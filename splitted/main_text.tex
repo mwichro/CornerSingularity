@@ -3,35 +3,38 @@
 \label{sec:intro}
 \input{splitted/introduction.tex}
 
-\subsection{What *Has* Been Done (The Existing Literature)}
-If you dive into the literature on singularities in finite/hyperelasticity, you will mostly find two major phenomena:
+\subsection{Existing literature}
+The literature on singularities in finite and nonlinear hyperelasticity is organised around three major phenomena.
 
 \begin{itemize}
-    \item Crack Tips in Tension (Knowles and Sternberg, 1970s):** This is the most famous work on nonlinear singularities. They
-          looked at a $360^\circ$ corner (a crack) pulled in pure tension. They found that in a neo-Hookean material, the
-          asymptotic displacement field behaves very differently from linear fracture mechanics. However, they only dealt with
-          pure traction-free boundaries and pure tensile opening.
-    \item Cavitation (John Ball, 1982):** Ball proved that under severe hydrostatic tension, hyperelastic equations admit
-          singular weak solutions where a hole spontaneously opens in the middle of a perfectly solid domain (a point singularity
-          where $\bm{F} \to \infty$).
-    \item Surface Creasing (Biot 1963, Hong et al. 2009):** Biot found that if you compress a flat half-space of a neo-Hookean
-          material, its surface becomes unstable at a critical stretch ($\lambda \approx 0.54$). Decades later, researchers
-          realized this instability is a *crease* (a point singularity forming on a flat surface).
+    \item \textbf{Crack tips in tension} (Knowles and Sternberg, 1970s). The classical work on nonlinear singularities
+          treats a $360^\circ$ corner (a crack) pulled in pure tension. In a neo-Hookean material the asymptotic
+          displacement field departs markedly from linear fracture mechanics; the analysis is, however, confined to
+          traction-free boundaries and pure tensile opening.
+    \item \textbf{Cavitation} (Ball, 1982). Under severe hydrostatic tension the hyperelastic equations admit singular
+          weak solutions in which a hole opens spontaneously in the interior of a solid domain --- a point singularity
+          with $\bm{F}\to\infty$.
+    \item \textbf{Surface creasing} (Biot, 1963; Hong et al., 2009). A compressed flat half-space of neo-Hookean
+          material becomes unstable at a critical stretch ($\lambda\approx0.54$); this instability is now understood as
+          a \emph{crease}, a point singularity nucleating on an initially flat surface.
 \end{itemize}
 
-\subsection{The Gap:}
-Almost all the existing nonlinear singularity literature avoids the exact setup you described: **a geometric corner
-(e.g., $90^\circ$) with mixed boundary conditions (Dirichlet meets Neumann) under compression.**
+\subsection{The gap}
+The existing nonlinear-singularity literature largely avoids the configuration of interest here: \emph{a geometric
+corner (e.g.\ $90^\circ$) carrying mixed boundary conditions (Dirichlet meeting Neumann) under compression}. Each
+strand addresses only part of it:
 
 \begin{itemize}
-    \item Linear theory (Kondratiev) handles the mixed BC corner, but ignores the large-deformation kinematics.
-    \item Nonlinear theory (Knowles/Sternberg) handles large deformations, but avoids the Dirichlet-Neumann condition and avoids
-          compression.
-    \item Instability theory handles compression, but usually on flat domains or purely symmetric geometries, ignoring the
-          existing geometric corner singularity.
+    \item Linear theory (Kondratiev) handles the mixed-BC corner but ignores the large-deformation kinematics.
+    \item Nonlinear theory (Knowles--Sternberg) handles large deformations but avoids the Dirichlet--Neumann condition
+          and avoids compression.
+    \item Instability theory handles compression but typically on flat domains or symmetric geometries, ignoring a
+          pre-existing geometric corner singularity.
 \end{itemize}
 
-\textbf{The Gap}: How does an already-existing stress concentration at a geometric Dirichlet-Neumann corner couple with a nonlinear structural instability (buckling/creasing)? How do we bound the operators there? That is fundamentally an open question.
+\noindent The open question this paper addresses is how an already-present stress concentration at a geometric
+Dirichlet--Neumann corner couples with a nonlinear structural instability (buckling/creasing), and how the resulting
+tangent operators can be bounded.
 
 \section{Problem formulation}
 \label{sec:formulation}
@@ -112,8 +115,8 @@ model of \cite{cutfemAD}. The corresponding stress and tangent are
     \bm{P}(\bm{F}) & = \mu_e \bm{F} + f'(J)\,J\,\bm{F}^{-T}, \\
     \label{eq:Lnh}
     L_{iJkL}       & = \mu_e\,\delta_{ik}\delta_{JL}
-    + \left( f''(J)J^2 + f'(J)J \right) F^{-T}_{iL} F^{-T}_{kJ}
-    - f'(J)J\, F^{-T}_{iJ} F^{-T}_{kL}.
+    + \left( f''(J)J^2 + f'(J)J \right) F^{-T}_{iJ} F^{-T}_{kL}
+    - f'(J)J\, F^{-T}_{iL} F^{-T}_{kJ}.
 \end{align}
 The first term $\mu_e\,\delta_{ik}\delta_{JL}$ is constant; the entire nonlinear part is controlled by $J$ and the
 \emph{inverse} deformation gradient $\bm{F}^{-1}$, yielding the structural bound
@@ -430,28 +433,50 @@ $f_{\mathrm{quad}}$ does not.
     $(\log\tfrac1r)^p\le C_\varepsilon r^{-\varepsilon}$ on $(0,\rho]$ for every $\varepsilon>0$. \qed
 \end{proof}
 
-\begin{lemma}[Uniform ellipticity]
+\begin{lemma}[Strong ellipticity outside the dilation core]
     \label{lem:Aellip}
-    Under Assumptions~\ref{ass:reg}, \ref{ass:ellip} and (NC), and assuming the volumetric prefactors in \eqref{eq:LHnh}
-    remain controlled (automatic for $f_{\log}$, where $f''J^2+f'J=2\lambda_e$ is constant and $|f'J|=\mathcal{O}(\log J)$
-    is subordinate), the tangent satisfies the Legendre--Hadamard condition on $B_\rho$ with a slowly varying constant:
-    there are $\gamma_0>0$ and $\varepsilon>0$ arbitrarily small with
+    Let $f=f_{\log}$ and let $J_*=\exp\!\big(1+\mu_e/(2\lambda_e)\big)$ be the dilation threshold of
+    Remark~\ref{rem:SEcaveat}, beyond which $f''_{\log}<0$. Under Assumptions~\ref{ass:reg}, \ref{ass:ellip} and (NC),
+    with the tensile kinematics $J\sim|K|\,r^{\alpha-1}$ of \S\ref{sub:growth}, define the \emph{dilation core radius}
+    \begin{equation}
+        \label{eq:rstar}
+        r_*:=\big(J_*/|K|\big)^{1/(\alpha-1)}=\big(|K|/J_*\big)^{1/(1-\alpha)} ,
+    \end{equation}
+    so that $J(\bm{x})\le J_*$ for $r\ge r_*$. Then on the annular region $A_*:=\{\bm{x}\in B_\rho: r_*<r<\rho\}$ the
+    tangent satisfies the Legendre--Hadamard condition with the \emph{constant} ellipticity modulus $\mu_e$,
     \begin{equation}
         \label{eq:LHcorner}
-        L_{iJkL}(\bm{x})\,m_iN_Jm_kN_L \ge \big(\gamma_0 - C_\varepsilon r^{\varepsilon}\big)\,|\bm{m}|^2|\bm{N}|^2
-        \ \ge\ \tfrac12\gamma_0\,|\bm{m}|^2|\bm{N}|^2
+        L_{iJkL}(\bm{x})\,m_iN_Jm_kN_L \ \ge\ \mu_e\,|\bm{m}|^2|\bm{N}|^2
+        \qquad \text{for a.e. } \bm{x}\in A_*,\ \ \forall\,\bm{m},\bm{N}\in\mathbb{R}^2.
     \end{equation}
-    for a.e. $\bm{x}\in B_\rho$ after shrinking $\rho$, for all $\bm{m},\bm{N}\in\mathbb{R}^2$.
+    On the complementary core $\{r\le r_*\}$, where $J>J_*$, strong ellipticity of $f_{\log}$ is genuinely lost
+    (Remark~\ref{rem:SEcaveat}): the bound \eqref{eq:LHcorner} fails and the modulus $\mu_e+f''(J)J^2\,\xi^2/(|\bm m|^2|\bm N|^2)$
+    can turn negative.
 \end{lemma}
 
 \begin{proof}
-    From \eqref{eq:LHnh}, $L_{iJkL}m_iN_Jm_kN_L \ge \mu_e|\bm{m}|^2|\bm{N}|^2 - |f''J^2+f'J|\,|\bm{a}|^2|\bm{m}|^2
-        - |f'J|\,|\bm{a}||\bm{b}||\bm{m}||\bm{N}|$, where the volumetric correction is bounded using $|\bm{a}|\le
-        c^{-1}|\bm{N}|$, $|\bm{b}|\le c^{-1}|\bm{m}|$ by $c^{-2}\big(|f''J^2+f'J|+|f'J|\big)|\bm{m}|^2|\bm{N}|^2 =
-        c^{-2}\Theta(J)|\bm{m}|^2|\bm{N}|^2$. For $f_{\log}$, $\Theta(J)=\mathcal{O}(\log\tfrac1r)\le C_\varepsilon
-        r^{\varepsilon}$ on $(0,\rho]$; the volumetric correction is thus $o(1)$ as $r\to0$, and after shrinking $\rho$ it is
-    below $\tfrac12\mu_e$, giving \eqref{eq:LHcorner} with $\gamma_0=\mu_e$. \qed
+    By the exact rank-one identity \eqref{eq:LHnh},
+    \begin{equation*}
+        L_{iJkL}m_iN_Jm_kN_L = \mu_e\,|\bm{m}|^2|\bm{N}|^2 + f''(J)\,J^2\,\xi^2,
+        \qquad \xi:=\bm{m}\cdot\bm{F}^{-T}\bm{N},
+    \end{equation*}
+    in which the volumetric prefactor is the single scalar $f''(J)J^2=\mu_e+2\lambda_e-2\lambda_e\log J$
+    (cf.~\eqref{eq:logcombo}). This is nonnegative precisely when $\log J\le 1+\mu_e/(2\lambda_e)$, i.e. $J\le J_*$.
+    Since $J\sim|K|r^{\alpha-1}$ is decreasing in $r$ (recall $\alpha<1$), the threshold $J=J_*$ is crossed at the single
+    radius \eqref{eq:rstar}, and $J\le J_*$ throughout $A_*$. There the second term only adds to $\mu_e$, giving
+    \eqref{eq:LHcorner}. For $r<r_*$ we have $J>J_*$, hence $f''(J)J^2<0$; taking $\bm{m},\bm{N}$ aligned so that
+    $\xi^2$ attains its maximum $|\bm{m}|^2|\bm{N}|^2\,\|\bm{F}^{-1}\|^2$ (admissible since $\|\bm{F}^{-1}\|\le c^{-1}$ is
+    only an upper bound, with equality possible) drives the form below zero once
+    $|f''(J)J^2|\,\|\bm{F}^{-1}\|^2>\mu_e$. \qed
 \end{proof}
+
+\noindent The picture is therefore sharper, and more honest, than ``tension is harmless'': for the logarithmic penalty
+the tensile corner is strongly elliptic on the annulus $A_*$ outside a \emph{dilation core} $\{r\le r_*\}$, inside which
+$f_{\log}$ itself --- not the corner --- ceases to be strongly elliptic because the material is dilated past $J_*$. The
+core radius $r_*$ in \eqref{eq:rstar} shrinks as the threshold $J_*=\exp(1+\mu_e/(2\lambda_e))$ grows, i.e. as the
+penalty is made stiffer against extreme dilation (large $\lambda_e/\mu_e$); a model with $f''\ge0$ globally would have
+$r_*=0$ and no core. This is the tensile mirror of the model-dependence already seen for $\Theta$ in
+\S\ref{sub:growth}, and it confines the genuinely delicate behaviour to a controlled inner region.
 
 For the weighted well-posedness we recall two standard inequalities in the Kondratiev space
 $V^{1,2}_\beta(B_\rho)$---the closure of smooth functions vanishing on $\Gamma_D\cap\partial B_\rho$ under
@@ -481,65 +506,89 @@ write the Newton-step bilinear form as
 
 \begin{theorem}[Well-posedness of the linearised step, tensile corner]
     \label{thm:A}
-    Under Assumptions~\ref{ass:reg}--\ref{ass:mild} and the non-compressive hypothesis (NC), the form \eqref{eq:formA}
-    is bounded and coercive on $V^{1,2}_{\beta_\star}(B_\rho)$ modulo a compact perturbation: there exist constants
-    $\Lambda<\infty$, $\gamma_1>0$ and a compact form $k(\cdot,\cdot)$ such that, for all
-    $\bm{u},\bm{v}\in V^{1,2}_{\beta_\star}(B_\rho)$,
+    Let $f=f_{\log}$ and work on the annular corner neighbourhood $A_*=\{r_*<r<\rho\}$ outside the dilation core
+    \eqref{eq:rstar} of Lemma~\ref{lem:Aellip} (for a globally convex-volumetric barrier the core is empty, $r_*=0$, and
+    $A_*=B_\rho$). Under Assumptions~\ref{ass:reg}--\ref{ass:mild} and the non-compressive hypothesis (NC), the form
+    \eqref{eq:formA}, restricted to $A_*$, is bounded and coercive on $V^{1,2}_{\beta_\star}(A_*)$ modulo a compact
+    perturbation: there exist constants $\Lambda<\infty$, $\gamma_1>0$ and a compact form $k(\cdot,\cdot)$ such that, for
+    all $\bm{u},\bm{v}\in V^{1,2}_{\beta_\star}(A_*)$,
     \begin{align}
         \label{eq:Abounded}
         |a(\bm{u},\bm{v})| & \le \Lambda\,\|\bm{u}\|_{V^{1,2}_{\beta_\star}}\,\|\bm{v}\|_{V^{1,2}_{\beta_\star}}, \\
         \label{eq:Agaarding}
         a(\bm{v},\bm{v})   & \ge \gamma_1\,\|\bm{v}\|_{V^{1,2}_{\beta_\star}}^2 - k(\bm{v},\bm{v}).
     \end{align}
-    Consequently the linearised corner operator is Fredholm of index zero in $V^{1,2}_{\beta_\star}$; for $\beta_\star$
-    avoiding the corner spectrum it is an isomorphism, its solutions admit the asymptotic expansion
+    Consequently, on $A_*$, the linearised corner operator is Fredholm of index zero in $V^{1,2}_{\beta_\star}$; for
+    $\beta_\star$ avoiding the corner spectrum it is an isomorphism, its solutions admit the asymptotic expansion
     \eqref{eq:kondratiev}, and the governing singular exponents coincide with those of the linearised elasticity
-    problem.
+    problem. The inner core $\{r\le r_*\}$, where $f_{\log}$ loses strong ellipticity (Lemma~\ref{lem:Aellip}), is a
+    fixed-size region carrying no vertex; it must be treated separately and is the price of the logarithmic penalty in
+    extreme tension (see Remark~\ref{rem:core}).
 \end{theorem}
 
 \begin{proof}
-    \emph{Boundedness.} By Cauchy--Schwarz and Lemma~\ref{lem:Abound}, for any $\varepsilon\in(0,1)$,
+    \emph{Boundedness.} By Cauchy--Schwarz and Lemma~\ref{lem:Abound}, on $A_*$ the coefficient obeys the sharp bound
+    $\|\mathbb{L}\|\le\mu_e+c^{-2}\Theta(J)=\mu_e+\mathcal{O}\!\big(\log\tfrac1r\big)$, a \emph{logarithm}, not a power.
+    Hence for every $\delta>0$ there is $C_\delta$ with $\|\mathbb{L}\|\le C_\delta\,r^{-\delta}$, and
     \begin{align*}
         |a(\bm{u},\bm{v})|
-         & \le \int_{B_\rho} \|\mathbb{L}\|\,|\Grad\bm{u}|\,|\Grad\bm{v}|\,dV
-        \le C_\varepsilon \int_{B_\rho} r^{-\varepsilon}\,|\Grad\bm{u}|\,|\Grad\bm{v}|\,dV   \\
-         & \le C_\varepsilon \Big(\!\int_{B_\rho} r^{2\beta_\star}|\Grad\bm{u}|^2\Big)^{1/2}
-        \Big(\!\int_{B_\rho} r^{-2\varepsilon-2\beta_\star}|\Grad\bm{v}|^2\Big)^{1/2}.
+         & \le \int_{A_*} \|\mathbb{L}\|\,|\Grad\bm{u}|\,|\Grad\bm{v}|\,dV
+        \le C_\delta \Big(\!\int_{A_*} r^{2\beta_\star}|\Grad\bm{u}|^2\Big)^{1/2}
+        \Big(\!\int_{A_*} r^{-2\delta-2\beta_\star}|\Grad\bm{v}|^2\Big)^{1/2}.
     \end{align*}
-    Since $\varepsilon$ is arbitrary and $\beta_\star$ is interior to an interval of admissible weights, the loss
-    $r^{-2\varepsilon}$ can be absorbed by a weight chosen within that interval; this gives \eqref{eq:Abounded} with
-    $\Lambda=\Lambda(\varepsilon)$. The key point is that the mild (logarithmic) growth of $\|\mathbb{L}\|$ is
-    subordinate to every algebraic weight, so it does not change the admissible weight interval.
+    This exhibits $a$ as bounded from $V^{1,2}_{\beta_\star}\times V^{1,2}_{\beta_\star-\delta}$. The logarithm is
+    subordinate to \emph{every} algebraic weight, so the loss may be made smaller than the slack to the weight interval:
+    let $(\beta_-,\beta_+)$ be the maximal open interval of weights for which the \emph{linear} corner pencil has no
+    eigenvalue with $\Re$-part in $[\beta_\star-\delta,\beta_\star]$ (such a $\delta$-band exists because $\beta_\star$
+    avoids the discrete corner spectrum, hence sits at a positive distance $\delta_0$ from it). Choosing
+    $\delta<\delta_0$, the weight $\beta_\star-\delta$ lies in the same admissible interval as $\beta_\star$, the two
+    Kondratiev norms $V^{1,2}_{\beta_\star}$ and $V^{1,2}_{\beta_\star-\delta}$ are comparable on $A_*$ (the bounded
+    annulus excludes the vertex, where alone they would differ), and \eqref{eq:Abounded} follows with
+    $\Lambda=\Lambda(\delta)$. The point is that the logarithmic growth does not move the admissible weight interval; no
+    singular weight is ``absorbed'' into $\bm{v}$.
 
-    \emph{G\aa rding inequality.} By Lemma~\ref{lem:Aellip} the integrand symbol $\mathbb{L}(\bm{x})$ is uniformly
-    strongly elliptic on $B_\rho$ with constant $\ge\tfrac12\gamma_0$. Freezing the (measurable, uniformly elliptic)
-    coefficients on a dyadic partition $\{r\sim 2^{-j}\}$ and applying the constant-coefficient G\aa rding inequality on
-    each annulus---valid because the principal symbol is positive definite on the Legendre--Hadamard cone---yields, after
-    summation against the weight $r^{2\beta_\star}$,
+    \emph{G\aa rding inequality.} By Lemma~\ref{lem:Aellip} the symbol $\mathbb{L}(\bm{x})$ is strongly elliptic on
+    $A_*$ with the constant Legendre--Hadamard modulus $\mu_e$. Freezing the (measurable, uniformly elliptic)
+    coefficients on a dyadic partition $\{r\sim 2^{-j}\}\cap A_*$ and applying the constant-coefficient G\aa rding
+    inequality on each annulus---valid because the principal symbol is positive definite on the Legendre--Hadamard
+    cone---yields, after summation against the weight $r^{2\beta_\star}$,
     \[
-        a(\bm{v},\bm{v}) \ge \tfrac12\gamma_0\,c_K^{-1}\!\int_{B_\rho} r^{2\beta_\star}|\Grad\bm{v}|^2\,dV
-        - C\!\int_{B_\rho} r^{2\beta_\star}|\bm{v}|^2\,dV,
+        a(\bm{v},\bm{v}) \ge \mu_e\,c_K^{-1}\!\int_{A_*} r^{2\beta_\star}|\Grad\bm{v}|^2\,dV
+        - C\!\int_{A_*} r^{2\beta_\star}|\bm{v}|^2\,dV,
     \]
     where the Korn inequality \eqref{eq:korn} converts ellipticity of the symmetric part into control of the full gradient.
     The remainder term has a strictly higher power of $r$ than the Hardy weight $r^{2\beta_\star-2}$, hence by
     \eqref{eq:hardy} it is relatively compact with respect to $\|\cdot\|_{V^{1,2}_{\beta_\star}}$; this is the compact form
-    $k$, and we obtain \eqref{eq:Agaarding} with $\gamma_1=\tfrac12\gamma_0 c_K^{-1}$.
+    $k$, and we obtain \eqref{eq:Agaarding} with $\gamma_1=\mu_e\, c_K^{-1}$.
 
     \emph{Fredholm property and exponents.} Estimates \eqref{eq:Abounded}--\eqref{eq:Agaarding} place the operator in the
-    Kondratiev--Maz'ya framework \cite{KMR2001}: it is Fredholm of index zero in $V^{1,2}_{\beta_\star}$ whenever
+    Kondratiev--Maz'ya framework \cite{KMR2001}: it is Fredholm of index zero in $V^{1,2}_{\beta_\star}(A_*)$ whenever
     $\beta_\star$ avoids the spectrum of the corner operator pencil. Because the nonlinear correction to the principal
-    symbol is subordinate (it is $o(r^{-\varepsilon})$ for every $\varepsilon$, by Lemma~\ref{lem:Abound}), the pencil
+    symbol is subordinate (it is $o(r^{-\delta})$ for every $\delta$, by Lemma~\ref{lem:Abound}), the pencil
     coincides with that of linearised elasticity; its eigenvalues are exactly the exponents $\alpha$ of
     \eqref{eq:kondratiev}, which are therefore unchanged by the nonlinearity. \qed
 \end{proof}
 
+\begin{remark}[The dilation core]
+    \label{rem:core}
+    For $f_{\log}$ the conclusion of Theorem~\ref{thm:A} is genuinely confined to $A_*$: the vertex itself sits inside the
+    core $\{r\le r_*\}$, where $J>J_*$ and $f_{\log}$ is not strongly elliptic. Three readings are consistent with the
+    analysis. (i) \emph{Mild loading}: for stress-intensity $|K|$ small the core radius $r_*=(|K|/J_*)^{1/(1-\alpha)}$ is
+    so small that the corner is elliptic on all of $B_\rho$ down to mesh scale, and the theorem governs the entire
+    computationally resolved region. (ii) \emph{Sharper model statement}: the tensile corner ``passes like linear
+    elasticity'' on $A_*$, and the only obstruction is the material law's own loss of ellipticity past $J_*$---a property
+    of $f_{\log}$, not of the corner. (iii) \emph{Open inner problem}: a complete vertex theory for $f_{\log}$ requires a
+    separate analysis inside the non-elliptic core, which we leave open; a globally convex-volumetric barrier
+    ($f''\ge0$, $r_*=0$) removes the issue entirely and recovers the unrestricted statement.
+\end{remark}
+
 \begin{remark}[Stress is singular, operator is not]
     The first Piola--Kirchhoff stress still blows up, $\bm{P}\sim \mu_e\bm{F}\to\infty$ as $r\to0$, so the tensile corner
-    is a genuine \emph{stress} singularity. Theorem~\ref{thm:A} asserts only that this singularity lives entirely in the
-    \emph{right-hand side} (the residual) of the Newton step, not in its operator: under a mild volumetric penalty the
-    nonlinear problem inherits the regularity theory of the linear one, standard graded meshes restore optimal
-    convergence, and no structural instability occurs. This is the precise sense in which a non-compressive corner
-    ``passes like linear elasticity.''
+    is a genuine \emph{stress} singularity. Theorem~\ref{thm:A} asserts only that, on the annulus $A_*$, this singularity
+    lives entirely in the \emph{right-hand side} (the residual) of the Newton step, not in its operator: under a mild
+    volumetric penalty the nonlinear problem inherits the regularity theory of the linear one, standard graded meshes
+    restore optimal convergence, and no structural instability occurs. This is the precise sense in which a
+    non-compressive corner ``passes like linear elasticity'' away from the dilation core.
 \end{remark}
 
 \begin{remark}[The quadratic penalty does \emph{not} pass like linear elasticity]
@@ -910,26 +959,33 @@ that feeds the tangent estimate below; it is \emph{not} the branch a load-contro
 The heart of the regularisation is geometric: the buckling mode trades pure compression for rotation and shear, which
 lifts the determinant off zero. The reason the relief is second order in $w$---and hence why the scaling exponents
 below are what they are---is that the mode is, to leading order, a \emph{rotation}, and rotations do not change volume
-at first order.
+at first order. We do \emph{not} assume the first-order volume change vanishes exactly; we use the quantitative bound on
+it furnished by the energy barrier (Lemma~\ref{lem:rot}) and show it is dominated by the second-order relief.
 
 \begin{lemma}[Determinant relief]
     \label{lem:relief}
-    Let $\bm{F}=\bm{F}_0+w\,\Grad\bm{\phi}+\mathcal{O}(w^2)$ at the corner, with $\bm{F}_0=\bm{F}_0(t_c)$, and let the
-    \emph{rotation condition}
+    Let $\bm{F}=\bm{F}_0+w\,\Grad\bm{\phi}+\mathcal{O}(w^2)$ at the corner, with $\bm{F}_0=\bm{F}_0(t)$ on the loaded path,
+    $J_0=\det\bm{F}_0$, and write the first-order volume change as
     \begin{equation}
         \label{eq:rotcond}
-        \operatorname{cof}\bm{F}_0:\Grad\bm{\phi} = J_0\,\bm{F}_0^{-T}:\Grad\bm{\phi} = 0
+        D_1:=\operatorname{cof}\bm{F}_0:\Grad\bm{\phi} = J_0\,\bm{F}_0^{-T}:\Grad\bm{\phi} .
     \end{equation}
-    hold (the critical mode is volume-preserving at first order; this is \emph{established} from the energy barrier in
-    Lemma~\ref{lem:rot} below, exactly rather than assumed). Let
+    By the barrier estimate \eqref{eq:rotrate} of Lemma~\ref{lem:rot}, the critical mode is \emph{asymptotically}
+    volume-preserving, $|D_1|\le c_\phi\,J_0/\sqrt{|\log J_0|}$, so $D_1$ does not vanish at finite load but is itself
+    small with $J_0$. Let
     $d_\phi:=\tfrac12\,\tfrac{d^2}{dw^2}\big|_{0}\det(\bm{F}_0+w\,\Grad\bm{\phi})>0$ be the second-order coefficient of
     the determinant --- the second mixed discriminant of $\bm{F}_0$ ($d-2$ copies) with $\Grad\bm{\phi}$ (two copies),
     which for $d=2$ reduces to $\det(\Grad\bm{\phi})$. Then
     \begin{equation}
         \label{eq:Jexp}
-        J = \det\bm{F} = J_0 + w^2\,d_\phi + \mathcal{O}(w^3),
+        J = \det\bm{F} = J_0 + w\,D_1 + w^2\,d_\phi + \mathcal{O}(w^3),
     \end{equation}
-    so that, with $\lambda_c=\lambda_{\min}(\bm{F}_0)$ and the remaining $d-1$ stretches of $\bm{F}$ bounded,
+    and the linear term is dominated by the other two: for $|w|\le w_0$ small,
+    \begin{equation}
+        \label{eq:Jlower}
+        J \ \ge\ \tfrac12\,J_0 + \tfrac12\,w^2\,d_\phi .
+    \end{equation}
+    Consequently, with $\lambda_c=\lambda_{\min}(\bm{F}_0)$ and the remaining $d-1$ stretches of $\bm{F}$ bounded,
     $\prod_{i\ge2}\lambda_i(\bm{F})=\mathcal{O}(1)$,
     \begin{equation}
         \label{eq:lminrelief}
@@ -941,25 +997,40 @@ at first order.
 \begin{proof}
     Expanding the determinant in $w$, $\det(\bm{F}_0+w\,\Grad\bm{\phi})=\sum_{k=0}^{d}w^k\,D_k(\bm{F}_0,\Grad\bm{\phi})$
     with $D_k$ the $k$-th mixed discriminant; $D_0=\det\bm{F}_0=J_0$, $D_1=\operatorname{cof}\bm{F}_0:\Grad\bm{\phi}$, and
-    $D_2=d_\phi$. The first-order term $D_1$ vanishes by \eqref{eq:rotcond}, leaving \eqref{eq:Jexp} (the
-    $\mathcal{O}(w^3)$ collecting $D_3,\dots,D_d$). Since $J=\prod_i\lambda_i$ and the $d-1$ largest stretches are
+    $D_2=d_\phi$, giving \eqref{eq:Jexp} (the $\mathcal{O}(w^3)$ collecting $D_3,\dots,D_d$). For \eqref{eq:Jlower} we
+    bound the linear term two ways using $|D_1|\le c_\phi J_0/\sqrt{|\log J_0|}$. By Young's inequality
+    $|w\,D_1|\le \tfrac12 d_\phi w^2 + \tfrac1{2d_\phi}D_1^2$, and $D_1^2\le c_\phi^2 J_0^2/|\log J_0|\le \tfrac12 d_\phi J_0$
+    once $J_0$ is small (the factor $J_0/|\log J_0|\to0$). Hence $|w\,D_1|\le \tfrac12 d_\phi w^2+\tfrac12 J_0$, and
+    inserting into \eqref{eq:Jexp} (absorbing the $\mathcal{O}(w^3)$ into the constants for $|w|\le w_0$) yields
+    \eqref{eq:Jlower}. Thus the residual first-order term, far from dominating, is swallowed by the barrier-controlled
+    $J_0$ and the relief $w^2 d_\phi$ --- this is the precise content of ``buckling relieves compression'' at finite
+    load, with no appeal to an exact rotation condition. Since $J=\prod_i\lambda_i$ and the $d-1$ largest stretches are
     $\mathcal{O}(1)$ on the relieved branch (the buckling redirects, but does not unboundedly stretch, the material near
     the corner), \eqref{eq:Jexp} gives \eqref{eq:lminrelief}. \qed
 \end{proof}
 
-As the load approaches the instability the perfect corner stretch $\lambda_c\to0$, so the $w^2$ term dominates the
-lower bound. On the \emph{unstable continuation branch} \eqref{eq:wscale} (the one a solver tracks through the
-instability), combining \eqref{eq:lminrelief} with $w\sim\epsilon^{1/3}$,
+The estimate \eqref{eq:lminrelief} carries two competing floors, $C_1\lambda_c$ and $C_2 w^2$, and which one binds
+depends on the load. At the bifurcation point itself the perfect stretch $\lambda_c(t_c)>0$ is finite (buckling
+precedes collapse, Remark~\ref{rem:framework}); there $C_1\lambda_c$ dominates, $\lambda_{\min}$ is bounded below by a
+constant, and \emph{no} blow-up occurs --- consistently with the bounded-tangent physical branch of
+Proposition~\ref{prop:physical}. The tangent divergence is felt only along the \emph{unstable continuation} that a
+solver tracks to deeper loads, where the perfect path drives $\lambda_c(t)\to0$; precisely in the regime
+$\lambda_c\lesssim w^2$ the relief term takes over. Combining \eqref{eq:lminrelief} with the branch amplitude
+$w\sim\epsilon^{1/3}$ of \eqref{eq:wscale} then gives, in that near-collapse regime,
 \begin{equation}
     \label{eq:lminscale}
     \lambda_{\min}(\epsilon) \gtrsim C_2\,w(\epsilon)^2 \sim \mathcal{O}(\epsilon^{2/3}),
     \qquad \|\bm{F}^{-1}\| = \lambda_{\min}^{-1} \sim \mathcal{O}(\epsilon^{-2/3}) .
 \end{equation}
-On the stable physical branch the picture is different and milder; we contrast the two after Theorem~\ref{thm:reg}.
+Outside that regime ($\lambda_c\gtrsim\epsilon^{2/3}$) the floor $C_1\lambda_c$ keeps $\|\bm{F}^{-1}\|$ even smaller, so
+\eqref{eq:lminscale} is the worst case. On the stable physical branch the picture is milder still; we contrast the two
+after Theorem~\ref{thm:reg}.
 
-The rotation condition \eqref{eq:rotcond} is not an extra assumption: it is \emph{forced} by the energy barrier, as we
-now show. This is the precise content of the informal statement ``buckling relieves compression''---the barrier makes
-the volume-preserving mode the only one of finite energy.
+The smallness of the first-order volume change $D_1$ in \eqref{eq:rotcond} is not an extra assumption: it is
+\emph{forced}, quantitatively, by the energy barrier, as we now show. This is the precise content of the informal
+statement ``buckling relieves compression''---the barrier penalises any finite-energy mode that changes volume at first
+order, driving $D_1\to0$ with $J_0$ at the rate \eqref{eq:rotrate}, which (Lemma~\ref{lem:relief}) is fast enough for
+the second-order relief to dominate.
 
 \begin{lemma}[The barrier forces the rotation condition]
     \label{lem:rot}
