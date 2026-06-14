@@ -220,21 +220,24 @@ on $\lambda_{\max}$) enters solely through the scalar $\Theta(\det \bm{F})$. Whe
 the deviatoric part (Gent, Arruda--Boyce), whose tangent diverges through $\lambda_{\max}$ directly rather than through
 $\Theta(\det\bm F)$, violate \eqref{eq:Hessbound} and are excluded.
 
-\begin{lemma}[The compressible neo-Hookean model satisfies Assumptions~\ref{ass:reg}--\ref{ass:ellip}]
+\begin{lemma}[Assumptions for the neo-Hookean model]
     \label{lem:nh}
-    Let $\Psi$ be the neo-Hookean energy \eqref{eq:neohooke} with $\mu_e>0$ and $f$ strictly convex,
-    $f(J)\to\infty$ as $J\to0^+$. Then Assumption~\ref{ass:reg} holds, Assumption~\ref{ass:growth} holds with
-    $c_0=\mu_e$ and
+    Let $\Psi$ be the neo-Hookean energy \eqref{eq:neohooke} with $\mu_e>0$ and $f\in C^2(0,\infty)$. Then
+    Assumption~\ref{ass:growth} holds with $c_0=\mu_e$ and
     \begin{equation}
         \label{eq:Thetagen}
         \Theta(J) = \big|\,f''(J)J^2 + f'(J)J\,\big| + \big|\,f'(J)J\,\big|,
     \end{equation}
-    and Assumption~\ref{ass:ellip} holds for both penalties in \eqref{eq:fchoices}.
+    and Assumption~\ref{ass:ellip} holds (rank-one convexity away from $\det\bm{F}=0$). Assumption~\ref{ass:reg}
+    additionally requires the barrier property $f(J)\to\infty$ as $J\to0^+$: this holds for $f_{\log}$ but \emph{fails}
+    for $f_{\mathrm{quad}}$, since $f_{\mathrm{quad}}(J)\to\tfrac{\kappa}{2}<\infty$ (see Remark~\ref{rem:quad} and
+    Scenario~B).
 \end{lemma}
 
 \begin{proof}
-    Objectivity and $C^2$ regularity on $\mathrm{GL}^+(2)$ are immediate, and $f(J)\to\infty$ as $J\to0^+$ gives the
-    blow-up in Assumption~\ref{ass:reg}. In \eqref{eq:Lnh} the first term is the scaled identity, of norm $\mu_e$. Each
+    Objectivity and $C^2$ regularity on $\mathrm{GL}^+(2)$ are immediate; the barrier hypothesis $f(J)\to\infty$ as
+    $J\to0^+$, when assumed, gives the blow-up required by Assumption~\ref{ass:reg}. In \eqref{eq:Lnh} the first term is
+    the scaled identity, of norm $\mu_e$. Each
     of the remaining two terms is a rank-one, respectively transposition, contraction of $\bm{F}^{-T}\otimes\bm{F}^{-T}$;
     since $\|\bm{F}^{-T}\|=\|\bm{F}^{-1}\|$, each is bounded in operator norm by its scalar prefactor times
     $\|\bm{F}^{-1}\|^2$. The triangle inequality gives \eqref{eq:Hessbound} with $c_0=\mu_e$ and $\Theta$ as in
