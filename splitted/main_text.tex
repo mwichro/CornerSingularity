@@ -622,104 +622,240 @@ is genuinely resisted.
 \section{Imperfect bifurcation analysis and asymptotic bounds}
 \label{sec:iba}
 
-\subsection{The perturbed weak form}
+The previous section showed that the perfect compressive path drives $\lambda_{\min}\to0$, blows up the tangent, and
+loses ellipticity. The premise of this section is that this scenario is an idealisation: a real system always carries
+small disturbances---geometric imperfections, load eccentricities, material inhomogeneity---and these select a nearby
+\emph{regular} solution branch on which the collapse never quite happens. We model the disturbance by a single scalar
+amplitude $\epsilon$, carry out an imperfect-bifurcation analysis, and quantify how the tangent blows up as
+$\epsilon\to0$. The punchline is that the blow-up is confined to a vanishingly small neighbourhood of the corner and
+proceeds at a controlled algebraic rate, so that for every $\epsilon>0$ the problem is regular.
 
-We introduce a pseudo-time load parameter $t \in [0, 1]$ that monotonically scales the compressive Dirichlet boundary
-conditions. To prevent the unphysical fundamental path ($J \to 0$), we add a small, fixed volumetric perturbation
-(noise) $\epsilon\, \bm{p}(\bm{x})$, where $\|\bm{p}\|_{L^2} = 1$ and $\epsilon \ll 1$ (we write the imperfection field
-as $\bm{p}$ to avoid collision with the volumetric penalty $f(J)$). The nonlinear equilibrium in weak form is
-$G(\bm{u}, t, \epsilon) = 0$,
+\subsection{The regularised problem and the fundamental path}
+
+We localise to the corner neighbourhood $B_\rho$ of \S\ref{sec:asymptotics}, regard the loading as transmitted through
+data on the outer arc $\partial B_\rho\setminus(\Gamma_D\cup\Gamma_N)$, and introduce a pseudo-time load parameter
+$t\in[0,1]$ that monotonically scales the compressive part of that data. Following the answer to the question posed in
+Scenario~B, we add a small, fixed volumetric body force $\epsilon\,\bm{p}(\bm{x})$ with $\|\bm{p}\|_{L^2(B_\rho)}=1$ and
+$\epsilon\ll1$ as the imperfection (we write the field as $\bm{p}$ to avoid collision with the penalty $f(J)$). The
+regularised equilibrium is $G(\bm{u},t,\epsilon)=0$,
 \begin{equation}
-    \langle G(\bm{u}, t, \epsilon), \bm{v} \rangle = \int_{\Omega} \bm{P}(\bm{F}) : \Grad \bm{v} \, dV
-    - \epsilon \int_{\Omega} \bm{p} \cdot \bm{v} \, dV = 0 \qquad \forall\, \bm{v} \in V,
+    \label{eq:Gdef}
+    \langle G(\bm{u},t,\epsilon),\bm{v}\rangle = \int_{B_\rho} \bm{P}(\bm{F}) : \Grad\bm{v}\,dV
+    - \epsilon \int_{B_\rho} \bm{p}\cdot\bm{v}\,dV - \ell_t(\bm{v}) = 0 \qquad \forall\,\bm{v}\in V,
 \end{equation}
-with $\bm{P}(\bm{F}) = \partial\Psi/\partial\bm{F}$ and $V$ the space of kinematically admissible test functions.
+with $\bm{P}=\partial\Psi/\partial\bm{F}$, $V$ the admissible test space, and $\ell_t$ the (linear) load functional at
+pseudo-time $t$. Let $\bm{u}_0(t)$ denote the \emph{fundamental path}, i.e. the branch of \eqref{eq:Gdef} with
+$\epsilon=0$ that continues the low-load compressive solution. We use the barrier penalty $f_{\log}$ throughout, so the
+collapse $J\to0$ is genuinely resisted (Assumption~\ref{ass:reg}); along $\bm{u}_0(t)$ the corner stretch
+$\lambda_c(t):=\lambda_{\min}(\bm{F}_0(t))$ decreases as $t\uparrow1$ but, on the bifurcating branch we construct, never
+reaches zero.
 
-\subsection{The critical point (perfect system, $\epsilon = 0$)}
-
-Let $\bm{u}_0(t)$ be the fundamental path of pure compression (the unphysical path where $J \to 0$ as $t \to 1$). At a
-critical load $t_c < 1$ the tangent $\mathbb{L}(\bm{F}_0)$ on the fundamental path loses positive definiteness, and the
-linearised operator $\mathcal{L}_c := \partial_{\bm{u}} G(\bm{u}_0(t_c), t_c, 0)$ develops a zero eigenvalue. Let
-$\bm{\phi} \in V$ be the normalised critical eigenmode ($\|\bm{\phi}\|_V = 1$) of this instability (a localised
-rotation/buckling near the corner), satisfying
-\begin{equation}
-    \int_{\Omega} \Grad \bm{\phi} : \mathbb{L}_c : \Grad \bm{v} \, dV = 0 \qquad \forall\, \bm{v} \in V .
-\end{equation}
-
-\subsection{Lyapunov--Schmidt reduction (the normal form)}
-
-To analyse the perturbed system ($\epsilon > 0$) near $t_c$, decompose the displacement into the fundamental path, the
-buckling amplitude $w(t, \epsilon)$ along $\bm{\phi}$, and a higher-order orthogonal remainder $\bm{v}$:
-\begin{equation}
-    \bm{u}(t, \epsilon) = \bm{u}_0(t) + w \bm{\phi} + \bm{v} .
-\end{equation}
-Projecting the weak form onto $\bm{\phi}$ and Taylor-expanding the energy to fourth order in $w$ reduces the
-infinite-dimensional problem to the scalar imperfect bifurcation equation
-\begin{equation}
-    \label{eq:bifeq}
-    a (t_c - t)\, w + b\, w^3 = \epsilon\, \eta,
-\end{equation}
-where
-\begin{itemize}
-    \item $a = \tfrac{1}{2} \tfrac{d}{dt} \langle \bm{\phi}, \partial^2_{\bm{u}} G(\bm{u}_0(t_c)) \bm{\phi} \rangle$ is the eigenvalue crossing velocity;
-    \item $b = \tfrac{1}{6} \langle \bm{\phi}, \partial^3_{\bm{u}} G(\bm{u}_0(t_c)) [\bm{\phi}, \bm{\phi}, \bm{\phi}] \rangle$ governs the post-buckling stiffness (assumed $b > 0$ for a stable supercritical bifurcation);
-    \item $\eta = \int_{\Omega} \bm{p} \cdot \bm{\phi} \, dV$ is the projection of the noise onto the buckling mode.
-\end{itemize}
-
-\subsection{Asymptotic estimate of the bifurcation amplitude}
-
-The maximum amplitude occurs at or near $t = t_c$, where the linear term in \eqref{eq:bifeq} vanishes, leaving
-$b\, w^3 \approx \epsilon\, \eta$, hence
-\begin{equation}
-    \label{eq:wscale}
-    w(\epsilon) \sim \left( \frac{\eta}{b} \right)^{1/3} \epsilon^{1/3} \quad \text{as } \epsilon \to 0 .
-\end{equation}
-
-\begin{remark}
-    If material softening dictates an asymmetric/transcritical bifurcation with $w^2 \sim \epsilon$, the logic below is
-    identical with a modified exponent. We proceed with the standard pitchfork $\epsilon^{1/3}$ scaling.
+\begin{remark}[Local versus global bifurcation]
+    \label{rem:framework}
+    Scenario~B establishes a \emph{pointwise} loss of strong ellipticity at the corner, which is not \emph{a priori} the
+    same as a global structural bifurcation with a discrete eigenvalue. We adopt the global viewpoint on the bounded
+    domain $B_\rho$: at $t<t_c$ the tangent form is uniformly elliptic on $B_\rho$ except in a shrinking corner zone, so
+    the operator $\mathcal{L}(t)=\partial_{\bm{u}}G(\bm{u}_0(t),t,0)$ has compact resolvent and discrete spectrum, and we
+    assume (Assumption~\ref{ass:bif}) that a simple eigenvalue first crosses zero at $t_c$. The strictly local
+    alternative---a self-similar blow-up in rescaled coordinates $r\mapsto r/\ell(\epsilon)$ tied directly to the
+    pointwise loss of ellipticity---yields the same scaling laws and is the natural setting for a fully rigorous
+    treatment of the borderline-elliptic limit; we do not pursue it here.
 \end{remark}
 
-\subsection{Kinematic relief mechanism: bounding \texorpdfstring{$J$ and $\|\bm{F}^{-1}\|$}{J and the inverse deformation gradient}}
+\subsection{Bifurcation hypotheses}
 
-The physical mechanism is that the buckling mode $\bm{\phi}$ introduces \emph{rotation and shear}, which geometrically
-relieves the pure volumetric compression. At the corner the total deformation gradient is
-$\bm{F} = \bm{F}_0(t_c) + w \Grad\bm{\phi} + \mathcal{O}(w^2)$, where $\bm{F}_0(t_c)$ is a purely compressive state with
-minimum principal stretch $\lambda_c$ (small but strictly nonzero, since $t_c$ occurs \emph{before} $J\to0$) and
-$\Grad\bm{\phi}$ is a symmetry-breaking rotation. Because the instability trades pure compression for bending/rotation,
-$J = \det\bm{F}$ is bounded below by the buckling amplitude:
+\begin{assumption}[Simple, transversal, supercritical bifurcation with active imperfection]
+    \label{ass:bif}
+    There is $t_c\in(0,1)$ such that, with $\mathcal{L}_c:=\mathcal{L}(t_c)$:
+    \begin{enumerate}
+        \item[(B1)] $\ker\mathcal{L}_c=\operatorname{span}\{\bm{\phi}\}$ is one-dimensional, $\|\bm{\phi}\|_V=1$, and
+              $0$ is an isolated, simple eigenvalue (the rest of the spectrum is bounded away from $0$); $\bm{\phi}$ is
+              localised near the corner and satisfies $\int_{B_\rho}\Grad\bm{\phi}:\mathbb{L}_c:\Grad\bm{v}\,dV=0$ for
+              all $\bm{v}\in V$;
+        \item[(B2)] the eigenvalue $\mu_1(t)$ of $\mathcal{L}(t)$ through $0$ crosses transversally,
+              $a:=-\mu_1'(t_c)>0$;
+        \item[(B3)] the post-buckling coefficient
+              $b:=\tfrac16\langle\bm{\phi},\partial^3_{\bm{u}}G(\bm{u}_0(t_c),t_c,0)[\bm{\phi},\bm{\phi},\bm{\phi}]\rangle>0$
+              (supercritical pitchfork);
+        \item[(B4)] the imperfection is active, $\eta:=\displaystyle\int_{B_\rho}\bm{p}\cdot\bm{\phi}\,dV\neq0$.
+    \end{enumerate}
+\end{assumption}
+
+Condition (B4) is generic: it fails only for $\bm{p}$ in the codimension-one subspace $\bm{\phi}^\perp$. The
+quadratic term in $w$ vanishes by the reflection symmetry $w\mapsto-w$ of the perfect compressive state about the
+corner bisector, which is what makes (B3) a pitchfork; we record the asymmetric (transcritical) variant in
+Lemma~\ref{lem:amp} as well.
+
+\subsection{Lyapunov--Schmidt reduction}
+
+\begin{proposition}[Normal form]
+    \label{prop:LS}
+    Under Assumption~\ref{ass:bif}, there is a neighbourhood of $(\bm{u}_0(t_c),t_c,0)$ in which the solutions of
+    \eqref{eq:Gdef} are exactly
+    \begin{equation}
+        \bm{u}(t,\epsilon) = \bm{u}_0(t) + w\,\bm{\phi} + \bm{\psi}(w,t,\epsilon),
+        \qquad \bm{\psi}\in V^\perp:=\{\bm{\phi}\}^{\perp},
+    \end{equation}
+    where $\bm{\psi}$ is smooth with $\bm{\psi}=\mathcal{O}(w^2+\epsilon)$, and the amplitude $w$ solves the scalar
+    imperfect bifurcation equation
+    \begin{equation}
+        \label{eq:bifeq}
+        a\,(t_c-t)\,w + b\,w^3 = \epsilon\,\eta + \mathcal{O}\!\big(\epsilon^2 + \epsilon w + |t_c-t|\,w^2 + w^4\big),
+    \end{equation}
+    with $a,b,\eta$ as in Assumption~\ref{ass:bif}.
+\end{proposition}
+
+\begin{proof}
+    Let $P$ be the $V$-orthogonal projection onto $\operatorname{span}\{\bm{\phi}\}$ and $Q=I-P$. Write
+    $\bm{u}=\bm{u}_0(t)+w\bm{\phi}+\bm{\psi}$ with $\bm{\psi}\in V^\perp$. The range equation $Q\,G=0$ has invertible
+    linearisation $Q\,\mathcal{L}_c\,Q$ on $V^\perp$ by (B1), so the implicit function theorem yields a unique smooth
+    $\bm{\psi}=\bm{\psi}(w,t,\epsilon)$ with $\bm{\psi}(0,t_c,0)=0$ and, by differentiating $QG=0$,
+    $\bm{\psi}=\mathcal{O}(w^2+\epsilon+|t_c-t|)$. Substituting into the kernel equation $\langle G,\bm{\phi}\rangle=0$
+    and Taylor-expanding $G$ to third order in $w$ about $(\bm{u}_0(t_c),t_c,0)$ gives \eqref{eq:bifeq}: the linear term
+    $a(t_c-t)w$ from (B2), the cubic $bw^3$ from (B3) (the quadratic term vanishing by symmetry, see above), and the
+    inhomogeneity $\epsilon\eta$ from $-\epsilon\langle\bm{p},\bm{\phi}\rangle$; the listed remainders collect the
+    mixed and higher-order contributions. \qed
+\end{proof}
+
+\subsection{Amplitude scaling}
+
+\begin{lemma}[Worst-case amplitude]
+    \label{lem:amp}
+    Under Assumption~\ref{ass:bif} the largest amplitude on the imperfect branch is attained at $t=t_c$, where
+    \eqref{eq:bifeq} reduces to $b\,w^3 = \epsilon\,\eta\,(1+o(1))$, so
+    \begin{equation}
+        \label{eq:wscale}
+        w(\epsilon) = \Big(\tfrac{\eta}{b}\Big)^{1/3}\epsilon^{1/3}\,(1+o(1)), \qquad \epsilon\to0 .
+    \end{equation}
+    If instead the symmetry is broken and a quadratic term $\beta w^2$ is present (transcritical case), the worst-case
+    amplitude is $w(\epsilon)\sim(\eta/\beta)^{1/2}\epsilon^{1/2}$.
+\end{lemma}
+
+\subsection{Kinematic relief: lower bound on \texorpdfstring{$J$}{J}}
+
+The heart of the regularisation is geometric: the buckling mode trades pure compression for rotation and shear, which
+lifts the determinant off zero. The reason the relief is second order in $w$---and hence why the scaling exponents
+below are what they are---is that the mode is, to leading order, a \emph{rotation}, and rotations do not change volume
+at first order.
+
+\begin{lemma}[Determinant relief]
+    \label{lem:relief}
+    Let $\bm{F}=\bm{F}_0+w\,\Grad\bm{\phi}+\mathcal{O}(w^2)$ at the corner, with $\bm{F}_0=\bm{F}_0(t_c)$. Assume the
+    \emph{rotation condition}
+    \begin{equation}
+        \label{eq:rotcond}
+        \operatorname{cof}\bm{F}_0:\Grad\bm{\phi} = J_0\,\bm{F}_0^{-T}:\Grad\bm{\phi} = 0
+    \end{equation}
+    (the critical mode is volume-preserving at first order), and $d_\phi:=\det(\Grad\bm{\phi})>0$. Then, in $2$D,
+    \begin{equation}
+        \label{eq:Jexp}
+        J = \det\bm{F} = J_0 + w^2\,d_\phi + \mathcal{O}(w^3),
+    \end{equation}
+    so that, with $\lambda_c=\lambda_{\min}(\bm{F}_0)$ and $\lambda_{\max}(\bm{F})=\mathcal{O}(1)$,
+    \begin{equation}
+        \label{eq:lminrelief}
+        \lambda_{\min}(\bm{F}) = \frac{J}{\lambda_{\max}} \ \gtrsim\ C_1\lambda_c + C_2\,w^2,
+        \qquad C_1,C_2>0 .
+    \end{equation}
+\end{lemma}
+
+\begin{proof}
+    In $2$D the determinant is quadratic: for any $\bm{A},\bm{B}$,
+    $\det(\bm{A}+w\bm{B})=\det\bm{A}+w\,(\operatorname{cof}\bm{A}:\bm{B})+w^2\det\bm{B}$. With $\bm{A}=\bm{F}_0$,
+    $\bm{B}=\Grad\bm{\phi}$, the first-order term is $\operatorname{cof}\bm{F}_0:\Grad\bm{\phi}$, which vanishes by
+    \eqref{eq:rotcond}, leaving \eqref{eq:Jexp}. Since $J=\lambda_{\min}\lambda_{\max}$ in $2$D and
+    $\lambda_{\max}=\mathcal{O}(1)$ on the relieved branch (the buckling redirects, but does not unboundedly stretch,
+    the material near the corner), \eqref{eq:Jexp} gives \eqref{eq:lminrelief}. \qed
+\end{proof}
+
+Along the loaded path $\lambda_c(t)\to0$ as $t\uparrow1$, so the $w^2$ term dominates the lower bound. Combining
+\eqref{eq:lminrelief} with the amplitude scaling \eqref{eq:wscale},
 \begin{equation}
-    J_{\min}(\epsilon) \geq C_1 \lambda_c + C_2\, w^2 ,
-\end{equation}
-with $C_1, C_2 > 0$ geometric constants. As $\epsilon \to 0$ (and $\lambda_c$ approaching its infinitesimal limit), the
-amplitude term dominates,
-\begin{equation}
-    J_{\min}(\epsilon) \sim \mathcal{O}(w^2) \sim \mathcal{O}(\epsilon^{2/3}) ,
-\end{equation}
-using \eqref{eq:wscale}. Since $J = \lambda_1\lambda_2$ in 2D and the transverse stretch is bounded, the minimum
-principal stretch scales as $\lambda_{\min} \sim \mathcal{O}(\epsilon^{2/3})$, whence
-\begin{equation}
-    \| \bm{F}^{-1} \| = \lambda_{\min}^{-1} \sim \mathcal{O}(\epsilon^{-2/3}) .
+    \label{eq:lminscale}
+    \lambda_{\min}(\epsilon) \gtrsim C_2\,w(\epsilon)^2 \sim \mathcal{O}(\epsilon^{2/3}),
+    \qquad \|\bm{F}^{-1}\| = \lambda_{\min}^{-1} \sim \mathcal{O}(\epsilon^{-2/3}) .
 \end{equation}
 
-\subsection{Final asymptotic bound on the tangent modulus}
+\begin{remark}[On the rotation condition]
+    Equation \eqref{eq:rotcond} is the precise content of the informal statement ``buckling relieves compression.'' It
+    can be read either as a property to be verified for the computed critical mode or as a \emph{selection principle}:
+    among competing modes, the volume-preserving one is energetically favoured precisely because the barrier $f_{\log}$
+    penalises any first-order volume change. A direct proof that the corner buckling mode satisfies \eqref{eq:rotcond}
+    is the main analytical gap remaining in this section.
+    %TODO: verify the rotation condition for the corner mode, or promote it to a stated selection lemma.
+\end{remark}
 
-By the structural bound \eqref{eq:Lbound},
+\subsection{Regularised tangent bound and spatial localisation}
+
+\begin{theorem}[Regularised blow-up]
+    \label{thm:reg}
+    Under Assumptions~\ref{ass:reg}, \ref{ass:bif} and the conclusions \eqref{eq:lminscale} of Lemma~\ref{lem:relief},
+    with the barrier penalty $f_{\log}$, the tangent on the imperfect branch satisfies
+    \begin{equation}
+        \label{eq:Lreg}
+        \max_{\bm{x}\in B_\rho} \|\mathbb{L}(\bm{x},\epsilon)\|
+        \ \le\ C\,\Theta(J)\,\|\bm{F}^{-1}\|^2
+        \ \sim\ \mathcal{O}\!\big(\epsilon^{-4/3}\,\log\tfrac1\epsilon\big), \qquad \epsilon\to0 .
+    \end{equation}
+    In the transcritical case (Lemma~\ref{lem:amp}) the rate is $\mathcal{O}(\epsilon^{-1}\log\tfrac1\epsilon)$.
+\end{theorem}
+
+\begin{proof}
+    By \eqref{eq:Lbound}, $\|\mathbb{L}\|\le\mu_e+\Theta(J)\|\bm{F}^{-1}\|^2$. For $f_{\log}$, $\Theta(J)=\mathcal{O}(\log\tfrac1J)$
+    as $J\to0$ by \eqref{eq:Thetacompress}, and $J\sim\lambda_{\min}\sim\epsilon^{2/3}$ by \eqref{eq:lminscale}, so
+    $\Theta(J)=\mathcal{O}(\log\tfrac1\epsilon)$; multiplying by $\|\bm{F}^{-1}\|^2\sim\epsilon^{-4/3}$ gives
+    \eqref{eq:Lreg}. The transcritical rate follows from $w\sim\epsilon^{1/2}$, $\lambda_{\min}\sim\epsilon$. \qed
+\end{proof}
+
+The maximum is, however, achieved only in a shrinking zone. Let $s>0$ be the spatial exponent with which the perfect
+compressive field would drive $\lambda_{\min}^{\mathrm{field}}(r)\sim A\,r^{s}$ toward the corner (an exponent inherited
+from the Scenario~B kinematics). On the imperfect branch the relief imposes the floor
+$\lambda_{\min}(r,\epsilon)\gtrsim\max\{A r^{s},\,c\,\epsilon^{2/3}\}$, so the high-stiffness corner zone is the disc
+$r<\ell(\epsilon)$ where the floor is active, with
 \begin{equation}
-    \| \mathbb{L}(\bm{F}) \| \leq \mu_e + \Theta(J)\, \|\bm{F}^{-1}\|^2 .
+    \label{eq:locallength}
+    \ell(\epsilon) \sim \Big(\tfrac{c}{A}\Big)^{1/s}\epsilon^{2/(3s)} \xrightarrow[\epsilon\to0]{} 0 .
 \end{equation}
-For the barrier penalty $f_{\log}$, $\Theta(J)=\mathcal{O}(\log\tfrac1J)$ as $J\to0$ (cf. \eqref{eq:Thetacompress}) is
-subordinate to $\|\bm{F}^{-1}\|^2$; substituting $\lambda_{\min}\sim\epsilon^{2/3}$ and $J\sim\lambda_{\min}$,
-\begin{equation}
-    \max_{\bm{x} \in \Omega} \| \mathbb{L}(\bm{x}, \epsilon) \| \leq
-    C\,\Theta(J)\,\|\bm{F}^{-1}\|^2 \sim
-    \mathcal{O}\!\big(\epsilon^{-4/3}\,\log\tfrac1\epsilon\big) .
-\end{equation}
-The imperfection thus converts the unbounded tangent of the perfect compressive path into a finite quantity that
-diverges only algebraically (up to a logarithm) as the noise is removed, at the rate $\epsilon^{-4/3}\log\tfrac1\epsilon$.
-The logarithmic factor is the same amplification identified in \eqref{eq:Lcompress}; it is the compressive counterpart
-of the benign $\log\tfrac1r$ growth in tension, and the analytic trace of the energy barrier that makes this whole
-bifurcation analysis well posed.
+
+\begin{proposition}[Narrowness of the singular zone]
+    \label{prop:narrow}
+    With $\ell(\epsilon)$ as in \eqref{eq:locallength}, the set on which the tangent is near its maximum has area
+    $\mathcal{O}(\ell(\epsilon)^2)=\mathcal{O}(\epsilon^{4/(3s)})\to0$, and the integrated stiffness obeys
+    \begin{equation}
+        \int_{B_\rho} \|\mathbb{L}(\bm{x},\epsilon)\|^{q}\,dV
+        \ \le\ C\Big(1 + \epsilon^{-4q/3}\,\ell(\epsilon)^2\,\log^q\tfrac1\epsilon\Big)
+        \ =\ C\Big(1 + \epsilon^{\frac{4}{3}\left(\frac{1}{s}-q\right)}\log^q\tfrac1\epsilon\Big),
+    \end{equation}
+    which stays bounded as $\epsilon\to0$ for every $q<1/s$. Thus, although the pointwise tangent diverges, its
+    $L^q$-mass over the corner remains finite for a range of $q$: the blow-up is genuinely localised, and for every
+    $\epsilon>0$ the regularised problem is well posed.
+\end{proposition}
+
+\begin{remark}[The determination of $s$]
+    The localisation exponent $s$, and hence the precise width \eqref{eq:locallength} and the integrability threshold
+    $q<1/s$, are inherited from the spatial decay of the perfect compressive stretch field, which the present analysis
+    does not pin down. Computing $s$ from the Scenario~B kinematics (or from the self-similar local problem of
+    Remark~\ref{rem:framework}) is the natural next step and would make Proposition~\ref{prop:narrow} fully
+    quantitative.
+    %TODO: determine s from the compressive corner kinematics.
+\end{remark}
+
+\subsection{Discussion}
+
+The structure of the result is the one anticipated physically. The idealised noiseless problem ($\epsilon=0$) is
+singular---the tangent is unbounded and ellipticity is lost---but it is a measure-zero idealisation. Any disturbance
+$\epsilon>0$ selects a smooth branch (Proposition~\ref{prop:LS}) on which the determinant is lifted off zero
+(Lemma~\ref{lem:relief}), the tangent is finite (Theorem~\ref{thm:reg}), and the residual singular character is
+confined to a disc of radius $\ell(\epsilon)\to0$ (Proposition~\ref{prop:narrow}). The divergence as $\epsilon\to0$ is
+only algebraic, $\epsilon^{-4/3}$ up to a logarithm, and is the mirror image---through the inverse channel---of the
+benign tensile growth of \S\ref{sub:growth}; the same logarithm, traceable to the energy barrier $f_{\log}$, appears in
+both. Two practical consequences follow. First, the bifurcation here is the corner-localised analogue of the classical
+\emph{creasing} instability of compressed elastomers \cite{Biot1963,Hong2009}, now seated at a geometric
+Dirichlet--Neumann junction rather than on a flat surface. Second, for computation the rate \eqref{eq:Lreg} prescribes
+how the unavoidable regularisation (mesh-induced or explicit) trades against tangent conditioning: halving the
+admissible $\|\mathbb{L}\|$ costs a definite reduction in $\epsilon$, and the localisation \eqref{eq:locallength} tells
+the solver where to refine. The reduction to scalar imperfect-bifurcation form follows the classical theory
+\cite{GolubitskySchaeffer1985,KeenerKeller1973}.
 
 \section{Conclusions}
 \label{sec:conclusions}
