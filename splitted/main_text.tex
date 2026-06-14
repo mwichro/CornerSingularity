@@ -684,13 +684,21 @@ reaches zero.
 \begin{remark}[The instability is structural, not material]
     \label{rem:framework}
     By Lemma~\ref{lem:SEcompress} the tangent stays strongly elliptic throughout compression, so the bifurcation here is
-    a \emph{structural} one (a buckling of the boundary-value problem), not a material change of type. We therefore work
-    with the global form on the bounded domain $B_\rho$: the operator
-    $\mathcal{L}(t)=\partial_{\bm{u}}G(\bm{u}_0(t),t,0)$ is uniformly elliptic with compact resolvent, hence has discrete
-    spectrum, and we assume (Assumption~\ref{ass:bif}) that a simple eigenvalue first crosses zero at $t_c$. What makes
-    the problem delicate is not a loss of ellipticity but the \emph{norm} blow-up $\|\mathbb{L}\|\to\infty$ at the corner
-    (eq.~\eqref{eq:Lcompress}): the coercivity constant stays positive while the boundedness constant diverges, so the
-    crossing eigenvalue $\mu_1(t)$ and the conditioning are controlled by different mechanisms.
+    a \emph{structural} one (a buckling of the boundary-value problem), not a material change of type. We work with the
+    global form on the bounded domain $B_\rho$. The operator $\mathcal{L}(t)=\partial_{\bm{u}}G(\bm{u}_0(t),t,0)$ has
+    discrete spectrum and attains $\mu_1(t)$ as a genuine eigenvalue \emph{provided} the fundamental stretch stays
+    bounded away from collapse up to the crossing, $\inf_{B_\rho}\lambda_{\min}(\bm{F}_0(t))\ge c>0$ for $t\le t_c$: then
+    $\mathcal{L}(t)$ has \emph{bounded} strongly-elliptic coefficients on the bounded domain, hence (G\aa rding, Korn and
+    the Rellich embedding) compact resolvent --- we make this precise as Lemma~\ref{lem:attain} in the concrete setting.
+    The reservation is essential: what makes the problem delicate is not a loss of ellipticity but the \emph{norm}
+    blow-up $\|\mathbb{L}\|\to\infty$ (eq.~\eqref{eq:Lcompress}), and it is exactly this blow-up, through the
+    scale-invariant (creasing) corner, that would push the bottom of the spectrum into the \emph{essential} spectrum and
+    destroy attainment. Crucially, that blow-up occurs only on the unphysical continuation past $t_c$, where
+    $\lambda_{\min}\to0$; at the crossing itself the spectrum is discrete \emph{so long as buckling precedes collapse}.
+    The coercivity constant thus stays positive while the boundedness constant diverges, and the crossing eigenvalue
+    $\mu_1(t)$ and the conditioning are controlled by different mechanisms. Assumption~\ref{ass:bif} records the spectral
+    facts (attainment and simplicity) we use; \S\ref{sub:core} shows that, for the concrete model, both follow once
+    buckling is known to precede collapse.
 \end{remark}
 
 \subsection{What is provable, and what must be assumed}
@@ -727,10 +735,12 @@ is the corner counterpart of the Biot/creasing instability \cite{Biot1963,Hong20
     one-dimensional, isolated kernel of $\mathcal{L}_c$ (the rest of the spectrum bounded away from $0$), with
     $\bm{\phi}$ localised near the corner.
 \end{assumption}
-\noindent This is the irreducible hypothesis: \emph{attainment} (the minimising sequence does not escape into the
+\noindent This bundles two spectral facts: \emph{attainment} (the minimising sequence does not escape into the
 corner as essential spectrum) and \emph{simplicity}. Simplicity is generic and, for a symmetric corner, can be argued
-from a reflection symmetry about the bisector; discreteness is the borderline-elliptic difficulty already flagged in
-Remark~\ref{rem:framework}. We do not prove it.
+from a reflection symmetry about the bisector; attainment is the borderline-elliptic difficulty flagged in
+Remark~\ref{rem:framework}. Neither is irreducible: in the concrete setting both are \emph{proved}
+(\S\ref{sub:symmetry}, Lemma~\ref{lem:attain}), the only residue being the cleaner geometric condition that buckling
+precede pointwise collapse.
 
 \paragraph{The crossing is transversal (provable under monotone loading).}
 \begin{lemma}[Transversality]

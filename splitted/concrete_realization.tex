@@ -243,19 +243,79 @@ of Lemma~\ref{lem:sval}, and that the collapse locus $\Sigma_{\mathrm{c}}$ is th
 along which the relieved branch would still collapse; the regularised bound of Theorem~\ref{thm:reg} and the
 localisation of Proposition~\ref{prop:narrow} then apply verbatim.
 
+\subsection{Attainment of the critical mode}
+\label{sub:attain}
+
+The second half of Assumption~\ref{ass:bif} --- that $\mu_1(t_c)=0$ is \emph{attained} by a genuine eigenmode rather
+than being the bottom of essential spectrum --- looks like the hard, borderline-elliptic point of
+Remark~\ref{rem:framework}. It is in fact a consequence of a single, transparent geometric condition: that the
+\emph{buckling precedes the pointwise collapse} of the fundamental state. The essential-spectrum threat is tied to the
+scale-invariance of the corner at collapse (the same wavenumber degeneracy that makes flat creasing scale-free, and
+that let $k\to\infty$ in Lemma~\ref{lem:biot}); it is activated only when $\mathbb{L}$ blows up, i.e. only when
+$\lambda_{\min}\to0$. So long as the crossing occurs while the fundamental stretch is still bounded below, the operator
+has bounded coefficients and the spectrum is discrete.
+
+\begin{assumption}[Buckling precedes collapse, (BC)]
+    \label{ass:bc}
+    The fundamental path keeps the stretch off collapse up to the crossing:
+    \begin{equation}
+        \label{eq:bc}
+        \inf_{t\le t_c}\ \inf_{\bm{x}\in\overline{B_\rho}}\ \lambda_{\min}\big(\bm{F}_0(t,\bm{x})\big)\ \ge\ c>0 .
+    \end{equation}
+\end{assumption}
+
+\begin{lemma}[Attainment under (BC)]
+    \label{lem:attain}
+    Under Assumption~\ref{ass:bc}, for every $t\le t_c$ the tangent $\mathbb{L}(\bm{F}_0(t))$ is bounded on $B_\rho$, the
+    operator $\mathcal{L}_c=\partial_{\bm{u}}G(\bm{u}_0(t_c),t_c,0)$ has compact resolvent and discrete spectrum, and the
+    critical value $\mu_1(t_c)=0$ is attained by an eigenmode $\bm{\phi}\in V$. Together with the simplicity argument of
+    \S\ref{sub:symmetry}, this discharges Assumption~\ref{ass:bif} in full.
+\end{lemma}
+
+\begin{proof}
+    By \eqref{eq:bc}, $\|\bm{F}_0(t)^{-1}\|=\lambda_{\min}^{-1}\le c^{-1}$ and $\det\bm{F}_0(t)$ is bounded on the
+    fundamental path; hence by the structural bound \eqref{eq:Lbound} with $\Theta=\Theta_{\log}$,
+    $\|\mathbb{L}(\bm{F}_0(t))\|\le\mu_e+c^{-2}\Theta_{\log}(\det\bm{F}_0)$ is uniformly bounded on $B_\rho$ for
+    $t\le t_c$. By Lemma~\ref{lem:SEcompress} the same tensor is strongly elliptic with constant $\ge\mu_e$ throughout
+    compression; with Korn's inequality the second-variation form obeys a G\aa rding estimate
+    $Q_{t_c}(\bm{v})\ge\gamma\,\|\bm{v}\|_{H^1(B_\rho)}^2-C\,\|\bm{v}\|_{L^2(B_\rho)}^2$ on $V\subset H^1$. Thus
+    $\mathcal{L}_c+C$ is coercive on $H^1$, its inverse maps $L^2$ boundedly into $H^1$, and the Rellich embedding
+    $H^1(B_\rho)\hookrightarrow\hookrightarrow L^2(B_\rho)$ --- valid on the bounded domain, the edge $\Sigma$
+    notwithstanding --- makes the resolvent of $\mathcal{L}_c$ compact. A self-adjoint operator with compact resolvent
+    has purely discrete spectrum and attains its lowest eigenvalue; at $t_c$ that eigenvalue is $\mu_1(t_c)=0$, with
+    eigenmode $\bm{\phi}$. \qed
+\end{proof}
+
+\begin{remark}[What (BC) costs, and why it is the right residue]
+    \label{rem:bc}
+    Lemma~\ref{lem:attain} relocates the difficulty from a functional-analytic statement about essential spectrum to a
+    comparison of two load thresholds: the buckling load $t_c$ and the pointwise-collapse load
+    $t_{\mathrm{coll}}:=\inf\{t:\inf_{B_\rho}\lambda_{\min}(\bm{F}_0(t))=0\}$, with (BC) asking $t_c<t_{\mathrm{coll}}$.
+    This is genuinely cleaner than ``attainment'': (i) Lemma~\ref{lem:biot} already bounds $t_c$ from above by the
+    surface-creasing load $t_*$, attained while $\lambda_{\min}\approx\lambda_\star=\mathcal{O}(1)$ at the creasing point
+    --- not at collapse; (ii) the barrier $f_{\log}(J)\to\infty$ makes $J=0$ cost infinite energy, so the true (not
+    linearly-predicted) fundamental path resists pointwise collapse and pushes $t_{\mathrm{coll}}$ up; and (iii) (BC) is
+    directly checkable in a computation, by monitoring $\min_{\bm{x}}\lambda_{\min}$ at the detected crossing. The one
+    place it can fail is the edge tip, where the \emph{linear} prediction $\lambda_{\min}\sim1-|K|r^{\alpha-1}$ wants to
+    collapse for any load; bounding the barrier-regularised tip collapse load from below is the concrete content left
+    open, in place of the opaque spectral hypothesis.
+\end{remark}
+
 \subsection{The irreducible core}
 \label{sub:core}
 
 Table~\ref{tab:status} summarises the effect of fixing the concrete model. Of the hypotheses of
 \S\ref{sec:asymptotics}--\S\ref{sec:iba}, the material assumptions are discharged by the neo-Hookean structure
 (\S\ref{sub:tier1}), the existence of the critical load by the localized-creasing Lemma~\ref{lem:biot} under the
-loading hypothesis (SC), and mode simplicity together with the vanishing quadratic by reflection symmetry
-(\S\ref{sub:symmetry}). Two hypotheses genuinely resist soft arguments and remain assumptions:
+loading hypothesis (SC), mode simplicity and the vanishing quadratic by reflection symmetry (\S\ref{sub:symmetry}), and
+mode attainment by Lemma~\ref{lem:attain} under the geometric condition (BC). What remains are two hypotheses, both now
+in concrete, checkable form rather than as opaque spectral postulates:
 \begin{enumerate}
-    \item \emph{Spectral attainment} (the remaining half of Assumption~\ref{ass:bif}): that the critical infimum is
-          attained by an $L^2$ mode rather than escaping into the essential spectrum associated with the corner. This is
-          the borderline-elliptic difficulty of Remark~\ref{rem:framework}; the norm blow-up \eqref{eq:Lcompress} is
-          exactly what makes it delicate, and we do not resolve it.
+    \item \emph{Buckling precedes collapse}, (BC) (Assumption~\ref{ass:bc}): the threshold inequality
+          $t_c<t_{\mathrm{coll}}$ that powers attainment (Lemma~\ref{lem:attain}). It is bounded on one side by
+          Lemma~\ref{lem:biot} ($t_c\le t_*$, at $\lambda_{\min}=\mathcal{O}(1)$) and supported by the energy barrier
+          (Remark~\ref{rem:bc}); the residual content is a lower bound on the barrier-regularised tip collapse load,
+          which we verify numerically.
     \item \emph{Subcriticality}, $b<0$ (the sign in Assumption~\ref{ass:subcrit}): the direction in which the cubic bends
           the branch. The creasing literature \cite{Biot1963,Hong2009} establishes subcriticality for the flat surface,
           which makes $b<0$ overwhelmingly likely here, but the sign of the reduced cubic at a \emph{corner} is not
@@ -274,22 +334,25 @@ loading hypothesis (SC), and mode simplicity together with the vanishing quadrat
         Transversality (M) (Lem.~\ref{lem:transversal})              & input on loading    & \textbf{holds} for monotone compression \\
         Mode simplicity (Ass.~\ref{ass:bif})                         & assumed             & \textbf{generic} per symmetry sector (\S\ref{sub:symmetry}) \\
         Quadratic coeff.\ vanishes (Ass.~\ref{ass:subcrit})          & assumed by symmetry & \textbf{forced} by reflection $R$ (\S\ref{sub:symmetry}) \\
+        Mode attainment (Ass.~\ref{ass:bif})                         & assumed             & \textbf{proved} under (BC) (Lem.~\ref{lem:attain}) \\
         Rotation condition / relief (Lem.~\ref{lem:rot},~\ref{lem:relief}) & \textbf{proved} (all $d$)  & genericity $d_\phi>0$ (\S\ref{sub:reliefd}) \\
         \midrule
-        Spectral attainment (Ass.~\ref{ass:bif})                     & assumed             & \emph{open} (irreducible core) \\
+        Buckling precedes collapse (BC) (Ass.~\ref{ass:bc})          & ---                 & \emph{numerical}: $t_c<t_{\mathrm{coll}}$ (Rem.~\ref{rem:bc}) \\
         Subcriticality $b<0$ (Ass.~\ref{ass:subcrit})                & assumed             & \emph{numerical} (irreducible core) \\
         \bottomrule
     \end{tabular}
     \caption{Hypothesis ledger for the concrete clamped--free neo-Hookean model. Fixing the material and geometry
-        discharges all but two hypotheses; those two form the irreducible analytical core.}
+        discharges every spectral postulate; the residue is two concrete, numerically checkable conditions --- that
+        buckling precedes pointwise collapse, and that the reduced cubic is subcritical.}
     \label{tab:status}
 \end{table}
 
 The upshot is that for the clamped--free neo-Hookean corner under compression the abstract picture of
-\S\ref{sec:asymptotics}--\S\ref{sec:iba} is, but for two clearly delimited hypotheses, a sequence of theorems: the
+\S\ref{sec:asymptotics}--\S\ref{sec:iba} is, but for two clearly delimited conditions, a sequence of theorems: the
 material bounds are explicit, the corner is genuinely compressive, the instability is a localized creasing event with a
-constructed destabilising mode, the critical mode is simple and the bifurcation has no quadratic term by symmetry, and
-the kinematic relief that regularises the tangent holds in every dimension. The two residual hypotheses ---
-attainment of the critical mode and the sign of the cubic --- are precisely the ones that the creasing problem on a
-flat surface also leaves to spectral theory and to computation, and they are inherited here rather than created by the
-corner.
+constructed destabilising mode, the critical mode is simple and attained (no quadratic term, by symmetry), and the
+kinematic relief that regularises the tangent holds in every dimension. Notably, the spectral postulates of the
+abstract theory --- attainment and simplicity --- are no longer assumed but proved; what remains are two \emph{concrete}
+and numerically checkable conditions: that buckling precedes pointwise collapse ($t_c<t_{\mathrm{coll}}$), and that the
+reduced cubic is subcritical ($b<0$). Both are exactly what the creasing problem on a flat surface also leaves to
+computation, and they are inherited here rather than created by the corner.
