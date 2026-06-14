@@ -662,74 +662,158 @@ reaches zero.
     treatment of the borderline-elliptic limit; we do not pursue it here.
 \end{remark}
 
-\subsection{Bifurcation hypotheses}
+\subsection{What is provable, and what must be assumed}
 
-\begin{assumption}[Simple, transversal, supercritical bifurcation with active imperfection]
+It is worth separating the genuinely provable facts about the critical point from the irreducible hypotheses. Let
+$Q_t(\bm{v}):=\int_{B_\rho}\Grad\bm{v}:\mathbb{L}(\bm{F}_0(t)):\Grad\bm{v}\,dV$ be the second-variation form on the
+fundamental path and $\mu_1(t):=\inf_{\|\bm{v}\|_V=1}Q_t(\bm{v})$.
+
+\paragraph{The critical load exists (provable).}
+\begin{lemma}[Existence of the critical load]
+    \label{lem:tc}
+    Assume (i) coercivity at zero load, $\mu_1(0)>0$, and (ii) loss of strong ellipticity at some $t_*\in(0,1)$ on the
+    fundamental path (Scenario~B). Then $\mu_1$ is continuous on $[0,t_*]$ and there is a first $t_c\in(0,t_*]$ with
+    $\mu_1(t_c)=0$ and $\mu_1(t)>0$ for $t<t_c$.
+\end{lemma}
+\begin{proof}
+    At $t=0$, $\bm{F}_0=\bm{I}$ and $\mathbb{L}=\mu_e\mathbb{I}+(\text{volumetric at }J{=}1)$ is positive definite, so
+    $\mu_1(0)>0$. Failure of the Legendre--Hadamard condition at $t_*$ furnishes a rank-one direction with $Q_{t_*}<0$,
+    hence $\mu_1(t_*)<0$. As $t\mapsto\mathbb{L}(\bm{F}_0(t))$ is continuous, so is $\mu_1$, and the intermediate value
+    theorem gives the first zero $t_c$. \qed
+\end{proof}
+
+\paragraph{The critical mode (assumed).}
+\begin{assumption}[Critical mode]
     \label{ass:bif}
-    There is $t_c\in(0,1)$ such that, with $\mathcal{L}_c:=\mathcal{L}(t_c)$:
-    \begin{enumerate}
-        \item[(B1)] $\ker\mathcal{L}_c=\operatorname{span}\{\bm{\phi}\}$ is one-dimensional, $\|\bm{\phi}\|_V=1$, and
-              $0$ is an isolated, simple eigenvalue (the rest of the spectrum is bounded away from $0$); $\bm{\phi}$ is
-              localised near the corner and satisfies $\int_{B_\rho}\Grad\bm{\phi}:\mathbb{L}_c:\Grad\bm{v}\,dV=0$ for
-              all $\bm{v}\in V$;
-        \item[(B2)] the eigenvalue $\mu_1(t)$ of $\mathcal{L}(t)$ through $0$ crosses transversally,
-              $a:=-\mu_1'(t_c)>0$;
-        \item[(B3)] the post-buckling coefficient
-              $b:=\tfrac16\langle\bm{\phi},\partial^3_{\bm{u}}G(\bm{u}_0(t_c),t_c,0)[\bm{\phi},\bm{\phi},\bm{\phi}]\rangle>0$
-              (supercritical pitchfork);
-        \item[(B4)] the imperfection is active, $\eta:=\displaystyle\int_{B_\rho}\bm{p}\cdot\bm{\phi}\,dV\neq0$.
-    \end{enumerate}
+    At $t_c$ the infimum $\mu_1(t_c)=0$ is attained at a mode $\bm{\phi}\in V$, $\|\bm{\phi}\|_V=1$, spanning a
+    one-dimensional, isolated kernel of $\mathcal{L}_c$ (the rest of the spectrum bounded away from $0$), with
+    $\bm{\phi}$ localised near the corner.
 \end{assumption}
+\noindent This is the irreducible hypothesis: \emph{attainment} (the minimising sequence does not escape into the
+corner as essential spectrum) and \emph{simplicity}. Simplicity is generic and, for a symmetric corner, can be argued
+from a reflection symmetry about the bisector; discreteness is the borderline-elliptic difficulty already flagged in
+Remark~\ref{rem:framework}. We do not prove it.
 
-Condition (B4) is generic: it fails only for $\bm{p}$ in the codimension-one subspace $\bm{\phi}^\perp$. The
-quadratic term in $w$ vanishes by the reflection symmetry $w\mapsto-w$ of the perfect compressive state about the
-corner bisector, which is what makes (B3) a pitchfork; we record the asymmetric (transcritical) variant in
-Lemma~\ref{lem:amp} as well.
+\paragraph{The crossing is transversal (provable under monotone loading).}
+\begin{lemma}[Transversality]
+    \label{lem:transversal}
+    Suppose the loading is monotonically destabilising at $t_c$,
+    \begin{equation}
+        \label{eq:monotone}
+        \langle\bm{\phi},\dot{\mathbb{L}}(t_c)\bm{\phi}\rangle
+        := \int_{B_\rho}\Grad\bm{\phi}:\partial_t\mathbb{L}(\bm{F}_0(t_c)):\Grad\bm{\phi}\,dV < 0 . \tag{M}
+    \end{equation}
+    Then, under Assumption~\ref{ass:bif}, $\mu_1$ is differentiable at $t_c$ with
+    $a:=-\mu_1'(t_c)=-\langle\bm{\phi},\dot{\mathbb{L}}(t_c)\bm{\phi}\rangle>0$.
+\end{lemma}
+\begin{proof}
+    For a simple eigenvalue, first-order perturbation theory gives $\mu_1'(t_c)=\langle\bm{\phi},\dot{\mathbb{L}}(t_c)\bm{\phi}\rangle$;
+    hypothesis \eqref{eq:monotone} fixes the sign. \qed
+\end{proof}
+\noindent Condition \eqref{eq:monotone} is the precise meaning of ``more compression $\Rightarrow$ less stiffness in
+the buckling direction'' and holds for any monotone compressive load path; it is an input on the \emph{loading}, not on
+the solution.
+
+\paragraph{The imperfection is active (provable, generic).}
+\begin{lemma}[Generic activation]
+    \label{lem:eta}
+    For every $\bm{p}$ outside the closed codimension-one subspace $\bm{\phi}^\perp$, the projection
+    $\eta:=\int_{B_\rho}\bm{p}\cdot\bm{\phi}\,dV\neq0$. Hence $\eta\neq0$ for generic imperfection.
+\end{lemma}
+
+\paragraph{The bifurcation is subcritical (assumed).}
+The one ingredient genuinely beyond reach of soft arguments is the \emph{sign} of the nonlinearity. Guided by the
+creasing analogy \cite{Biot1963,Hong2009}---surface instabilities of compressed elastomers are well known to be
+subcritical---we assume it here rather than pretend to derive it.
+\begin{assumption}[Subcritical, non-degenerate reduced potential]
+    \label{ass:subcrit}
+    The reduced bifurcation equation is subcritical with quintic saturation,
+    \begin{equation}
+        b:=\tfrac16\langle\bm{\phi},\partial^3_{\bm{u}}G[\bm{\phi},\bm{\phi},\bm{\phi}]\rangle<0,
+        \qquad
+        d:=\tfrac1{120}\langle\bm{\phi},\partial^5_{\bm{u}}G[\bm{\phi},\dots,\bm{\phi}]\rangle>0,
+    \end{equation}
+    and the quadratic coefficient vanishes by the reflection symmetry $w\mapsto-w$ of the perfect compressive state
+    about the corner bisector.
+\end{assumption}
 
 \subsection{Lyapunov--Schmidt reduction}
 
 \begin{proposition}[Normal form]
     \label{prop:LS}
-    Under Assumption~\ref{ass:bif}, there is a neighbourhood of $(\bm{u}_0(t_c),t_c,0)$ in which the solutions of
-    \eqref{eq:Gdef} are exactly
+    Under Assumption~\ref{ass:bif}, Lemma~\ref{lem:transversal} and Assumption~\ref{ass:subcrit}, there is a
+    neighbourhood of $(\bm{u}_0(t_c),t_c,0)$ in which the solutions of \eqref{eq:Gdef} are exactly
     \begin{equation}
         \bm{u}(t,\epsilon) = \bm{u}_0(t) + w\,\bm{\phi} + \bm{\psi}(w,t,\epsilon),
         \qquad \bm{\psi}\in V^\perp:=\{\bm{\phi}\}^{\perp},
     \end{equation}
     where $\bm{\psi}$ is smooth with $\bm{\psi}=\mathcal{O}(w^2+\epsilon)$, and the amplitude $w$ solves the scalar
-    imperfect bifurcation equation
+    imperfect bifurcation equation, retained to quintic order because the cubic is destabilising ($b<0$),
     \begin{equation}
         \label{eq:bifeq}
-        a\,(t_c-t)\,w + b\,w^3 = \epsilon\,\eta + \mathcal{O}\!\big(\epsilon^2 + \epsilon w + |t_c-t|\,w^2 + w^4\big),
+        a\,(t_c-t)\,w + b\,w^3 + d\,w^5 = \epsilon\,\eta + \mathcal{O}\!\big(\epsilon^2 + \epsilon w + |t_c-t|\,w^2 + w^6\big),
     \end{equation}
-    with $a,b,\eta$ as in Assumption~\ref{ass:bif}.
+    with $a>0$ (Lemma~\ref{lem:transversal}), $b<0<d$ (Assumption~\ref{ass:subcrit}) and $\eta$ as in
+    Lemma~\ref{lem:eta}.
 \end{proposition}
 
 \begin{proof}
     Let $P$ be the $V$-orthogonal projection onto $\operatorname{span}\{\bm{\phi}\}$ and $Q=I-P$. Write
     $\bm{u}=\bm{u}_0(t)+w\bm{\phi}+\bm{\psi}$ with $\bm{\psi}\in V^\perp$. The range equation $Q\,G=0$ has invertible
-    linearisation $Q\,\mathcal{L}_c\,Q$ on $V^\perp$ by (B1), so the implicit function theorem yields a unique smooth
-    $\bm{\psi}=\bm{\psi}(w,t,\epsilon)$ with $\bm{\psi}(0,t_c,0)=0$ and, by differentiating $QG=0$,
+    linearisation $Q\,\mathcal{L}_c\,Q$ on $V^\perp$ by Assumption~\ref{ass:bif}, so the implicit function theorem
+    yields a unique smooth $\bm{\psi}=\bm{\psi}(w,t,\epsilon)$ with $\bm{\psi}(0,t_c,0)=0$ and
     $\bm{\psi}=\mathcal{O}(w^2+\epsilon+|t_c-t|)$. Substituting into the kernel equation $\langle G,\bm{\phi}\rangle=0$
-    and Taylor-expanding $G$ to third order in $w$ about $(\bm{u}_0(t_c),t_c,0)$ gives \eqref{eq:bifeq}: the linear term
-    $a(t_c-t)w$ from (B2), the cubic $bw^3$ from (B3) (the quadratic term vanishing by symmetry, see above), and the
-    inhomogeneity $\epsilon\eta$ from $-\epsilon\langle\bm{p},\bm{\phi}\rangle$; the listed remainders collect the
-    mixed and higher-order contributions. \qed
+    and Taylor-expanding $G$ about $(\bm{u}_0(t_c),t_c,0)$ gives \eqref{eq:bifeq}: the linear term $a(t_c-t)w$ from
+    Lemma~\ref{lem:transversal}, the cubic $bw^3$ and quintic $dw^5$ from Assumption~\ref{ass:subcrit} (the quadratic
+    vanishing by symmetry), and the inhomogeneity $\epsilon\eta$ from $-\epsilon\langle\bm{p},\bm{\phi}\rangle$. Because
+    $b<0$, the cubic alone does not saturate the amplitude, which is why the quintic $dw^5$ ($d>0$) is retained. \qed
 \end{proof}
 
-\subsection{Amplitude scaling}
+\subsection{Subcritical branch structure and imperfection sensitivity}
+\label{sub:subcrit}
 
-\begin{lemma}[Worst-case amplitude]
-    \label{lem:amp}
-    Under Assumption~\ref{ass:bif} the largest amplitude on the imperfect branch is attained at $t=t_c$, where
-    \eqref{eq:bifeq} reduces to $b\,w^3 = \epsilon\,\eta\,(1+o(1))$, so
+\paragraph{Perfect system.}
+Set $\epsilon=0$ and $t<t_c$. Dividing \eqref{eq:bifeq} by $w$ gives $a(t_c-t)+bw^2+dw^4=0$, i.e.
+\begin{equation}
+    w^2 = \frac{-b\pm\sqrt{b^2-4ad(t_c-t)}}{2d},
+\end{equation}
+which (with $a>0$, $b<0$, $d>0$) admits real nontrivial branches only for $t\ge t_L$, where
+\begin{equation}
+    \label{eq:fold}
+    t_L := t_c - \frac{b^2}{4ad} < t_c, \qquad w_L^2 = \frac{-b}{2d} = \mathcal{O}(1).
+\end{equation}
+At $t_L$ the two branches meet in a limit point (fold) at the \emph{finite} amplitude $w_L$. The fundamental branch
+$w=0$ is stable for $t<t_c$ and unstable for $t>t_c$; the upper nontrivial branch is stable. Hence on $[t_L,t_c)$ the
+compressed state and a finite-amplitude creased state coexist: the bifurcation is subcritical, with hysteresis and a
+\emph{snap} at $t_c$.
+
+\paragraph{Imperfect system.}
+\begin{proposition}[Imperfection sensitivity, Koiter $\tfrac23$ law]
+    \label{prop:koiter}
+    For $\epsilon>0$ the limit point of \eqref{eq:bifeq} shifts to
     \begin{equation}
-        \label{eq:wscale}
-        w(\epsilon) = \Big(\tfrac{\eta}{b}\Big)^{1/3}\epsilon^{1/3}\,(1+o(1)), \qquad \epsilon\to0 .
+        \label{eq:koiter}
+        t_L(\epsilon) = t_L - C\,|\eta\,\epsilon|^{2/3} + o(\epsilon^{2/3}), \qquad C>0,
     \end{equation}
-    If instead the symmetry is broken and a quadratic term $\beta w^2$ is present (transcritical case), the worst-case
-    amplitude is $w(\epsilon)\sim(\eta/\beta)^{1/2}\epsilon^{1/2}$.
-\end{lemma}
+    so the load at which the compressed branch ceases to exist is reduced by $\mathcal{O}(\epsilon^{2/3})$, while the
+    amplitude at snap remains $w=\mathcal{O}(1)$.
+\end{proposition}
+\begin{proof}[Sketch]
+    A limit point of $g(w):=a(t_c-t)w+bw^3+dw^5-\epsilon\eta$ satisfies $g=g'=0$. Eliminating $t$ and expanding about
+    the perfect fold $(w_L,t_L)$, where $g'=0$ and $g''\neq0$, yields a relation $\delta t\sim -\,c\,(\epsilon\eta)^{2/3}$
+    between the load offset $\delta t=t-t_L$ and the imperfection; this is the classical $\tfrac23$ power law
+    \cite{Koiter1945,GolubitskySchaeffer1985}. \qed
+\end{proof}
+
+\paragraph{The unstable continuation branch.}
+Separately, near $t_c$ the small-amplitude (backward-bending, unstable) branch of \eqref{eq:bifeq} satisfies, at
+$t=t_c$, $b\,w^3=\epsilon\eta\,(1+o(1))$ with the quintic subdominant, so
+\begin{equation}
+    \label{eq:wscale}
+    |w(\epsilon)| = \Big(\frac{|\eta|}{|b|}\Big)^{1/3}\epsilon^{1/3}\,(1+o(1)), \qquad \epsilon\to0 .
+\end{equation}
+This is the branch a displacement- or arc-length-controlled solver tracks through the instability, and it is the one
+that feeds the tangent estimate below; it is \emph{not} the branch a load-controlled physical system follows.
 
 \subsection{Kinematic relief: lower bound on \texorpdfstring{$J$}{J}}
 
@@ -769,13 +853,15 @@ at first order.
     the material near the corner), \eqref{eq:Jexp} gives \eqref{eq:lminrelief}. \qed
 \end{proof}
 
-Along the loaded path $\lambda_c(t)\to0$ as $t\uparrow1$, so the $w^2$ term dominates the lower bound. Combining
-\eqref{eq:lminrelief} with the amplitude scaling \eqref{eq:wscale},
+As the load approaches the instability the perfect corner stretch $\lambda_c\to0$, so the $w^2$ term dominates the
+lower bound. On the \emph{unstable continuation branch} \eqref{eq:wscale} (the one a solver tracks through the
+instability), combining \eqref{eq:lminrelief} with $w\sim\epsilon^{1/3}$,
 \begin{equation}
     \label{eq:lminscale}
     \lambda_{\min}(\epsilon) \gtrsim C_2\,w(\epsilon)^2 \sim \mathcal{O}(\epsilon^{2/3}),
     \qquad \|\bm{F}^{-1}\| = \lambda_{\min}^{-1} \sim \mathcal{O}(\epsilon^{-2/3}) .
 \end{equation}
+On the stable physical branch the picture is different and milder; we contrast the two after Theorem~\ref{thm:reg}.
 
 The rotation condition \eqref{eq:rotcond} is not an extra assumption: it is \emph{forced} by the energy barrier, as we
 now show. This is the precise content of the informal statement ``buckling relieves compression''---the barrier makes
@@ -813,25 +899,43 @@ the volume-preserving mode the only one of finite energy.
 
 \subsection{Regularised tangent bound and spatial localisation}
 
-\begin{theorem}[Regularised blow-up]
+\begin{proposition}[Stable physical branch: bounded tangent]
+    \label{prop:physical}
+    Under load control the structure follows the compressed fundamental branch up to the snap at $t_L(\epsilon)\le t_c$
+    (Proposition~\ref{prop:koiter}) and then jumps to the creased branch of amplitude $w=\mathcal{O}(1)$. On the
+    compressed branch $\lambda_{\min}\ge\lambda_c(t)\ge\lambda_c(t_c)>0$; after the snap the $\mathcal{O}(1)$ amplitude
+    relieves the compression to $\lambda_{\min}=\mathcal{O}(1)$ via Lemma~\ref{lem:relief}. Hence on the physical branch
+    \begin{equation}
+        \max_{\bm{x}\in B_\rho}\|\mathbb{L}(\bm{x},\epsilon)\| = \mathcal{O}(1) \quad\text{uniformly in } \epsilon,
+    \end{equation}
+    and the sole effect of the imperfection is the $\mathcal{O}(\epsilon^{2/3})$ reduction \eqref{eq:koiter} of the snap
+    load. There is no tangent blow-up on the physical branch.
+\end{proposition}
+
+\begin{theorem}[Unstable continuation branch: regularised blow-up]
     \label{thm:reg}
-    Under Assumptions~\ref{ass:reg}, \ref{ass:bif} and the conclusions \eqref{eq:lminscale} of Lemma~\ref{lem:relief},
-    with the barrier penalty $f_{\log}$, the tangent on the imperfect branch satisfies
+    Under Assumptions~\ref{ass:reg}, \ref{ass:bif}, \ref{ass:subcrit} and the conclusions \eqref{eq:lminscale} of
+    Lemma~\ref{lem:relief}, with the barrier penalty $f_{\log}$, the tangent \emph{along the unstable continuation
+    branch} \eqref{eq:wscale}---the branch tracked by a displacement- or arc-length-controlled solver---satisfies
     \begin{equation}
         \label{eq:Lreg}
         \max_{\bm{x}\in B_\rho} \|\mathbb{L}(\bm{x},\epsilon)\|
         \ \le\ C\,\Theta(J)\,\|\bm{F}^{-1}\|^2
         \ \sim\ \mathcal{O}\!\big(\epsilon^{-4/3}\,\log\tfrac1\epsilon\big), \qquad \epsilon\to0 .
     \end{equation}
-    In the transcritical case (Lemma~\ref{lem:amp}) the rate is $\mathcal{O}(\epsilon^{-1}\log\tfrac1\epsilon)$.
 \end{theorem}
 
 \begin{proof}
     By \eqref{eq:Lbound}, $\|\mathbb{L}\|\le\mu_e+\Theta(J)\|\bm{F}^{-1}\|^2$. For $f_{\log}$, $\Theta(J)=\mathcal{O}(\log\tfrac1J)$
-    as $J\to0$ by \eqref{eq:Thetacompress}, and $J\sim\lambda_{\min}\sim\epsilon^{2/3}$ by \eqref{eq:lminscale}, so
-    $\Theta(J)=\mathcal{O}(\log\tfrac1\epsilon)$; multiplying by $\|\bm{F}^{-1}\|^2\sim\epsilon^{-4/3}$ gives
-    \eqref{eq:Lreg}. The transcritical rate follows from $w\sim\epsilon^{1/2}$, $\lambda_{\min}\sim\epsilon$. \qed
+    as $J\to0$ by \eqref{eq:Thetacompress}, and on the unstable branch $J\sim\lambda_{\min}\sim\epsilon^{2/3}$ by
+    \eqref{eq:lminscale}, so $\Theta(J)=\mathcal{O}(\log\tfrac1\epsilon)$; multiplying by
+    $\|\bm{F}^{-1}\|^2\sim\epsilon^{-4/3}$ gives \eqref{eq:Lreg}. \qed
 \end{proof}
+
+The two results together are the precise sense in which ``the singularity never occurs in reality'': a load-controlled
+physical system snaps and keeps a bounded tangent (Proposition~\ref{prop:physical}), and the divergent
+$\epsilon^{-4/3}$ rate is felt only by an algorithm that suppresses the snap and tracks the unstable branch through the
+instability (Theorem~\ref{thm:reg}). The spatial localisation below applies to that branch.
 
 The maximum is, however, achieved only in a shrinking zone, and we can now identify the localisation exponent exactly.
 The relevant geometry is the \emph{collapse locus} of the perfect field.
@@ -893,22 +997,28 @@ half-width $\ell(\epsilon)$ around $\Sigma$ in which the floor is active, with (
 
 \subsection{Discussion}
 
-The structure of the result is the one anticipated physically. The idealised noiseless problem ($\epsilon=0$) is
-singular---the tangent is unbounded and ellipticity is lost---but it is a measure-zero idealisation. Any disturbance
-$\epsilon>0$ selects a smooth branch (Proposition~\ref{prop:LS}) on which the determinant is lifted off zero
-(Lemma~\ref{lem:relief}, with the volume-preserving character of the buckling mode \emph{forced} by the energy barrier,
-Lemma~\ref{lem:rot}), the tangent is finite (Theorem~\ref{thm:reg}), and the residual singular character is confined to
-a tube of width $\ell(\epsilon)\sim\epsilon^{2/3}\to0$ about the collapse locus, where it remains $L^q$-integrable for
-all $q<\tfrac12$ (Lemma~\ref{lem:sval}, Proposition~\ref{prop:narrow}). The divergence as $\epsilon\to0$ is
-only algebraic, $\epsilon^{-4/3}$ up to a logarithm, and is the mirror image---through the inverse channel---of the
-benign tensile growth of \S\ref{sub:growth}; the same logarithm, traceable to the energy barrier $f_{\log}$, appears in
-both. Two practical consequences follow. First, the bifurcation here is the corner-localised analogue of the classical
-\emph{creasing} instability of compressed elastomers \cite{Biot1963,Hong2009}, now seated at a geometric
-Dirichlet--Neumann junction rather than on a flat surface. Second, for computation the rate \eqref{eq:Lreg} prescribes
-how the unavoidable regularisation (mesh-induced or explicit) trades against tangent conditioning: halving the
-admissible $\|\mathbb{L}\|$ costs a definite reduction in $\epsilon$, and the localisation \eqref{eq:locallength} tells
-the solver where to refine. The reduction to scalar imperfect-bifurcation form follows the classical theory
-\cite{GolubitskySchaeffer1985,KeenerKeller1973}.
+The structure of the result is the one anticipated physically, and it splits cleanly along the stability of the branch
+followed. The idealised noiseless problem ($\epsilon=0$) is singular---the tangent is unbounded and ellipticity is
+lost---but it is a measure-zero idealisation. Because the corner instability is subcritical (the creasing analogy,
+Assumption~\ref{ass:subcrit}), a load-controlled physical system never traverses the singular continuation: it stays on
+the compressed branch and \emph{snaps} to a finite-amplitude crease at a load reduced by only
+$\mathcal{O}(\epsilon^{2/3})$ (Proposition~\ref{prop:koiter}), keeping a bounded tangent throughout
+(Proposition~\ref{prop:physical}). The much-discussed divergence is therefore not seen by the physical system at all;
+it is the worst case for an algorithm---displacement or arc-length control, numerical continuation---that suppresses the
+snap and tracks the \emph{unstable} branch through the instability. On that branch the determinant is still lifted off
+zero (Lemma~\ref{lem:relief}, with the volume-preserving character of the mode \emph{forced} by the energy barrier,
+Lemma~\ref{lem:rot}), the tangent diverges only algebraically, $\epsilon^{-4/3}$ up to a logarithm
+(Theorem~\ref{thm:reg}), and the singular character is confined to a tube of width $\ell(\epsilon)\sim\epsilon^{2/3}\to0$
+about the collapse locus, remaining $L^q$-integrable for all $q<\tfrac12$ (Lemma~\ref{lem:sval},
+Proposition~\ref{prop:narrow}). That algebraic rate is the mirror image---through the inverse channel---of the benign
+tensile growth of \S\ref{sub:growth}; the same logarithm, traceable to the barrier $f_{\log}$, appears in both. Two
+practical consequences follow. First, the bifurcation is the corner-localised analogue of the classical \emph{creasing}
+instability of compressed elastomers \cite{Biot1963,Hong2009}, now seated at a geometric Dirichlet--Neumann junction
+rather than on a flat surface. Second, the dichotomy is a concrete warning for computation: a solver that continues
+through the instability will see the conditioning degrade as $\epsilon^{-4/3}$ and should either admit the snap or
+refine inside the tube \eqref{eq:locallength}; the load-control reduction \eqref{eq:koiter} tells it when the snap is
+due. The reduction to scalar imperfect-bifurcation form follows the classical theory
+\cite{GolubitskySchaeffer1985,KeenerKeller1973,Koiter1945}.
 
 \section{Conclusions}
 \label{sec:conclusions}
