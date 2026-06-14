@@ -31,7 +31,7 @@ Almost all the existing nonlinear singularity literature avoids the exact setup 
           existing geometric corner singularity.
 \end{itemize}
 
-\textbf{The Gap}: How does an already-existing stress concentration at a geometric Dirichlet-Neumann corner couple with a nonlinear loss of ellipticity (buckling/creasing)? How do we bound the operators there? That is fundamentally an open question.
+\textbf{The Gap}: How does an already-existing stress concentration at a geometric Dirichlet-Neumann corner couple with a nonlinear structural instability (buckling/creasing)? How do we bound the operators there? That is fundamentally an open question.
 
 \section{Problem formulation}
 \label{sec:formulation}
@@ -145,10 +145,11 @@ $\bm{F} = \bm{I} + \mathcal{O}(K r^{\alpha-1})$, so $\|\bm{F}\| \to \infty$ as $
 The question this raises---and which the remainder of the paper addresses---is how this kinematic singularity
 propagates into the nonlinear tangent operator \eqref{eq:tangentdef}. In view of \eqref{eq:Lbound}, the answer hinges
 on which principal stretch diverges: a tensile corner keeps $\bm{F}^{-1}$ bounded and (for a suitable penalty) leaves
-$\mathbb{L}$ well behaved, whereas a compressive corner drives $\lambda_{\min} \to 0$, blows up $\mathbb{L}$, and
-triggers a loss of strong ellipticity. The following sections analyse these two scenarios in turn
-(Section~\ref{sec:asymptotics}) and then show how a small imperfection regularises the compressive case through a
-structural bifurcation (Section~\ref{sec:iba}).
+$\mathbb{L}$ well behaved, whereas a compressive corner drives $\lambda_{\min} \to 0$ and blows up the \emph{norm} of
+$\mathbb{L}$ (severe ill-conditioning). The tangent nonetheless remains strongly elliptic --- the compressive
+instability is \emph{structural} (a corner analogue of creasing), not a change of type of the PDE. The following
+sections analyse the two scenarios in turn (Section~\ref{sec:asymptotics}) and then show how a small imperfection
+regularises the compressive case through a structural bifurcation (Section~\ref{sec:iba}).
 
 \section{Asymptotic behaviour of the tangent operator at a mixed corner}
 \label{sec:asymptotics}
@@ -242,26 +243,29 @@ $\Theta(\det\bm F)$, violate \eqref{eq:Hessbound} and are excluded.
     since $\|\bm{F}^{-T}\|=\|\bm{F}^{-1}\|$, each is bounded in operator norm by its scalar prefactor times
     $\|\bm{F}^{-1}\|^2$. The triangle inequality gives \eqref{eq:Hessbound} with $c_0=\mu_e$ and $\Theta$ as in
     \eqref{eq:Thetagen}. For Assumption~\ref{ass:ellip}, contracting \eqref{eq:Lnh} with $\bm{m}\otimes\bm{N}$ and
-    setting $\bm{a}:=\bm{F}^{-T}\bm{N}$, $\bm{b}:=\bm{F}^{-1}\bm{m}$ gives
+    writing $\xi:=\bm{m}\cdot\bm{F}^{-T}\bm{N}=\bm{N}\cdot\bm{F}^{-1}\bm{m}$, the two volumetric terms combine
+    ($(f''J^2+f'J)\xi^2-f'J\,\xi^2$) to the single clean form
     \begin{equation}
         \label{eq:LHnh}
-        L_{iJkL}m_iN_Jm_kN_L
-        = \mu_e\,|\bm{m}|^2|\bm{N}|^2
-        + \big(f''J^2+f'J\big)\,(\bm{m}\cdot\bm{a})^2
-        - f'J\,(\bm{m}\cdot\bm{a})(\bm{N}\cdot\bm{b}).
+        L_{iJkL}m_iN_Jm_kN_L = \mu_e\,|\bm{m}|^2|\bm{N}|^2 + f''(J)\,J^2\,\xi^2 .
     \end{equation}
-    On $\{\lambda_{\min}\ge c,\ \det\bm{F}\le M\}$ the vectors $\bm{a},\bm{b}$ obey $|\bm{a}|\le c^{-1}|\bm{N}|$,
-    $|\bm{b}|\le c^{-1}|\bm{m}|$, and the prefactors are continuous in $J\in[c^2,M]$ (for $f_{\log}$,
-    $f''J^2+f'J=2\lambda_e$ is constant, see \S\ref{sub:growth}); choosing $c$ such that the constant term $\mu_e$
-    dominates the bounded volumetric remainder, or invoking the standard rank-one convexity of \eqref{eq:neohooke} away
-    from $\det\bm F=0$, yields \eqref{eq:LH} with a $\gamma(c,M)>0$. \qed
+    Wherever $f''(J)\ge0$ the second term is nonnegative and \eqref{eq:LH} holds with $\gamma=\mu_e$, uniformly in
+    $\bm{F}$ (no distortion bound needed); this covers $f_{\mathrm{quad}}$ ($f''=\kappa>0$) everywhere and $f_{\log}$ on
+    $\{f''_{\log}\ge0\}$. \qed
 \end{proof}
 
-\begin{remark}
-    The constant $c_0$ in \eqref{eq:Hessbound} is exactly the constant fourth-order term $\mu_e\,\delta_{ik}\delta_{JL}$
-    of the neo-Hookean tangent: the Hessian of the quadratic (Hookean) part does not depend on $\bm{F}$ at all. This is
-    why the \emph{deviatoric} response cannot blow up under tension; only the \emph{volumetric} response, through
-    $\Theta$, can.
+\begin{remark}[Strength and a tension caveat]
+    \label{rem:SEcaveat}
+    Identity \eqref{eq:LHnh} is sharper than \eqref{eq:LH}: the neo-Hookean tangent is strongly elliptic with constant
+    \emph{exactly} $\mu_e$ wherever $f''(J)\ge0$, and the volumetric term only adds to it. The Hessian of the quadratic
+    (Hookean) part is constant, which is why the \emph{deviatoric} response never blows up; only the \emph{volumetric}
+    response, through $\Theta$, can. One caveat for $f_{\log}$: since
+    $f''_{\log}(J)=(\mu_e+2\lambda_e-2\lambda_e\log J)/J^2$, convexity is lost once
+    $J>J_*:=\exp\!\big(1+\mu_e/(2\lambda_e)\big)$, and then \eqref{eq:LHnh} can turn negative for $\xi$ near its maximal
+    value $|\bm{m}||\bm{N}|/\lambda_{\min}$. Hence Assumption~\ref{ass:ellip} holds throughout \emph{compression}
+    ($J\le1$) and moderate tension, but $f_{\log}$ can lose strong ellipticity under \emph{extreme dilation}
+    ($J>J_*$)---a tension-side phenomenon distinct from the compressive analysis, and one more reason the bounded-$J$
+    qualifier matters in \S\ref{sub:scenarioA}. The globally convex $f_{\mathrm{quad}}$ is free of this.
 \end{remark}
 
 \subsection{The non-compressive hypothesis}
@@ -600,30 +604,49 @@ pathology, not a better one. The logarithmic penalty's stronger blow-up is, conv
 barrier $f_{\log}(J)\to+\infty$---and it is precisely that barrier which forces, and gives physical meaning to, the
 bifurcation rescue of Section~\ref{sec:iba}.
 
-\paragraph{Loss of strong ellipticity.}
-Before $J$ even reaches $0$, the extreme compression causes the acoustic tensor $Q_{ik}(\bm{N}) = L_{iJkL} N_J N_L$ to
-lose positive definiteness. Taking $\bm{N}$ aligned with the direction of maximum compression, the acoustic tensor
-develops a zero, then a negative, eigenvalue:
-\begin{equation}
-    \min_{\bm{m},\bm{N}} \left( L_{iJkL}\, m_i N_J m_k N_L \right) \leq 0 ,
-\end{equation}
-and Assumption~\ref{ass:ellip} fails. The PDE locally ceases to be elliptic.
+\paragraph{Ellipticity is \emph{not} lost --- the instability is structural.}
+It is tempting to attribute the breakdown to a loss of strong ellipticity (an indefinite acoustic tensor). For this
+neo-Hookean model that is \emph{false}, and it is worth stating the fact precisely, as it shapes the rest of the
+analysis.
+
+\begin{lemma}[Compressive strong ellipticity of the neo-Hookean tangent]
+    \label{lem:SEcompress}
+    For the energy \eqref{eq:neohooke}, the rank-one form of the tangent is exactly \eqref{eq:LHnh},
+    $L_{iJkL}m_iN_Jm_kN_L=\mu_e|\bm{m}|^2|\bm{N}|^2+f''(J)J^2(\bm{m}\cdot\bm{F}^{-T}\bm{N})^2$. Wherever $f''(J)\ge0$ ---
+    in particular throughout compression, $J\le1$, for both penalties \eqref{eq:fchoices} --- the tangent is strongly
+    elliptic with constant $\ge\mu_e>0$, uniformly in $\bm{F}$, and the acoustic tensor $Q_{ik}(\bm{N})=L_{iJkL}N_JN_L$
+    is positive definite and never degenerates under compression.
+\end{lemma}
+
+\begin{proof}
+    The identity is \eqref{eq:LHnh} (Lemma~\ref{lem:nh}). As $J\to0^+$, $f''(J)J^2\to+\infty$ for $f_{\log}$
+    (cf.~\eqref{eq:fppblow}) and $f''(J)J^2=\kappa J^2\ge0$ for $f_{\mathrm{quad}}$; in both cases the second term only
+    \emph{adds} to the constant $\mu_e$. \qed
+\end{proof}
+
+Thus the compressive corner is \emph{not} a material instability: the volumetric stiffening that blows up $\|\mathbb{L}\|$
+is exactly the term $f''(J)J^2$ in \eqref{eq:LHnh}, and it is positive --- it strengthens ellipticity while destroying
+conditioning. What fails is the \emph{boundedness} of the operator, not its positivity.
 
 \paragraph{Conclusion for Scenario B.}
-The assumption that the deformation smoothly follows the fundamental path into the corner leads to a mathematical
-breakdown: $\|\mathbb{L}\| \to \infty$, the local operator loses coercivity, the Newton step ceases to be well posed in
-the standard spaces, and standard Newton--Raphson solvers fail. For a barrier penalty such as $f_{\log}$ this is
-accompanied by an unphysical infinite accumulation of energy ($f(J)\to\infty$ as $J\to0$), which signals that the smooth
-fundamental path is not the physical solution. In reality, the loss of ellipticity dictates a local geometric
-bifurcation. To capture this analytically we introduce an imperfect perturbation (noise) that regularises the
-bifurcation and bounds the singularity; we work from here on with the barrier model $f_{\log}$, for which the collapse
-is genuinely resisted.
+The assumption that the deformation smoothly follows the fundamental path into the corner therefore produces, not a loss
+of ellipticity, but two distinct effects: (i) a blow-up of the tangent \emph{norm}, $\|\mathbb{L}\|\to\infty$
+(eq.~\eqref{eq:Lcompress}), which renders the Newton step catastrophically ill-conditioned even though it remains
+elliptic; and (ii) for a barrier penalty $f_{\log}$, an unphysical infinite accumulation of energy
+($f(J)\to\infty$ as $J\to0$), signalling that the smooth fundamental path is not the physical solution. The genuine
+mechanism that intervenes is a \emph{structural} bifurcation of the compressed state --- the corner analogue of
+\emph{creasing}, an instability of a material that remains everywhere strongly elliptic (Lemma~\ref{lem:SEcompress}),
+driven by the geometry and boundary conditions rather than by a change of type of the PDE. To capture it we introduce in
+Section~\ref{sec:iba} an imperfect perturbation that regularises the bifurcation and bounds the singularity; we work
+from here on with the barrier model $f_{\log}$, for which collapse is genuinely resisted.
 
 \section{Imperfect bifurcation analysis and asymptotic bounds}
 \label{sec:iba}
 
-The previous section showed that the perfect compressive path drives $\lambda_{\min}\to0$, blows up the tangent, and
-loses ellipticity. The premise of this section is that this scenario is an idealisation: a real system always carries
+The previous section showed that the perfect compressive path drives $\lambda_{\min}\to0$ and blows up the tangent norm
+while the material remains strongly elliptic (Lemma~\ref{lem:SEcompress}), so the breakdown is a structural instability
+rather than a loss of type. The premise of this section is that this scenario is an idealisation: a real system always
+carries
 small disturbances---geometric imperfections, load eccentricities, material inhomogeneity---and these select a nearby
 \emph{regular} solution branch on which the collapse never quite happens. We model the disturbance by a single scalar
 amplitude $\epsilon$, carry out an imperfect-bifurcation analysis, and quantify how the tangent blows up as
@@ -650,16 +673,16 @@ collapse $J\to0$ is genuinely resisted (Assumption~\ref{ass:reg}); along $\bm{u}
 $\lambda_c(t):=\lambda_{\min}(\bm{F}_0(t))$ decreases as $t\uparrow1$ but, on the bifurcating branch we construct, never
 reaches zero.
 
-\begin{remark}[Local versus global bifurcation]
+\begin{remark}[The instability is structural, not material]
     \label{rem:framework}
-    Scenario~B establishes a \emph{pointwise} loss of strong ellipticity at the corner, which is not \emph{a priori} the
-    same as a global structural bifurcation with a discrete eigenvalue. We adopt the global viewpoint on the bounded
-    domain $B_\rho$: at $t<t_c$ the tangent form is uniformly elliptic on $B_\rho$ except in a shrinking corner zone, so
-    the operator $\mathcal{L}(t)=\partial_{\bm{u}}G(\bm{u}_0(t),t,0)$ has compact resolvent and discrete spectrum, and we
-    assume (Assumption~\ref{ass:bif}) that a simple eigenvalue first crosses zero at $t_c$. The strictly local
-    alternative---a self-similar blow-up in rescaled coordinates $r\mapsto r/\ell(\epsilon)$ tied directly to the
-    pointwise loss of ellipticity---yields the same scaling laws and is the natural setting for a fully rigorous
-    treatment of the borderline-elliptic limit; we do not pursue it here.
+    By Lemma~\ref{lem:SEcompress} the tangent stays strongly elliptic throughout compression, so the bifurcation here is
+    a \emph{structural} one (a buckling of the boundary-value problem), not a material change of type. We therefore work
+    with the global form on the bounded domain $B_\rho$: the operator
+    $\mathcal{L}(t)=\partial_{\bm{u}}G(\bm{u}_0(t),t,0)$ is uniformly elliptic with compact resolvent, hence has discrete
+    spectrum, and we assume (Assumption~\ref{ass:bif}) that a simple eigenvalue first crosses zero at $t_c$. What makes
+    the problem delicate is not a loss of ellipticity but the \emph{norm} blow-up $\|\mathbb{L}\|\to\infty$ at the corner
+    (eq.~\eqref{eq:Lcompress}): the coercivity constant stays positive while the boundedness constant diverges, so the
+    crossing eigenvalue $\mu_1(t)$ and the conditioning are controlled by different mechanisms.
 \end{remark}
 
 \subsection{What is provable, and what must be assumed}
@@ -668,19 +691,26 @@ It is worth separating the genuinely provable facts about the critical point fro
 $Q_t(\bm{v}):=\int_{B_\rho}\Grad\bm{v}:\mathbb{L}(\bm{F}_0(t)):\Grad\bm{v}\,dV$ be the second-variation form on the
 fundamental path and $\mu_1(t):=\inf_{\|\bm{v}\|_V=1}Q_t(\bm{v})$.
 
-\paragraph{The critical load exists (provable).}
+\paragraph{The critical load exists (conditionally provable).}
+A clarification is essential here. By Lemma~\ref{lem:SEcompress} the neo-Hookean material remains strongly elliptic
+throughout compression, so $\mu_1(t)$ \emph{cannot} be driven negative by a rank-one (material) instability: any
+crossing must be a \emph{structural} loss of positivity of the global form $Q_t$, i.e. a buckling of the
+boundary-value problem in which the destabilising test field is not rank-one. This is the creasing mechanism.
 \begin{lemma}[Existence of the critical load]
     \label{lem:tc}
-    Assume (i) coercivity at zero load, $\mu_1(0)>0$, and (ii) loss of strong ellipticity at some $t_*\in(0,1)$ on the
-    fundamental path (Scenario~B). Then $\mu_1$ is continuous on $[0,t_*]$ and there is a first $t_c\in(0,t_*]$ with
-    $\mu_1(t_c)=0$ and $\mu_1(t)>0$ for $t<t_c$.
+    Assume (i) coercivity at zero load, $\mu_1(0)>0$, and (ii) a structural instability of the compressed state: there
+    exist $t_*\in(0,1)$ and $\bm{v}_*\in V$ with $Q_{t_*}(\bm{v}_*)<0$. Then $\mu_1$ is continuous on $[0,t_*]$ and there
+    is a first $t_c\in(0,t_*]$ with $\mu_1(t_c)=0$ and $\mu_1(t)>0$ for $t<t_c$.
 \end{lemma}
 \begin{proof}
     At $t=0$, $\bm{F}_0=\bm{I}$ and $\mathbb{L}=\mu_e\mathbb{I}+(\text{volumetric at }J{=}1)$ is positive definite, so
-    $\mu_1(0)>0$. Failure of the Legendre--Hadamard condition at $t_*$ furnishes a rank-one direction with $Q_{t_*}<0$,
-    hence $\mu_1(t_*)<0$. As $t\mapsto\mathbb{L}(\bm{F}_0(t))$ is continuous, so is $\mu_1$, and the intermediate value
-    theorem gives the first zero $t_c$. \qed
+    with Korn's inequality $\mu_1(0)>0$. Hypothesis (ii) gives $\mu_1(t_*)\le Q_{t_*}(\bm{v}_*)/\|\bm{v}_*\|_V^2<0$. As
+    $t\mapsto\mathbb{L}(\bm{F}_0(t))$ is continuous, so is $\mu_1$, and the intermediate value theorem gives the first
+    zero $t_c$. \qed
 \end{proof}
+\noindent Hypothesis (i) is provable for neo-Hookean (positive-definiteness at $\bm{F}=\bm{I}$ plus Korn). Hypothesis
+(ii) --- the existence of a structurally destabilising field --- is the genuine content and is \emph{not} elementary: it
+is the corner counterpart of the Biot/creasing instability \cite{Biot1963,Hong2009} and we do not establish it here.
 
 \paragraph{The critical mode (assumed).}
 \begin{assumption}[Critical mode]
