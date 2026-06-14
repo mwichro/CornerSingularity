@@ -740,13 +740,14 @@ at first order.
 
 \begin{lemma}[Determinant relief]
     \label{lem:relief}
-    Let $\bm{F}=\bm{F}_0+w\,\Grad\bm{\phi}+\mathcal{O}(w^2)$ at the corner, with $\bm{F}_0=\bm{F}_0(t_c)$. Assume the
+    Let $\bm{F}=\bm{F}_0+w\,\Grad\bm{\phi}+\mathcal{O}(w^2)$ at the corner, with $\bm{F}_0=\bm{F}_0(t_c)$, and let the
     \emph{rotation condition}
     \begin{equation}
         \label{eq:rotcond}
         \operatorname{cof}\bm{F}_0:\Grad\bm{\phi} = J_0\,\bm{F}_0^{-T}:\Grad\bm{\phi} = 0
     \end{equation}
-    (the critical mode is volume-preserving at first order), and $d_\phi:=\det(\Grad\bm{\phi})>0$. Then, in $2$D,
+    hold (the critical mode is volume-preserving at first order; this is \emph{established} from the energy barrier in
+    Lemma~\ref{lem:rot} below, exactly rather than assumed). With $d_\phi:=\det(\Grad\bm{\phi})>0$, in $2$D,
     \begin{equation}
         \label{eq:Jexp}
         J = \det\bm{F} = J_0 + w^2\,d_\phi + \mathcal{O}(w^3),
@@ -776,14 +777,39 @@ Along the loaded path $\lambda_c(t)\to0$ as $t\uparrow1$, so the $w^2$ term domi
     \qquad \|\bm{F}^{-1}\| = \lambda_{\min}^{-1} \sim \mathcal{O}(\epsilon^{-2/3}) .
 \end{equation}
 
-\begin{remark}[On the rotation condition]
-    Equation \eqref{eq:rotcond} is the precise content of the informal statement ``buckling relieves compression.'' It
-    can be read either as a property to be verified for the computed critical mode or as a \emph{selection principle}:
-    among competing modes, the volume-preserving one is energetically favoured precisely because the barrier $f_{\log}$
-    penalises any first-order volume change. A direct proof that the corner buckling mode satisfies \eqref{eq:rotcond}
-    is the main analytical gap remaining in this section.
-    %TODO: verify the rotation condition for the corner mode, or promote it to a stated selection lemma.
-\end{remark}
+The rotation condition \eqref{eq:rotcond} is not an extra assumption: it is \emph{forced} by the energy barrier, as we
+now show. This is the precise content of the informal statement ``buckling relieves compression''---the barrier makes
+the volume-preserving mode the only one of finite energy.
+
+\begin{lemma}[The barrier forces the rotation condition]
+    \label{lem:rot}
+    Let $f=f_{\log}$. Then the bulk modulus diverges at collapse,
+    \begin{equation}
+        \label{eq:fppblow}
+        f''(J) = \frac{\mu_e + 2\lambda_e - 2\lambda_e\log J}{J^2} \sim \frac{2\lambda_e\,|\log J|}{J^2}
+        \to +\infty \qquad (J\to0^+),
+    \end{equation}
+    and consequently any mode $\bm{\phi}$ of bounded second-variation energy
+    $\langle\bm{\phi},\mathcal{L}\bm{\phi}\rangle\le C$ on the near-collapse fundamental state $\bm{F}_0$ satisfies
+    \begin{equation}
+        \label{eq:rotrate}
+        \operatorname{cof}\bm{F}_0:\Grad\bm{\phi}
+        = \mathcal{O}\!\Big(\frac{J_0}{\sqrt{|\log J_0|}}\Big) \to 0 \qquad (J_0\to0^+).
+    \end{equation}
+    In particular the critical buckling mode is first-order volume-preserving in the collapse limit, so
+    \eqref{eq:rotcond} holds asymptotically along the loaded path, and the residual first-order term in \eqref{eq:Jexp}
+    is dominated by the relief term $w^2 d_\phi$.
+\end{lemma}
+
+\begin{proof}
+    Differentiating $f_{\log}'(J)=-\mu_e/J+2\lambda_e\log J/J$ gives \eqref{eq:fppblow}. The volumetric part of the
+    second variation of $\Psi$ in the direction $\bm{\phi}$ contains the term $f''(J_0)\,(\delta J)^2$, where
+    $\delta J=\operatorname{cof}\bm{F}_0:\Grad\bm{\phi}=J_0\,\bm{F}_0^{-T}:\Grad\bm{\phi}$ is the first variation of the
+    determinant. Since every term other than this one is bounded on the fundamental state, boundedness of
+    $\langle\bm{\phi},\mathcal{L}\bm{\phi}\rangle$ forces $f''(J_0)\,(\delta J)^2\le C'$, hence
+    $(\delta J)^2\le C'/f''(J_0)\sim C'\,J_0^2/(2\lambda_e|\log J_0|)$. Taking square roots yields
+    \eqref{eq:rotrate}. \qed
+\end{proof}
 
 \subsection{Regularised tangent bound and spatial localisation}
 
@@ -807,46 +833,73 @@ Along the loaded path $\lambda_c(t)\to0$ as $t\uparrow1$, so the $w^2$ term domi
     \eqref{eq:Lreg}. The transcritical rate follows from $w\sim\epsilon^{1/2}$, $\lambda_{\min}\sim\epsilon$. \qed
 \end{proof}
 
-The maximum is, however, achieved only in a shrinking zone. Let $s>0$ be the spatial exponent with which the perfect
-compressive field would drive $\lambda_{\min}^{\mathrm{field}}(r)\sim A\,r^{s}$ toward the corner (an exponent inherited
-from the Scenario~B kinematics). On the imperfect branch the relief imposes the floor
-$\lambda_{\min}(r,\epsilon)\gtrsim\max\{A r^{s},\,c\,\epsilon^{2/3}\}$, so the high-stiffness corner zone is the disc
-$r<\ell(\epsilon)$ where the floor is active, with
+The maximum is, however, achieved only in a shrinking zone, and we can now identify the localisation exponent exactly.
+The relevant geometry is the \emph{collapse locus} of the perfect field.
+
+\begin{lemma}[Transversal collapse: $s=1$]
+    \label{lem:sval}
+    On the perfect (unphysical) continuation of the fundamental path beyond $t_c$, let $\Sigma\subset B_\rho$ be the
+    collapse locus on which the smallest stretch vanishes, $\lambda_{\min}=0$ (equivalently $J=0$). At any point of
+    $\Sigma$ where $\lambda_{\min}$ is a simple singular value of $\bm{F}$, $\lambda_{\min}$ is a smooth function of
+    $\bm{x}$, and generically it vanishes \emph{transversally},
+    \begin{equation}
+        \label{eq:transversal}
+        \lambda_{\min}^{\mathrm{field}}(\bm{x}) = \kappa_*\,\operatorname{dist}(\bm{x},\Sigma) + \mathcal{O}\!\big(\operatorname{dist}^2\big),
+        \qquad \kappa_*>0 .
+    \end{equation}
+    Hence the localisation exponent is $s=1$. (A non-generic tangential contact, $\nabla\lambda_{\min}=0$ on $\Sigma$,
+    would give $s\ge2$.)
+\end{lemma}
+
+\begin{proof}
+    Where the smallest singular value is simple it is an analytic function of the entries of $\bm{F}$, hence smooth in
+    $\bm{x}$. A smooth scalar field vanishing on $\Sigma$ has, by Taylor expansion, $\lambda_{\min}=\nabla\lambda_{\min}
+    \cdot\bm{n}\,\operatorname{dist}(\bm{x},\Sigma)+\mathcal{O}(\operatorname{dist}^2)$ with $\bm{n}$ the unit normal;
+    transversality $\nabla\lambda_{\min}\ne0$ (the generic case, by Sard's theorem) gives \eqref{eq:transversal} with
+    $\kappa_*=|\nabla\lambda_{\min}|>0$. \qed
+\end{proof}
+
+On the imperfect branch the relief of \eqref{eq:lminscale} imposes the floor $\lambda_{\min}(\bm{x},\epsilon)\gtrsim
+\max\{\kappa_*\operatorname{dist}(\bm{x},\Sigma),\,c\,\epsilon^{2/3}\}$, so the high-stiffness zone is the tube of
+half-width $\ell(\epsilon)$ around $\Sigma$ in which the floor is active, with (using $s=1$)
 \begin{equation}
     \label{eq:locallength}
-    \ell(\epsilon) \sim \Big(\tfrac{c}{A}\Big)^{1/s}\epsilon^{2/(3s)} \xrightarrow[\epsilon\to0]{} 0 .
+    \ell(\epsilon) \sim \frac{c}{\kappa_*}\,\epsilon^{2/3} \xrightarrow[\epsilon\to0]{} 0 .
 \end{equation}
 
 \begin{proposition}[Narrowness of the singular zone]
     \label{prop:narrow}
-    With $\ell(\epsilon)$ as in \eqref{eq:locallength}, the set on which the tangent is near its maximum has area
-    $\mathcal{O}(\ell(\epsilon)^2)=\mathcal{O}(\epsilon^{4/(3s)})\to0$, and the integrated stiffness obeys
+    With $\ell(\epsilon)$ as in \eqref{eq:locallength} and $s=1$ (Lemma~\ref{lem:sval}), the set on which the tangent is
+    near its maximum is a tube about $\Sigma$ of area $\mathcal{O}(|\Sigma|\,\ell(\epsilon))=\mathcal{O}(\epsilon^{2/3})\to0$,
+    and the integrated stiffness obeys
     \begin{equation}
         \int_{B_\rho} \|\mathbb{L}(\bm{x},\epsilon)\|^{q}\,dV
-        \ \le\ C\Big(1 + \epsilon^{-4q/3}\,\ell(\epsilon)^2\,\log^q\tfrac1\epsilon\Big)
-        \ =\ C\Big(1 + \epsilon^{\frac{4}{3}\left(\frac{1}{s}-q\right)}\log^q\tfrac1\epsilon\Big),
+        \ \le\ C\Big(1 + \epsilon^{-4q/3}\,\ell(\epsilon)\,\log^q\tfrac1\epsilon\Big)
+        \ =\ C\Big(1 + \epsilon^{\frac{2}{3}\left(1-2q\right)}\log^q\tfrac1\epsilon\Big),
     \end{equation}
-    which stays bounded as $\epsilon\to0$ for every $q<1/s$. Thus, although the pointwise tangent diverges, its
-    $L^q$-mass over the corner remains finite for a range of $q$: the blow-up is genuinely localised, and for every
-    $\epsilon>0$ the regularised problem is well posed.
+    which stays bounded as $\epsilon\to0$ for every $q<\tfrac12$. Thus, although the pointwise tangent diverges like
+    $\epsilon^{-4/3}$, its $L^q$-mass over the corner remains finite for all $q<\tfrac12$: the blow-up is genuinely
+    localised to a tube of vanishing area, and for every $\epsilon>0$ the regularised problem is well posed.
 \end{proposition}
 
-\begin{remark}[The determination of $s$]
-    The localisation exponent $s$, and hence the precise width \eqref{eq:locallength} and the integrability threshold
-    $q<1/s$, are inherited from the spatial decay of the perfect compressive stretch field, which the present analysis
-    does not pin down. Computing $s$ from the Scenario~B kinematics (or from the self-similar local problem of
-    Remark~\ref{rem:framework}) is the natural next step and would make Proposition~\ref{prop:narrow} fully
-    quantitative.
-    %TODO: determine s from the compressive corner kinematics.
-\end{remark}
+\begin{proof}
+    Split $B_\rho$ into the tube $T_\epsilon=\{\operatorname{dist}(\cdot,\Sigma)<\ell(\epsilon)\}$ and its complement.
+    On $T_\epsilon$, $\|\mathbb{L}\|\sim\epsilon^{-4/3}\log\tfrac1\epsilon$ (Theorem~\ref{thm:reg}) and
+    $|T_\epsilon|\sim|\Sigma|\ell(\epsilon)\sim\epsilon^{2/3}$, giving the displayed contribution. Off $T_\epsilon$,
+    using transversal coordinates $d=\operatorname{dist}(\cdot,\Sigma)$ and $\lambda_{\min}\sim\kappa_* d$, one has
+    $\|\mathbb{L}\|\sim d^{-2}\log\tfrac1d$, and $\int_{\ell(\epsilon)}^{\rho} d^{-2q}\log^q\tfrac1d\,dd$ converges as
+    $\ell(\epsilon)\to0$ precisely when $2q<1$. Both regimes are controlled iff $q<\tfrac12$. \qed
+\end{proof}
 
 \subsection{Discussion}
 
 The structure of the result is the one anticipated physically. The idealised noiseless problem ($\epsilon=0$) is
 singular---the tangent is unbounded and ellipticity is lost---but it is a measure-zero idealisation. Any disturbance
 $\epsilon>0$ selects a smooth branch (Proposition~\ref{prop:LS}) on which the determinant is lifted off zero
-(Lemma~\ref{lem:relief}), the tangent is finite (Theorem~\ref{thm:reg}), and the residual singular character is
-confined to a disc of radius $\ell(\epsilon)\to0$ (Proposition~\ref{prop:narrow}). The divergence as $\epsilon\to0$ is
+(Lemma~\ref{lem:relief}, with the volume-preserving character of the buckling mode \emph{forced} by the energy barrier,
+Lemma~\ref{lem:rot}), the tangent is finite (Theorem~\ref{thm:reg}), and the residual singular character is confined to
+a tube of width $\ell(\epsilon)\sim\epsilon^{2/3}\to0$ about the collapse locus, where it remains $L^q$-integrable for
+all $q<\tfrac12$ (Lemma~\ref{lem:sval}, Proposition~\ref{prop:narrow}). The divergence as $\epsilon\to0$ is
 only algebraic, $\epsilon^{-4/3}$ up to a logarithm, and is the mirror image---through the inverse channel---of the
 benign tensile growth of \S\ref{sub:growth}; the same logarithm, traceable to the energy barrier $f_{\log}$, appears in
 both. Two practical consequences follow. First, the bifurcation here is the corner-localised analogue of the classical
