@@ -59,8 +59,8 @@ $\bm{v}$.
 
 \subsection{Stationarity, stress, and tangent modulus}
 
-A minimiser satisfies the stationarity condition $D_{\delta \bm{u}}\mathcal{E}(\bm{u}) = 0$ for all admissible variations
-$\delta \bm{u}$ (vanishing on $\Gamma_D$), which is the weak form of equilibrium
+A minimiser satisfies the stationarity condition $D_{\delta \bm{u}}\mathcal{E}(\bm{u}) = 0$ for all admissible
+variations $\delta \bm{u}$ (vanishing on $\Gamma_D$), which is the weak form of equilibrium
 \begin{equation}
     \label{eq:weakform}
     \int_\Omega \bm{P}(\bm{F}) : \Grad \delta \bm{u} \,dV
@@ -109,9 +109,9 @@ $f'(1) = -\mu_e$, and $f(J) \to \infty$ as $J \to 0^+$. Two standard choices are
 with $\lambda_e$ the Lam\'e constant and $\kappa$ a bulk modulus; \eqref{eq:neohooke} with $f_{\log}$ reproduces the
 model of \cite{cutfemAD}. The corresponding stress and tangent are
 \begin{align}
-    \bm{P}(\bm{F}) & = \mu_e \bm{F} + f'(J)\,J\,\bm{F}^{-T},   \\
+    \bm{P}(\bm{F}) & = \mu_e \bm{F} + f'(J)\,J\,\bm{F}^{-T}, \\
     \label{eq:Lnh}
-    L_{iJkL} & = \mu_e\,\delta_{ik}\delta_{JL}
+    L_{iJkL}       & = \mu_e\,\delta_{ik}\delta_{JL}
     + \left( f''(J)J^2 + f'(J)J \right) F^{-T}_{iL} F^{-T}_{kJ}
     - f'(J)J\, F^{-T}_{iJ} F^{-T}_{kL}.
 \end{align}
@@ -157,8 +157,8 @@ regularises the compressive case through a structural bifurcation (Section~\ref{
 \subsection{Geometry and linearised kinematics}
 
 Let the reference domain $\Omega \subset \mathbb{R}^2$ feature a right-angle corner at the origin $(0,0)$, described in
-polar coordinates $(r,\theta)$ by $r\in[0,R]$, $\theta\in[0,\pi/2]$, and write $B_\rho := \{\bm{x}\in\Omega : |\bm{x}|<\rho\}$
-for the corner neighbourhood.
+polar coordinates $(r,\theta)$ by $r\in[0,R]$, $\theta\in[0,\pi/2]$, and write $B_\rho := \{\bm{x}\in\Omega :
+    |\bm{x}|<\rho\}$ for the corner neighbourhood.
 \begin{itemize}
     \item \textbf{Dirichlet boundary ($\Gamma_D$):} $\theta = 0$, deformation prescribed, $\bm{y}(r,0) = \bm{g}(r)$.
     \item \textbf{Neumann boundary ($\Gamma_N$):} $\theta = \pi/2$, traction-free, $\bm{P}\bm{N} = \bm{0}$.
@@ -183,8 +183,8 @@ depends not on $\|\bm{F}\|$ but on which principal stretches diverge, which is t
 The mechanism we describe is not specific to the neo-Hookean model; that model only serves to fix ideas and to exhibit
 explicit constants. We therefore phrase the analysis for a general frame-indifferent energy and isolate the structural
 properties that the argument actually uses. Throughout, $\|\cdot\|$ denotes the operator (spectral) norm on tensors,
-$0<\lambda_{\min}(\bm{F})\le\lambda_{\max}(\bm{F})$ are the singular values of $\bm{F}$ (the principal stretches), and we
-recall $\|\bm{F}^{-1}\| = \lambda_{\min}(\bm{F})^{-1}$.
+$0<\lambda_{\min}(\bm{F})\le\lambda_{\max}(\bm{F})$ are the singular values of $\bm{F}$ (the principal stretches), and
+we recall $\|\bm{F}^{-1}\| = \lambda_{\min}(\bm{F})^{-1}$.
 
 \begin{assumption}[Regularity and frame indifference]
     \label{ass:reg}
@@ -213,13 +213,13 @@ recall $\|\bm{F}^{-1}\| = \lambda_{\min}(\bm{F})^{-1}$.
     \end{equation}
 \end{assumption}
 
-The decisive feature of Assumption~\ref{ass:growth} is that the inverse-stretch factor $\|\bm{F}^{-1}\|^2=\lambda_{\min}^{-2}$
-is the \emph{only} algebraic channel through which the Hessian can blow up; the dependence on $\|\bm{F}\|$ (equivalently
-on $\lambda_{\max}$) enters solely through the scalar $\Theta(\det \bm{F})$. Whether a tensile corner
-($\lambda_{\max}\to\infty$, $\det \bm{F}\to\infty$, $\lambda_{\min}$ bounded below) is benign therefore reduces to the
-\emph{growth rate} of $\Theta$, which we quantify in \S\ref{sub:growth}. Materials with genuine tensile stiffening of
-the deviatoric part (Gent, Arruda--Boyce), whose tangent diverges through $\lambda_{\max}$ directly rather than through
-$\Theta(\det\bm F)$, violate \eqref{eq:Hessbound} and are excluded.
+The decisive feature of Assumption~\ref{ass:growth} is that the inverse-stretch factor
+$\|\bm{F}^{-1}\|^2=\lambda_{\min}^{-2}$ is the \emph{only} algebraic channel through which the Hessian can blow up; the
+dependence on $\|\bm{F}\|$ (equivalently on $\lambda_{\max}$) enters solely through the scalar $\Theta(\det \bm{F})$.
+Whether a tensile corner ($\lambda_{\max}\to\infty$, $\det \bm{F}\to\infty$, $\lambda_{\min}$ bounded below) is benign
+therefore reduces to the \emph{growth rate} of $\Theta$, which we quantify in \S\ref{sub:growth}. Materials with
+genuine tensile stiffening of the deviatoric part (Gent, Arruda--Boyce), whose tangent diverges through
+$\lambda_{\max}$ directly rather than through $\Theta(\det\bm F)$, violate \eqref{eq:Hessbound} and are excluded.
 
 \begin{lemma}[Assumptions for the neo-Hookean model]
     \label{lem:nh}
@@ -302,14 +302,14 @@ are kinematically decoupled:
     \label{eq:twochannels}
     \|\mathbb{L}(\bm{F})\| \le \mu_e
     + \underbrace{\Theta(\det\bm{F})}_{\substack{\text{dilation channel}\\ J\to\infty}}\;\cdot\;
-      \underbrace{\|\bm{F}^{-1}\|^{2}}_{\substack{\text{inverse channel}\\ \lambda_{\min}\to 0}} .
+    \underbrace{\|\bm{F}^{-1}\|^{2}}_{\substack{\text{inverse channel}\\ \lambda_{\min}\to 0}} .
 \end{equation}
 The \emph{inverse channel} is the one usually blamed for trouble: it requires $\lambda_{\min}\to0$, i.e. compression to
 zero volume, and is the subject of Scenario~B. The \emph{dilation channel}, $\Theta(\det\bm{F})\to\infty$ as
 $J\to\infty$, is activated by \emph{expansion} and is precisely what a tensile corner switches on, since
 $\lambda_{\max}\sim r^{\alpha-1}\to\infty$ forces $J\to\infty$ even with $\lambda_{\min}$ bounded below by (NC). Whether
 this matters is therefore not a property of the corner or of the sign of the loading, but of the \emph{growth rate of
-$\Theta$}---a property of the volumetric penalty $f$ alone. We now evaluate it for the two penalties
+    $\Theta$}---a property of the volumetric penalty $f$ alone. We now evaluate it for the two penalties
 \eqref{eq:fchoices}; the contrast shows that ``tension is benign'' is a model-dependent statement.
 
 \paragraph{Logarithmic penalty.}
@@ -354,12 +354,13 @@ We combine \eqref{eq:Hessbound} with (NC) ($\|\bm{F}^{-1}\|^2\le c^{-2}$) and th
 non-compressive regime exactly one stretch diverges: $\lambda_{\max}\sim|K|\,r^{\alpha-1}$ while $\lambda_{\min}$ stays
 bounded below, so $J=\lambda_{\min}\lambda_{\max}\sim r^{\alpha-1}$. (If instead $\Grad\bm{u}$ had two diverging
 eigenvalues, the subdeterminant would give $J\sim r^{2(\alpha-1)}$; we work in the one-large-stretch regime
-characteristic of a Dirichlet--Neumann opening, where $J\sim r^{\alpha-1}$.) The tangent norm near the corner then obeys
+characteristic of a Dirichlet--Neumann opening, where $J\sim r^{\alpha-1}$.) The tangent norm near the corner then
+obeys
 \begin{equation}
     \label{eq:Lcornergrowth}
     \|\mathbb{L}(\bm{x})\| \le \mu_e + c^{-2}\,\Theta\!\big(\det\bm{F}(\bm{x})\big) \sim
     \begin{cases}
-        \mu_e + \mathcal{O}\!\big(\log\tfrac1r\big), & f=f_{\log}, \\[4pt]
+        \mu_e + \mathcal{O}\!\big(\log\tfrac1r\big), & f=f_{\log},          \\[4pt]
         \mathcal{O}\!\big(r^{-2(1-\alpha)}\big),     & f=f_{\mathrm{quad}}.
     \end{cases}
 \end{equation}
@@ -376,10 +377,10 @@ loading a tensile corner imposes:
 \begin{center}
     \begin{tabular}{lll}
         \toprule
-        volumetric model & energy as $J\to\infty$ & tangent $\Theta(J)$ \\
+        volumetric model           & energy as $J\to\infty$   & tangent $\Theta(J)$   \\
         \midrule
-        $\lambda_e\log^2 J$        & $\sim \log^2 J$ \ (soft)  & $\mathcal{O}(\log J)$ \\
-        $\tfrac{\kappa}{2}(J-1)^2$ & $\sim J^2$ \ (stiff)      & $\mathcal{O}(J^2)$    \\
+        $\lambda_e\log^2 J$        & $\sim \log^2 J$ \ (soft) & $\mathcal{O}(\log J)$ \\
+        $\tfrac{\kappa}{2}(J-1)^2$ & $\sim J^2$ \ (stiff)     & $\mathcal{O}(J^2)$    \\
         \bottomrule
     \end{tabular}
 \end{center}
@@ -437,10 +438,10 @@ $f_{\mathrm{quad}}$ does not.
 
 \begin{proof}
     From \eqref{eq:LHnh}, $L_{iJkL}m_iN_Jm_kN_L \ge \mu_e|\bm{m}|^2|\bm{N}|^2 - |f''J^2+f'J|\,|\bm{a}|^2|\bm{m}|^2
-    - |f'J|\,|\bm{a}||\bm{b}||\bm{m}||\bm{N}|$, where the volumetric correction is bounded using $|\bm{a}|\le
-    c^{-1}|\bm{N}|$, $|\bm{b}|\le c^{-1}|\bm{m}|$ by $c^{-2}\big(|f''J^2+f'J|+|f'J|\big)|\bm{m}|^2|\bm{N}|^2 =
-    c^{-2}\Theta(J)|\bm{m}|^2|\bm{N}|^2$. For $f_{\log}$, $\Theta(J)=\mathcal{O}(\log\tfrac1r)\le C_\varepsilon
-    r^{\varepsilon}$ on $(0,\rho]$; the volumetric correction is thus $o(1)$ as $r\to0$, and after shrinking $\rho$ it is
+        - |f'J|\,|\bm{a}||\bm{b}||\bm{m}||\bm{N}|$, where the volumetric correction is bounded using $|\bm{a}|\le
+        c^{-1}|\bm{N}|$, $|\bm{b}|\le c^{-1}|\bm{m}|$ by $c^{-2}\big(|f''J^2+f'J|+|f'J|\big)|\bm{m}|^2|\bm{N}|^2 =
+        c^{-2}\Theta(J)|\bm{m}|^2|\bm{N}|^2$. For $f_{\log}$, $\Theta(J)=\mathcal{O}(\log\tfrac1r)\le C_\varepsilon
+        r^{\varepsilon}$ on $(0,\rho]$; the volumetric correction is thus $o(1)$ as $r\to0$, and after shrinking $\rho$ it is
     below $\tfrac12\mu_e$, giving \eqref{eq:LHcorner} with $\gamma_0=\mu_e$. \qed
 \end{proof}
 
@@ -455,9 +456,9 @@ $\|\bm{v}\|_{V^{1,2}_\beta}^2 = \int_{B_\rho} \big(r^{2\beta}|\Grad\bm{v}|^2 + r
     vanishing on $\Gamma_D\cap\partial B_\rho$,
     \begin{align}
         \label{eq:hardy}
-        \int_{B_\rho} r^{2\beta-2}|\bm{v}|^2\,dV &\le C_H \int_{B_\rho} r^{2\beta}|\Grad\bm{v}|^2\,dV,\\
+        \int_{B_\rho} r^{2\beta-2}|\bm{v}|^2\,dV    & \le C_H \int_{B_\rho} r^{2\beta}|\Grad\bm{v}|^2\,dV,                \\
         \label{eq:korn}
-        \int_{B_\rho} r^{2\beta}|\Grad\bm{v}|^2\,dV &\le C_K \int_{B_\rho} r^{2\beta}\,|\bm{\varepsilon}(\bm{v})|^2\,dV,
+        \int_{B_\rho} r^{2\beta}|\Grad\bm{v}|^2\,dV & \le C_K \int_{B_\rho} r^{2\beta}\,|\bm{\varepsilon}(\bm{v})|^2\,dV,
         \qquad \bm{\varepsilon}(\bm{v}) = \tfrac12\big(\Grad\bm{v}+\Grad\bm{v}^T\big).
     \end{align}
 \end{lemma}
@@ -478,9 +479,9 @@ write the Newton-step bilinear form as
     $\bm{u},\bm{v}\in V^{1,2}_{\beta_\star}(B_\rho)$,
     \begin{align}
         \label{eq:Abounded}
-        |a(\bm{u},\bm{v})| &\le \Lambda\,\|\bm{u}\|_{V^{1,2}_{\beta_\star}}\,\|\bm{v}\|_{V^{1,2}_{\beta_\star}},\\
+        |a(\bm{u},\bm{v})| & \le \Lambda\,\|\bm{u}\|_{V^{1,2}_{\beta_\star}}\,\|\bm{v}\|_{V^{1,2}_{\beta_\star}}, \\
         \label{eq:Agaarding}
-        a(\bm{v},\bm{v}) &\ge \gamma_1\,\|\bm{v}\|_{V^{1,2}_{\beta_\star}}^2 - k(\bm{v},\bm{v}).
+        a(\bm{v},\bm{v})   & \ge \gamma_1\,\|\bm{v}\|_{V^{1,2}_{\beta_\star}}^2 - k(\bm{v},\bm{v}).
     \end{align}
     Consequently the linearised corner operator is Fredholm of index zero in $V^{1,2}_{\beta_\star}$; for $\beta_\star$
     avoiding the corner spectrum it is an isomorphism, its solutions admit the asymptotic expansion
@@ -492,10 +493,10 @@ write the Newton-step bilinear form as
     \emph{Boundedness.} By Cauchy--Schwarz and Lemma~\ref{lem:Abound}, for any $\varepsilon\in(0,1)$,
     \begin{align*}
         |a(\bm{u},\bm{v})|
-        &\le \int_{B_\rho} \|\mathbb{L}\|\,|\Grad\bm{u}|\,|\Grad\bm{v}|\,dV
-         \le C_\varepsilon \int_{B_\rho} r^{-\varepsilon}\,|\Grad\bm{u}|\,|\Grad\bm{v}|\,dV \\
-        &\le C_\varepsilon \Big(\!\int_{B_\rho} r^{2\beta_\star}|\Grad\bm{u}|^2\Big)^{1/2}
-                          \Big(\!\int_{B_\rho} r^{-2\varepsilon-2\beta_\star}|\Grad\bm{v}|^2\Big)^{1/2}.
+         & \le \int_{B_\rho} \|\mathbb{L}\|\,|\Grad\bm{u}|\,|\Grad\bm{v}|\,dV
+        \le C_\varepsilon \int_{B_\rho} r^{-\varepsilon}\,|\Grad\bm{u}|\,|\Grad\bm{v}|\,dV   \\
+         & \le C_\varepsilon \Big(\!\int_{B_\rho} r^{2\beta_\star}|\Grad\bm{u}|^2\Big)^{1/2}
+        \Big(\!\int_{B_\rho} r^{-2\varepsilon-2\beta_\star}|\Grad\bm{v}|^2\Big)^{1/2}.
     \end{align*}
     Since $\varepsilon$ is arbitrary and $\beta_\star$ is interior to an interval of admissible weights, the loss
     $r^{-2\varepsilon}$ can be absorbed by a weight chosen within that interval; this gives \eqref{eq:Abounded} with
@@ -511,10 +512,10 @@ write the Newton-step bilinear form as
         a(\bm{v},\bm{v}) \ge \tfrac12\gamma_0\,c_K^{-1}\!\int_{B_\rho} r^{2\beta_\star}|\Grad\bm{v}|^2\,dV
         - C\!\int_{B_\rho} r^{2\beta_\star}|\bm{v}|^2\,dV,
     \]
-    where the Korn inequality \eqref{eq:korn} converts ellipticity of the symmetric part into control of the full
-    gradient. The remainder term has a strictly higher power of $r$ than the Hardy weight $r^{2\beta_\star-2}$, hence by
-    \eqref{eq:hardy} it is relatively compact with respect to $\|\cdot\|_{V^{1,2}_{\beta_\star}}$; this is the compact
-    form $k$, and we obtain \eqref{eq:Agaarding} with $\gamma_1=\tfrac12\gamma_0 c_K^{-1}$.
+    where the Korn inequality \eqref{eq:korn} converts ellipticity of the symmetric part into control of the full gradient.
+    The remainder term has a strictly higher power of $r$ than the Hardy weight $r^{2\beta_\star-2}$, hence by
+    \eqref{eq:hardy} it is relatively compact with respect to $\|\cdot\|_{V^{1,2}_{\beta_\star}}$; this is the compact form
+    $k$, and we obtain \eqref{eq:Agaarding} with $\gamma_1=\tfrac12\gamma_0 c_K^{-1}$.
 
     \emph{Fredholm property and exponents.} Estimates \eqref{eq:Abounded}--\eqref{eq:Agaarding} place the operator in the
     Kondratiev--Maz'ya framework \cite{KMR2001}: it is Fredholm of index zero in $V^{1,2}_{\beta_\star}$ whenever
@@ -546,9 +547,9 @@ write the Newton-step bilinear form as
     We emphasise that this serves as a \emph{cautionary comparator} rather than a model we advocate: as written,
     $f_{\mathrm{quad}}'(1)=0\ne-\mu_e$, so $\tfrac{\kappa}{2}(J-1)^2$ does not combine with the deviatoric term
     $\tfrac{\mu_e}{2}(\tr(\bm{F}^T\bm{F})-2)$ to leave the reference configuration stress-free, and in practice it is used
-    together with an isochoric (deviatoric/volumetric) split of $\bm{F}$. The point is that a standard-looking
-    polynomial penalty already forfeits the benign tensile behaviour enjoyed by the logarithmic model
-    \eqref{eq:fchoices} actually used in \cite{cutfemAD}.
+    together with an isochoric (deviatoric/volumetric) split of $\bm{F}$. The point is that a standard-looking polynomial
+    penalty already forfeits the benign tensile behaviour enjoyed by the logarithmic model \eqref{eq:fchoices} actually
+    used in \cite{cutfemAD}.
     %TODO: decide whether to develop the quadratic-penalty weighted analysis or cite it as motivation for preferring the
     %      logarithmic volumetric model in computations.
 \end{remark}
@@ -576,7 +577,7 @@ threshold where the local contraction annihilates the material volume:
 
 \paragraph{Operator blow-up (and its model dependence).}
 Here it is the \emph{inverse channel} of \eqref{eq:twochannels} that fires: $\|\bm{F}^{-1}\| = \lambda_{\min}^{-1} \to
-\infty$. The dilation channel $\Theta(J)$ is now probed at $J\to0^+$ rather than $J\to\infty$, and---exactly as in
+    \infty$. The dilation channel $\Theta(J)$ is now probed at $J\to0^+$ rather than $J\to\infty$, and---exactly as in
 tension, but with the roles reversed---its behaviour discriminates between the two penalties. Writing
 $J\sim\lambda_{\min}$ near the corner (one large stretch, cf. \S\ref{sub:growth}),
 \begin{equation}
@@ -591,7 +592,7 @@ so that the tangent norm $\|\mathbb{L}\|\le \mu_e + \Theta(J)\|\bm{F}^{-1}\|^2$ 
     \label{eq:Lcompress}
     \| \mathbb{L}(\bm{x}) \| \sim
     \begin{cases}
-        \mathcal{O}\!\big(\lambda_{\min}^{-2}\,\log\tfrac1{\lambda_{\min}}\big), & f=f_{\log}, \\[4pt]
+        \mathcal{O}\!\big(\lambda_{\min}^{-2}\,\log\tfrac1{\lambda_{\min}}\big), & f=f_{\log},          \\[4pt]
         \mathcal{O}\!\big(\lambda_{\min}^{-1}\big),                              & f=f_{\mathrm{quad}}.
     \end{cases}
 \end{equation}
@@ -604,10 +605,9 @@ pathology, not a better one. The logarithmic penalty's stronger blow-up is, conv
 barrier $f_{\log}(J)\to+\infty$---and it is precisely that barrier which forces, and gives physical meaning to, the
 bifurcation rescue of Section~\ref{sec:iba}.
 
-\paragraph{Ellipticity is \emph{not} lost --- the instability is structural.}
-It is tempting to attribute the breakdown to a loss of strong ellipticity (an indefinite acoustic tensor). For this
-neo-Hookean model that is \emph{false}, and it is worth stating the fact precisely, as it shapes the rest of the
-analysis.
+\paragraph{Ellipticity is \emph{not} lost --- the instability is structural.} It is tempting to attribute the breakdown to a loss of strong ellipticity (an
+indefinite acoustic tensor). For this neo-Hookean model that is \emph{false}, and it is worth stating the fact
+precisely, as it shapes the rest of the analysis.
 
 \begin{lemma}[Compressive strong ellipticity of the neo-Hookean tangent]
     \label{lem:SEcompress}
@@ -624,19 +624,19 @@ analysis.
     \emph{adds} to the constant $\mu_e$. \qed
 \end{proof}
 
-Thus the compressive corner is \emph{not} a material instability: the volumetric stiffening that blows up $\|\mathbb{L}\|$
-is exactly the term $f''(J)J^2$ in \eqref{eq:LHnh}, and it is positive --- it strengthens ellipticity while destroying
-conditioning. What fails is the \emph{boundedness} of the operator, not its positivity.
+Thus the compressive corner is \emph{not} a material instability: the volumetric stiffening that blows up
+$\|\mathbb{L}\|$ is exactly the term $f''(J)J^2$ in \eqref{eq:LHnh}, and it is positive --- it strengthens ellipticity
+while destroying conditioning. What fails is the \emph{boundedness} of the operator, not its positivity.
 
 \paragraph{Conclusion for Scenario B.}
-The assumption that the deformation smoothly follows the fundamental path into the corner therefore produces, not a loss
-of ellipticity, but two distinct effects: (i) a blow-up of the tangent \emph{norm}, $\|\mathbb{L}\|\to\infty$
+The assumption that the deformation smoothly follows the fundamental path into the corner therefore produces, not a
+loss of ellipticity, but two distinct effects: (i) a blow-up of the tangent \emph{norm}, $\|\mathbb{L}\|\to\infty$
 (eq.~\eqref{eq:Lcompress}), which renders the Newton step catastrophically ill-conditioned even though it remains
-elliptic; and (ii) for a barrier penalty $f_{\log}$, an unphysical infinite accumulation of energy
-($f(J)\to\infty$ as $J\to0$), signalling that the smooth fundamental path is not the physical solution. The genuine
-mechanism that intervenes is a \emph{structural} bifurcation of the compressed state --- the corner analogue of
-\emph{creasing}, an instability of a material that remains everywhere strongly elliptic (Lemma~\ref{lem:SEcompress}),
-driven by the geometry and boundary conditions rather than by a change of type of the PDE. To capture it we introduce in
+elliptic; and (ii) for a barrier penalty $f_{\log}$, an unphysical infinite accumulation of energy ($f(J)\to\infty$ as
+$J\to0$), signalling that the smooth fundamental path is not the physical solution. The genuine mechanism that
+intervenes is a \emph{structural} bifurcation of the compressed state --- the corner analogue of \emph{creasing}, an
+instability of a material that remains everywhere strongly elliptic (Lemma~\ref{lem:SEcompress}), driven by the
+geometry and boundary conditions rather than by a change of type of the PDE. To capture it we introduce in
 Section~\ref{sec:iba} an imperfect perturbation that regularises the bifurcation and bounds the singularity; we work
 from here on with the barrier model $f_{\log}$, for which collapse is genuinely resisted.
 
@@ -646,10 +646,9 @@ from here on with the barrier model $f_{\log}$, for which collapse is genuinely 
 The previous section showed that the perfect compressive path drives $\lambda_{\min}\to0$ and blows up the tangent norm
 while the material remains strongly elliptic (Lemma~\ref{lem:SEcompress}), so the breakdown is a structural instability
 rather than a loss of type. The premise of this section is that this scenario is an idealisation: a real system always
-carries
-small disturbances---geometric imperfections, load eccentricities, material inhomogeneity---and these select a nearby
-\emph{regular} solution branch on which the collapse never quite happens. We model the disturbance by a single scalar
-amplitude $\epsilon$, carry out an imperfect-bifurcation analysis, and quantify how the tangent blows up as
+carries small disturbances---geometric imperfections, load eccentricities, material inhomogeneity---and these select a
+nearby \emph{regular} solution branch on which the collapse never quite happens. We model the disturbance by a single
+scalar amplitude $\epsilon$, carry out an imperfect-bifurcation analysis, and quantify how the tangent blows up as
 $\epsilon\to0$. The punchline is that the blow-up is confined to a vanishingly small neighbourhood of the corner and
 proceeds at a controlled algebraic rate, so that for every $\epsilon>0$ the problem is regular.
 
@@ -658,8 +657,8 @@ proceeds at a controlled algebraic rate, so that for every $\epsilon>0$ the prob
 We localise to the corner neighbourhood $B_\rho$ of \S\ref{sec:asymptotics}, regard the loading as transmitted through
 data on the outer arc $\partial B_\rho\setminus(\Gamma_D\cup\Gamma_N)$, and introduce a pseudo-time load parameter
 $t\in[0,1]$ that monotonically scales the compressive part of that data. Following the answer to the question posed in
-Scenario~B, we add a small, fixed volumetric body force $\epsilon\,\bm{p}(\bm{x})$ with $\|\bm{p}\|_{L^2(B_\rho)}=1$ and
-$\epsilon\ll1$ as the imperfection (we write the field as $\bm{p}$ to avoid collision with the penalty $f(J)$). The
+Scenario~B, we add a small, fixed volumetric body force $\epsilon\,\bm{p}(\bm{x})$ with $\|\bm{p}\|_{L^2(B_\rho)}=1$
+and $\epsilon\ll1$ as the imperfection (we write the field as $\bm{p}$ to avoid collision with the penalty $f(J)$). The
 regularised equilibrium is $G(\bm{u},t,\epsilon)=0$,
 \begin{equation}
     \label{eq:Gdef}
@@ -694,8 +693,8 @@ fundamental path and $\mu_1(t):=\inf_{\|\bm{v}\|_V=1}Q_t(\bm{v})$.
 \paragraph{The critical load exists (conditionally provable).}
 A clarification is essential here. By Lemma~\ref{lem:SEcompress} the neo-Hookean material remains strongly elliptic
 throughout compression, so $\mu_1(t)$ \emph{cannot} be driven negative by a rank-one (material) instability: any
-crossing must be a \emph{structural} loss of positivity of the global form $Q_t$, i.e. a buckling of the
-boundary-value problem in which the destabilising test field is not rank-one. This is the creasing mechanism.
+crossing must be a \emph{structural} loss of positivity of the global form $Q_t$, i.e. a buckling of the boundary-value
+problem in which the destabilising test field is not rank-one. This is the creasing mechanism.
 \begin{lemma}[Existence of the critical load]
     \label{lem:tc}
     Assume (i) coercivity at zero load, $\mu_1(0)>0$, and (ii) a structural instability of the compressed state: there
@@ -820,19 +819,61 @@ compressed state and a finite-amplitude creased state coexist: the bifurcation i
 \paragraph{Imperfect system.}
 \begin{proposition}[Imperfection sensitivity, Koiter $\tfrac23$ law]
     \label{prop:koiter}
-    For $\epsilon>0$ the limit point of \eqref{eq:bifeq} shifts to
+    For $\epsilon>0$ the compressed branch terminates at a limit point that issues from the bifurcation point
+    $(0,t_c)$ and is depressed below $t_c$ according to
     \begin{equation}
         \label{eq:koiter}
-        t_L(\epsilon) = t_L - C\,|\eta\,\epsilon|^{2/3} + o(\epsilon^{2/3}), \qquad C>0,
+        t_s(\epsilon) = t_c - C\,|\eta\,\epsilon|^{2/3} + o(\epsilon^{2/3}), \qquad
+        C=\frac{3\,|b|^{1/3}}{2^{2/3}\,a}>0,
     \end{equation}
-    so the load at which the compressed branch ceases to exist is reduced by $\mathcal{O}(\epsilon^{2/3})$, while the
-    amplitude at snap remains $w=\mathcal{O}(1)$.
+    so the load at which the compressed branch ceases to exist is reduced by $\mathcal{O}(\epsilon^{2/3})$. The
+    turning amplitude there is itself small, $w_\ast=\mathcal{O}(\epsilon^{1/3})$; the $\mathcal{O}(1)$ amplitude is
+    that of the creased branch onto which the structure then snaps.
 \end{proposition}
-\begin{proof}[Sketch]
-    A limit point of $g(w):=a(t_c-t)w+bw^3+dw^5-\epsilon\eta$ satisfies $g=g'=0$. Eliminating $t$ and expanding about
-    the perfect fold $(w_L,t_L)$, where $g'=0$ and $g''\neq0$, yields a relation $\delta t\sim -\,c\,(\epsilon\eta)^{2/3}$
-    between the load offset $\delta t=t-t_L$ and the imperfection; this is the classical $\tfrac23$ power law
-    \cite{Koiter1945,GolubitskySchaeffer1985}. \qed
+\begin{proof}
+    Write \eqref{eq:bifeq} as $g(w,t)=0$ with
+    \begin{equation*}
+        g(w,t):=a(t_c-t)\,w+b\,w^3+d\,w^5-\epsilon\eta ,
+    \end{equation*}
+    the analytic remainder of \eqref{eq:bifeq} being subdominant at the scaling found below (we verify this at the
+    end). A limit point in the load is a point of the solution set at which the branch turns, i.e.\ at which $t$ is
+    stationary along the curve; differentiating $g=0$ implicitly, this is the pair
+    \begin{equation}
+        \label{eq:lp}
+        g(w,t)=0, \qquad g_w(w,t)=a(t_c-t)+3b\,w^2+5d\,w^4=0 .
+    \end{equation}
+    We follow the limit point that issues from the bifurcation point $(0,t_c)$ as $\epsilon\to0$; this is the one that
+    caps the slightly deflected compressed branch and hence sets the snap load.
+
+    \emph{Turning amplitude.} Using the second equation of \eqref{eq:lp} to eliminate the load,
+    $a(t_c-t)=-(3b\,w^2+5d\,w^4)$, and substituting into the first gives a single equation for the turning amplitude,
+    \begin{equation}
+        \label{eq:turn}
+        -2b\,w^3-4d\,w^5=\epsilon\eta .
+    \end{equation}
+    Because $b<0$, the small root of \eqref{eq:turn} as $\epsilon\to0$ obeys $-2b\,w^3=\epsilon\eta\,(1+o(1))$, the
+    quintic entering only at relative order $w^2$; hence
+    \begin{equation}
+        \label{eq:wstar}
+        w_\ast(\epsilon)=\Big(\tfrac{|\eta|\,\epsilon}{2|b|}\Big)^{1/3}\,(1+o(1))=\mathcal{O}(\epsilon^{1/3}),
+    \end{equation}
+    in agreement with the unstable-branch scaling \eqref{eq:wscale} evaluated at the turn. In particular
+    $w_\ast\to0$, so at this limit point the cubic dominates the quintic, $d\,w_\ast^4/(b\,w_\ast^2)=\mathcal{O}(\epsilon^{2/3})$.
+
+    \emph{Snap load.} Inserting \eqref{eq:wstar} into $g_w=0$ and discarding the quintic, a relative
+    $\mathcal{O}(\epsilon^{2/3})$ correction,
+    \begin{equation*}
+        a\big(t_c-t_s(\epsilon)\big)=-3b\,w_\ast^2\,(1+o(1))
+        =3|b|\Big(\tfrac{|\eta|\,\epsilon}{2|b|}\Big)^{2/3}(1+o(1)),
+    \end{equation*}
+    which is \eqref{eq:koiter} with $C=3|b|^{1/3}/(2^{2/3}a)>0$, the classical Koiter $\tfrac23$ power law
+    \cite{Koiter1945,GolubitskySchaeffer1985}.
+
+    \emph{Remainder.} At the limit point $w=\mathcal{O}(\epsilon^{1/3})$ and $t_c-t=\mathcal{O}(\epsilon^{2/3})$, so the
+    omitted terms $\mathcal{O}(\epsilon^2+\epsilon w+|t_c-t|\,w^2+w^6)$ of \eqref{eq:bifeq} are
+    $\mathcal{O}(\epsilon^{4/3})$, a relative $\mathcal{O}(\epsilon^{1/3})$ against the dominant balance
+    $a(t_c-t)w\sim b\,w^3\sim\epsilon\eta=\mathcal{O}(\epsilon)$. They perturb $w_\ast$ and $t_s(\epsilon)$ only within
+    the stated $o(\epsilon^{2/3})$, leaving the exponent and $C$ unchanged. \qed
 \end{proof}
 
 \paragraph{The unstable continuation branch.}
@@ -931,7 +972,7 @@ the volume-preserving mode the only one of finite energy.
 
 \begin{proposition}[Stable physical branch: bounded tangent]
     \label{prop:physical}
-    Under load control the structure follows the compressed fundamental branch up to the snap at $t_L(\epsilon)\le t_c$
+    Under load control the structure follows the compressed fundamental branch up to the snap at $t_s(\epsilon)\le t_c$
     (Proposition~\ref{prop:koiter}) and then jumps to the creased branch of amplitude $w=\mathcal{O}(1)$. On the
     compressed branch $\lambda_{\min}\ge\lambda_c(t)\ge\lambda_c(t_c)>0$; after the snap the $\mathcal{O}(1)$ amplitude
     relieves the compression to $\lambda_{\min}=\mathcal{O}(1)$ via Lemma~\ref{lem:relief}. Hence on the physical branch
@@ -946,7 +987,7 @@ the volume-preserving mode the only one of finite energy.
     \label{thm:reg}
     Under Assumptions~\ref{ass:reg}, \ref{ass:bif}, \ref{ass:subcrit} and the conclusions \eqref{eq:lminscale} of
     Lemma~\ref{lem:relief}, with the barrier penalty $f_{\log}$, the tangent \emph{along the unstable continuation
-    branch} \eqref{eq:wscale}---the branch tracked by a displacement- or arc-length-controlled solver---satisfies
+        branch} \eqref{eq:wscale}---the branch tracked by a displacement- or arc-length-controlled solver---satisfies
     \begin{equation}
         \label{eq:Lreg}
         \max_{\bm{x}\in B_\rho} \|\mathbb{L}(\bm{x},\epsilon)\|
@@ -988,13 +1029,13 @@ The relevant geometry is the \emph{collapse locus} of the perfect field.
 \begin{proof}
     Where the smallest singular value is simple it is an analytic function of the entries of $\bm{F}$, hence smooth in
     $\bm{x}$. A smooth scalar field vanishing on $\Sigma$ has, by Taylor expansion, $\lambda_{\min}=\nabla\lambda_{\min}
-    \cdot\bm{n}\,\operatorname{dist}(\bm{x},\Sigma)+\mathcal{O}(\operatorname{dist}^2)$ with $\bm{n}$ the unit normal;
+        \cdot\bm{n}\,\operatorname{dist}(\bm{x},\Sigma)+\mathcal{O}(\operatorname{dist}^2)$ with $\bm{n}$ the unit normal;
     transversality $\nabla\lambda_{\min}\ne0$ (the generic case, by Sard's theorem) gives \eqref{eq:transversal} with
     $\kappa_*=|\nabla\lambda_{\min}|>0$. \qed
 \end{proof}
 
 On the imperfect branch the relief of \eqref{eq:lminscale} imposes the floor $\lambda_{\min}(\bm{x},\epsilon)\gtrsim
-\max\{\kappa_*\operatorname{dist}(\bm{x},\Sigma),\,c\,\epsilon^{2/3}\}$, so the high-stiffness zone is the tube of
+    \max\{\kappa_*\operatorname{dist}(\bm{x},\Sigma),\,c\,\epsilon^{2/3}\}$, so the high-stiffness zone is the tube of
 half-width $\ell(\epsilon)$ around $\Sigma$ in which the floor is active, with (using $s=1$)
 \begin{equation}
     \label{eq:locallength}
@@ -1034,20 +1075,20 @@ Assumption~\ref{ass:subcrit}), a load-controlled physical system never traverses
 the compressed branch and \emph{snaps} to a finite-amplitude crease at a load reduced by only
 $\mathcal{O}(\epsilon^{2/3})$ (Proposition~\ref{prop:koiter}), keeping a bounded tangent throughout
 (Proposition~\ref{prop:physical}). The much-discussed divergence is therefore not seen by the physical system at all;
-it is the worst case for an algorithm---displacement or arc-length control, numerical continuation---that suppresses the
-snap and tracks the \emph{unstable} branch through the instability. On that branch the determinant is still lifted off
-zero (Lemma~\ref{lem:relief}, with the volume-preserving character of the mode \emph{forced} by the energy barrier,
+it is the worst case for an algorithm---displacement or arc-length control, numerical continuation---that suppresses
+the snap and tracks the \emph{unstable} branch through the instability. On that branch the determinant is still lifted
+off zero (Lemma~\ref{lem:relief}, with the volume-preserving character of the mode \emph{forced} by the energy barrier,
 Lemma~\ref{lem:rot}), the tangent diverges only algebraically, $\epsilon^{-4/3}$ up to a logarithm
-(Theorem~\ref{thm:reg}), and the singular character is confined to a tube of width $\ell(\epsilon)\sim\epsilon^{2/3}\to0$
-about the collapse locus, remaining $L^q$-integrable for all $q<\tfrac12$ (Lemma~\ref{lem:sval},
-Proposition~\ref{prop:narrow}). That algebraic rate is the mirror image---through the inverse channel---of the benign
-tensile growth of \S\ref{sub:growth}; the same logarithm, traceable to the barrier $f_{\log}$, appears in both. Two
-practical consequences follow. First, the bifurcation is the corner-localised analogue of the classical \emph{creasing}
-instability of compressed elastomers \cite{Biot1963,Hong2009}, now seated at a geometric Dirichlet--Neumann junction
-rather than on a flat surface. Second, the dichotomy is a concrete warning for computation: a solver that continues
-through the instability will see the conditioning degrade as $\epsilon^{-4/3}$ and should either admit the snap or
-refine inside the tube \eqref{eq:locallength}; the load-control reduction \eqref{eq:koiter} tells it when the snap is
-due. The reduction to scalar imperfect-bifurcation form follows the classical theory
+(Theorem~\ref{thm:reg}), and the singular character is confined to a tube of width
+$\ell(\epsilon)\sim\epsilon^{2/3}\to0$ about the collapse locus, remaining $L^q$-integrable for all $q<\tfrac12$
+(Lemma~\ref{lem:sval}, Proposition~\ref{prop:narrow}). That algebraic rate is the mirror image---through the inverse
+channel---of the benign tensile growth of \S\ref{sub:growth}; the same logarithm, traceable to the barrier $f_{\log}$,
+appears in both. Two practical consequences follow. First, the bifurcation is the corner-localised analogue of the
+classical \emph{creasing} instability of compressed elastomers \cite{Biot1963,Hong2009}, now seated at a geometric
+Dirichlet--Neumann junction rather than on a flat surface. Second, the dichotomy is a concrete warning for computation:
+a solver that continues through the instability will see the conditioning degrade as $\epsilon^{-4/3}$ and should
+either admit the snap or refine inside the tube \eqref{eq:locallength}; the load-control reduction \eqref{eq:koiter}
+tells it when the snap is due. The reduction to scalar imperfect-bifurcation form follows the classical theory
 \cite{GolubitskySchaeffer1985,KeenerKeller1973,Koiter1945}.
 
 \section{Conclusions}
