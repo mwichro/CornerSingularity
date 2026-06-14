@@ -8,10 +8,10 @@
 
 \subsection{Finite-strain elastostatics as energy minimisation}
 
-We consider a hyperelastic body occupying a reference domain $\Omega \subset \mathbb{R}^2$ with boundary
-$\partial\Omega = \overline{\Gamma_D} \cup \overline{\Gamma_N}$, $\Gamma_D \cap \Gamma_N = \emptyset$. The deformation
-of the body is described by the displacement field $u : \Omega \to \mathbb{R}^2$, the deformation map $y(x) = x +
-    u(x)$, and the associated deformation gradient
+We consider a hyperelastic body occupying a reference $d$-dimensional domain $\Omega \subset \mathbb{R}^d$ with
+boundary $\partial\Omega = \overline{\Gamma_D} \cup \overline{\Gamma_N}$, $\Gamma_D \cap \Gamma_N = \emptyset$. The
+deformation of the body is described by the displacement field $u : \Omega \to \mathbb{R}^d$, the deformation map $y(x)
+    = x + u(x)$, and the associated deformation gradient
 \begin{equation}
     F = \nabla y = I + \nabla u, \qquad J = \det F > 0,
 \end{equation}
@@ -60,8 +60,8 @@ the behaviour of $L$ as a function of the local deformation state.
 
 \subsection{The neo-Hookean material}
 
-Throughout we use the compressible neo-Hookean strain energy density adopted in the cut-finite-element study \cite{cutfemAD}
-that motivates this analysis,
+Throughout we use the compressible neo-Hookean strain energy density adopted in the cut-finite-element study
+\cite{cutfemAD} that motivates this analysis,
 \begin{equation}
     \label{eq:neohooke}
     \Psi(F) = \frac{\mu}{2}\left( \operatorname{tr}(F^T F) - 2 \right) + f(J),
@@ -89,9 +89,9 @@ $F$ with $F^{-1}$ bounded leaves $L$ finite. This dichotomy is the analytical ba
 
 The configuration of interest is a right-angle corner at the origin where the two boundary-condition types meet: a
 Dirichlet segment ($\Gamma_D$, prescribed displacement) abutting a traction-free Neumann segment ($\Gamma_N$). Such
-junctions arise, for example, at the lower corners of the loaded-pole benchmark of \cite{cutfemAD}, where the numerically
-observed convergence rate is capped well below the optimal order. Classical Kondratiev theory for the linearised
-problem predicts a corner singularity
+junctions arise, for example, at the lower corners of the loaded-pole benchmark of \cite{cutfemAD}, where the
+numerically observed convergence rate is capped well below the optimal order. Classical Kondratiev theory for the
+linearised problem predicts a corner singularity
 \begin{equation}
     u(r,\theta) \sim K\, r^{\alpha}\,\Phi(\theta), \qquad \alpha \in (0,1),
 \end{equation}
