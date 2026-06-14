@@ -1,0 +1,45 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{url}
+
+% define \headers to ignore its two arguments (e.g., \headers{title}{authors})
+\providecommand{\headers}[2]{}
+
+% Redefine \title to support optional argument (short title) which is ignored in article class
+\let\oldtitle\title
+\renewcommand{\title}[2][]{\oldtitle{#2}}
+
+% load the original preamble (packages and macros)
+\input{splitted/preamble}
+
+% load shared title/author/macros from the original
+\input{splitted/shared}
+
+% provide simple replacements for SIAM-specific environments
+\providecommand{\keywordsname}{Keywords}
+\newcommand{\Keywords}[1]{\par\noindent\textbf{\keywordsname:} #1}
+\newcommand{\AMS}[1]{\par\noindent\textbf{AMS subject classifications:} #1}
+
+\begin{document}
+\author{Michał Wichrowski}
+\footnotetext{Interdisziplinäres Zentrum für Wissenschaftliches Rechnen (IWR), Ruprecht-Karls-Universität Heidelberg, Germany, \texttt{mt.wichrowsk@uw.edu.pl}}
+\date{}
+
+\maketitle
+
+\begin{abstract}
+    \input{splitted/abstract}
+\end{abstract}
+
+\Keywords{Keyords go here.}
+
+\AMS{Classification codes go here.}
+
+\input{splitted/main_text}
+
+\bibliographystyle{siam}
+\bibliography{literature}
+
+\end{document}

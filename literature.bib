@@ -1,0 +1,942 @@
+#
+# Please maintain alphabetical order by authors!
+
+@article{ArnoldFalkWinther97Hdiv,
+  AUTHOR = {Arnold, Douglas N. and Falk, Richard S. and Winther, R.},
+   TITLE = {Preconditioning in {$H({\rm div})$} and applications},
+   JOURNAL = {Math. Comput.},
+  VOLUME = {66},
+    YEAR = {1997},
+  NUMBER = {219},
+   PAGES = {957--984},
+    ISSN = {0025-5718},
+     DOI = {10.1090/S0025-5718-97-00826-0}
+}             
+
+@article{ArnoldFalkWinther00,
+  AUTHOR = {Arnold, Douglas N. and Falk, Richard S. and Winther, Ragnar},
+   TITLE = {Multigrid in {$H({\rm div})$} and {$H({\rm curl})$}},
+   JOURNAL = {Numer. Math.},
+  FJOURNAL = {Numer. Math.},
+  VOLUME = 85,
+    YEAR = 2000,
+  NUMBER = 2,
+   PAGES = {197--217},
+     DOI = {10.1007/PL00005386}
+}
+
+@Book{Bramble93,
+  title = {Multigrid Methods},
+  author = {Bramble, J. H.},
+  number = {294},
+  publisher = {Longman Scientific},
+  series = {Pitman research notes in mathematics series},
+  year = {1993}
+}
+
+@article{burstedde2011p4est,
+  title={p4est: Scalable algorithms for parallel adaptive mesh refinement on forests of octrees},
+  author={Burstedde, Carsten and Wilcox, Lucas C and Ghattas, Omar},
+  journal={SIAM J. Sci. Comput.},
+  volume={33},
+  number={3},
+  pages={1103--1133},
+  year={2011},
+  publisher={SIAM}
+}
+
+@article{bangerth2012algorithms,
+  title={Algorithms and data structures for massively parallel generic adaptive finite element codes},
+  author={Bangerth, Wolfgang and Burstedde, Carsten and Heister, Timo and Kronbichler, Martin},
+  journal={ACM Trans. Math. Softw.},
+  volume={38},
+  number={2},
+  pages={14/1--28},
+  year={2012},
+  publisher={ACM New York, NY, USA},
+  doi={10.1145/2049673.2049678}
+}
+
+@Article{dealii2019design,
+    title   = {The {deal.II} finite element library: Design, features, and insights},
+    author  = {Daniel Arndt and Wolfgang Bangerth and Denis Davydov and
+           Timo Heister and Luca Heltai and Martin Kronbichler and
+           Matthias Maier and Jean-Paul Pelteret and Bruno Turcksin and
+           David Wells},
+    journal = {Comput. \& Math. Appl.},
+    year    = {2021},
+    DOI     = {10.1016/j.camwa.2020.02.022},
+    pages   = {407-422},
+    volume  = {81},
+    url     = {https://arxiv.org/abs/1910.13247}
+    }
+
+
+I will update this to the latest version 9.7
+
+@article{dealII97,
+url = {https://doi.org/10.1515/jnma-2025-0115},
+title = {The {deal.II} library, version 9.7},
+author = {Daniel Arndt and Wolfgang Bangerth and Maximilian Bergbauer 
+and Bruno Blais and Marc Fehling and Rene Gassmöller 
+and Timo Heister and Luca Heltai and Martin Kronbichler 
+and Matthias Maier and Peter Munch and Sam Scheuerman 
+and Bruno Turcksin and Siarhei Uzunbajakau and David Wells
+and Michał Wichrowski},
+journal = {Journal of Numerical Mathematics},
+doi = {doi:10.1515/jnma-2025-0115},
+year = {},
+lastchecked = {2025-10-19}
+}
+
+
+
+Pavarino proved that the additive Schwarz method with vertex patches and a low-
+order coarse space gives a p-robust solver for symmetric and coercive problems [42]. However, for very
+high polynomial degree it is not feasible to assemble or factorize the matrices for each patch. In this
+work we introduce a direct solver for separable patch problems that scales to very high polynomial
+degree on tensor product cells. The solver constructs a tensor product basis that diagonalizes the
+blocks in the stiffness matrix for the internal degrees of freedom of each individual cell. As a result,
+the non-zero structure of the cell matrices is that of the graph connecting internal degrees of freedom
+to their projection onto the facets. In the new basis, the patch problem is as sparse as a low-
+order finite difference discretization, while having a sparser Cholesky factorization. We can thus
+afford to assemble and factorize the matrices for the vertex-patch problems, even for very high
+polynomial degree. In the non-separable case, the method can be applied as a preconditioner by
+approximating the problem with a separable surrogate. We demonstrate the approach by solving the
+Poisson equation and a H(div)-conforming interior penalty discretization of linear elasticity in three
+dimensions at p = 15.
+Nice but cholesky requires O(p^(3d-1)) operations, although their results show that it might be lower in practice.
+However Memory scales like O(p^2(d-1)) which is nice but not optimal O(p^d).
+@article{brubeck2021scalable,
+author = {Brubeck, Pablo D. and Farrell, Patrick E.},
+title = {A Scalable and Robust Vertex-Star Relaxation for High-Order {FEM}},
+journal = {SIAM J. Sci. Comput.},
+volume = {44},
+number = {5},
+pages = {A2991-A3017},
+year = {2022},
+doi = {10.1137/21M1444187}
+}
+
+
+
+
+
+@Book{Ciarlet78,
+  title = {The Finite Element Method for Elliptic Problems},
+  author = {Ciarlet, Ph. G.},
+  publisher = {North-Holland},
+  year = {1978}
+}
+
+@Book{Hackbusch85,
+  title = {Multi-grid Methods and Applications},
+  author = {Hackbusch, W.},
+  publisher = {Springer},
+  address = {Heidelberg},
+  year = 1985
+}
+
+@Article{JanssenKanschat11,
+  author =       {Janssen, B. and Kanschat, G.},
+  title =        {Adaptive multilevel methods with local smoothing for
+          {${H}^1$}- and {$H^{\text{curl}}$}-conforming high order
+          finite element methods},
+  journal =      {SIAM J. Sci. Comput.},
+  year =         2011,
+  volume =       33,
+  number =       4,
+  pages =        {2095--2114},
+  doi = {10.1137/090778523}
+}
+
+@Article{Kanschat08smoother,
+  author =       {Kanschat, G.},
+  title =        {Robust smoothers for high order discontinuous {G}alerkin
+  discretizations of advection-diffusion problems},
+  journal =      {J. Comput. Appl. Math.},
+  year =         2008,
+  volume =       218,
+  pages =        {53--60},
+  doi = {10.1016/j.cam.2007.04.032}
+}
+
+
+@Article{KanschatMao15,
+  author = 	 {Kanschat, G. and Mao, Y.},
+  title = 	 {Multigrid methods for {$\mathbf H^{\text{div}}$}-conforming discontinuous
+{G}alerkin methods for the {S}tokes equations},
+  journal = 	 {J. Numer. Math.},
+  year = 	 2015,
+  volume = 	 23,
+  number = 	 1,
+  pages = 	 {51--66},
+  doi =	 {10.1515/jnma-2015-0005}
+}
+
+MF framework I am  using
+@article{Kronbichler2012,
+author = {Kronbichler, Martin and Kormann, Katharina},
+journal = {Computers \& Fluids},
+pages = {135--147},
+title = {{A generic interface for parallel cell-based finite element operator application}},
+volume = {63},
+year = {2012},
+doi = {10.1016/j.compﬂuid.2012.04.012}
+}
+
+@article{Kronbichler2017a,
+ author = {Kronbichler, Martin and Kormann, Katharina},
+ title = {Fast Matrix-Free Evaluation of Discontinuous {G}alerkin Finite Element Operators},
+ year = {2019},
+ volume = {45},
+ number = {3},
+ journal = {ACM Trans. Math. Softw.},
+ pages = {29/1--40},
+ doi = {10.1145/3325864}
+}
+
+@article{kronbichler2022cg,
+  title = {Enhancing data locality of the conjugate gradient method for
+          high-order matrix-free finite-element implementations},
+  author = {Martin Kronbichler and Dmytro Sashko and Peter Munch},
+  journal = {Int. J. High-Performance Computing Appl.},
+  year = {2023},
+  volume = 37,
+  number = 2,
+  pages = {61--81},
+  doi = {10.1177/10943420221107880}
+}
+
+@article{LuceroKanschat21,
+  author  = {Lucero Lorca, J. P. and G. Kanschat},
+  title   = {Multilevel Schwarz preconditioners for singularly perturbed symmetric reaction-diffusion systems},
+  journal = {Electron. Trans. Numer. Anal.},
+  volume  = {54},
+  year    = {2021},
+  pages   = {89--107},
+  doi     = {10.1553/etna_vol54s89},
+}
+
+@article{Lynch1964,
+author = {Lynch, R. E. and Rice, J. R. and Thomas, D. H.},
+title = {Direct solution of partial difference equations by tensor product methods},
+journal = {Numer. Math.},
+volume = 6,
+pages = {185--199},
+year = 1964,
+doi = {10.1007/BF01386067}
+}
+
+@article{malas2017multidimensional,
+  title={Multidimensional intratile parallelization for memory-starved stencil computations},
+  author={Malas, Tareq M and Hager, Georg and Ltaief, Hatem and Keyes, David E},
+  journal={ACM Trans. Parallel Comput.},
+  volume={4},
+  number={3},
+  pages={12:1--32},
+  year={2017},
+  doi={10.1145/3155290}
+}
+
+@article{Melenk99fullydiscrete,
+title = "Fully discrete hp-finite elements: fast quadrature",
+journal = "Comp. Meth. Appl. Mech. Engrg.",
+volume = "190",
+number = "32",
+pages = "4339--4364",
+year = "2001",
+author = "J. Markus Melenk and Klaus Gerdes and Christoph Schwab",
+doi = {10.1016/S0045-7825(00)00322-4}
+}
+
+
+@article{Orszag1980,
+author = {Orszag, Steven A.},
+journal = {J. Comput. Phys.},
+number = {1},
+pages = {70--92},
+title = {Spectral methods for problems in complex geometries},
+volume = {37},
+year = {1980}
+}
+
+@article{Trojak2022,
+  doi = {10.1016/j.cpc.2021.108235},
+  year = {2022},
+  volume = {273},
+  pages = {108235},
+  author = {W. Trojak and R. Watson and F.D. Witherden},
+  title = {Hyperbolic diffusion in flux reconstruction: Optimisation through kernel fusion within tensor-product elements},
+  journal = {Computer Phys. Commun.}
+}
+
+@inproceedings{Kormann2011,
+author = {Kormann, Katharina and Kronbichler, Martin},
+title = {Parallel Finite Element Operator Application: {G}raph Partitioning and Coloring},
+booktitle ={Proceedings of the 7th IEEE International Conference on eScience},
+year = {2011},
+pages = {332--339},
+doi = {10.1109/eScience.2011.53}
+}
+
+@Article{WitteArndtKanschat21,
+  author =       {Witte, J. and Arndt, D. and Kanschat, G.},
+  title =        {Fast Tensor Product {S}chwarz Smoothers for High-Order Discontinuous {G}alerkin Methods},
+  journal =      {Comput. Meth. Appl. Math.},
+  number = {3},
+  volume = {21},
+  year = {2021},
+  pages = {709--728},
+  doi = {10.1515/cmam-2020-0078}
+}
+
+@article{Dumbser2018,
+  doi = {10.3390/axioms7030063},
+  year = {2018},
+  volume = {7},
+  number = {3},
+  pages = {63},
+  author = {Michael Dumbser and Francesco Fambri and Maurizio Tavelli and Michael Bader and Tobias Weinzierl},
+  title = {Efficient Implementation of {ADER} Discontinuous {G}alerkin Schemes for a Scalable Hyperbolic {PDE} Engine},
+  journal = {Axioms}
+}
+
+@article{kohl2022textbook,
+  title={Textbook efficiency: massively parallel matrix-free multigrid for the {S}tokes system},
+  author={Kohl, Nils and R\"ude, Ulrich},
+  journal={SIAM J. Sci. Comput.},
+  volume={44},
+  number={2},
+  pages={C124--C155},
+  year={2022},
+  doi={10.1137/20M1376005}
+}
+
+@article{kronbichler2019multigrid,
+  title={Multigrid for matrix-free high-order finite element computations on graphics processors},
+  author={Kronbichler, Martin and Ljungkvist, Karl},
+  journal={ACM Trans. Parallel Comput.},
+  volume={6},
+  number={1},
+  pages={2/1--32},
+  year={2019},
+  doi={10.1145/3322813}
+}
+
+
+
+%% CELLWISE SMOOTHERS:
+%BRUBECK:  A popular alternative in the literature has been to use cell-centered patches with
+minimal overlap by including a few layers of DOFs of the neighboring cell\
+@article{fischer2000overlapping,
+  title={An overlapping {S}chwarz method for spectral element simulation of three-dimensional incompressible flows},
+  author={Fischer, Paul F and Miller, Neil I and Tufo, Henry M},
+  journal = {IMA Volumes in Mathematics and its Applications},
+  volume={120},
+  pages={159--180},
+  year={2000},
+  publisher={New York; Springer; 1999}
+}
+
+@article{dryja2016massively,
+  title={A massively parallel nonoverlapping additive Schwarz method for discontinuous {G}alerkin discretization of elliptic problems},
+  author={Dryja, Maksymilian and Krzy{\.z}anowski, Piotr},
+  journal={Numer. Math.},
+  volume={132},
+  pages={347--367},
+  year={2016},
+  publisher={Springer}
+}
+
+@article{vos2010h,
+  title={From h to p efficiently: Implementing finite and spectral/hp element methods to achieve optimal performance for low-and high-order discretisations},
+  author={Vos, Peter EJ and Sherwin, Spencer J and Kirby, Robert M},
+  journal={J. Comput. Phys.},
+  volume={229},
+  number={13},
+  pages={5161--5181},
+  year={2010}
+}
+
+@article{bauer2016implementation,
+  title={Implementation of the {V}anka-type multigrid solver for the finite element approximation of the {N}avier--{S}tokes equations on {GPU}},
+  author={Bauer, Petr and Klement, Vladimir and Oberhuber, Tom{\'a}{\v{s}} and {\v{Z}}abka, V{\'\i}t{\v{e}}zslav},
+  journal={Computer Phys. Comm.},
+  volume={200},
+  pages={50--56},
+  year={2016}
+}
+
+
+
+
+@article{muthing2017high,
+  title={High-performance implementation of matrix-free high-order discontinuous {G}alerkin methods},
+  author={M{\"u}thing, Steffen and Piatkowski, Marian and Bastian, Peter},
+  note={published???},
+  journal={arXiv preprint arXiv:1711.10885},
+  year={2017}
+}
+
+@article{thomas2003textbook,
+  title={Textbook multigrid efficiency for fluid simulations},
+  author={Thomas, James L and Diskin, Boris and Brandt, Achi},
+  journal={Annu. Rev. Fluid Mech.},
+  volume={35},
+  number={1},
+  pages={317--340},
+  year={2003},
+  doi={10.1146/annurev.fluid.35.101101.161209}
+}
+
+@article{fehn2019matrix,
+  title={A matrix-free high-order discontinuous {G}alerkin compressible {N}avier-{S}tokes solver: A performance comparison of compressible and incompressible formulations for turbulent incompressible flows},
+  author={Fehn, Niklas and Wall, Wolfgang A and Kronbichler, Martin},
+  journal={Int. J. Numer. Meth. Fluids},
+  volume={89},
+  number={3},
+  pages={71--102},
+  year={2019},
+  publisher={Wiley Online Library}
+}
+
+@article{hong2016robust,
+  title={A robust multigrid method for discontinuous {G}alerkin discretizations of {S}tokes and linear elasticity equations},
+  author={Hong, Qingguo and Kraus, Johannes and Xu, Jinchao and Zikatanov, Ludmil},
+  journal={Numer. Math.},
+  volume={132},
+  number={1},
+  pages={23--49},
+  year={2016},
+  publisher={Springer}
+}
+
+
+
+@article{sun2020study,
+  title={A study of vectorization for matrix-free finite element methods},
+  author={Sun, Tianjiao and Mitchell, Lawrence and Kulkarni, Kaushik and Kl{\"o}ckner, Andreas and Ham, David A and Kelly, Paul HJ},
+  journal={Int. J. High Perf. Comput. Appl.},
+  volume={34},
+  number={6},
+  pages={629--644},
+  year={2020},
+  publisher={SAGE Publications Sage UK: London, England}
+}
+
+@inproceedings{raffenetti2017why,
+  doi = {10.1145/3126908.3126963},
+  year = {2017},
+  publisher = {{ACM}},
+  author = {Ken Raffenetti and Abdelhalim Amer and Lena Oden and Charles Archer and Wesley Bland and Hajime Fujita and Yanfei Guo and Tomislav Janjusic and Dmitry Durnov and Michael Blocksome and Min Si and Sangmin Seo and Akhil Langer and Gengbin Zheng and Masamichi Takagi and Paul Coffman and Jithin Jose and Sayantan Sur and Alexander Sannikov and Sergey Oblomov and Michael Chuvelev and Masayuki Hatanaka and Xin Zhao and Paul Fischer and Thilina Rathnayake and Matt Otten and Misun Min and Pavan Balaji},
+  title = {Why is {MPI} so slow?},
+  booktitle = {Proceedings of the International Conference for High Performance Computing,  Networking,  Storage and Analysis}
+}
+
+
+%additive Schwarz method, cell-wise smoothing.  Local inverse via fast daigonalization, so inverse is exact on cartesian meshes,
+they use chebyshev acceleration
+@article{munch2023cache,
+ author = {Peter Munch and Martin Kronbichler},
+ title = {Cache-optimized and low-overhead implementations of additive {S}chwarz methods for high-order {FEM} multigrid computations},
+ journal = {Int. J. High Perf. Comput. Appl.},
+ year = 2023,
+ note = {In press},
+ doi = {10.1177/10943420231217221}
+}
+
+Checbyshev with JAcobi / Diagonal,  Matrix-free hp-MG 
+We find that a transfer to a continuous function space at highest polynomial degree (or on the finest mesh), followed by polynomial and geometric coarsening, shows the best overall performance. 
+@article{fehn2020hybrid,
+  doi = {10.1016/j.jcp.2020.109538},
+  year = {2020},
+  volume = {415},
+  pages = {109538},
+  author = {Niklas Fehn and Peter Munch and Wolfgang A. Wall and Martin Kronbichler},
+  title = {Hybrid multigrid methods for high-order discontinuous {G}alerkin discretizations},
+  journal = {J. Comput. Phys.}
+}
+
+Relying on a data-dependency analysis and appropriate enumeration of degrees of freedom,
+ we interleave the vector updates and inner products in a CG iteration with the matrix-vector
+  product with only minor organizational overhead. As a result, around 90% of the vector entries
+   of the three active vectors of the CG method are transferred from slow RAM memory exactly once 
+   per iteration, with all additional access hitting fast cache memory
+@article{kronbichler2023enhancing,
+  title={Enhancing data locality of the conjugate gradient method for high-order matrix-free finite-element implementations},
+  author={Kronbichler, Martin and Sashko, Dmytro and Munch, Peter},
+  journal={The International Journal of High Performance Computing Applications},
+  volume={37},
+  number={2},
+  pages={61--81},
+  year={2023},
+  publisher={Sage Publications Sage UK: London, England}
+}
+
+
+MF patch smoother that I am using here
+@article{wichrowski2025smoothers,
+  title={Smoothers with Localized Residual Computations for Geometric Multigrid Methods for Higher-Order Finite Elements},
+  author={Wichrowski, Micha{\l} and Munch, Peter and Kronbichler, Martin and Kanschat, Guido},
+  journal={SIAM Journal on Scientific Computing},
+  volume={47},
+  number={3},
+  pages={B645--B664},
+  year={2025},
+  publisher={SIAM}
+}
+
+
+
+% MAtrix-free multigrid for {S}tokes, based on Breess Sarazin, and Wieners TODO Add Breuss Sarazin references
+@article{wichrowski2022matrix,
+  title={A matrix-free multilevel preconditioner for the generalized {S}tokes problem with discontinuous viscosity},
+  author={Wichrowski, Micha{\l} and Krzy{\.z}anowski, Piotr},
+  journal={Journal of Computational Science},
+  volume={63},
+  pages={101804},
+  year={2022},
+  publisher={Elsevier}
+}
+
+
+@article{cui2025implementation,
+  title={An implementation of tensor product patch smoothers on {GPU}s},
+  author={Cui, Cu and Grosse-Bley, Paul and Kanschat, Guido and Strzodka, Robert},
+  journal={SIAM Journal on Scientific Computing},
+  volume={47},
+  number={2},
+  pages={B280--B307},
+  year={2025},
+  publisher={SIAM}
+}
+
+
+
+
+Fast diagonalization for biharmonic problems, tensor-product patches
+@article{witte2025tensor,
+  title={Tensor-product vertex patch smoothers for biharmonic problems},
+  author={Witte, Julius and Cui, Cu and Bonizzoni, Francesca and Kanschat, Guido},
+  journal={Computational Methods in Applied Mathematics},
+  number={0},
+  year={2025},
+  publisher={De Gruyter}
+}
+
+
+
+Fast implementation of multigrid block-smoothers for Discontinuous Galerkin discretisations.
+Iterative inversion of block-diagonal avoids explicit matrix assembly.  they almost got my idea...
+@article{bastian2019matrix,
+  title={Matrix-free multigrid block-preconditioners for higher order discontinuous {G}alerkin discretisations},
+  author={Bastian, Peter and M{\"u}ller, Eike Hermann and M{\"u}thing, Steffen and Piatkowski, Marian},
+  journal={Journal of Computational Physics},
+  volume={394},
+  pages={417--439},
+  year={2019},
+  publisher={Elsevier}
+}
+
+
+@article{pavarino1993additive,
+  title={Additive Schwarz methods for the p-version finite element method},
+  author={Pavarino, Luca F},
+  journal={Numerische Mathematik},
+  volume={66},
+  number={1},
+  pages={493--515},
+  year={1993},
+  publisher={Springer}
+}
+
+
+%%% Sum-factorization breaks down the residual evaluation into  products of one-dimensional operators and diagonal scalings
+@incollection{orszag1979spectral,
+  title={Spectral methods for problems in complex geometrics},
+  author={Orszag, Steven A},
+  booktitle={Numerical methods for partial differential equations},
+  pages={273--305},
+  year={1979},
+  publisher={Elsevier}
+}
+
+%% introduced a remarkably fast solver with O(pd) scaling on
+such meshes
+@article{huismann2019scaling,
+  title={Scaling to the stars--a linearly scaling elliptic solver for p-multigrid},
+  author={Huismann, Immo and Stiller, J{\"o}rg and Fr{\"o}hlich, Jochen},
+  journal={Journal of Computational Physics},
+  volume={398},
+  pages={108868},
+  year={2019},
+  publisher={Elsevier}
+}
+
+
+%cellwise as above
+@article{pazner2018approximate,
+  title={Approximate tensor-product preconditioners for very high order discontinuous {G}alerkin methods},
+  author={Pazner, Will and Persson, Per-Olof},
+  journal={Journal of computational physics},
+  volume={354},
+  pages={344--369},
+  year={2018},
+  publisher={Elsevier}
+}
+
+%still cellwise as above
+@article{remacle2016gpu,
+  title={ {GPU} accelerated spectral finite elements on all-hex meshes},
+  author={Remacle, J-F and Gandham, Rajesh and Warburton, Tim},
+  journal={Journal of Computational Physics},
+  volume={324},
+  pages={246--257},
+  year={2016},
+  publisher={Elsevier}
+}
+
+
+Computationally advantageous approaches involve
+incomplete factorizations of the patch FEM-SEM matrices
+@article{pazner2020efficient,
+  title={Efficient low-order refined preconditioners for high-order matrix-free continuous and discontinuous {G}alerkin methods},
+  author={Pazner, Will},
+  journal={SIAM Journal on Scientific Computing},
+  volume={42},
+  number={5},
+  pages={A3055--A3083},
+  year={2020},
+  publisher={SIAM}
+}
+
+
+%or the use of algebraic multigrid on the global FEM-SEM operator 
+% AMG has inherent limitation because it requires the assembly of the matrix, the assembly itself is expensive.
+@article{bello2019scalable,
+  title={Scalable low-order finite element preconditioners for high-order spectral element Poisson solvers},
+  author={Bello-Maldonado, Pedro D and Fischer, Paul F},
+  journal={SIAM Journal on Scientific Computing},
+  volume={41},
+  number={5},
+  pages={S2--S18},
+  year={2019},
+  publisher={SIAM}
+}
+
+
+
+cell based Vanka smoother
+Vanka smoother based on vertex star patches
+@article{margenberg2025hp,
+  title={An hp multigrid approach for tensor-product space-time finite element discretizations of the {S}tokes equations},
+  author={Margenberg, Nils and Bause, Markus and Munch, Peter},
+  journal={arXiv preprint arXiv:2502.09159},
+  year={2025}
+}
+
+
+
+%% MG for {S}tokes, Braess Sarazin smoother
+@article{braess1997efficient,
+  title={An efficient smoother for the {S}tokes problem},
+  author={Braess, Dietrich and Sarazin, Regina},
+  journal={Applied Numerical Mathematics},
+  volume={23},
+  number={1},
+  pages={3--19},
+  year={1997},
+  publisher={Elsevier}
+}
+
+
+@article{jodlbauer2024matrix,
+  title={Matrix-free monolithic multigrid methods for {S}tokes and generalized {S}tokes problems},
+  author={Jodlbauer, Daniel and Langer, Ulrich and Wick, Thomas and Zulehner, Walter},
+  journal={SIAM Journal on Scientific Computing},
+  volume={46},
+  number={3},
+  pages={A1599--A1627},
+  year={2024},
+  publisher={SIAM}
+}
+
+
+% Braess-Sarazin smoother, inexact solve of the schur complement.
+@article{zulehner2000class,
+  title={A class of smoothers for saddle point problems},
+  author={Zulehner, Walter},
+  journal={Computing},
+  volume={65},
+  number={3},
+  pages={227--246},
+  year={2000},
+  publisher={Springer-Verlag Wien}
+}
+
+
+@article{voronin2025monolithic,
+  title={Monolithic multigrid preconditioners for high-order discretizations of {S}tokes equations},
+  author={Voronin, Alexey and Harper, Graham and MacLachlan, Scott and Olson, Luke N and Tuminaro, Raymond S},
+  journal={SIAM Journal on Scientific Computing},
+  number={0},
+  pages={S207--S231},
+  year={2025},
+  publisher={SIAM}
+}
+
+
+
+cell patches, vertex patches.
+@article{anselmann2024energy,
+  title={An energy-efficient {GMRES}--multigrid solver for space-time finite element computation of dynamic poroelasticity},
+  author={Anselmann, Mathias and Bause, Markus and Margenberg, Nils and Shamko, Pavel},
+  journal={Computational Mechanics},
+  volume={74},
+  number={4},
+  pages={889--912},
+  year={2024},
+  publisher={Springer}
+}
+
+
+
+%%% Application to non-matching
+
+SBM preconditioner, matrix based cell-patch
+@article{wichrowski2025geometric,
+  title={A Geometric Multigrid Preconditioner for Discontinuous {G}alerkin Shifted Boundary Method},
+  author={Wichrowski, Michal},
+  journal={arXiv preprint arXiv:2506.12899},
+  year={2025}
+}
+
+SBM matrix free, 
+@article{wichrowski2025matrix,
+  title={Matrix-Free Evaluation of High-Order Shifted Boundary Finite Element Operators},
+  author={Wichrowski, Micha{\l}},
+  journal={arXiv preprint arXiv:2507.17053},
+  year={2025}
+}
+
+{GPU} implementation of CutFEM multigrid -- patch smoothing.
+@article{cui2025multigrid,
+  title={A multigrid method for {CutFEM} and its implementation on {GPU}},
+  author={Cui, Cu and Kanschat, Guido},
+  journal={arXiv preprint arXiv:2508.11608},
+  year={2025}
+}
+
+
+@article{bergbauer2025high,
+  title={High-performance matrix-free unfitted finite element operator evaluation},
+  author={Bergbauer, Maximilian and Munch, Peter and Wall, Wolfgang A and Kronbichler, Martin},
+  journal={SIAM Journal on Scientific Computing},
+  volume={47},
+  number={3},
+  pages={B665--B689},
+  year={2025},
+  publisher={SIAM}
+}
+
+
+
+
+@article{kershaw1981differencing,
+  title={Differencing of the diffusion equation in {L}agrangian hydrodynamic codes},
+  author={Kershaw, David S},
+  journal={Journal of Computational Physics},
+  volume={39},
+  number={2},
+  pages={375--395},
+  year={1981},
+  publisher={Elsevier}
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%
+
+
+@article{notay2000flexible,
+  title={Flexible conjugate gradients},
+  author={Notay, Yvan},
+  journal={SIAM Journal on Scientific Computing},
+  volume={22},
+  number={4},
+  pages={1444--1460},
+  year={2000},
+  publisher={SIAM}
+}
+
+
+
+
+
+%%%%%%%%%%%%%%%%
+
+ADDED by Fable
+
+%% Entries added by Claude — VERIFY ALL of these before use (titles, years, venues, DOIs).
+%% Cite keys used in splitted/introduction.tex:
+%%   deville2002highorder, libceed2021, nekrs2022, gslib, farhat1991feti,
+%%   dohrmann2003bddc, mfem2021, p4est
+%% (notay2000flexible, Kronbichler2012, kronbichler2022cg already exist in literature.bib)
+
+@book{deville2002highorder,
+  title={High-Order Methods for Incompressible Fluid Flow},
+  author={Deville, Michel O. and Fischer, Paul F. and Mund, Ernest H.},
+  year={2002},
+  publisher={Cambridge University Press},
+  series={Cambridge Monographs on Applied and Computational Mathematics}
+}
+
+@article{libceed2021,
+  title={libCEED: Fast algebra for high-order element-based discretizations},
+  author={Brown, Jed and Abdelfattah, Ahmad and Barra, Valeria and Beams, Natalie and Camier, Jean-Sylvain and Dobrev, Veselin and Dudouit, Yohann and Ghaffari, Leila and Kolev, Tzanio and Medina, David and Pazner, Will and Ratnayaka, Thilina and Thompson, Jeremy L. and Tomov, Stanimire},
+  journal={Journal of Open Source Software},
+  volume={6},
+  number={63},
+  pages={2945},
+  year={2021}
+}
+
+@article{nekrs2022,
+  title={NekRS, a GPU-accelerated spectral element Navier--Stokes solver},
+  author={Fischer, Paul and Kerkemeier, Stefan and Min, Misun and Lan, Yu-Hsiang and Phillips, Malachi and Rathnayake, Thilina and Merzari, Elia and Tomboulides, Ananias and Karakus, Ali and Chalmers, Noel and Warburton, Tim},
+  journal={Parallel Computing},
+  volume={114},
+  pages={102982},
+  year={2022},
+  publisher={Elsevier}
+}
+
+
+@article{farhat1991feti,
+  title={A method of finite element tearing and interconnecting and its parallel solution algorithm},
+  author={Farhat, Charbel and Roux, Fran{\c{c}}ois-Xavier},
+  journal={International Journal for Numerical Methods in Engineering},
+  volume={32},
+  number={6},
+  pages={1205--1227},
+  year={1991},
+  publisher={Wiley}
+}
+
+@article{dohrmann2003bddc,
+  title={A preconditioner for substructuring based on constrained energy minimization},
+  author={Dohrmann, Clark R.},
+  journal={SIAM Journal on Scientific Computing},
+  volume={25},
+  number={1},
+  pages={246--258},
+  year={2003},
+  publisher={SIAM}
+}
+
+@article{mfem2021,
+  title={MFEM: A modular finite element methods library},
+  author={Anderson, Robert and Andrej, Julian and Barker, Andrew and Bramwell, Jamie and Camier, Jean-Sylvain and Cerveny, Jakub and Dobrev, Veselin and Dudouit, Yohann and Fisher, Aaron and Kolev, Tzanio and Pazner, Will and Stowell, Mark and Tomov, Vladimir and Akkerman, Ido and Dahm, Johann and Medina, David and Zampini, Stefano},
+  journal={Computers \& Mathematics with Applications},
+  volume={81},
+  pages={42--74},
+  year={2021},
+  publisher={Elsevier}
+}
+
+
+
+@techreport{gslib2,
+  title={Nek5000 developments in support of industry and the NRC},
+  author={Shaver, Dillon and Obabko, Aleks and Tomboulides, Ananias and Coppo-Leite, Victor and Lan, Yu-Hsiang and Min, Misun and Fischer, Paul F and Boyd, Christopher},
+  year={2020},
+  institution={Argonne National Laboratory (ANL), Argonne, IL (United States)}
+}
+@misc{gslib,
+  author = {Lottes, James W. and Fischer, Paul F.},
+  title  = {gslib: Gather-scatter library},
+  howpublished = {\url{https://github.com/Nek5000/gslib}}
+}
+
+
+
+
+@software{jax2018github,
+  author = {Bradbury, James and Frostig, Roy and Hawkins, Peter and Johnson, Matthew James and Leary, Chris and Maclaurin, Dougal and Necula, George and Paszke, Adam and Vander{P}las, Jake and Wanderman-Milne, Skye and Zhang, Qiao},
+  title = {{JAX}: composable transformations of {P}ython+{N}um{P}y programs},
+  url = {http://github.com/jax-ml/jax},
+  year = {2018}
+}
+
+
+@inproceedings{triton2019,
+  title={Triton: an intermediate language and compiler for tiled neural network computations},
+  author={Tillet, Philippe and Kung, H. T. and Cox, David},
+  booktitle={Proceedings of the 3rd ACM SIGPLAN International Workshop on Machine Learning and Programming Languages (MAPL)},
+  pages={10--19},
+  year={2019}
+}
+
+%%
+@article{mukunoki2025dgemm,
+  title={DGEMM without FP64 Arithmetic-Using FP64 Emulation and FP8 Tensor Cores with Ozaki Scheme},
+  author={Mukunoki, Daichi},
+  journal={arXiv preprint arXiv:2508.00441},
+  year={2025}
+}
+
+
+@article{zheng2025triton,
+  title={Triton-distributed: Programming overlapping kernels on distributed ai systems with the triton compiler},
+  author={Zheng, Size and Bao, Wenlei and Hou, Qi and Zheng, Xuegui and Fang, Jin and Huang, Chenhui and Li, Tianqi and Duanmu, Haojie and Chen, Renze and Xu, Ruifan and others},
+  journal={arXiv preprint arXiv:2504.19442},
+  year={2025}
+}
+
+
+@inproceedings{zhou2026linear,
+  title={Linear Layouts: Robust Code Generation of Efficient Tensor Computation Using F\_2},
+  author={Zhou, Keren and Lezcano-Casado, Mario and Goucher, Adam P and Rakhmati, Akhmed and Niu, Jeff and Lebar, Justin and Szczerbuk, Pawel and Bell, Peter and Tillet, Phil and Raoux, Thomas and others},
+  booktitle={Proceedings of the 31st ACM International Conference on Architectural Support for Programming Languages and Operating Systems, Volume 1},
+  pages={132--146},
+  year={2026}
+}
+
+@article{soi2025optimal,
+  title={Optimal Software Pipelining and Warp Specialization for Tensor Core GPUs},
+  author={Soi, Rupanshu and Yadav, Rohan and Kjolstad, Fredrik and Aiken, Alex and Dehnavi, Maryam Mehri and Garland, Michael and Bauer, Michael},
+  journal={arXiv preprint arXiv:2512.18134},
+  year={2025}
+}
+
+
+
+@article{williams2009roofline,
+  title={Roofline: an insightful visual performance model for multicore architectures},
+  author={Williams, Samuel and Waterman, Andrew and Patterson, David},
+  journal={Communications of the ACM},
+  volume={52},
+  number={4},
+  pages={65--76},
+  year={2009},
+  publisher={ACM}
+}
+
+@article{fischer2020scalability,
+  title={Scalability of high-performance PDE solvers},
+  author={Fischer, Paul and Min, Misun and Rathnayake, Thilina and Dutta, Som and Kolev, Tzanio and Dobrev, Veselin and Camier, Jean-Sylvain and Kronbichler, Martin and Warburton, Tim and {\'S}wirydowicz, Kasia and Brown, Jed},
+  journal={The International Journal of High Performance Computing Applications},
+  volume={34},
+  number={5},
+  pages={562--586},
+  year={2020},
+  publisher={SAGE}
+}
+
+@article{wichrowski2025local,
+  title={Local solvers for high-order patch smoothers via p-multigrid},
+  author={Wichrowski, Micha{\l}},
+  journal={arXiv preprint arXiv:2510.17785},
+  year={2025}
+}

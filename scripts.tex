@@ -1,0 +1,12 @@
+% Command to execute data extraction script
+\newcommand{\executeextract}[3]{%
+    \ifrunscripts
+        % #1: input csv file
+        % #2: SQL query
+        % #3: output data file
+        \immediate\write18{python3 scripts/extract_data.py --input "#1" --query "#2" --output "#3"}%
+    \fi
+}
+
+% Example: configure extracts/plots by copying or updating these lines
+% \executeextract{results/...}{SELECT ...}{results/tmp/...}

@@ -1,0 +1,26 @@
+{
+    // Custom build tool: call latexmk with explicit path to .latexmkrc
+    // (without -r, LaTeX Workshop's default recipe ignores .latexmkrc)
+    "latex-workshop.latex.tools": [
+        {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+                "-r", "%DIR%/.latexmkrc",
+                "%DOC%"
+            ]
+        }
+    ],
+    // Use only our custom tool above, not the default multi-step recipe
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "latexmk",
+            "tools": ["latexmk"]
+        }
+    ],
+    // Must match where the final PDF lands so that Ctrl+Alt+J (SyncTeX) works.
+    // Build artifacts go to build/ (set in .latexmkrc), but .latexmkrc also
+    // copies the finished PDF back to the root, so we point the viewer here.
+    "latex-workshop.latex.outDir": "%DIR%",
+    "latex-workshop.view.pdf.viewer": "tab"
+}

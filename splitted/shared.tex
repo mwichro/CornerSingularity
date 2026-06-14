@@ -1,0 +1,29 @@
+% Shared information template for DDSpaper
+\usepackage{lipsum}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{amsmath,amssymb,amsthm}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{definition}
+\newtheorem{assumption}{Assumption}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\theoremstyle{plain}
+\ifpdf
+    \DeclareGraphicsExtensions{.eps,.pdf,.png,.jpg}
+\else
+    \DeclareGraphicsExtensions{.eps}
+\fi
+
+\newcommand{\creflastconjunction}{, and~}
+
+\headers{Short title }{Michał Wichrowski}
+
+\title{Proper Title }
+\author{Michał Wichrowski$^0$}
+
+\usepackage{amsopn}
+\DeclareMathOperator{\diag}{diag}

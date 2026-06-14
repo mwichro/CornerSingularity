@@ -1,0 +1,228 @@
+% Load a package only if the class 'acmart' is NOT loaded.
+% Usage: \LoadPackageUnlessAcm[<options>]{<package>}
+\makeatletter
+\newcommand{\LoadPackageUnlessAcm}[2][]{%
+    \@ifclassloaded{acmart}{%
+        % acmart is loaded -> skip the package (informational message)
+        \PackageInfo{preamble}{Skipping package `#2' because acmart class is used}%
+    }{%
+        % acmart not loaded -> load package (with or without options)
+        \if\relax\detokenize{#1}\relax
+            \usepackage{#2}%
+        \else
+            \usepackage[#1]{#2}%
+        \fi
+    }%
+}
+\makeatother
+
+\LoadPackageUnlessAcm{caption}
+\LoadPackageUnlessAcm{subcaption}
+\LoadPackageUnlessAcm{authblk}
+\LoadPackageUnlessAcm{hyperref}
+
+\usepackage{amstext}
+\usepackage{stmaryrd}
+\usepackage{algpseudocode}
+
+\usepackage{units}
+\usepackage{cancel}
+\usepackage{graphicx}
+
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{verbatim}
+\usepackage{booktabs}
+\usepackage{makecell}
+\usepackage{calc}
+\usepackage{textcomp}
+\usepackage{multirow}
+\usepackage{tikz,tikzscale}
+
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepackage{pgfkeys}
+\pgfplotsset{compat=1.18}
+
+\definecolor{deepgreen}{RGB}{0,100,0}
+
+\newif\ifrunscripts
+\runscriptstrue
+\input{scripts.tex}
+
+\pgfplotsset{
+    p2/.style={teal, mark=*},
+    p3/.style={orange, mark=triangle*},
+    p7/.style={blue, mark=square*},
+}
+
+\newcommand{\plotwidth}{0.49\columnwidth}
+\newcommand{\plotheight}{0.4\columnwidth}
+
+\pgfplotscreateplotcyclelist{paper markers}{
+    {teal,    solid, mark=*},
+    {orange,   solid, mark=triangle*},
+    {blue,     solid, mark=square*},
+    {red,      solid, mark=pentagon*},
+    {violet,     solid, mark=otimes*},
+    {brown,    solid, mark=halfcircle*},
+    {black,   solid, mark=diamond*},
+}
+
+\newcommand{\PaperColorA}{teal}
+\newcommand{\PaperColorB}{orange}
+\newcommand{\PaperColorC}{blue}
+
+\colorlet{BarColorOne}{orange!60!white}
+\colorlet{BarColorTwo}{teal!80!white}
+\colorlet{BarColorThree}{red!80!black}
+\colorlet{BarColorFour}{blue!60!white}
+\colorlet{BarColorFive}{brown!70!black}
+
+\pgfplotsset{legend swatch/.style={area legend, draw=none}}
+\newcommand{\RangeFillOpacity}{0.15}
+
+\pgfplotsset{
+    paperplot/.style={
+            width=\plotwidth,
+            height=\plotheight,
+            cycle list name=paper markers,
+            every axis/.append style={font=\small},
+            grid=major,
+            thick
+        }
+}
+
+\pgfplotsset{
+    longplot/.style={
+            width=0.8\columnwidth,
+            height=\plotheight,
+            cycle list name=paper markers,
+            every axis/.append style={font=\small},
+            grid=major,
+            thick
+        }
+}
+
+\usepackage[all]{xy}
+\usepackage{mathtools}
+\usepackage{placeins}
+\usetikzlibrary{calc}
+\usetikzlibrary{shadings}
+\usepgfplotslibrary{fillbetween}
+
+\usepackage[mode=multiuser,status=draft]{fixme}
+\fxsetup{innerlayout=inline}
+\fxsetup{targetlayout=colorcb}
+\fxusetheme{color}
+\FXRegisterAuthor{mw}{envmw}{MW}
+
+\definecolor{apply}{rgb}{0.3,.7,0.}
+\definecolor{applyface}{rgb}{.9,.95,0.}
+\definecolor{invert}{rgb} {0.5,0.,1.}
+\colorlet{invertface}{invert!60!red}
+
+\usepackage[colorinlistoftodos,prependcaption,textsize=small]{todonotes}
+
+\newcommand{\FigureSubst}[1]{ \fbox{
+        \begin{minipage} {0.7\textwidth} #1
+        \end{minipage}    }   }
+
+\def\mesh{\mathbb M}
+\def\cell{K}
+\def\R{\mathbb R}
+\def\ncol{N_{\text{colors}}}
+\def\resth#1{I_{#1}^{\downarrow_{h}}}
+\def\prolh#1{I_{#1}^{\uparrow_{h}}}
+
+\def\prolp#1{I_{#1}^{\Uparrow_{p}}}
+\def\restp#1{I_{#1}^{\Downarrow_{p}}}
+
+\usepackage{colortbl}
+\newcommand{\myrowcolor}{\rowcolor[gray]{0.925}}
+\newcommand{\headercolor}{\rowcolor[gray]{0.825}}
+\usepackage{booktabs}
+\usepackage[font=footnotesize,position=b]{subcaption}
+\usepackage{adjustbox}
+
+\newcommand{\pluseq}{\stackrel{+}{\gets}}
+
+\newcommand{\LUpNew}{local_update}
+\newcommand{\LSolNew}{local_solve}
+
+\newcommand{\residual}{r}
+\newcommand{\res}{\text{res}}
+
+\makeatletter
+\def\pgfplots@getautoplotspec into#1{%
+        \begingroup
+        \let#1=\pgfutil@empty
+        \pgfkeysgetvalue{/pgfplots/cycle multi list/@dim}\pgfplots@cycle@dim
+        %
+        \let\pgfplots@listindex=\pgfplots@numplots
+        %%% Start new code
+        \pgfkeysgetvalue{/pgfplots/cycle list set}\pgfplots@listindex@set
+        \ifx\pgfplots@listindex@set\pgfutil@empty
+        \else
+            \c@pgf@counta=\pgfplots@listindex
+            \c@pgf@countb=\pgfplots@listindex@set
+            \advance\c@pgf@countb by -\c@pgf@counta
+            \globaldefs=1\relax
+            \edef\setshift{%
+                \noexpand\pgfkeys{
+                    /pgfplots/cycle list shift=\the\c@pgf@countb,
+                    /pgfplots/cycle list set=
+                }
+            }%
+            \setshift%
+            \globaldefs=0\relax
+        \fi
+        %%% End new code    
+        \pgfkeysgetvalue{/pgfplots/cycle list shift}\pgfplots@listindex@shift
+        \ifx\pgfplots@listindex@shift\pgfutil@empty
+        \else
+            \c@pgf@counta=\pgfplots@listindex\relax
+            \advance\c@pgf@counta by\pgfplots@listindex@shift\relax
+            \ifnum\c@pgf@counta<0
+                \c@pgf@counta=-\c@pgf@counta
+            \fi
+            \edef\pgfplots@listindex{\the\c@pgf@counta}%
+        \fi
+        \ifnum\pgfplots@cycle@dim>0
+            \c@pgf@counta=\pgfplots@cycle@dim\relax
+            \c@pgf@countb=\pgfplots@listindex\relax
+            \advance\c@pgf@counta by-1
+            \pgfplotsloop{%
+                \ifnum\c@pgf@counta<0
+                    \pgfplotsloopcontinuefalse
+                \else
+                    \pgfplotsloopcontinuetrue
+                \fi
+            }{%
+                \pgfkeysgetvalue{/pgfplots/cycle multi list/@N\the\c@pgf@counta}\pgfplots@cycle@N
+                \pgfplotsmathmodint{\c@pgf@countb}{\pgfplots@cycle@N}%
+                \divide\c@pgf@countb by \pgfplots@cycle@N\relax
+                %
+                \expandafter\pgfplots@getautoplotspec@
+                \csname pgfp@cyclist@/pgfplots/cycle multi list/@list\the\c@pgf@counta @\endcsname
+                {\pgfplots@cycle@N}%
+                {\pgfmathresult}%
+                \t@pgfplots@toka=\expandafter{#1,}%
+                \t@pgfplots@tokb=\expandafter{\pgfplotsretval}%
+                \edef#1{\the\t@pgfplots@toka\the\t@pgfplots@tokb}%
+                \advance\c@pgf@counta by-1
+            }%
+        \else
+            \pgfplotslistsize\autoplotspeclist\to\c@pgf@countd
+
+            \pgfplots@getautoplotspec@{\autoplotspeclist}{\c@pgf@countd}{\pgfplots@listindex}%
+            \let#1=\pgfplotsretval
+        \fi
+        \pgfmath@smuggleone#1%
+        \endgroup
+    }
+
+\pgfplotsset{
+    cycle list set/.initial=
+}
+\makeatother
