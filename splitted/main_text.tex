@@ -3,6 +3,36 @@
 \label{sec:intro}
 \input{splitted/introduction.tex}
 
+\subsection{What *Has* Been Done (The Existing Literature)}
+If you dive into the literature on singularities in finite/hyperelasticity, you will mostly find two major phenomena:
+
+\begin{itemize}
+    \item Crack Tips in Tension (Knowles and Sternberg, 1970s):** This is the most famous work on nonlinear singularities. They
+          looked at a $360^\circ$ corner (a crack) pulled in pure tension. They found that in a neo-Hookean material, the
+          asymptotic displacement field behaves very differently from linear fracture mechanics. However, they only dealt with
+          pure traction-free boundaries and pure tensile opening.
+    \item Cavitation (John Ball, 1982):** Ball proved that under severe hydrostatic tension, hyperelastic equations admit
+          singular weak solutions where a hole spontaneously opens in the middle of a perfectly solid domain (a point singularity
+          where $F \to \infty$).
+    \item Surface Creasing (Biot 1963, Hong et al. 2009):** Biot found that if you compress a flat half-space of a neo-Hookean
+          material, its surface becomes unstable at a critical stretch ($\lambda \approx 0.54$). Decades later, researchers
+          realized this instability is a *crease* (a point singularity forming on a flat surface).
+\end{itemize}
+
+\subsection{The Gap:}
+Almost all the existing nonlinear singularity literature avoids the exact setup you described: **a geometric corner
+(e.g., $90^\circ$) with mixed boundary conditions (Dirichlet meets Neumann) under compression.**
+
+\begin{itemize}
+    \item Linear theory (Kondratiev) handles the mixed BC corner, but ignores the large-deformation kinematics.
+    \item Nonlinear theory (Knowles/Sternberg) handles large deformations, but avoids the Dirichlet-Neumann condition and avoids
+          compression.
+    \item Instability theory handles compression, but usually on flat domains or purely symmetric geometries, ignoring the
+          existing geometric corner singularity.
+\end{itemize}
+
+\textbf{The Gap}: How does an already-existing stress concentration at a geometric Dirichlet-Neumann corner couple with a nonlinear loss of ellipticity (buckling/creasing)? How do we bound the operators there? That is fundamentally an open question.
+
 \section{Problem formulation}
 \label{sec:formulation}
 
