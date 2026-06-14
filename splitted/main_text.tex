@@ -6,7 +6,108 @@
 \section{Problem formulation}
 \label{sec:formulation}
 
+\subsection{Finite-strain elastostatics as energy minimisation}
+
+We consider a hyperelastic body occupying a reference domain $\Omega \subset \mathbb{R}^2$ with boundary
+$\partial\Omega = \overline{\Gamma_D} \cup \overline{\Gamma_N}$, $\Gamma_D \cap \Gamma_N = \emptyset$. The deformation
+of the body is described by the displacement field $u : \Omega \to \mathbb{R}^2$, the deformation map $y(x) = x +
+    u(x)$, and the associated deformation gradient
+\begin{equation}
+    F = \nabla y = I + \nabla u, \qquad J = \det F > 0,
+\end{equation}
+where $\nabla$ denotes the gradient with respect to the reference configuration. The mechanical response is encoded
+in a strain energy density $\Psi(F)$, and the equilibrium configuration is the minimiser of the total potential
+energy
+\begin{equation}
+    \label{eq:totalenergy}
+    \mathcal{E}(u) = \int_\Omega \Psi(F)\,dV - \int_\Omega f_0 \cdot u \,dV - \int_{\Gamma_N} t_0 \cdot u \,dS,
+\end{equation}
+over the space of admissible displacements $U = \{ u \in H^1(\Omega;\mathbb{R}^2) : u = g \text{ on } \Gamma_D \}$,
+where $f_0$ is a body force, $t_0$ a prescribed traction on the Neumann boundary, and $g$ the prescribed boundary
+displacement. We seek $u \in U$ such that $\mathcal{E}(u) \le \mathcal{E}(v)$ for all admissible $v$.
+
+\subsection{Stationarity, stress, and tangent modulus}
+
+A minimiser satisfies the stationarity condition $D_{\delta u}\mathcal{E}(u) = 0$ for all admissible variations $\delta
+    u$ (vanishing on $\Gamma_D$), which is the weak form of equilibrium
+\begin{equation}
+    \label{eq:weakform}
+    \int_\Omega P(F) : \nabla \delta u \,dV
+    = \int_\Omega f_0 \cdot \delta u \,dV + \int_{\Gamma_N} t_0 \cdot \delta u \,dS,
+\end{equation}
+where the first Piola--Kirchhoff stress is the first derivative of the energy with respect to the deformation
+gradient,
+\begin{equation}
+    P(F) = \frac{\partial \Psi}{\partial F}.
+\end{equation}
+The natural boundary condition associated with $\Gamma_N$ is $P N = t_0$, with $N$ the reference outward unit
+normal. Because \eqref{eq:weakform} is nonlinear in $u$, it is solved iteratively by Newton's method. Linearising
+the residual about a current iterate $\bar u$ in a direction $\Delta u$ introduces the fourth-order tangent
+(elasticity) modulus
+\begin{equation}
+    \label{eq:tangentdef}
+    L = \frac{\partial P}{\partial F} = \frac{\partial^2 \Psi}{\partial F \otimes \partial F},
+\end{equation}
+so that each Newton step requires solving the linear problem
+\begin{equation}
+    \label{eq:newtonstep}
+    \int_\Omega \nabla \delta u : L(\bar F) : \nabla \Delta u \,dV = -\,R(\bar u; \delta u),
+\end{equation}
+with $R(\bar u; \delta u)$ the residual of \eqref{eq:weakform} evaluated at $\bar u$. The well-posedness and
+conditioning of \eqref{eq:newtonstep}---and hence the convergence of the whole nonlinear solver---are governed by the
+coercivity and boundedness of the bilinear form induced by $L(\bar F)$. The central object of this work is therefore
+the behaviour of $L$ as a function of the local deformation state.
+
+\subsection{The neo-Hookean material}
+
+Throughout we use the compressible neo-Hookean strain energy density adopted in the cut-finite-element study \cite{cutfemAD}
+that motivates this analysis,
+\begin{equation}
+    \label{eq:neohooke}
+    \Psi(F) = \frac{\mu}{2}\left( \operatorname{tr}(F^T F) - 2 \right) + f(J),
+\end{equation}
+where $\mu > 0$ is the shear modulus and $f(J)$ is a strictly convex volumetric penalty with $f(1) = 0$,
+$f'(1) = -\mu$, and $f(J) \to \infty$ as $J \to 0^+$ (for instance $f(J) = -\mu \log J + \tfrac{\lambda}{2}\log^2 J$,
+or $f(J) = \tfrac{\kappa}{2}(J-1)^2$). The corresponding stress and tangent are
+\begin{align}
+    P(F)     & = \mu F + f'(J)\,J\,F^{-T},   \\
+    L_{iJkL} & = \mu\,\delta_{ik}\delta_{JL}
+    + \left( f''(J)J^2 + f'(J)J \right) F^{-T}_{iL} F^{-T}_{kJ}
+    - f'(J)J\, F^{-T}_{iJ} F^{-T}_{kL}.
+\end{align}
+The first term $\mu\,\delta_{ik}\delta_{JL}$ is constant; the entire nonlinear part is controlled by $J$ and the
+\emph{inverse} deformation gradient $F^{-1}$, yielding the structural bound
+\begin{equation}
+    \label{eq:Lbound}
+    \| L(F) \| \le \mu + C(J)\,\| F^{-1} \|^2,
+\end{equation}
+where $\|F^{-1}\| = \lambda_{\min}^{-1}$ is set by the smallest principal stretch. Consequently $L$ can only become
+unbounded through volumetric collapse, $\lambda_{\min} \to 0$ (equivalently $J \to 0$); a purely tensile blow-up of
+$F$ with $F^{-1}$ bounded leaves $L$ finite. This dichotomy is the analytical backbone of the present paper.
+
+\subsection{The mixed-corner singularity}
+
+The configuration of interest is a right-angle corner at the origin where the two boundary-condition types meet: a
+Dirichlet segment ($\Gamma_D$, prescribed displacement) abutting a traction-free Neumann segment ($\Gamma_N$). Such
+junctions arise, for example, at the lower corners of the loaded-pole benchmark of \cite{cutfemAD}, where the numerically
+observed convergence rate is capped well below the optimal order. Classical Kondratiev theory for the linearised
+problem predicts a corner singularity
+\begin{equation}
+    u(r,\theta) \sim K\, r^{\alpha}\,\Phi(\theta), \qquad \alpha \in (0,1),
+\end{equation}
+in polar coordinates $(r,\theta)$ centred at the corner, with $K$ a generalised stress-intensity factor and
+$\alpha$ the (geometry- and Poisson-ratio-dependent) singularity exponent. The deformation gradient then scales as
+$F = I + \mathcal{O}(K r^{\alpha-1})$, so $\|F\| \to \infty$ as $r \to 0$.
+
+The question this raises---and which the remainder of the paper addresses---is how this kinematic singularity
+propagates into the nonlinear tangent operator \eqref{eq:tangentdef}. In view of \eqref{eq:Lbound}, the answer hinges
+on the \emph{sign} of the loading (the sign of $K$): a tensile corner keeps $F^{-1}$ bounded and leaves $L$ well
+behaved, whereas a compressive corner drives $\lambda_{\min} \to 0$, blows up $L$, and triggers a loss of strong
+ellipticity. The following sections analyse these two scenarios in turn (Section~\ref{sec:asymptotics}) and then show
+how a small imperfection regularises the compressive case through a structural bifurcation (Section~\ref{sec:iba}).
+
 \section{Asymptotic Behavior of the Neo-Hookean Operator at a Mixed Corner}
+\label{sec:asymptotics}
 
 \subsection{Problem Setup and Linearized Kinematics}
 
@@ -117,6 +218,7 @@ capture this analytically, we must introduce an imperfect perturbation (noise) t
 the singularity.
 
 \section{Imperfect Bifurcation Analysis and Asymptotic Bounds}
+\label{sec:iba}
 
 \subsection{The Perturbed Weak Form}
 
