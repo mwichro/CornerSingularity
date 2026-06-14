@@ -289,9 +289,21 @@ complementary, compressive case in which \eqref{eq:NC} fails.
 \subsection{Explicit volumetric growth functions}
 \label{sub:growth}
 
-We now evaluate $\Theta$ in \eqref{eq:Thetagen} for the two penalties \eqref{eq:fchoices}. This is the step that makes
-the abstract bound \eqref{eq:Hessbound} concrete and, as it turns out, reveals that ``tension is benign'' is a
-model-dependent statement.
+The bound \eqref{eq:Hessbound} exposes \emph{two independent channels} through which the tangent can diverge, and they
+are kinematically decoupled:
+\begin{equation}
+    \label{eq:twochannels}
+    \|\mathbb{L}(\bm{F})\| \le \mu_e
+    + \underbrace{\Theta(\det\bm{F})}_{\substack{\text{dilation channel}\\ J\to\infty}}\;\cdot\;
+      \underbrace{\|\bm{F}^{-1}\|^{2}}_{\substack{\text{inverse channel}\\ \lambda_{\min}\to 0}} .
+\end{equation}
+The \emph{inverse channel} is the one usually blamed for trouble: it requires $\lambda_{\min}\to0$, i.e. compression to
+zero volume, and is the subject of Scenario~B. The \emph{dilation channel}, $\Theta(\det\bm{F})\to\infty$ as
+$J\to\infty$, is activated by \emph{expansion} and is precisely what a tensile corner switches on, since
+$\lambda_{\max}\sim r^{\alpha-1}\to\infty$ forces $J\to\infty$ even with $\lambda_{\min}$ bounded below by (NC). Whether
+this matters is therefore not a property of the corner or of the sign of the loading, but of the \emph{growth rate of
+$\Theta$}---a property of the volumetric penalty $f$ alone. We now evaluate it for the two penalties
+\eqref{eq:fchoices}; the contrast shows that ``tension is benign'' is a model-dependent statement.
 
 \paragraph{Logarithmic penalty.}
 For $f_{\log}(J)=-\mu_e\log J+\lambda_e\log^2 J$,
@@ -331,8 +343,11 @@ so
 The volumetric stiffening grows \emph{quadratically} in $J$.
 
 \paragraph{Consequence at the corner.}
-Combining \eqref{eq:Hessbound} with (NC) ($\|\bm{F}^{-1}\|^2\le c^{-2}$) and the tensile kinematics
-$J=\det\bm{F}\sim |K|\,r^{\alpha-1}$ from \eqref{eq:Fblowup}, the tangent norm near the corner obeys
+We combine \eqref{eq:Hessbound} with (NC) ($\|\bm{F}^{-1}\|^2\le c^{-2}$) and the tensile kinematics. In the
+non-compressive regime exactly one stretch diverges: $\lambda_{\max}\sim|K|\,r^{\alpha-1}$ while $\lambda_{\min}$ stays
+bounded below, so $J=\lambda_{\min}\lambda_{\max}\sim r^{\alpha-1}$. (If instead $\Grad\bm{u}$ had two diverging
+eigenvalues, the subdeterminant would give $J\sim r^{2(\alpha-1)}$; we work in the one-large-stretch regime
+characteristic of a Dirichlet--Neumann opening, where $J\sim r^{\alpha-1}$.) The tangent norm near the corner then obeys
 \begin{equation}
     \label{eq:Lcornergrowth}
     \|\mathbb{L}(\bm{x})\| \le \mu_e + c^{-2}\,\Theta\!\big(\det\bm{F}(\bm{x})\big) \sim
@@ -341,11 +356,32 @@ $J=\det\bm{F}\sim |K|\,r^{\alpha-1}$ from \eqref{eq:Fblowup}, the tangent norm n
         \mathcal{O}\!\big(r^{-2(1-\alpha)}\big),     & f=f_{\mathrm{quad}}.
     \end{cases}
 \end{equation}
-Thus the logarithmic penalty keeps the tangent bounded up to a logarithm, while the quadratic penalty produces a
-genuine algebraic blow-up of the tangent \emph{even in pure tension}---of the same order $r^{-2(1-\alpha)}$ that the
-compressive case will produce through $\|\bm{F}^{-1}\|^2$. The often-repeated statement that ``tension is harmless for
-neo-Hookean'' is therefore an artefact of the logarithmic volumetric model; it is false for the quadratic model. We
-make the benign case precise in Theorem~\ref{thm:A} and flag the algebraic case in Remark~\ref{rem:quad}.
+Thus the logarithmic penalty keeps the tangent bounded up to a logarithm, whereas the quadratic penalty produces a
+genuine \emph{algebraic} blow-up of the tangent \emph{even in pure tension}. This is the dilation channel of
+\eqref{eq:twochannels} acting alone, with the inverse channel inert ($\|\bm{F}^{-1}\|$ bounded); it is algebraically
+singular of a severity comparable to---though mechanistically distinct from---the compressive blow-up of Scenario~B,
+which instead runs through $\|\bm{F}^{-1}\|^2$. The often-repeated statement that ``tension is harmless for
+neo-Hookean'' is therefore an artefact of the logarithmic volumetric model and is false for the quadratic one.
+
+\paragraph{Physical reading: the large-dilation response.}
+The dichotomy is, at bottom, a statement about how the bulk energy behaves under unbounded \emph{expansion}, the
+loading a tensile corner imposes:
+\begin{center}
+    \begin{tabular}{lll}
+        \toprule
+        volumetric model & energy as $J\to\infty$ & tangent $\Theta(J)$ \\
+        \midrule
+        $\lambda_e\log^2 J$        & $\sim \log^2 J$ \ (soft)  & $\mathcal{O}(\log J)$ \\
+        $\tfrac{\kappa}{2}(J-1)^2$ & $\sim J^2$ \ (stiff)      & $\mathcal{O}(J^2)$    \\
+        \bottomrule
+    \end{tabular}
+\end{center}
+A penalty that is polynomial in $J$ makes the material resist further dilation ever more stiffly, and the linearised
+modulus faithfully reports that stiffness as a blow-up; the logarithmic penalty is gentle about expansion and does not.
+Both penalties are designed to diverge correctly as $J\to0$ (resisting collapse, the inverse channel); their
+large-$J$ behaviour, which the dilation channel probes, was never physically constrained, and that latitude is exactly
+where they part. The exact cancellation \eqref{eq:logcombo} is the analytic signature of this softness. We make the
+benign case precise in Theorem~\ref{thm:A} and flag the algebraic case in Remark~\ref{rem:quad}.
 
 \subsection{Scenario A: the tensile (non-compressive) singularity}
 \label{sub:scenarioA}
@@ -494,11 +530,18 @@ write the Newton-step bilinear form as
     \label{rem:quad}
     For $f_{\mathrm{quad}}$, Assumption~\ref{ass:mild} fails: by \eqref{eq:Thetaquad} and \eqref{eq:Lcornergrowth} the
     tangent grows algebraically, $\|\mathbb{L}\|=\mathcal{O}(r^{-2(1-\alpha)})$, \emph{even in pure tension}. The
-    coefficients of \eqref{eq:formA} are then genuinely singular of the same order as in the compressive Scenario~B, the
-    boundedness step above fails for $\beta_\star$, and the admissible weight interval---hence the effective corner
+    coefficients of \eqref{eq:formA} are then genuinely singular, of severity comparable to the compressive Scenario~B,
+    the boundedness step above fails for $\beta_\star$, and the admissible weight interval---hence the effective corner
     exponents seen by the nonlinear operator---shifts relative to linear elasticity. A sharp analysis of this case (the
     correct weight, and whether coercivity survives) is governed by the volumetric blow-up rather than by the
     deviatoric singularity and is left open here.
+
+    We emphasise that this serves as a \emph{cautionary comparator} rather than a model we advocate: as written,
+    $f_{\mathrm{quad}}'(1)=0\ne-\mu_e$, so $\tfrac{\kappa}{2}(J-1)^2$ does not combine with the deviatoric term
+    $\tfrac{\mu_e}{2}(\tr(\bm{F}^T\bm{F})-2)$ to leave the reference configuration stress-free, and in practice it is used
+    together with an isochoric (deviatoric/volumetric) split of $\bm{F}$. The point is that a standard-looking
+    polynomial penalty already forfeits the benign tensile behaviour enjoyed by the logarithmic model
+    \eqref{eq:fchoices} actually used in \cite{cutfemAD}.
     %TODO: decide whether to develop the quadratic-penalty weighted analysis or cite it as motivation for preferring the
     %      logarithmic volumetric model in computations.
 \end{remark}
@@ -524,12 +567,35 @@ threshold where the local contraction annihilates the material volume:
     \det \bm{F} \to 0 \implies J \to 0, \qquad \lambda_{\min} \to 0 .
 \end{equation}
 
-\paragraph{Operator blow-up.}
-Because $\|\bm{F}^{-1}\| = \lambda_{\min}^{-1} \to \infty$, the inverse-channel term in \eqref{eq:Hessbound} dominates and
-the tangent modulus scales as
+\paragraph{Operator blow-up (and its model dependence).}
+Here it is the \emph{inverse channel} of \eqref{eq:twochannels} that fires: $\|\bm{F}^{-1}\| = \lambda_{\min}^{-1} \to
+\infty$. The dilation channel $\Theta(J)$ is now probed at $J\to0^+$ rather than $J\to\infty$, and---exactly as in
+tension, but with the roles reversed---its behaviour discriminates between the two penalties. Writing
+$J\sim\lambda_{\min}$ near the corner (one large stretch, cf. \S\ref{sub:growth}),
 \begin{equation}
-    \| \mathbb{L}(\bm{x}) \| \sim \mathcal{O}(\|\bm{F}^{-1}\|^2) \sim \mathcal{O}(\lambda_{\min}^{-2}) \to \infty .
+    \label{eq:Thetacompress}
+    \Theta_{\log}(J) \sim 2\lambda_e\,\big|\log J\big| \to \infty,
+    \qquad
+    \Theta_{\mathrm{quad}}(J) \sim 2\kappa J \to 0
+    \qquad (J\to 0^+),
 \end{equation}
+so that the tangent norm $\|\mathbb{L}\|\le \mu_e + \Theta(J)\|\bm{F}^{-1}\|^2$ behaves as
+\begin{equation}
+    \label{eq:Lcompress}
+    \| \mathbb{L}(\bm{x}) \| \sim
+    \begin{cases}
+        \mathcal{O}\!\big(\lambda_{\min}^{-2}\,\log\tfrac1{\lambda_{\min}}\big), & f=f_{\log}, \\[4pt]
+        \mathcal{O}\!\big(\lambda_{\min}^{-1}\big),                              & f=f_{\mathrm{quad}}.
+    \end{cases}
+\end{equation}
+Thus the logarithmic penalty---benign under tension---produces here the \emph{stronger} blow-up, $\lambda_{\min}^{-2}$
+\emph{amplified} by a logarithm, whereas the quadratic penalty gives the milder rate $\lambda_{\min}^{-1}$. This
+reversal is not a redemption of the quadratic model: $f_{\mathrm{quad}}(J)\to\tfrac{\kappa}{2}<\infty$ as $J\to0^+$, so
+it provides \emph{no energy barrier against volume collapse} and violates Assumption~\ref{ass:reg}; the milder tangent
+growth merely reflects this missing barrier (the material is free to interpenetrate at finite energy), which is a worse
+pathology, not a better one. The logarithmic penalty's stronger blow-up is, conversely, the analytic price of a genuine
+barrier $f_{\log}(J)\to+\infty$---and it is precisely that barrier which forces, and gives physical meaning to, the
+bifurcation rescue of Section~\ref{sec:iba}.
 
 \paragraph{Loss of strong ellipticity.}
 Before $J$ even reaches $0$, the extreme compression causes the acoustic tensor $Q_{ik}(\bm{N}) = L_{iJkL} N_J N_L$ to
@@ -543,10 +609,12 @@ and Assumption~\ref{ass:ellip} fails. The PDE locally ceases to be elliptic.
 \paragraph{Conclusion for Scenario B.}
 The assumption that the deformation smoothly follows the fundamental path into the corner leads to a mathematical
 breakdown: $\|\mathbb{L}\| \to \infty$, the local operator loses coercivity, the Newton step ceases to be well posed in
-the standard spaces, and standard Newton--Raphson solvers fail. This unphysical infinite accumulation of energy
-($f(J) \to \infty$) signals that the smooth fundamental path is not the physical solution. In reality, the loss of
-ellipticity dictates a local geometric bifurcation. To capture this analytically we introduce an imperfect perturbation
-(noise) that regularises the bifurcation and bounds the singularity.
+the standard spaces, and standard Newton--Raphson solvers fail. For a barrier penalty such as $f_{\log}$ this is
+accompanied by an unphysical infinite accumulation of energy ($f(J)\to\infty$ as $J\to0$), which signals that the smooth
+fundamental path is not the physical solution. In reality, the loss of ellipticity dictates a local geometric
+bifurcation. To capture this analytically we introduce an imperfect perturbation (noise) that regularises the
+bifurcation and bounds the singularity; we work from here on with the barrier model $f_{\log}$, for which the collapse
+is genuinely resisted.
 
 \section{Imperfect bifurcation analysis and asymptotic bounds}
 \label{sec:iba}
@@ -637,14 +705,18 @@ By the structural bound \eqref{eq:Lbound},
 \begin{equation}
     \| \mathbb{L}(\bm{F}) \| \leq \mu_e + \Theta(J)\, \|\bm{F}^{-1}\|^2 .
 \end{equation}
-For the logarithmic penalty $\Theta(J)=\mathcal{O}(\log\tfrac1J)$ remains subordinate near $J=0$, so the dominant
-singularity is driven by $\|\bm{F}^{-1}\|^2$; substituting the bifurcation bound,
+For the barrier penalty $f_{\log}$, $\Theta(J)=\mathcal{O}(\log\tfrac1J)$ as $J\to0$ (cf. \eqref{eq:Thetacompress}) is
+subordinate to $\|\bm{F}^{-1}\|^2$; substituting $\lambda_{\min}\sim\epsilon^{2/3}$ and $J\sim\lambda_{\min}$,
 \begin{equation}
-    \max_{\bm{x} \in \Omega} \| \mathbb{L}(\bm{x}, \epsilon) \| \leq C\, \|\bm{F}^{-1}\|^2 \sim
-    \mathcal{O}\!\big((\epsilon^{-2/3})^2\big) = \mathcal{O}(\epsilon^{-4/3}) .
+    \max_{\bm{x} \in \Omega} \| \mathbb{L}(\bm{x}, \epsilon) \| \leq
+    C\,\Theta(J)\,\|\bm{F}^{-1}\|^2 \sim
+    \mathcal{O}\!\big(\epsilon^{-4/3}\,\log\tfrac1\epsilon\big) .
 \end{equation}
 The imperfection thus converts the unbounded tangent of the perfect compressive path into a finite quantity that
-diverges only algebraically as the noise is removed, at the rate $\epsilon^{-4/3}$.
+diverges only algebraically (up to a logarithm) as the noise is removed, at the rate $\epsilon^{-4/3}\log\tfrac1\epsilon$.
+The logarithmic factor is the same amplification identified in \eqref{eq:Lcompress}; it is the compressive counterpart
+of the benign $\log\tfrac1r$ growth in tension, and the analytic trace of the energy barrier that makes this whole
+bifurcation analysis well posed.
 
 \section{Conclusions}
 \label{sec:conclusions}
