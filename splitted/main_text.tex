@@ -1,10 +1,231 @@
-%!TEX root = ../main.tex
+%!TEX root = ../main.tex 
 \section{Introduction}
 \label{sec:intro}
 \input{splitted/introduction.tex}
 
-\section{First section}
-\label{sec:first_section}
+\section{Problem formulation}
+\label{sec:formulation}
+
+\section{Asymptotic Behavior of the Neo-Hookean Operator at a Mixed Corner}
+
+\subsection{Problem Setup and Linearized Kinematics}
+
+Let the reference domain $\Omega \subset \mathbb{R}^2$ feature a right-angle corner at the origin $(0,0)$ described by
+polar coordinates $(r, \theta)$ for $r \in [0, R]$ and $\theta \in [0, \pi/2]$.
+\begin{itemize}
+    \item \textbf{Dirichlet Boundary ($\Gamma_D$):} $\theta = 0$, where deformation is prescribed: $y(r, 0) = g(r)$.
+    \item \textbf{Neumann Boundary ($\Gamma_N$):} $\theta = \pi/2$, which is traction-free: $P N = 0$.
+\end{itemize}
+
+Let $u(x)$ be the displacement, and $F = I + \nabla u$ the deformation gradient. From classical Kondratiev theory for
+linear elasticity, the leading-order singular displacement field at this mixed corner behaves as:
+\begin{equation}
+    u(r, \theta) \sim K r^{\alpha} \Phi(\theta)
+\end{equation}
+where $K$ is the generalized stress intensity factor (dependent on far-field loading), $\Phi(\theta)$ is a smooth angular
+function, and $\alpha \in (0,1)$ is the singularity exponent (typically $\alpha \approx 0.68$ for incompressible
+materials).
+
+Consequently, the deformation gradient scales as:
+\begin{equation}
+    F = I + \mathcal{O}(K r^{\alpha-1})
+\end{equation}
+As $r \to 0$, $\|F\| \to \infty$. The nature of this singularity---and the resulting behavior of the nonlinear tangent
+modulus $L = \frac{\partial^2 \Psi}{\partial F \partial F}$---depends entirely on the sign of $K$ (the loading
+direction).
+
+We define a standard compressible neo-Hookean energy density:
+\begin{equation}
+    \Psi(F) = \frac{\mu}{2} \left( \operatorname{tr}(F^T F) - 2 \right) + f(J)
+\end{equation}
+where $J = \det(F)$ and $f(J)$ is a strictly convex volumetric penalty function satisfying $f(1)=0$, $f'(1)=-\mu$, and
+$f(J) \to \infty$ as $J \to 0$.
+
+The fourth-order tangent modulus $L$ is exactly:
+\begin{equation}
+    L_{iJkL} = \mu \delta_{ik} \delta_{JL} + \mathcal{B}_{iJkL}(F^{-1}, J)
+\end{equation}
+where $\mathcal{B}$ contains all nonlinear geometric stiffness terms, bounded by $\| \mathcal{B} \| \leq C(J) \|F^{-1}\|^2$.
+
+\subsection{Scenario A: The Tensile (Non-Compressive) Singularity}
+
+Assume the far-field loading pulls the material away from the corner ($K > 0$ such that the material undergoes radial
+tension).
+
+\paragraph{Kinematic consequence.}
+The maximum principal stretch $\lambda_{\max}$ aligns roughly radially and blows up as $r^{\alpha-1}$. However, because
+the material is pulled outward, the domain locally expands or preserves volume (by drawing material in from the Neumann
+boundary). Therefore, the determinant $J$ remains bounded strictly away from zero ($J \geq J_{\min} > 0$), and the
+transverse stretch $\lambda_{\min}$ remains finite and non-zero.
+
+\paragraph{Operator behavior.}
+Because $\lambda_{\min} > 0$, the inverse deformation gradient is bounded: $\|F^{-1}\| = \lambda_{\min}^{-1} \leq M$.
+Looking at the tangent modulus $L$:
+\begin{equation}
+    \| L(x) \| \leq \mu + C(J) \|F^{-1}\|^2 < \infty \quad \text{as } r \to 0
+\end{equation}
+
+\paragraph{Conclusion for Scenario A.}
+Although there is a severe \emph{stress singularity} (the First Piola-Kirchhoff stress $P \sim \mu F \to \infty$ as $r
+\to 0$), \textbf{there is no singularity in the tangent operator.}
+\begin{itemize}
+    \item $L$ remains strongly elliptic (the Legendre--Hadamard condition $L_{iJkL}m_i M_J m_k M_L \geq c > 0$ holds).
+    \item The standard weak form of the linearized Newton step $\int_\Omega L : \nabla \delta u : \nabla \Delta u \, d\Omega$
+          remains uniformly coercive.
+    \item The nonlinear neo-Hookean problem behaves exactly parallel to the linear problem. The singularity is safely handled by
+          standard weighted Sobolev spaces ($V_\beta^{1,2}$), and no structural instability occurs.
+\end{itemize}
+
+\subsection{Scenario B: The Compressive Singularity (The Pathological Case)}
+
+Now, assume the far-field loading pushes the material \emph{into} the corner ($K < 0$, radial compression).
+
+\paragraph{Kinematic consequence.}
+The naive linear prediction suggests $\nabla u$ has a negative dominant eigenvalue scaling as $-|K| r^{\alpha-1}$.
+Because $F = I + \nabla u$, as we approach the corner ($r \to 0$) or as we increase the pseudo-time load factor $t$,
+there exists a critical threshold where the local contraction completely annihilates the material volume:
+\begin{equation}
+    \det(F) \to 0 \implies J \to 0
+\end{equation}
+When $J \to 0$, the minimum principal stretch $\lambda_{\min} \to 0$.
+
+\paragraph{Operator blow-up.}
+Because $\|F^{-1}\| = \lambda_{\min}^{-1} \to \infty$, the nonlinear operator $\mathcal{B}$ dominates. The tangent
+modulus scales asymptotically as:
+\begin{equation}
+    \| L(x) \| \sim \mathcal{O}(J^{-2}) \sim \mathcal{O}(\|F^{-1}\|^2) \to \infty
+\end{equation}
+
+\paragraph{Loss of strong ellipticity.}
+Before $J$ even reaches $0$, the extreme compression causes the acoustic tensor $Q_{ik}(N) = L_{iJkL} N_J N_L$ to lose
+positive-definiteness. Let $N$ be the normal vector aligned with the direction of maximum compression. The acoustic
+tensor associated with this direction will develop a zero, and then negative, eigenvalue:
+\begin{equation}
+    \min_{m, N} \left( L_{iJkL} m_i N_J m_k N_L \right) \leq 0
+\end{equation}
+The PDE locally ceases to be elliptic and becomes hyperbolic.
+
+\paragraph{Conclusion for Scenario B.}
+The naive assumption that the deformation smoothly follows the fundamental thermodynamic path into the corner leads to
+a complete mathematical breakdown. The tangent modulus $L$ becomes infinitely singular ($\|L\| \to \infty$), and the
+local operator loses coercivity, meaning standard Newton--Raphson solvers will inevitably fail, and a weak solution for
+the linearized step ceases to exist in the standard functional spaces.
+
+This unphysical infinite accumulation of energy ($f(J) \to \infty$) and operator blow-up implies that the assumption of
+a smooth deformation path is flawed. In reality, the loss of ellipticity dictates a local geometric bifurcation. To
+capture this analytically, we must introduce an imperfect perturbation (noise) to regularize the bifurcation and bound
+the singularity.
+
+\section{Imperfect Bifurcation Analysis and Asymptotic Bounds}
+
+\subsection{The Perturbed Weak Form}
+
+We introduce a pseudo-time load parameter $t \in [0, 1]$ which monotonically scales the compressive Dirichlet boundary
+conditions. To prevent the unphysical perfect fundamental path ($J \to 0$), we introduce a small, fixed volumetric
+perturbation (noise) $\epsilon f(x)$, where $\|f\|_{L^2} = 1$ and $\epsilon \ll 1$.
+
+The nonlinear equilibrium equation in weak form is $G(u, t, \epsilon) = 0$, defined as:
+\begin{equation}
+    \langle G(u, t, \epsilon), v \rangle = \int_{\Omega} P(F) : \nabla v \, d\Omega - \epsilon \int_{\Omega} f \cdot v \, d\Omega = 0 \quad \forall v \in V
+\end{equation}
+where $P(F) = \frac{\partial \Psi}{\partial F}$ is the First Piola-Kirchhoff stress, and $V$ is the appropriate space
+of kinematically admissible test functions.
+
+\subsection{The Critical Point (Perfect System, $\epsilon = 0$)}
+
+Let $u_0(t)$ be the fundamental path of pure compression (the unphysical path where $J \to 0$ as $t \to 1$). At some
+critical load $t_c < 1$, the tangent modulus $L(F_0)$ evaluated on the fundamental path loses positive definiteness.
+The linearized operator $\mathcal{L}_c := \partial_u G(u_0(t_c), t_c, 0)$ develops a zero eigenvalue.
+
+Let $\phi \in V$ be the normalized critical eigenmode ($\|\phi\|_V = 1$) associated with this instability (representing
+a localized rotation/buckling near the corner). It satisfies:
+\begin{equation}
+    \int_{\Omega} \nabla \phi : L_c : \nabla v \, d\Omega = 0 \quad \forall v \in V
+\end{equation}
+
+\subsection{Lyapunov--Schmidt Reduction (The Normal Form)}
+
+To analyze the perturbed system ($\epsilon > 0$) near $t_c$, we decompose the displacement field into the fundamental
+path, the buckling amplitude $w(t, \epsilon)$ along the eigenmode $\phi$, and a higher-order orthogonal remainder $v$:
+\begin{equation}
+    u(t, \epsilon) = u_0(t) + w \phi + v
+\end{equation}
+By projecting the weak form onto the eigenmode $\phi$ and applying a standard Taylor expansion of the energy functional
+up to the fourth order in $w$, the infinite-dimensional PDE reduces to a scalar algebraic equation for the amplitude
+$w$ (the imperfect bifurcation equation):
+\begin{equation}
+    a (t_c - t) w + b w^3 = \epsilon \eta
+\end{equation}
+where:
+\begin{itemize}
+    \item $a = \frac{1}{2} \frac{d}{dt} \langle \phi, \partial^2_u G(u_0(t_c)) \phi \rangle$ is the eigenvalue crossing velocity.
+    \item $b = \frac{1}{6} \langle \phi, \partial^3_u G(u_0(t_c)) [\phi, \phi, \phi] \rangle$ governs the post-buckling stiffness (assumed $b > 0$ for a stable supercritical bifurcation).
+    \item $\eta = \int_{\Omega} f \cdot \phi \, d\Omega$ is the projection of the noise onto the buckling mode.
+\end{itemize}
+
+\subsection{Asymptotic Estimate of the Bifurcation Amplitude}
+
+We are interested in the maximum deformation amplitude, which occurs at or near the critical time $t = t_c$. Evaluated
+exactly at $t_c$, the linear term vanishes, leaving:
+\begin{equation}
+    b w^3 \approx \epsilon \eta
+\end{equation}
+Thus, the amplitude of the structural instability scales asymptotically with the perturbation:
+\begin{equation}
+    w(\epsilon) \sim \left( \frac{\eta}{b} \right)^{1/3} \epsilon^{1/3} \quad \text{as } \epsilon \to 0
+\end{equation}
+
+\begin{remark}
+    Even if the material softening dictates an asymmetric/transcritical bifurcation yielding $w^2 \sim \epsilon$, the
+    logic below remains identical with a modified exponent. We proceed with the standard pitchfork $\epsilon^{1/3}$
+    scaling.
+\end{remark}
+
+\subsection{Kinematic Relief Mechanism: Bounding $J$ and $\|F^{-1}\|$}
+
+The core physical mechanism is that the buckling mode $\phi$ introduces \emph{rotation and shear}, which geometrically
+relieves the pure volumetric compression.
+
+At the corner, the total deformation gradient is $F = F_0(t_c) + w \nabla \phi + \mathcal{O}(w^2)$.
+\begin{itemize}
+    \item $F_0(t_c)$ is a purely compressive state with a minimum principal stretch $\lambda_{c}$, which is small but strictly non-zero ($t_c$ occurs \emph{before} $J \to 0$).
+    \item The buckling gradient $\nabla \phi$ represents a symmetry-breaking rotation.
+\end{itemize}
+
+Because the instability trades pure compression for bending/rotation, the volumetric determinant $J = \det(F)$ becomes
+bounded away from zero by the amplitude of the buckling mode. To leading order, rotations modify the stretch
+quadratically. Therefore, the minimum volume ratio is bounded below by:
+\begin{equation}
+    J_{\min}(\epsilon) \geq C_1 \lambda_c + C_2 w^2
+\end{equation}
+where $C_1, C_2 > 0$ are geometric constants. As $\epsilon \to 0$ (and assuming $\lambda_c$ approaches some
+infinitesimal limit near the theoretical singularity), the dominant bound is provided by the buckling amplitude:
+\begin{equation}
+    J_{\min}(\epsilon) \sim \mathcal{O}(w^2) \sim \mathcal{O}(\epsilon^{2/3})
+\end{equation}
+
+Since $J = \det(F) = \lambda_1 \lambda_2$ (in 2D), and the transverse stretch is largely unaffected or bounded, the
+minimum principal stretch scales as $\lambda_{\min} \sim \mathcal{O}(\epsilon^{2/3})$.
+
+Consequently, the norm of the inverse deformation gradient is strictly bounded by the noise:
+\begin{equation}
+    \| F^{-1} \| = \frac{1}{\lambda_{\min}} \sim \mathcal{O}(\epsilon^{-2/3})
+\end{equation}
+
+\subsection{Final Asymptotic Bound on the Tangent Modulus $L$}
+
+Recall from the previous section that the norm of the fourth-order neo-Hookean tangent modulus $L$ is bounded by the
+inverse deformation gradient:
+\begin{equation}
+    \| L(F) \| \leq \mu + \mathcal{K}(J) \|F^{-1}\|^2
+\end{equation}
+Assuming the volumetric penalty $f(J)$ is chosen such that $\mathcal{K}(J)$ remains bounded or scales no worse than
+$J^{-1}$ near $J=0$, the dominant singularity is driven by $\|F^{-1}\|^2$.
+
+Substituting the kinematic bound derived from the imperfect bifurcation analysis:
+\begin{equation}
+    \max_{x \in \Omega} \| L(x, \epsilon) \| \leq C \| F^{-1} \|^2 \sim \mathcal{O} \left( (\epsilon^{-2/3})^2 \right) = \mathcal{O}(\epsilon^{-4/3})
+\end{equation}
 
 \section{Conclusions}
 \label{sec:conclusions}
