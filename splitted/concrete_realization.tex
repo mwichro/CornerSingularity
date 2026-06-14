@@ -1,0 +1,295 @@
+%!TEX root = ../main.tex
+\section{A concrete realization: the clamped--free corner under compression}
+\label{sec:concrete}
+
+The preceding analysis is deliberately abstract: it isolates the structural properties of the energy
+(Assumptions~\ref{ass:reg}--\ref{ass:mild}) and of the loading (the hypotheses of \S\ref{sec:iba}) that the argument
+actually uses, without committing to a domain. We now fix a concrete material and a concrete family of geometries and
+ask how much of that hypothesis list can be \emph{discharged} rather than assumed. The material is the compressible
+neo-Hookean energy \eqref{eq:neohooke} with the barrier penalty $f_{\log}$. The geometry is a body whose boundary
+carries a clamped (Dirichlet) face meeting a traction-free (Neumann) face at a right angle, under a compressive load.
+
+The abstract development of \S\ref{sec:asymptotics}--\S\ref{sec:iba} is already dimension-independent: it analyses the
+transverse problem at the codimension-two Dirichlet--Neumann edge $\Sigma$ in $\mathbb{R}^d$. Here we instantiate it on
+concrete bodies and ask how much of that hypothesis list can be \emph{discharged} rather than assumed.
+
+\subsection{Geometry and the singular set}
+\label{sub:geom}
+
+We consider two model bodies in $\Omega\subset\mathbb{R}^d$.
+
+\begin{itemize}
+    \item \textbf{(H) Half-ball.} $\Omega = \{\,\bm{x}\in\mathbb{R}^d : |\bm{x}|<1,\ x_d>0\,\}$. The flat base
+          $\Gamma_D=\{x_d=0\}\cap\partial\Omega$ is clamped; the spherical cap $\Gamma_N=\{|\bm{x}|=1\}\cap\partial\Omega$ is
+          traction-free.
+    \item \textbf{(C) Box.} $\Omega=(-1,1)^{d-1}\times(0,1)$. The base $\Gamma_D=\{x_d=0\}$ is clamped; the remaining faces
+          are traction-free.
+\end{itemize}
+
+In both cases the load is a monotone compression transmitted through $\Gamma_N$ (a pressure or an inward normal
+displacement on the cap, respectively the lateral/top faces), scaled by the pseudo-time $t\in[0,1]$ of \S\ref{sec:iba}.
+
+The \emph{singular set} $\Sigma\subset\partial\Omega$ is the locus where $\overline{\Gamma_D}$ meets
+$\overline{\Gamma_N}$:
+\begin{itemize}
+    \item for (H), $\Sigma=\{|\bm{x}|=1,\ x_d=0\}\cong S^{d-2}$, a \emph{smooth} codimension-two submanifold; the cap is
+          tangent to the vertical at the equator, so it meets the horizontal base at a right angle;
+    \item for (C), $\Sigma$ is the union of the bottom edges $\{x_d=0,\ x_i=\pm1\}$, again right-angle Dirichlet--Neumann
+          edges, \emph{together with} the bottom vertices, where $d$ faces meet.
+\end{itemize}
+
+Fix $\bm{x}_0\in\Sigma$ away from any vertex and split $\mathbb{R}^d=T_{\bm{x}_0}\Sigma\oplus\Pi$, with $\Pi$ the
+two-plane normal to $\Sigma$. In the slice $\Pi$ the boundary reduces to a Dirichlet ray and a Neumann ray meeting at
+$90^\circ$: \emph{exactly} the planar junction of \S\ref{sub:scenarioA}. We write $B_\rho$ for a tubular neighbourhood
+of $\Sigma$ of radius $\rho$ and use $(r,\theta)$ for polar coordinates in $\Pi$ as before.
+
+\begin{remark}[Why the half-ball is the clean model]
+    \label{rem:cleanmodel}
+    For (H) the singular set $\Sigma$ is a smooth closed manifold with no vertices, so the singularity is a \emph{pure
+        edge} everywhere on $\Sigma$ and the transverse problem is the planar right-angle junction at every point. For (C)
+    the edge interiors behave identically, but the bottom vertices carry an additional, generally stronger,
+    polyhedral-vertex singularity \cite{MazyaRossmann2010} that is outside the scope of the edge analysis; one either
+    rounds the vertices or restricts $B_\rho$ to the edge interior. We therefore state the dimension-independent results
+    for (H) and note that they hold verbatim on the edge interiors of (C).
+\end{remark}
+
+\subsection{Tier 1: the material assumptions are already discharged}
+\label{sub:tier1}
+
+For the neo-Hookean energy \eqref{eq:neohooke} with $f_{\log}$, the standing assumptions of
+\S\ref{sec:asymptotics} hold with explicit constants and require no information about the domain:
+Assumption~\ref{ass:reg} (regularity, objectivity, and the collapse barrier $f_{\log}(J)\to\infty$),
+Assumption~\ref{ass:growth} (the inverse-channel bound, with $\Theta=\Theta_{\log}$ of \eqref{eq:Thetalog}),
+Assumption~\ref{ass:ellip} and the sharper Lemma~\ref{lem:SEcompress} (strong ellipticity with constant $\ge\mu_e$
+throughout compression), and Assumption~\ref{ass:mild} (logarithmic growth, $p=1$) are all established in
+Lemma~\ref{lem:nh}, Remark~\ref{rem:SEcaveat} and \S\ref{sub:growth}. None of these proofs uses $d=2$: the tangent
+formula \eqref{eq:Lnh}, the rank-one identity \eqref{eq:LHnh}, and the growth functions \eqref{eq:Thetalog} are
+algebraic identities in $\mathrm{GL}^+(d)$. Thus the entire material side of the hypothesis list is closed for the
+concrete model, in every dimension. What remains are the hypotheses on the \emph{solution and loading}, which is where
+the geometry enters.
+
+\subsection{The edge exponent and the scenario it selects}
+\label{sub:edgeexp}
+
+By the edge-singularity calculus \cite{KMR2001,MazyaRossmann2010}, the leading singular exponents of the linearised
+elasticity operator along the smooth edge $\Sigma$ coincide with those of the transverse two-dimensional pencil in
+$\Pi$, modulated smoothly along $\Sigma$. That transverse pencil is the planar right-angle Dirichlet--Neumann corner of
+\eqref{eq:kondratiev}; its leading exponent $\alpha\in(0,1)$ is the smallest root of the corresponding
+clamped--free Williams secular equation and depends only on the Poisson ratio. Consequently the kinematic blow-up
+\eqref{eq:Fblowup}, $\bm{F}=\bm{I}+\mathcal{O}(r^{\alpha-1})$, holds with a \emph{computable} exponent, and by
+Theorem~\ref{thm:A} the nonlinear tangent inherits exactly this $\alpha$ in the benign regime.
+
+Which scenario of \S\ref{sec:asymptotics} is realized is governed by the sign of the dominant eigenvalue of
+$\Grad\bm{u}$ at the edge, equivalently by the sign of the stress-intensity factor $K$ in \eqref{eq:kondratiev}. This is
+a global quantity, set by the far field, and is not determined by the local pencil alone. The compressive load we
+impose selects $K<0$: the material is pushed into the corner, the dominant eigenvalue of $\Grad\bm{u}$ is negative,
+and Scenario~B (\S\ref{sub:scenarioB}) is the relevant branch. The quantitative form of ``compressive enough'' is the
+hypothesis (SC) below; it simultaneously selects Scenario~B and drives the structural instability of
+\S\ref{sub:concrete-tc}. The complementary tensile load ($K>0$) selects Scenario~A, where (NC) holds and
+Theorem~\ref{thm:A} applies; for the present geometry under compression that case does not arise near the edge.
+
+\subsection{Existence of the critical load via a localized surface instability}
+\label{sub:concrete-tc}
+
+The one genuinely non-elementary ingredient of \S\ref{sec:iba} was hypothesis (ii) of Lemma~\ref{lem:tc}: the
+existence of a structurally destabilising field, $Q_{t_*}(\bm{v}_*)<0$, which we there declined to establish and
+flagged as the corner counterpart of the Biot/creasing instability. For the concrete clamped--free geometry we now
+\emph{prove} it, by reduction to the surface instability of the compressed half-space.
+
+The free face $\Gamma_N$ under compression is, locally, a traction-free surface compressed parallel to itself --- the
+exact configuration of Biot's classical analysis \cite{Biot1963}. A homogeneously compressed neo-Hookean half-space
+loses stability to a surface mode once the surface-parallel stretch falls below a threshold
+$\lambda_\star\in(0,1)$ (for the incompressible model $\lambda_\star\approx0.544$; for the compressible energy
+\eqref{eq:neohooke} the threshold is the corresponding root of the surface secular equation, still in $(0,1)$
+\cite{Hong2009}). We package the loading requirement as a single hypothesis.
+
+\begin{assumption}[Surface compression reaches threshold, (SC)]
+    \label{ass:sc}
+    There exist $t_*\in(0,1]$ and an interior point $P\in\Gamma_N\cap B_\rho$, at positive distance from both $\Sigma$
+    and $\overline{\Gamma_D}$, such that the fundamental state compresses the free face below the half-space threshold
+    there: the surface-parallel principal stretch of $\bm{F}_0(t_*)$ at $P$ satisfies
+    $\lambda_\parallel\big(\bm{F}_0(t_*);P\big)<\lambda_\star$.
+\end{assumption}
+
+\noindent (SC) is an input on the \emph{loading}, in the same spirit as the monotonicity condition (M) of
+Lemma~\ref{lem:transversal}: it says only that the prescribed compression is strong enough that the free surface dips
+below its own buckling threshold somewhere near the edge. Since $t$ merely normalises the load amplitude, (SC) can
+always be met by loading hard enough, provided the material does not fail elsewhere first.
+
+\begin{lemma}[Localized surface instability $\Rightarrow$ structural instability]
+    \label{lem:biot}
+    Under Assumption~\ref{ass:sc}, hypothesis (ii) of Lemma~\ref{lem:tc} holds: there is $\bm{v}_*\in V$, supported in
+    $B_\rho$ and vanishing on $\Gamma_D$, with
+    \begin{equation}
+        \label{eq:Qneg}
+        Q_{t_*}(\bm{v}_*) = \int_{B_\rho}\Grad\bm{v}_* : \mathbb{L}\big(\bm{F}_0(t_*)\big) : \Grad\bm{v}_*\,dV < 0 .
+    \end{equation}
+    Consequently, with $\mu_1(0)>0$ from Lemma~\ref{lem:tc}(i), there is a first critical load $t_c\in(0,t_*]$ with
+    $\mu_1(t_c)=0$.
+\end{lemma}
+
+\begin{proof}
+    Work in coordinates centred at $P$: let $n\ge0$ be the depth into the body along the inward normal to $\Gamma_N$ and
+    $\bm{s}\in\mathbb{R}^{d-1}$ the surface-tangent coordinates, so that near $P$ the body is the half-space $\{n>0\}$ and
+    $\bm{F}_0(t_*)$ is $C^1$ with value $\bm{F}_P:=\bm{F}_0(t_*;P)$ whose surface-parallel stretch is
+    $\lambda_\parallel<\lambda_\star$.
+
+    \emph{Step 1: the homogeneous unstable mode.} Freeze the coefficients at $\bm{F}_P$ and consider the constant-tensor
+    form $Q_0(\bm{v})=\int_{\{n>0\}}\Grad\bm{v}:\mathbb{L}(\bm{F}_P):\Grad\bm{v}\,dV$ on the half-space, with $\bm{v}$
+    traction-free at $n=0$. Because $\lambda_\parallel<\lambda_\star$, the half-space is past its surface-instability
+    threshold \cite{Biot1963,Hong2009}: for each surface wavevector $\bm{k}\in\mathbb{R}^{d-1}$, $k:=|\bm{k}|$, there is a
+    surface mode
+    \begin{equation}
+        \label{eq:biotmode}
+        \bm{v}_{\bm{k}}(\bm{s},n) = \mathrm{Re}\,\big[\,\hat{\bm{v}}(kn)\,e^{\mathrm{i}\bm{k}\cdot\bm{s}}\,\big],
+        \qquad |\hat{\bm{v}}(\zeta)|\le C e^{-\beta\zeta}\ (\beta>0),
+    \end{equation}
+    decaying exponentially into the body on the depth scale $1/k$. Since $\mathbb{L}(\bm{F}_P)$ is constant, the rescaling
+    $(\bm{s},n)\mapsto k^{-1}(\bm{s},n)$ shows that over a surface window $W$ of area $|W|$,
+    \begin{equation}
+        \label{eq:biotscale}
+        \int_{\{n>0\}} \mathbf{1}_W\,\Grad\bm{v}_{\bm{k}}:\mathbb{L}(\bm{F}_P):\Grad\bm{v}_{\bm{k}}\,dV
+        = q(\lambda_\parallel)\,k\,|W|\,(1+o(1)), \qquad q(\lambda_\parallel)<0,
+    \end{equation}
+    where $q$ is the Biot secular form, strictly negative past threshold. Likewise
+    $\int_{\{n>0\}}\mathbf{1}_W\,|\Grad\bm{v}_{\bm{k}}|^2 \sim k\,|W|$ and
+    $\int_{\{n>0\}}\mathbf{1}_W\,|\bm{v}_{\bm{k}}|^2 \sim k^{-1}|W|$, the latter two by the same scaling.
+
+    \emph{Step 2: cut-off.} Let $\chi$ be smooth, $\chi\equiv1$ on $B(P,\delta/2)$, $\mathrm{supp}\,\chi\subset
+        B(P,\delta)$, $|\Grad\chi|\le C/\delta$, with $\delta$ small enough that $B(P,\delta)\cap\overline\Omega$ avoids
+    both $\Sigma$ and $\overline{\Gamma_D}$ and lies in $B_\rho$ (possible since $P$ is at positive distance from both).
+    Set $\bm{v}_*:=\chi\,\bm{v}_{\bm{k}}$. Then $\bm{v}_*\in V$ and vanishes on $\Gamma_D$ (its support avoids
+    $\overline{\Gamma_D}$); it is unconstrained on the free face, as required.
+
+    \emph{Step 3: error control.} Write $\Grad\bm{v}_*=\chi\Grad\bm{v}_{\bm{k}}+(\Grad\chi)\otimes\bm{v}_{\bm{k}}$ and
+    expand \eqref{eq:Qneg}. The effective window is $W\sim B(P,\delta)\cap\Gamma_N$, of area $|W|\sim\delta^{d-1}$, and the
+    decay confines the mass to depth $1/k$. Three errors arise.
+    \begin{enumerate}
+        \item[(a)] \emph{Coefficient variation:} replacing $\mathbb{L}(\bm{F}_0(\bm{x}))$ by $\mathbb{L}(\bm{F}_P)$ costs
+              $\le \sup_{B(P,\delta)}\|\mathbb{L}(\bm{F}_0)-\mathbb{L}(\bm{F}_P)\|\int\chi^2|\Grad\bm{v}_{\bm{k}}|^2
+                  \le C\delta\cdot k\delta^{d-1}=Ck\delta^{d}$ (by $C^1$ regularity of $\bm{F}_0$ at $P$).
+        \item[(b)] \emph{Gradient commutator:} the cross term and $|\Grad\chi|^2|\bm{v}_{\bm{k}}|^2$ term are bounded by
+              $C\big(\delta^{-1}\!\!\int_W |\bm{v}_{\bm{k}}||\Grad\bm{v}_{\bm{k}}| + \delta^{-2}\!\!\int_W|\bm{v}_{\bm{k}}|^2\big)
+                  \le C\big(\delta^{d-2} + \delta^{d-3}k^{-1}\big)$.
+        \item[(c)] \emph{Window vs.\ cut-off:} replacing $\mathbf{1}_W$ by $\chi^2$ in \eqref{eq:biotscale} changes the
+              leading constant by $1+o(1)$ only.
+    \end{enumerate}
+    The leading term is $q(\lambda_\parallel)\,k\,\delta^{d-1}<0$. The errors (a)--(b), relative to it, are
+    $\mathcal{O}(\delta)$, $\mathcal{O}((k\delta)^{-1})$ and $\mathcal{O}((k\delta)^{-2})$. Choosing $\delta=k^{-1/2}$
+    sends $\delta\to0$ and $k\delta=k^{1/2}\to\infty$, so all relative errors vanish as $k\to\infty$. Hence for $k$ large
+    enough,
+    \[
+        Q_{t_*}(\bm{v}_*) = q(\lambda_\parallel)\,k\,\delta^{d-1}\,(1+o(1)) < 0,
+    \]
+    which is \eqref{eq:Qneg}. The final statement is Lemma~\ref{lem:tc} with hypothesis (ii) now supplied. \qed
+\end{proof}
+
+\begin{remark}[What this closes]
+    Lemma~\ref{lem:biot} converts the existence of the critical load $t_c$ --- previously conditional on the unproved
+    hypothesis (ii) --- into a \emph{theorem} for the concrete clamped--free geometry, contingent only on the loading
+    hypothesis (SC). The mechanism is made explicit: the corner instability \emph{is} the half-space surface (creasing)
+    instability, localised to the free face near the edge by the cut-off \eqref{eq:biotmode}--\eqref{eq:biotscale}. This
+    is the precise sense in which the corner bifurcation is ``the corner analogue of creasing.''
+\end{remark}
+
+\begin{remark}[On the threshold $\lambda_\star$: compressible vs.\ incompressible]
+    \label{rem:threshold}
+    The proof uses only the \emph{existence} of a surface-instability threshold $\lambda_\star\in(0,1)$, not its value.
+    The familiar number $\lambda_\star\approx0.544$ is Biot's result for the \emph{incompressible} neo-Hookean half-space
+    \cite{Biot1963}; the present material \eqref{eq:neohooke} is compressible, and its threshold is the corresponding root
+    of the compressible surface secular equation, which depends on the ratio $\lambda_e/\mu_e$ (equivalently the Poisson
+    ratio) and tends to $0.544$ in the incompressible limit $\lambda_e/\mu_e\to\infty$ \cite{Hong2009}. This is the same
+    instability with a material-dependent threshold, not a discrepancy: Lemma~\ref{lem:biot} \emph{reduces} the corner
+    instability to the half-space one and thereby agrees with the creasing literature rather than competing with it.
+    Accordingly we keep $\lambda_\star$ symbolic throughout.
+\end{remark}
+
+\subsection{Symmetry: simplicity of the mode and the vanishing quadratic}
+\label{sub:symmetry}
+
+Both model bodies of \S\ref{sub:geom} possess reflection symmetries that the fundamental compressive state inherits:
+(H) is invariant under every orthogonal map fixing the $x_d$-axis, and (C) under each coordinate reflection
+$x_i\mapsto-x_i$ ($i<d$). Let $R$ be such a reflection and $\mathcal{R}$ its action on displacement fields. Because
+$\bm{F}_0(t)$ and hence $\mathbb{L}(\bm{F}_0(t))$ are $R$-invariant, the second-variation operator $\mathcal{L}(t)$
+commutes with $\mathcal{R}$, so its eigenspaces split into the symmetric ($\mathcal{R}=+1$) and antisymmetric
+($\mathcal{R}=-1$) sectors. This yields, for the concrete geometry, two of the ingredients that \S\ref{sec:iba} had to
+posit:
+
+\begin{itemize}
+    \item \emph{Simplicity (part of Assumption~\ref{ass:bif}).} The lowest eigenvalue within a fixed symmetry sector is
+          generically simple, and the critical mode $\bm{\phi}$ is the ground state of one sector; the genericity is the
+          standard one for self-adjoint operators commuting with a finite symmetry group. Thus simplicity need not be
+          assumed separately --- only the spectral \emph{attainment} (the borderline-elliptic point of
+          Remark~\ref{rem:framework}) remains genuinely open.
+    \item \emph{Vanishing quadratic coefficient (part of Assumption~\ref{ass:subcrit}).} The reduced potential of
+          Proposition~\ref{prop:LS} inherits the $\mathcal{R}$-symmetry of the perfect state. If $\bm{\phi}$ lies in the
+          antisymmetric sector then $w\mapsto-w$ is a symmetry of the reduced equation, forcing the quadratic coefficient
+          to vanish exactly, as Assumption~\ref{ass:subcrit} stipulated ``by the reflection symmetry about the corner
+          bisector.'' Here that bisector symmetry is realized concretely by $R$.
+\end{itemize}
+
+What symmetry does \emph{not} give is the sign of the cubic, $b<0$; that is the irreducible core addressed below.
+
+\subsection{Kinematic relief}
+\label{sub:reliefd}
+
+The kinematic relief is already dimension-independent: Lemma~\ref{lem:relief} gives
+$J=J_0+w^2 d_\phi+\mathcal{O}(w^3)$ in $\mathbb{R}^d$ with $d_\phi$ the second mixed discriminant of $\bm{F}_0$ and
+$\Grad\bm{\phi}$ (the second-order coefficient of the determinant, $=\det\Grad\bm{\phi}$ for $d=2$), and the rotation
+condition \eqref{eq:rotcond} that suppresses the first-order term is \emph{forced} by the barrier in every dimension by
+Lemma~\ref{lem:rot} (its proof uses only $f''(J)(\delta J)^2\le C$, valid for all $d$). For the concrete model the only
+points to add are that the genericity $d_\phi>0$ holds off a measure-zero set of modes, by the transversality argument
+of Lemma~\ref{lem:sval}, and that the collapse locus $\Sigma_{\mathrm{c}}$ is the codimension-one set inside $B_\rho$
+along which the relieved branch would still collapse; the regularised bound of Theorem~\ref{thm:reg} and the
+localisation of Proposition~\ref{prop:narrow} then apply verbatim.
+
+\subsection{The irreducible core}
+\label{sub:core}
+
+Table~\ref{tab:status} summarises the effect of fixing the concrete model. Of the hypotheses of
+\S\ref{sec:asymptotics}--\S\ref{sec:iba}, the material assumptions are discharged by the neo-Hookean structure
+(\S\ref{sub:tier1}), the existence of the critical load by the localized-creasing Lemma~\ref{lem:biot} under the
+loading hypothesis (SC), and mode simplicity together with the vanishing quadratic by reflection symmetry
+(\S\ref{sub:symmetry}). Two hypotheses genuinely resist soft arguments and remain assumptions:
+\begin{enumerate}
+    \item \emph{Spectral attainment} (the remaining half of Assumption~\ref{ass:bif}): that the critical infimum is
+          attained by an $L^2$ mode rather than escaping into the essential spectrum associated with the corner. This is
+          the borderline-elliptic difficulty of Remark~\ref{rem:framework}; the norm blow-up \eqref{eq:Lcompress} is
+          exactly what makes it delicate, and we do not resolve it.
+    \item \emph{Subcriticality}, $b<0$ (the sign in Assumption~\ref{ass:subcrit}): the direction in which the cubic bends
+          the branch. The creasing literature \cite{Biot1963,Hong2009} establishes subcriticality for the flat surface,
+          which makes $b<0$ overwhelmingly likely here, but the sign of the reduced cubic at a \emph{corner} is not
+          delivered by symmetry and we verify it only numerically.
+\end{enumerate}
+
+\begin{table}[t]
+    \centering
+    \begin{tabular}{lll}
+        \toprule
+        Hypothesis & Abstract status & Status for the concrete model \\
+        \midrule
+        Reg./growth/ellip./mild (Ass.~\ref{ass:reg}--\ref{ass:mild}) & standing assumptions & \textbf{proved} (Lem.~\ref{lem:nh}, \S\ref{sub:tier1}) \\
+        Edge exponent $\alpha$, scenario selection                   & abstract pencil      & \textbf{computed}; B selected by $K<0$ (\S\ref{sub:edgeexp}) \\
+        Critical load $t_c$ exists (Lem.~\ref{lem:tc}(ii))           & not established      & \textbf{proved} under (SC) (Lem.~\ref{lem:biot}) \\
+        Transversality (M) (Lem.~\ref{lem:transversal})              & input on loading    & \textbf{holds} for monotone compression \\
+        Mode simplicity (Ass.~\ref{ass:bif})                         & assumed             & \textbf{generic} per symmetry sector (\S\ref{sub:symmetry}) \\
+        Quadratic coeff.\ vanishes (Ass.~\ref{ass:subcrit})          & assumed by symmetry & \textbf{forced} by reflection $R$ (\S\ref{sub:symmetry}) \\
+        Rotation condition / relief (Lem.~\ref{lem:rot},~\ref{lem:relief}) & \textbf{proved} (all $d$)  & genericity $d_\phi>0$ (\S\ref{sub:reliefd}) \\
+        \midrule
+        Spectral attainment (Ass.~\ref{ass:bif})                     & assumed             & \emph{open} (irreducible core) \\
+        Subcriticality $b<0$ (Ass.~\ref{ass:subcrit})                & assumed             & \emph{numerical} (irreducible core) \\
+        \bottomrule
+    \end{tabular}
+    \caption{Hypothesis ledger for the concrete clamped--free neo-Hookean model. Fixing the material and geometry
+        discharges all but two hypotheses; those two form the irreducible analytical core.}
+    \label{tab:status}
+\end{table}
+
+The upshot is that for the clamped--free neo-Hookean corner under compression the abstract picture of
+\S\ref{sec:asymptotics}--\S\ref{sec:iba} is, but for two clearly delimited hypotheses, a sequence of theorems: the
+material bounds are explicit, the corner is genuinely compressive, the instability is a localized creasing event with a
+constructed destabilising mode, the critical mode is simple and the bifurcation has no quadratic term by symmetry, and
+the kinematic relief that regularises the tangent holds in every dimension. The two residual hypotheses ---
+attainment of the critical mode and the sign of the cubic --- are precisely the ones that the creasing problem on a
+flat surface also leaves to spectral theory and to computation, and they are inherited here rather than created by the
+corner.
