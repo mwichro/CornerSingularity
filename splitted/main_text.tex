@@ -1,4 +1,4 @@
-%!TEX root = ../main.tex 
+%!TEX root = ../main.tex
 \section{Introduction}
 \label{sec:intro}
 \input{splitted/introduction.tex}
@@ -13,7 +13,7 @@ If you dive into the literature on singularities in finite/hyperelasticity, you 
           pure traction-free boundaries and pure tensile opening.
     \item Cavitation (John Ball, 1982):** Ball proved that under severe hydrostatic tension, hyperelastic equations admit
           singular weak solutions where a hole spontaneously opens in the middle of a perfectly solid domain (a point singularity
-          where $F \to \infty$).
+          where $\bm{F} \to \infty$).
     \item Surface Creasing (Biot 1963, Hong et al. 2009):** Biot found that if you compress a flat half-space of a neo-Hookean
           material, its surface becomes unstable at a critical stretch ($\lambda \approx 0.54$). Decades later, researchers
           realized this instability is a *crease* (a point singularity forming on a flat surface).
@@ -40,80 +40,93 @@ Almost all the existing nonlinear singularity literature avoids the exact setup 
 
 We consider a hyperelastic body occupying a reference $d$-dimensional domain $\Omega \subset \mathbb{R}^d$ with
 boundary $\partial\Omega = \overline{\Gamma_D} \cup \overline{\Gamma_N}$, $\Gamma_D \cap \Gamma_N = \emptyset$. The
-deformation of the body is described by the displacement field $u : \Omega \to \mathbb{R}^d$, the deformation map $y(x)
-    = x + u(x)$, and the associated deformation gradient
+deformation of the body is described by the displacement field $\bm{u} : \Omega \to \mathbb{R}^d$, the deformation map
+$\bm{y}(\bm{x}) = \bm{x} + \bm{u}(\bm{x})$, and the associated deformation gradient
 \begin{equation}
-    F = \nabla y = I + \nabla u, \qquad J = \det F > 0,
+    \bm{F} = \Grad \bm{y} = \bm{I} + \Grad \bm{u}, \qquad J = \det \bm{F} > 0,
 \end{equation}
-where $\nabla$ denotes the gradient with respect to the reference configuration. The mechanical response is encoded
-in a strain energy density $\Psi(F)$, and the equilibrium configuration is the minimiser of the total potential
+where $\Grad$ denotes the gradient with respect to the reference configuration. The mechanical response is encoded
+in a strain energy density $\Psi(\bm{F})$, and the equilibrium configuration is the minimiser of the total potential
 energy
 \begin{equation}
     \label{eq:totalenergy}
-    \mathcal{E}(u) = \int_\Omega \Psi(F)\,dV - \int_\Omega f_0 \cdot u \,dV - \int_{\Gamma_N} t_0 \cdot u \,dS,
+    \mathcal{E}(\bm{u}) = \int_\Omega \Psi(\bm{F})\,dV - \int_\Omega \bm{f}_0 \cdot \bm{u} \,dV - \int_{\Gamma_N} \bm{t}_0 \cdot \bm{u} \,dS,
 \end{equation}
-over the space of admissible displacements $U = \{ u \in H^1(\Omega;\mathbb{R}^2) : u = g \text{ on } \Gamma_D \}$,
-where $f_0$ is a body force, $t_0$ a prescribed traction on the Neumann boundary, and $g$ the prescribed boundary
-displacement. We seek $u \in U$ such that $\mathcal{E}(u) \le \mathcal{E}(v)$ for all admissible $v$.
+over the space of admissible displacements $U = \{ \bm{u} \in H^1(\Omega;\mathbb{R}^2) : \bm{u} = \bm{g} \text{ on } \Gamma_D \}$,
+where $\bm{f}_0$ is a body force, $\bm{t}_0$ a prescribed traction on the Neumann boundary, and $\bm{g}$ the prescribed
+boundary displacement. We seek $\bm{u} \in U$ such that $\mathcal{E}(\bm{u}) \le \mathcal{E}(\bm{v})$ for all admissible
+$\bm{v}$.
 
 \subsection{Stationarity, stress, and tangent modulus}
 
-A minimiser satisfies the stationarity condition $D_{\delta u}\mathcal{E}(u) = 0$ for all admissible variations $\delta
-    u$ (vanishing on $\Gamma_D$), which is the weak form of equilibrium
+A minimiser satisfies the stationarity condition $D_{\delta \bm{u}}\mathcal{E}(\bm{u}) = 0$ for all admissible variations
+$\delta \bm{u}$ (vanishing on $\Gamma_D$), which is the weak form of equilibrium
 \begin{equation}
     \label{eq:weakform}
-    \int_\Omega P(F) : \nabla \delta u \,dV
-    = \int_\Omega f_0 \cdot \delta u \,dV + \int_{\Gamma_N} t_0 \cdot \delta u \,dS,
+    \int_\Omega \bm{P}(\bm{F}) : \Grad \delta \bm{u} \,dV
+    = \int_\Omega \bm{f}_0 \cdot \delta \bm{u} \,dV + \int_{\Gamma_N} \bm{t}_0 \cdot \delta \bm{u} \,dS,
 \end{equation}
 where the first Piola--Kirchhoff stress is the first derivative of the energy with respect to the deformation
 gradient,
 \begin{equation}
-    P(F) = \frac{\partial \Psi}{\partial F}.
+    \bm{P}(\bm{F}) = \frac{\partial \Psi}{\partial \bm{F}}.
 \end{equation}
-The natural boundary condition associated with $\Gamma_N$ is $P N = t_0$, with $N$ the reference outward unit
-normal. Because \eqref{eq:weakform} is nonlinear in $u$, it is solved iteratively by Newton's method. Linearising
-the residual about a current iterate $\bar u$ in a direction $\Delta u$ introduces the fourth-order tangent
-(elasticity) modulus
+The natural boundary condition associated with $\Gamma_N$ is $\bm{P} \bm{N} = \bm{t}_0$, with $\bm{N}$ the reference
+outward unit normal. Because \eqref{eq:weakform} is nonlinear in $\bm{u}$, it is solved iteratively by Newton's method.
+Linearising the residual about a current iterate $\bar{\bm{u}}$ in a direction $\Delta \bm{u}$ introduces the
+fourth-order tangent (elasticity) modulus $\mathbb{L}$, with components $L_{iJkL}$,
 \begin{equation}
     \label{eq:tangentdef}
-    L = \frac{\partial P}{\partial F} = \frac{\partial^2 \Psi}{\partial F \otimes \partial F},
+    \mathbb{L} = \frac{\partial \bm{P}}{\partial \bm{F}} = \frac{\partial^2 \Psi}{\partial \bm{F} \otimes \partial \bm{F}},
+    \qquad L_{iJkL} = \frac{\partial^2 \Psi}{\partial F_{iJ}\,\partial F_{kL}},
 \end{equation}
-so that each Newton step requires solving the linear problem
+which possesses the major symmetry $L_{iJkL} = L_{kLiJ}$, so that each Newton step requires solving the linear problem
 \begin{equation}
     \label{eq:newtonstep}
-    \int_\Omega \nabla \delta u : L(\bar F) : \nabla \Delta u \,dV = -\,R(\bar u; \delta u),
+    \int_\Omega \Grad \delta \bm{u} : \mathbb{L}(\bar{\bm{F}}) : \Grad \Delta \bm{u} \,dV = -\,R(\bar{\bm{u}}; \delta \bm{u}),
 \end{equation}
-with $R(\bar u; \delta u)$ the residual of \eqref{eq:weakform} evaluated at $\bar u$. The well-posedness and
-conditioning of \eqref{eq:newtonstep}---and hence the convergence of the whole nonlinear solver---are governed by the
-coercivity and boundedness of the bilinear form induced by $L(\bar F)$. The central object of this work is therefore
-the behaviour of $L$ as a function of the local deformation state.
+with $R(\bar{\bm{u}}; \delta \bm{u})$ the residual of \eqref{eq:weakform} evaluated at $\bar{\bm{u}}$. The well-posedness
+and conditioning of \eqref{eq:newtonstep}---and hence the convergence of the whole nonlinear solver---are governed by
+the coercivity and boundedness of the bilinear form induced by $\mathbb{L}(\bar{\bm{F}})$. The central object of this
+work is therefore the behaviour of $\mathbb{L}$ as a function of the local deformation state.
 
 \subsection{The neo-Hookean material}
 
-Throughout we use the compressible neo-Hookean strain energy density adopted in the cut-finite-element study
-\cite{cutfemAD} that motivates this analysis,
+To fix ideas and to exhibit explicit constants we use, as a running example, the compressible neo-Hookean strain energy
+density adopted in the cut-finite-element study \cite{cutfemAD} that motivates this analysis,
 \begin{equation}
     \label{eq:neohooke}
-    \Psi(F) = \frac{\mu}{2}\left( \operatorname{tr}(F^T F) - 2 \right) + f(J),
+    \Psi(\bm{F}) = \frac{\mu_e}{2}\left( \tr(\bm{F}^T \bm{F}) - 2 \right) + f(J),
 \end{equation}
-where $\mu > 0$ is the shear modulus and $f(J)$ is a strictly convex volumetric penalty with $f(1) = 0$,
-$f'(1) = -\mu$, and $f(J) \to \infty$ as $J \to 0^+$ (for instance $f(J) = -\mu \log J + \tfrac{\lambda}{2}\log^2 J$,
-or $f(J) = \tfrac{\kappa}{2}(J-1)^2$). The corresponding stress and tangent are
+where $\mu_e > 0$ is the shear modulus and $f(J)$ is a strictly convex volumetric penalty with $f(1) = 0$,
+$f'(1) = -\mu_e$, and $f(J) \to \infty$ as $J \to 0^+$. Two standard choices are
+\begin{equation}
+    \label{eq:fchoices}
+    f_{\log}(J) = -\mu_e \log J + \lambda_e \log^2 J,
+    \qquad
+    f_{\mathrm{quad}}(J) = \tfrac{\kappa}{2}(J-1)^2,
+\end{equation}
+with $\lambda_e$ the Lam\'e constant and $\kappa$ a bulk modulus; \eqref{eq:neohooke} with $f_{\log}$ reproduces the
+model of \cite{cutfemAD}. The corresponding stress and tangent are
 \begin{align}
-    P(F)     & = \mu F + f'(J)\,J\,F^{-T},   \\
-    L_{iJkL} & = \mu\,\delta_{ik}\delta_{JL}
+    \bm{P}(\bm{F}) & = \mu_e \bm{F} + f'(J)\,J\,\bm{F}^{-T},   \\
+    \label{eq:Lnh}
+    L_{iJkL} & = \mu_e\,\delta_{ik}\delta_{JL}
     + \left( f''(J)J^2 + f'(J)J \right) F^{-T}_{iL} F^{-T}_{kJ}
     - f'(J)J\, F^{-T}_{iJ} F^{-T}_{kL}.
 \end{align}
-The first term $\mu\,\delta_{ik}\delta_{JL}$ is constant; the entire nonlinear part is controlled by $J$ and the
-\emph{inverse} deformation gradient $F^{-1}$, yielding the structural bound
+The first term $\mu_e\,\delta_{ik}\delta_{JL}$ is constant; the entire nonlinear part is controlled by $J$ and the
+\emph{inverse} deformation gradient $\bm{F}^{-1}$, yielding the structural bound
 \begin{equation}
     \label{eq:Lbound}
-    \| L(F) \| \le \mu + C(J)\,\| F^{-1} \|^2,
+    \| \mathbb{L}(\bm{F}) \| \le \mu_e + \Theta(J)\,\| \bm{F}^{-1} \|^2,
 \end{equation}
-where $\|F^{-1}\| = \lambda_{\min}^{-1}$ is set by the smallest principal stretch. Consequently $L$ can only become
-unbounded through volumetric collapse, $\lambda_{\min} \to 0$ (equivalently $J \to 0$); a purely tensile blow-up of
-$F$ with $F^{-1}$ bounded leaves $L$ finite. This dichotomy is the analytical backbone of the present paper.
+where $\|\bm{F}^{-1}\| = \lambda_{\min}^{-1}$ is set by the smallest principal stretch and $\Theta$ is a scalar growth
+function fixed by $f$ (computed explicitly in \S\ref{sub:growth}). Consequently $\mathbb{L}$ can become unbounded
+through volumetric collapse, $\lambda_{\min} \to 0$ (equivalently $\bm{F}^{-1} \to \infty$); whether a purely tensile
+blow-up of $\bm{F}$ (with $\bm{F}^{-1}$ bounded) leaves $\mathbb{L}$ finite depends on the growth of $\Theta(J)$, which
+turns out to discriminate sharply between the two penalties in \eqref{eq:fchoices}. This dichotomy is the analytical
+backbone of the present paper.
 
 \subsection{The mixed-corner singularity}
 
@@ -123,242 +136,515 @@ junctions arise, for example, at the lower corners of the loaded-pole benchmark 
 numerically observed convergence rate is capped well below the optimal order. Classical Kondratiev theory for the
 linearised problem predicts a corner singularity
 \begin{equation}
-    u(r,\theta) \sim K\, r^{\alpha}\,\Phi(\theta), \qquad \alpha \in (0,1),
+    \bm{u}(r,\theta) \sim K\, r^{\alpha}\,\bm{\Phi}(\theta), \qquad \alpha \in (0,1),
 \end{equation}
 in polar coordinates $(r,\theta)$ centred at the corner, with $K$ a generalised stress-intensity factor and
 $\alpha$ the (geometry- and Poisson-ratio-dependent) singularity exponent. The deformation gradient then scales as
-$F = I + \mathcal{O}(K r^{\alpha-1})$, so $\|F\| \to \infty$ as $r \to 0$.
+$\bm{F} = \bm{I} + \mathcal{O}(K r^{\alpha-1})$, so $\|\bm{F}\| \to \infty$ as $r \to 0$.
 
 The question this raises---and which the remainder of the paper addresses---is how this kinematic singularity
 propagates into the nonlinear tangent operator \eqref{eq:tangentdef}. In view of \eqref{eq:Lbound}, the answer hinges
-on the \emph{sign} of the loading (the sign of $K$): a tensile corner keeps $F^{-1}$ bounded and leaves $L$ well
-behaved, whereas a compressive corner drives $\lambda_{\min} \to 0$, blows up $L$, and triggers a loss of strong
-ellipticity. The following sections analyse these two scenarios in turn (Section~\ref{sec:asymptotics}) and then show
-how a small imperfection regularises the compressive case through a structural bifurcation (Section~\ref{sec:iba}).
+on which principal stretch diverges: a tensile corner keeps $\bm{F}^{-1}$ bounded and (for a suitable penalty) leaves
+$\mathbb{L}$ well behaved, whereas a compressive corner drives $\lambda_{\min} \to 0$, blows up $\mathbb{L}$, and
+triggers a loss of strong ellipticity. The following sections analyse these two scenarios in turn
+(Section~\ref{sec:asymptotics}) and then show how a small imperfection regularises the compressive case through a
+structural bifurcation (Section~\ref{sec:iba}).
 
-\section{Asymptotic Behavior of the Neo-Hookean Operator at a Mixed Corner}
+\section{Asymptotic behaviour of the tangent operator at a mixed corner}
 \label{sec:asymptotics}
 
-\subsection{Problem Setup and Linearized Kinematics}
+\subsection{Geometry and linearised kinematics}
 
-Let the reference domain $\Omega \subset \mathbb{R}^2$ feature a right-angle corner at the origin $(0,0)$ described by
-polar coordinates $(r, \theta)$ for $r \in [0, R]$ and $\theta \in [0, \pi/2]$.
+Let the reference domain $\Omega \subset \mathbb{R}^2$ feature a right-angle corner at the origin $(0,0)$, described in
+polar coordinates $(r,\theta)$ by $r\in[0,R]$, $\theta\in[0,\pi/2]$, and write $B_\rho := \{\bm{x}\in\Omega : |\bm{x}|<\rho\}$
+for the corner neighbourhood.
 \begin{itemize}
-    \item \textbf{Dirichlet Boundary ($\Gamma_D$):} $\theta = 0$, where deformation is prescribed: $y(r, 0) = g(r)$.
-    \item \textbf{Neumann Boundary ($\Gamma_N$):} $\theta = \pi/2$, which is traction-free: $P N = 0$.
+    \item \textbf{Dirichlet boundary ($\Gamma_D$):} $\theta = 0$, deformation prescribed, $\bm{y}(r,0) = \bm{g}(r)$.
+    \item \textbf{Neumann boundary ($\Gamma_N$):} $\theta = \pi/2$, traction-free, $\bm{P}\bm{N} = \bm{0}$.
 \end{itemize}
 
-Let $u(x)$ be the displacement, and $F = I + \nabla u$ the deformation gradient. From classical Kondratiev theory for
-linear elasticity, the leading-order singular displacement field at this mixed corner behaves as:
+Classical Kondratiev theory for the \emph{linearised} problem gives the leading-order singular displacement
 \begin{equation}
-    u(r, \theta) \sim K r^{\alpha} \Phi(\theta)
+    \label{eq:kondratiev}
+    \bm{u}(r,\theta) \sim K\, r^{\alpha}\,\bm{\Phi}(\theta),
 \end{equation}
-where $K$ is the generalized stress intensity factor (dependent on far-field loading), $\Phi(\theta)$ is a smooth angular
-function, and $\alpha \in (0,1)$ is the singularity exponent (typically $\alpha \approx 0.68$ for incompressible
-materials).
-
-Consequently, the deformation gradient scales as:
+with $K$ the generalised stress-intensity factor (set by the far field), $\bm{\Phi}$ a smooth angular profile, and
+$\alpha\in(0,1)$ the geometry- and Poisson-dependent exponent. Consequently
 \begin{equation}
-    F = I + \mathcal{O}(K r^{\alpha-1})
+    \label{eq:Fblowup}
+    \bm{F} = \bm{I} + \mathcal{O}\!\left(K\,r^{\alpha-1}\right), \qquad \|\bm{F}\|\to\infty \text{ as } r\to 0 .
 \end{equation}
-As $r \to 0$, $\|F\| \to \infty$. The nature of this singularity---and the resulting behavior of the nonlinear tangent
-modulus $L = \frac{\partial^2 \Psi}{\partial F \partial F}$---depends entirely on the sign of $K$ (the loading
-direction).
+Whether this kinematic blow-up contaminates the tangent operator $\mathbb{L}=\partial^2\Psi/\partial\bm{F}\,\partial\bm{F}$
+depends not on $\|\bm{F}\|$ but on which principal stretches diverge, which is the content of the rest of this section.
 
-We define a standard compressible neo-Hookean energy density:
+\subsection{Standing assumptions on the stored energy}
+
+The mechanism we describe is not specific to the neo-Hookean model; that model only serves to fix ideas and to exhibit
+explicit constants. We therefore phrase the analysis for a general frame-indifferent energy and isolate the structural
+properties that the argument actually uses. Throughout, $\|\cdot\|$ denotes the operator (spectral) norm on tensors,
+$0<\lambda_{\min}(\bm{F})\le\lambda_{\max}(\bm{F})$ are the singular values of $\bm{F}$ (the principal stretches), and we
+recall $\|\bm{F}^{-1}\| = \lambda_{\min}(\bm{F})^{-1}$.
+
+\begin{assumption}[Regularity and frame indifference]
+    \label{ass:reg}
+    The stored energy $\Psi:\mathrm{GL}^+(2)\to\mathbb{R}$ is objective, $\Psi\in C^2(\mathrm{GL}^+(2))$, and
+    $\Psi(\bm{F})\to+\infty$ as $\det \bm{F}\to 0^+$.
+\end{assumption}
+
+\begin{assumption}[Inverse-channel growth of the tangent]
+    \label{ass:growth}
+    There exist a continuous, nondecreasing function $\Theta:(0,\infty)\to(0,\infty)$ and a constant $c_0\ge 0$ such
+    that the tangent modulus $\mathbb{L}(\bm{F})=D^2\Psi(\bm{F})$ satisfies, for all $\bm{F}\in\mathrm{GL}^+(2)$,
+    \begin{equation}
+        \label{eq:Hessbound}
+        \| \mathbb{L}(\bm{F}) \| \;\le\; c_0 \;+\; \Theta\!\big(\det \bm{F}\big)\,\|\bm{F}^{-1}\|^{2}.
+    \end{equation}
+\end{assumption}
+
+\begin{assumption}[Uniform strong ellipticity on bounded-distortion sets]
+    \label{ass:ellip}
+    For every $0<c\le 1$ and $M\ge 1$ there is $\gamma(c,M)>0$ such that whenever $\lambda_{\min}(\bm{F})\ge c$ and
+    $\det \bm{F}\le M$,
+    \begin{equation}
+        \label{eq:LH}
+        L_{iJkL}(\bm{F})\, m_i N_J\, m_k N_L \;\ge\; \gamma(c,M)\,|\bm{m}|^2\,|\bm{N}|^2
+        \qquad \forall\, \bm{m},\bm{N}\in\mathbb{R}^2 .
+    \end{equation}
+\end{assumption}
+
+The decisive feature of Assumption~\ref{ass:growth} is that the inverse-stretch factor $\|\bm{F}^{-1}\|^2=\lambda_{\min}^{-2}$
+is the \emph{only} algebraic channel through which the Hessian can blow up; the dependence on $\|\bm{F}\|$ (equivalently
+on $\lambda_{\max}$) enters solely through the scalar $\Theta(\det \bm{F})$. Whether a tensile corner
+($\lambda_{\max}\to\infty$, $\det \bm{F}\to\infty$, $\lambda_{\min}$ bounded below) is benign therefore reduces to the
+\emph{growth rate} of $\Theta$, which we quantify in \S\ref{sub:growth}. Materials with genuine tensile stiffening of
+the deviatoric part (Gent, Arruda--Boyce), whose tangent diverges through $\lambda_{\max}$ directly rather than through
+$\Theta(\det\bm F)$, violate \eqref{eq:Hessbound} and are excluded.
+
+\begin{lemma}[The compressible neo-Hookean model satisfies Assumptions~\ref{ass:reg}--\ref{ass:ellip}]
+    \label{lem:nh}
+    Let $\Psi$ be the neo-Hookean energy \eqref{eq:neohooke} with $\mu_e>0$ and $f$ strictly convex,
+    $f(J)\to\infty$ as $J\to0^+$. Then Assumption~\ref{ass:reg} holds, Assumption~\ref{ass:growth} holds with
+    $c_0=\mu_e$ and
+    \begin{equation}
+        \label{eq:Thetagen}
+        \Theta(J) = \big|\,f''(J)J^2 + f'(J)J\,\big| + \big|\,f'(J)J\,\big|,
+    \end{equation}
+    and Assumption~\ref{ass:ellip} holds for both penalties in \eqref{eq:fchoices}.
+\end{lemma}
+
+\begin{proof}
+    Objectivity and $C^2$ regularity on $\mathrm{GL}^+(2)$ are immediate, and $f(J)\to\infty$ as $J\to0^+$ gives the
+    blow-up in Assumption~\ref{ass:reg}. In \eqref{eq:Lnh} the first term is the scaled identity, of norm $\mu_e$. Each
+    of the remaining two terms is a rank-one, respectively transposition, contraction of $\bm{F}^{-T}\otimes\bm{F}^{-T}$;
+    since $\|\bm{F}^{-T}\|=\|\bm{F}^{-1}\|$, each is bounded in operator norm by its scalar prefactor times
+    $\|\bm{F}^{-1}\|^2$. The triangle inequality gives \eqref{eq:Hessbound} with $c_0=\mu_e$ and $\Theta$ as in
+    \eqref{eq:Thetagen}. For Assumption~\ref{ass:ellip}, contracting \eqref{eq:Lnh} with $\bm{m}\otimes\bm{N}$ and
+    setting $\bm{a}:=\bm{F}^{-T}\bm{N}$, $\bm{b}:=\bm{F}^{-1}\bm{m}$ gives
+    \begin{equation}
+        \label{eq:LHnh}
+        L_{iJkL}m_iN_Jm_kN_L
+        = \mu_e\,|\bm{m}|^2|\bm{N}|^2
+        + \big(f''J^2+f'J\big)\,(\bm{m}\cdot\bm{a})^2
+        - f'J\,(\bm{m}\cdot\bm{a})(\bm{N}\cdot\bm{b}).
+    \end{equation}
+    On $\{\lambda_{\min}\ge c,\ \det\bm{F}\le M\}$ the vectors $\bm{a},\bm{b}$ obey $|\bm{a}|\le c^{-1}|\bm{N}|$,
+    $|\bm{b}|\le c^{-1}|\bm{m}|$, and the prefactors are continuous in $J\in[c^2,M]$ (for $f_{\log}$,
+    $f''J^2+f'J=2\lambda_e$ is constant, see \S\ref{sub:growth}); choosing $c$ such that the constant term $\mu_e$
+    dominates the bounded volumetric remainder, or invoking the standard rank-one convexity of \eqref{eq:neohooke} away
+    from $\det\bm F=0$, yields \eqref{eq:LH} with a $\gamma(c,M)>0$. \qed
+\end{proof}
+
+\begin{remark}
+    The constant $c_0$ in \eqref{eq:Hessbound} is exactly the constant fourth-order term $\mu_e\,\delta_{ik}\delta_{JL}$
+    of the neo-Hookean tangent: the Hessian of the quadratic (Hookean) part does not depend on $\bm{F}$ at all. This is
+    why the \emph{deviatoric} response cannot blow up under tension; only the \emph{volumetric} response, through
+    $\Theta$, can.
+\end{remark}
+
+\subsection{The non-compressive hypothesis}
+
+The qualitative split between the two scenarios is captured by a single quantity: the smallest principal stretch near
+the corner. We call the corner singularity \emph{non-compressive} when $\lambda_{\min}$ stays bounded away from zero,
+even though $\lambda_{\max}$ (hence $\|\bm{F}\|$ and $\det\bm{F}$) may diverge.
+
+\begin{assumption}[Non-compressive singularity, (NC)]
+    \label{ass:nc}
+    There exist $\rho\in(0,R]$ and $c\in(0,1]$ such that the equilibrium deformation satisfies
+    \begin{equation}
+        \label{eq:NC}
+        \lambda_{\min}(\bm{F}(\bm{x})) \ge c, \quad\text{equivalently}\quad \|\bm{F}^{-1}(\bm{x})\|\le c^{-1},
+        \qquad \text{for a.e. } \bm{x}\in B_\rho .
+    \end{equation}
+\end{assumption}
+
+We stress what \eqref{eq:NC} does \emph{not} say. It does not require incompressibility, and crucially it does
+\emph{not} bound $\det\bm{F}$: in a tensile corner $\lambda_{\max}\sim r^{\alpha-1}\to\infty$, so
+$J=\lambda_{\min}\lambda_{\max}\sim r^{\alpha-1}\to\infty$ as well. The only quantity (NC) controls is
+$\|\bm{F}^{-1}\|\le c^{-1}$. Physically, (NC) states that the material is pulled around the corner (tension/shear)
+rather than crushed into it. Because $\det\bm{F}$ is \emph{not} bounded under (NC), the factor $\Theta(\det\bm{F})$ in
+\eqref{eq:Hessbound} need not stay bounded; the next subsection makes its growth explicit, and this is precisely where
+the two volumetric penalties \eqref{eq:fchoices} part ways. Scenario~B (\S\ref{sub:scenarioB}) treats the
+complementary, compressive case in which \eqref{eq:NC} fails.
+
+\subsection{Explicit volumetric growth functions}
+\label{sub:growth}
+
+We now evaluate $\Theta$ in \eqref{eq:Thetagen} for the two penalties \eqref{eq:fchoices}. This is the step that makes
+the abstract bound \eqref{eq:Hessbound} concrete and, as it turns out, reveals that ``tension is benign'' is a
+model-dependent statement.
+
+\paragraph{Logarithmic penalty.}
+For $f_{\log}(J)=-\mu_e\log J+\lambda_e\log^2 J$,
 \begin{equation}
-    \Psi(F) = \frac{\mu}{2} \left( \operatorname{tr}(F^T F) - 2 \right) + f(J)
+    f'(J)J = -\mu_e + 2\lambda_e\log J,
+    \qquad
+    f''(J)J^2 = \mu_e + 2\lambda_e - 2\lambda_e\log J,
 \end{equation}
-where $J = \det(F)$ and $f(J)$ is a strictly convex volumetric penalty function satisfying $f(1)=0$, $f'(1)=-\mu$, and
-$f(J) \to \infty$ as $J \to 0$.
-
-The fourth-order tangent modulus $L$ is exactly:
+so that the combination collapses to a constant,
 \begin{equation}
-    L_{iJkL} = \mu \delta_{ik} \delta_{JL} + \mathcal{B}_{iJkL}(F^{-1}, J)
+    \label{eq:logcombo}
+    f''(J)J^2 + f'(J)J = 2\lambda_e,
 \end{equation}
-where $\mathcal{B}$ contains all nonlinear geometric stiffness terms, bounded by $\| \mathcal{B} \| \leq C(J) \|F^{-1}\|^2$.
+and therefore
+\begin{equation}
+    \label{eq:Thetalog}
+    \Theta_{\log}(J) = 2\lambda_e + \big|\,2\lambda_e\log J - \mu_e\,\big| = \mathcal{O}\!\big(\log J\big)
+    \quad\text{as } J\to\infty .
+\end{equation}
+The volumetric stiffening grows only \emph{logarithmically} in $J$.
 
-\subsection{Scenario A: The Tensile (Non-Compressive) Singularity}
+\paragraph{Quadratic penalty.}
+For $f_{\mathrm{quad}}(J)=\tfrac{\kappa}{2}(J-1)^2$,
+\begin{equation}
+    f'(J)J = \kappa J(J-1),
+    \qquad
+    f''(J)J^2 = \kappa J^2,
+    \qquad
+    f''(J)J^2 + f'(J)J = \kappa J(2J-1),
+\end{equation}
+so
+\begin{equation}
+    \label{eq:Thetaquad}
+    \Theta_{\mathrm{quad}}(J) = \kappa J\,|2J-1| + \kappa J\,|J-1| = \mathcal{O}\!\big(\kappa J^2\big)
+    \quad\text{as } J\to\infty .
+\end{equation}
+The volumetric stiffening grows \emph{quadratically} in $J$.
 
-Assume the far-field loading pulls the material away from the corner ($K > 0$ such that the material undergoes radial
-tension).
+\paragraph{Consequence at the corner.}
+Combining \eqref{eq:Hessbound} with (NC) ($\|\bm{F}^{-1}\|^2\le c^{-2}$) and the tensile kinematics
+$J=\det\bm{F}\sim |K|\,r^{\alpha-1}$ from \eqref{eq:Fblowup}, the tangent norm near the corner obeys
+\begin{equation}
+    \label{eq:Lcornergrowth}
+    \|\mathbb{L}(\bm{x})\| \le \mu_e + c^{-2}\,\Theta\!\big(\det\bm{F}(\bm{x})\big) \sim
+    \begin{cases}
+        \mu_e + \mathcal{O}\!\big(\log\tfrac1r\big), & f=f_{\log}, \\[4pt]
+        \mathcal{O}\!\big(r^{-2(1-\alpha)}\big),     & f=f_{\mathrm{quad}}.
+    \end{cases}
+\end{equation}
+Thus the logarithmic penalty keeps the tangent bounded up to a logarithm, while the quadratic penalty produces a
+genuine algebraic blow-up of the tangent \emph{even in pure tension}---of the same order $r^{-2(1-\alpha)}$ that the
+compressive case will produce through $\|\bm{F}^{-1}\|^2$. The often-repeated statement that ``tension is harmless for
+neo-Hookean'' is therefore an artefact of the logarithmic volumetric model; it is false for the quadratic model. We
+make the benign case precise in Theorem~\ref{thm:A} and flag the algebraic case in Remark~\ref{rem:quad}.
+
+\subsection{Scenario A: the tensile (non-compressive) singularity}
+\label{sub:scenarioA}
+
+We work under the mild-growth condition isolated above.
+
+\begin{assumption}[Mild volumetric growth]
+    \label{ass:mild}
+    The growth function satisfies $\Theta(J) = \mathcal{O}\!\big((\log J)^{p}\big)$ as $J\to\infty$ for some $p\ge 0$.
+\end{assumption}
+
+\noindent By \eqref{eq:Thetalog}, $f_{\log}$ satisfies Assumption~\ref{ass:mild} with $p=1$; by \eqref{eq:Thetaquad},
+$f_{\mathrm{quad}}$ does not.
+
+\begin{lemma}[Subordinate tangent]
+    \label{lem:Abound}
+    Under Assumptions~\ref{ass:reg}, \ref{ass:growth}, \ref{ass:mild} and (NC), for every $\varepsilon>0$ there is
+    $C_\varepsilon$ with
+    \begin{equation}
+        \label{eq:subord}
+        \|\mathbb{L}(\bm{x})\| \le C_\varepsilon\, r^{-\varepsilon} \qquad \text{for a.e. } \bm{x}\in B_\rho .
+    \end{equation}
+    In particular $\mathbb{L}\in L^q(B_\rho)$ for every $q<\infty$, and $\|\mathbb{L}\|$ is dominated by any negative
+    power of $r$.
+\end{lemma}
+
+\begin{proof}
+    By \eqref{eq:Hessbound} and (NC), $\|\mathbb{L}\|\le \mu_e + c^{-2}\Theta(\det\bm{F})$. Assumption~\ref{ass:mild}
+    and $\det\bm{F}=\mathcal{O}(r^{\alpha-1})$ give $\Theta(\det\bm{F})=\mathcal{O}\big((\log\tfrac1r)^p\big)$, and
+    $(\log\tfrac1r)^p\le C_\varepsilon r^{-\varepsilon}$ on $(0,\rho]$ for every $\varepsilon>0$. \qed
+\end{proof}
+
+\begin{lemma}[Uniform ellipticity]
+    \label{lem:Aellip}
+    Under Assumptions~\ref{ass:reg}, \ref{ass:ellip} and (NC), and assuming the volumetric prefactors in \eqref{eq:LHnh}
+    remain controlled (automatic for $f_{\log}$, where $f''J^2+f'J=2\lambda_e$ is constant and $|f'J|=\mathcal{O}(\log J)$
+    is subordinate), the tangent satisfies the Legendre--Hadamard condition on $B_\rho$ with a slowly varying constant:
+    there are $\gamma_0>0$ and $\varepsilon>0$ arbitrarily small with
+    \begin{equation}
+        \label{eq:LHcorner}
+        L_{iJkL}(\bm{x})\,m_iN_Jm_kN_L \ge \big(\gamma_0 - C_\varepsilon r^{\varepsilon}\big)\,|\bm{m}|^2|\bm{N}|^2
+        \ \ge\ \tfrac12\gamma_0\,|\bm{m}|^2|\bm{N}|^2
+    \end{equation}
+    for a.e. $\bm{x}\in B_\rho$ after shrinking $\rho$, for all $\bm{m},\bm{N}\in\mathbb{R}^2$.
+\end{lemma}
+
+\begin{proof}
+    From \eqref{eq:LHnh}, $L_{iJkL}m_iN_Jm_kN_L \ge \mu_e|\bm{m}|^2|\bm{N}|^2 - |f''J^2+f'J|\,|\bm{a}|^2|\bm{m}|^2
+    - |f'J|\,|\bm{a}||\bm{b}||\bm{m}||\bm{N}|$, where the volumetric correction is bounded using $|\bm{a}|\le
+    c^{-1}|\bm{N}|$, $|\bm{b}|\le c^{-1}|\bm{m}|$ by $c^{-2}\big(|f''J^2+f'J|+|f'J|\big)|\bm{m}|^2|\bm{N}|^2 =
+    c^{-2}\Theta(J)|\bm{m}|^2|\bm{N}|^2$. For $f_{\log}$, $\Theta(J)=\mathcal{O}(\log\tfrac1r)\le C_\varepsilon
+    r^{\varepsilon}$ on $(0,\rho]$; the volumetric correction is thus $o(1)$ as $r\to0$, and after shrinking $\rho$ it is
+    below $\tfrac12\mu_e$, giving \eqref{eq:LHcorner} with $\gamma_0=\mu_e$. \qed
+\end{proof}
+
+For the weighted well-posedness we recall two standard inequalities in the Kondratiev space
+$V^{1,2}_\beta(B_\rho)$---the closure of smooth functions vanishing on $\Gamma_D\cap\partial B_\rho$ under
+$\|\bm{v}\|_{V^{1,2}_\beta}^2 = \int_{B_\rho} \big(r^{2\beta}|\Grad\bm{v}|^2 + r^{2\beta-2}|\bm{v}|^2\big)\,dV$.
+
+\begin{lemma}[Weighted Hardy and Korn inequalities {\cite{KMR2001,NazarovPlamenevsky1994}}]
+    \label{lem:korn}
+    Let $\beta\in\mathbb{R}$ avoid the (discrete) set of exceptional exponents of the corner. There are constants
+    $C_H, C_K$ depending only on $\beta$ and the opening angle such that, for all $\bm{v}\in V^{1,2}_\beta(B_\rho)$
+    vanishing on $\Gamma_D\cap\partial B_\rho$,
+    \begin{align}
+        \label{eq:hardy}
+        \int_{B_\rho} r^{2\beta-2}|\bm{v}|^2\,dV &\le C_H \int_{B_\rho} r^{2\beta}|\Grad\bm{v}|^2\,dV,\\
+        \label{eq:korn}
+        \int_{B_\rho} r^{2\beta}|\Grad\bm{v}|^2\,dV &\le C_K \int_{B_\rho} r^{2\beta}\,|\bm{\varepsilon}(\bm{v})|^2\,dV,
+        \qquad \bm{\varepsilon}(\bm{v}) = \tfrac12\big(\Grad\bm{v}+\Grad\bm{v}^T\big).
+    \end{align}
+\end{lemma}
+
+Let $\beta_\star$ be the weight exponent for which the \emph{linear} elasticity corner problem at this
+Dirichlet--Neumann junction is Fredholm (equivalently $\beta_\star$ avoids the singular exponents $\alpha$). We may
+write the Newton-step bilinear form as
+\begin{equation}
+    \label{eq:formA}
+    a(\Delta\bm{u},\delta\bm{u}) := \int_{B_\rho} \Grad\delta\bm{u} : \mathbb{L}(\bar{\bm{F}}) : \Grad\Delta\bm{u}\,dV .
+\end{equation}
+
+\begin{theorem}[Well-posedness of the linearised step, tensile corner]
+    \label{thm:A}
+    Under Assumptions~\ref{ass:reg}--\ref{ass:mild} and the non-compressive hypothesis (NC), the form \eqref{eq:formA}
+    is bounded and coercive on $V^{1,2}_{\beta_\star}(B_\rho)$ modulo a compact perturbation: there exist constants
+    $\Lambda<\infty$, $\gamma_1>0$ and a compact form $k(\cdot,\cdot)$ such that, for all
+    $\bm{u},\bm{v}\in V^{1,2}_{\beta_\star}(B_\rho)$,
+    \begin{align}
+        \label{eq:Abounded}
+        |a(\bm{u},\bm{v})| &\le \Lambda\,\|\bm{u}\|_{V^{1,2}_{\beta_\star}}\,\|\bm{v}\|_{V^{1,2}_{\beta_\star}},\\
+        \label{eq:Agaarding}
+        a(\bm{v},\bm{v}) &\ge \gamma_1\,\|\bm{v}\|_{V^{1,2}_{\beta_\star}}^2 - k(\bm{v},\bm{v}).
+    \end{align}
+    Consequently the linearised corner operator is Fredholm of index zero in $V^{1,2}_{\beta_\star}$; for $\beta_\star$
+    avoiding the corner spectrum it is an isomorphism, its solutions admit the asymptotic expansion
+    \eqref{eq:kondratiev}, and the governing singular exponents coincide with those of the linearised elasticity
+    problem.
+\end{theorem}
+
+\begin{proof}
+    \emph{Boundedness.} By Cauchy--Schwarz and Lemma~\ref{lem:Abound}, for any $\varepsilon\in(0,1)$,
+    \begin{align*}
+        |a(\bm{u},\bm{v})|
+        &\le \int_{B_\rho} \|\mathbb{L}\|\,|\Grad\bm{u}|\,|\Grad\bm{v}|\,dV
+         \le C_\varepsilon \int_{B_\rho} r^{-\varepsilon}\,|\Grad\bm{u}|\,|\Grad\bm{v}|\,dV \\
+        &\le C_\varepsilon \Big(\!\int_{B_\rho} r^{2\beta_\star}|\Grad\bm{u}|^2\Big)^{1/2}
+                          \Big(\!\int_{B_\rho} r^{-2\varepsilon-2\beta_\star}|\Grad\bm{v}|^2\Big)^{1/2}.
+    \end{align*}
+    Since $\varepsilon$ is arbitrary and $\beta_\star$ is interior to an interval of admissible weights, the loss
+    $r^{-2\varepsilon}$ can be absorbed by a weight chosen within that interval; this gives \eqref{eq:Abounded} with
+    $\Lambda=\Lambda(\varepsilon)$. The key point is that the mild (logarithmic) growth of $\|\mathbb{L}\|$ is
+    subordinate to every algebraic weight, so it does not change the admissible weight interval.
+
+    \emph{G\aa rding inequality.} By Lemma~\ref{lem:Aellip} the integrand symbol $\mathbb{L}(\bm{x})$ is uniformly
+    strongly elliptic on $B_\rho$ with constant $\ge\tfrac12\gamma_0$. Freezing the (measurable, uniformly elliptic)
+    coefficients on a dyadic partition $\{r\sim 2^{-j}\}$ and applying the constant-coefficient G\aa rding inequality on
+    each annulus---valid because the principal symbol is positive definite on the Legendre--Hadamard cone---yields, after
+    summation against the weight $r^{2\beta_\star}$,
+    \[
+        a(\bm{v},\bm{v}) \ge \tfrac12\gamma_0\,c_K^{-1}\!\int_{B_\rho} r^{2\beta_\star}|\Grad\bm{v}|^2\,dV
+        - C\!\int_{B_\rho} r^{2\beta_\star}|\bm{v}|^2\,dV,
+    \]
+    where the Korn inequality \eqref{eq:korn} converts ellipticity of the symmetric part into control of the full
+    gradient. The remainder term has a strictly higher power of $r$ than the Hardy weight $r^{2\beta_\star-2}$, hence by
+    \eqref{eq:hardy} it is relatively compact with respect to $\|\cdot\|_{V^{1,2}_{\beta_\star}}$; this is the compact
+    form $k$, and we obtain \eqref{eq:Agaarding} with $\gamma_1=\tfrac12\gamma_0 c_K^{-1}$.
+
+    \emph{Fredholm property and exponents.} Estimates \eqref{eq:Abounded}--\eqref{eq:Agaarding} place the operator in the
+    Kondratiev--Maz'ya framework \cite{KMR2001}: it is Fredholm of index zero in $V^{1,2}_{\beta_\star}$ whenever
+    $\beta_\star$ avoids the spectrum of the corner operator pencil. Because the nonlinear correction to the principal
+    symbol is subordinate (it is $o(r^{-\varepsilon})$ for every $\varepsilon$, by Lemma~\ref{lem:Abound}), the pencil
+    coincides with that of linearised elasticity; its eigenvalues are exactly the exponents $\alpha$ of
+    \eqref{eq:kondratiev}, which are therefore unchanged by the nonlinearity. \qed
+\end{proof}
+
+\begin{remark}[Stress is singular, operator is not]
+    The first Piola--Kirchhoff stress still blows up, $\bm{P}\sim \mu_e\bm{F}\to\infty$ as $r\to0$, so the tensile corner
+    is a genuine \emph{stress} singularity. Theorem~\ref{thm:A} asserts only that this singularity lives entirely in the
+    \emph{right-hand side} (the residual) of the Newton step, not in its operator: under a mild volumetric penalty the
+    nonlinear problem inherits the regularity theory of the linear one, standard graded meshes restore optimal
+    convergence, and no structural instability occurs. This is the precise sense in which a non-compressive corner
+    ``passes like linear elasticity.''
+\end{remark}
+
+\begin{remark}[The quadratic penalty does \emph{not} pass like linear elasticity]
+    \label{rem:quad}
+    For $f_{\mathrm{quad}}$, Assumption~\ref{ass:mild} fails: by \eqref{eq:Thetaquad} and \eqref{eq:Lcornergrowth} the
+    tangent grows algebraically, $\|\mathbb{L}\|=\mathcal{O}(r^{-2(1-\alpha)})$, \emph{even in pure tension}. The
+    coefficients of \eqref{eq:formA} are then genuinely singular of the same order as in the compressive Scenario~B, the
+    boundedness step above fails for $\beta_\star$, and the admissible weight interval---hence the effective corner
+    exponents seen by the nonlinear operator---shifts relative to linear elasticity. A sharp analysis of this case (the
+    correct weight, and whether coercivity survives) is governed by the volumetric blow-up rather than by the
+    deviatoric singularity and is left open here.
+    %TODO: decide whether to develop the quadratic-penalty weighted analysis or cite it as motivation for preferring the
+    %      logarithmic volumetric model in computations.
+\end{remark}
+
+\begin{remark}[Self-consistency of (NC)]
+    Hypothesis (NC) is compatible with the singular kinematics \eqref{eq:Fblowup}: an angular profile $\bm{\Phi}$
+    corresponding to opening/shear produces $\Grad\bm{u}$ whose dominant eigenvalue is positive (radial extension), so
+    $\lambda_{\max}\to\infty$ while $\lambda_{\min}=\det\bm{F}/\lambda_{\max}$ need not approach zero. The complementary
+    profile, in which the dominant eigenvalue of $\Grad\bm{u}$ is negative, drives $\lambda_{\min}\to0$ and violates
+    (NC); that is exactly Scenario~B below.
+\end{remark}
+
+\subsection{Scenario B: the compressive singularity (the pathological case)}
+\label{sub:scenarioB}
+
+Now assume the far-field loading pushes the material \emph{into} the corner ($K < 0$, radial compression).
 
 \paragraph{Kinematic consequence.}
-The maximum principal stretch $\lambda_{\max}$ aligns roughly radially and blows up as $r^{\alpha-1}$. However, because
-the material is pulled outward, the domain locally expands or preserves volume (by drawing material in from the Neumann
-boundary). Therefore, the determinant $J$ remains bounded strictly away from zero ($J \geq J_{\min} > 0$), and the
-transverse stretch $\lambda_{\min}$ remains finite and non-zero.
-
-\paragraph{Operator behavior.}
-Because $\lambda_{\min} > 0$, the inverse deformation gradient is bounded: $\|F^{-1}\| = \lambda_{\min}^{-1} \leq M$.
-Looking at the tangent modulus $L$:
+The naive linear prediction gives $\Grad\bm{u}$ a negative dominant eigenvalue scaling as $-|K| r^{\alpha-1}$. Because
+$\bm{F} = \bm{I} + \Grad\bm{u}$, as $r \to 0$ (or as the pseudo-time load factor $t$ increases) there is a critical
+threshold where the local contraction annihilates the material volume:
 \begin{equation}
-    \| L(x) \| \leq \mu + C(J) \|F^{-1}\|^2 < \infty \quad \text{as } r \to 0
+    \det \bm{F} \to 0 \implies J \to 0, \qquad \lambda_{\min} \to 0 .
 \end{equation}
-
-\paragraph{Conclusion for Scenario A.}
-Although there is a severe \emph{stress singularity} (the First Piola-Kirchhoff stress $P \sim \mu F \to \infty$ as $r
-\to 0$), \textbf{there is no singularity in the tangent operator.}
-\begin{itemize}
-    \item $L$ remains strongly elliptic (the Legendre--Hadamard condition $L_{iJkL}m_i M_J m_k M_L \geq c > 0$ holds).
-    \item The standard weak form of the linearized Newton step $\int_\Omega L : \nabla \delta u : \nabla \Delta u \, d\Omega$
-          remains uniformly coercive.
-    \item The nonlinear neo-Hookean problem behaves exactly parallel to the linear problem. The singularity is safely handled by
-          standard weighted Sobolev spaces ($V_\beta^{1,2}$), and no structural instability occurs.
-\end{itemize}
-
-\subsection{Scenario B: The Compressive Singularity (The Pathological Case)}
-
-Now, assume the far-field loading pushes the material \emph{into} the corner ($K < 0$, radial compression).
-
-\paragraph{Kinematic consequence.}
-The naive linear prediction suggests $\nabla u$ has a negative dominant eigenvalue scaling as $-|K| r^{\alpha-1}$.
-Because $F = I + \nabla u$, as we approach the corner ($r \to 0$) or as we increase the pseudo-time load factor $t$,
-there exists a critical threshold where the local contraction completely annihilates the material volume:
-\begin{equation}
-    \det(F) \to 0 \implies J \to 0
-\end{equation}
-When $J \to 0$, the minimum principal stretch $\lambda_{\min} \to 0$.
 
 \paragraph{Operator blow-up.}
-Because $\|F^{-1}\| = \lambda_{\min}^{-1} \to \infty$, the nonlinear operator $\mathcal{B}$ dominates. The tangent
-modulus scales asymptotically as:
+Because $\|\bm{F}^{-1}\| = \lambda_{\min}^{-1} \to \infty$, the inverse-channel term in \eqref{eq:Hessbound} dominates and
+the tangent modulus scales as
 \begin{equation}
-    \| L(x) \| \sim \mathcal{O}(J^{-2}) \sim \mathcal{O}(\|F^{-1}\|^2) \to \infty
+    \| \mathbb{L}(\bm{x}) \| \sim \mathcal{O}(\|\bm{F}^{-1}\|^2) \sim \mathcal{O}(\lambda_{\min}^{-2}) \to \infty .
 \end{equation}
 
 \paragraph{Loss of strong ellipticity.}
-Before $J$ even reaches $0$, the extreme compression causes the acoustic tensor $Q_{ik}(N) = L_{iJkL} N_J N_L$ to lose
-positive-definiteness. Let $N$ be the normal vector aligned with the direction of maximum compression. The acoustic
-tensor associated with this direction will develop a zero, and then negative, eigenvalue:
+Before $J$ even reaches $0$, the extreme compression causes the acoustic tensor $Q_{ik}(\bm{N}) = L_{iJkL} N_J N_L$ to
+lose positive definiteness. Taking $\bm{N}$ aligned with the direction of maximum compression, the acoustic tensor
+develops a zero, then a negative, eigenvalue:
 \begin{equation}
-    \min_{m, N} \left( L_{iJkL} m_i N_J m_k N_L \right) \leq 0
+    \min_{\bm{m},\bm{N}} \left( L_{iJkL}\, m_i N_J m_k N_L \right) \leq 0 ,
 \end{equation}
-The PDE locally ceases to be elliptic and becomes hyperbolic.
+and Assumption~\ref{ass:ellip} fails. The PDE locally ceases to be elliptic.
 
 \paragraph{Conclusion for Scenario B.}
-The naive assumption that the deformation smoothly follows the fundamental thermodynamic path into the corner leads to
-a complete mathematical breakdown. The tangent modulus $L$ becomes infinitely singular ($\|L\| \to \infty$), and the
-local operator loses coercivity, meaning standard Newton--Raphson solvers will inevitably fail, and a weak solution for
-the linearized step ceases to exist in the standard functional spaces.
+The assumption that the deformation smoothly follows the fundamental path into the corner leads to a mathematical
+breakdown: $\|\mathbb{L}\| \to \infty$, the local operator loses coercivity, the Newton step ceases to be well posed in
+the standard spaces, and standard Newton--Raphson solvers fail. This unphysical infinite accumulation of energy
+($f(J) \to \infty$) signals that the smooth fundamental path is not the physical solution. In reality, the loss of
+ellipticity dictates a local geometric bifurcation. To capture this analytically we introduce an imperfect perturbation
+(noise) that regularises the bifurcation and bounds the singularity.
 
-This unphysical infinite accumulation of energy ($f(J) \to \infty$) and operator blow-up implies that the assumption of
-a smooth deformation path is flawed. In reality, the loss of ellipticity dictates a local geometric bifurcation. To
-capture this analytically, we must introduce an imperfect perturbation (noise) to regularize the bifurcation and bound
-the singularity.
-
-\section{Imperfect Bifurcation Analysis and Asymptotic Bounds}
+\section{Imperfect bifurcation analysis and asymptotic bounds}
 \label{sec:iba}
 
-\subsection{The Perturbed Weak Form}
+\subsection{The perturbed weak form}
 
-We introduce a pseudo-time load parameter $t \in [0, 1]$ which monotonically scales the compressive Dirichlet boundary
-conditions. To prevent the unphysical perfect fundamental path ($J \to 0$), we introduce a small, fixed volumetric
-perturbation (noise) $\epsilon f(x)$, where $\|f\|_{L^2} = 1$ and $\epsilon \ll 1$.
-
-The nonlinear equilibrium equation in weak form is $G(u, t, \epsilon) = 0$, defined as:
+We introduce a pseudo-time load parameter $t \in [0, 1]$ that monotonically scales the compressive Dirichlet boundary
+conditions. To prevent the unphysical fundamental path ($J \to 0$), we add a small, fixed volumetric perturbation
+(noise) $\epsilon\, \bm{p}(\bm{x})$, where $\|\bm{p}\|_{L^2} = 1$ and $\epsilon \ll 1$ (we write the imperfection field
+as $\bm{p}$ to avoid collision with the volumetric penalty $f(J)$). The nonlinear equilibrium in weak form is
+$G(\bm{u}, t, \epsilon) = 0$,
 \begin{equation}
-    \langle G(u, t, \epsilon), v \rangle = \int_{\Omega} P(F) : \nabla v \, d\Omega - \epsilon \int_{\Omega} f \cdot v \, d\Omega = 0 \quad \forall v \in V
+    \langle G(\bm{u}, t, \epsilon), \bm{v} \rangle = \int_{\Omega} \bm{P}(\bm{F}) : \Grad \bm{v} \, dV
+    - \epsilon \int_{\Omega} \bm{p} \cdot \bm{v} \, dV = 0 \qquad \forall\, \bm{v} \in V,
 \end{equation}
-where $P(F) = \frac{\partial \Psi}{\partial F}$ is the First Piola-Kirchhoff stress, and $V$ is the appropriate space
-of kinematically admissible test functions.
+with $\bm{P}(\bm{F}) = \partial\Psi/\partial\bm{F}$ and $V$ the space of kinematically admissible test functions.
 
-\subsection{The Critical Point (Perfect System, $\epsilon = 0$)}
+\subsection{The critical point (perfect system, $\epsilon = 0$)}
 
-Let $u_0(t)$ be the fundamental path of pure compression (the unphysical path where $J \to 0$ as $t \to 1$). At some
-critical load $t_c < 1$, the tangent modulus $L(F_0)$ evaluated on the fundamental path loses positive definiteness.
-The linearized operator $\mathcal{L}_c := \partial_u G(u_0(t_c), t_c, 0)$ develops a zero eigenvalue.
-
-Let $\phi \in V$ be the normalized critical eigenmode ($\|\phi\|_V = 1$) associated with this instability (representing
-a localized rotation/buckling near the corner). It satisfies:
+Let $\bm{u}_0(t)$ be the fundamental path of pure compression (the unphysical path where $J \to 0$ as $t \to 1$). At a
+critical load $t_c < 1$ the tangent $\mathbb{L}(\bm{F}_0)$ on the fundamental path loses positive definiteness, and the
+linearised operator $\mathcal{L}_c := \partial_{\bm{u}} G(\bm{u}_0(t_c), t_c, 0)$ develops a zero eigenvalue. Let
+$\bm{\phi} \in V$ be the normalised critical eigenmode ($\|\bm{\phi}\|_V = 1$) of this instability (a localised
+rotation/buckling near the corner), satisfying
 \begin{equation}
-    \int_{\Omega} \nabla \phi : L_c : \nabla v \, d\Omega = 0 \quad \forall v \in V
+    \int_{\Omega} \Grad \bm{\phi} : \mathbb{L}_c : \Grad \bm{v} \, dV = 0 \qquad \forall\, \bm{v} \in V .
 \end{equation}
 
-\subsection{Lyapunov--Schmidt Reduction (The Normal Form)}
+\subsection{Lyapunov--Schmidt reduction (the normal form)}
 
-To analyze the perturbed system ($\epsilon > 0$) near $t_c$, we decompose the displacement field into the fundamental
-path, the buckling amplitude $w(t, \epsilon)$ along the eigenmode $\phi$, and a higher-order orthogonal remainder $v$:
+To analyse the perturbed system ($\epsilon > 0$) near $t_c$, decompose the displacement into the fundamental path, the
+buckling amplitude $w(t, \epsilon)$ along $\bm{\phi}$, and a higher-order orthogonal remainder $\bm{v}$:
 \begin{equation}
-    u(t, \epsilon) = u_0(t) + w \phi + v
+    \bm{u}(t, \epsilon) = \bm{u}_0(t) + w \bm{\phi} + \bm{v} .
 \end{equation}
-By projecting the weak form onto the eigenmode $\phi$ and applying a standard Taylor expansion of the energy functional
-up to the fourth order in $w$, the infinite-dimensional PDE reduces to a scalar algebraic equation for the amplitude
-$w$ (the imperfect bifurcation equation):
+Projecting the weak form onto $\bm{\phi}$ and Taylor-expanding the energy to fourth order in $w$ reduces the
+infinite-dimensional problem to the scalar imperfect bifurcation equation
 \begin{equation}
-    a (t_c - t) w + b w^3 = \epsilon \eta
+    \label{eq:bifeq}
+    a (t_c - t)\, w + b\, w^3 = \epsilon\, \eta,
 \end{equation}
-where:
+where
 \begin{itemize}
-    \item $a = \frac{1}{2} \frac{d}{dt} \langle \phi, \partial^2_u G(u_0(t_c)) \phi \rangle$ is the eigenvalue crossing velocity.
-    \item $b = \frac{1}{6} \langle \phi, \partial^3_u G(u_0(t_c)) [\phi, \phi, \phi] \rangle$ governs the post-buckling stiffness (assumed $b > 0$ for a stable supercritical bifurcation).
-    \item $\eta = \int_{\Omega} f \cdot \phi \, d\Omega$ is the projection of the noise onto the buckling mode.
+    \item $a = \tfrac{1}{2} \tfrac{d}{dt} \langle \bm{\phi}, \partial^2_{\bm{u}} G(\bm{u}_0(t_c)) \bm{\phi} \rangle$ is the eigenvalue crossing velocity;
+    \item $b = \tfrac{1}{6} \langle \bm{\phi}, \partial^3_{\bm{u}} G(\bm{u}_0(t_c)) [\bm{\phi}, \bm{\phi}, \bm{\phi}] \rangle$ governs the post-buckling stiffness (assumed $b > 0$ for a stable supercritical bifurcation);
+    \item $\eta = \int_{\Omega} \bm{p} \cdot \bm{\phi} \, dV$ is the projection of the noise onto the buckling mode.
 \end{itemize}
 
-\subsection{Asymptotic Estimate of the Bifurcation Amplitude}
+\subsection{Asymptotic estimate of the bifurcation amplitude}
 
-We are interested in the maximum deformation amplitude, which occurs at or near the critical time $t = t_c$. Evaluated
-exactly at $t_c$, the linear term vanishes, leaving:
+The maximum amplitude occurs at or near $t = t_c$, where the linear term in \eqref{eq:bifeq} vanishes, leaving
+$b\, w^3 \approx \epsilon\, \eta$, hence
 \begin{equation}
-    b w^3 \approx \epsilon \eta
-\end{equation}
-Thus, the amplitude of the structural instability scales asymptotically with the perturbation:
-\begin{equation}
-    w(\epsilon) \sim \left( \frac{\eta}{b} \right)^{1/3} \epsilon^{1/3} \quad \text{as } \epsilon \to 0
+    \label{eq:wscale}
+    w(\epsilon) \sim \left( \frac{\eta}{b} \right)^{1/3} \epsilon^{1/3} \quad \text{as } \epsilon \to 0 .
 \end{equation}
 
 \begin{remark}
-    Even if the material softening dictates an asymmetric/transcritical bifurcation yielding $w^2 \sim \epsilon$, the
-    logic below remains identical with a modified exponent. We proceed with the standard pitchfork $\epsilon^{1/3}$
-    scaling.
+    If material softening dictates an asymmetric/transcritical bifurcation with $w^2 \sim \epsilon$, the logic below is
+    identical with a modified exponent. We proceed with the standard pitchfork $\epsilon^{1/3}$ scaling.
 \end{remark}
 
-\subsection{Kinematic Relief Mechanism: Bounding $J$ and $\|F^{-1}\|$}
+\subsection{Kinematic relief mechanism: bounding \texorpdfstring{$J$ and $\|\bm{F}^{-1}\|$}{J and the inverse deformation gradient}}
 
-The core physical mechanism is that the buckling mode $\phi$ introduces \emph{rotation and shear}, which geometrically
-relieves the pure volumetric compression.
-
-At the corner, the total deformation gradient is $F = F_0(t_c) + w \nabla \phi + \mathcal{O}(w^2)$.
-\begin{itemize}
-    \item $F_0(t_c)$ is a purely compressive state with a minimum principal stretch $\lambda_{c}$, which is small but strictly non-zero ($t_c$ occurs \emph{before} $J \to 0$).
-    \item The buckling gradient $\nabla \phi$ represents a symmetry-breaking rotation.
-\end{itemize}
-
-Because the instability trades pure compression for bending/rotation, the volumetric determinant $J = \det(F)$ becomes
-bounded away from zero by the amplitude of the buckling mode. To leading order, rotations modify the stretch
-quadratically. Therefore, the minimum volume ratio is bounded below by:
+The physical mechanism is that the buckling mode $\bm{\phi}$ introduces \emph{rotation and shear}, which geometrically
+relieves the pure volumetric compression. At the corner the total deformation gradient is
+$\bm{F} = \bm{F}_0(t_c) + w \Grad\bm{\phi} + \mathcal{O}(w^2)$, where $\bm{F}_0(t_c)$ is a purely compressive state with
+minimum principal stretch $\lambda_c$ (small but strictly nonzero, since $t_c$ occurs \emph{before} $J\to0$) and
+$\Grad\bm{\phi}$ is a symmetry-breaking rotation. Because the instability trades pure compression for bending/rotation,
+$J = \det\bm{F}$ is bounded below by the buckling amplitude:
 \begin{equation}
-    J_{\min}(\epsilon) \geq C_1 \lambda_c + C_2 w^2
+    J_{\min}(\epsilon) \geq C_1 \lambda_c + C_2\, w^2 ,
 \end{equation}
-where $C_1, C_2 > 0$ are geometric constants. As $\epsilon \to 0$ (and assuming $\lambda_c$ approaches some
-infinitesimal limit near the theoretical singularity), the dominant bound is provided by the buckling amplitude:
+with $C_1, C_2 > 0$ geometric constants. As $\epsilon \to 0$ (and $\lambda_c$ approaching its infinitesimal limit), the
+amplitude term dominates,
 \begin{equation}
-    J_{\min}(\epsilon) \sim \mathcal{O}(w^2) \sim \mathcal{O}(\epsilon^{2/3})
+    J_{\min}(\epsilon) \sim \mathcal{O}(w^2) \sim \mathcal{O}(\epsilon^{2/3}) ,
 \end{equation}
-
-Since $J = \det(F) = \lambda_1 \lambda_2$ (in 2D), and the transverse stretch is largely unaffected or bounded, the
-minimum principal stretch scales as $\lambda_{\min} \sim \mathcal{O}(\epsilon^{2/3})$.
-
-Consequently, the norm of the inverse deformation gradient is strictly bounded by the noise:
+using \eqref{eq:wscale}. Since $J = \lambda_1\lambda_2$ in 2D and the transverse stretch is bounded, the minimum
+principal stretch scales as $\lambda_{\min} \sim \mathcal{O}(\epsilon^{2/3})$, whence
 \begin{equation}
-    \| F^{-1} \| = \frac{1}{\lambda_{\min}} \sim \mathcal{O}(\epsilon^{-2/3})
+    \| \bm{F}^{-1} \| = \lambda_{\min}^{-1} \sim \mathcal{O}(\epsilon^{-2/3}) .
 \end{equation}
 
-\subsection{Final Asymptotic Bound on the Tangent Modulus $L$}
+\subsection{Final asymptotic bound on the tangent modulus}
 
-Recall from the previous section that the norm of the fourth-order neo-Hookean tangent modulus $L$ is bounded by the
-inverse deformation gradient:
+By the structural bound \eqref{eq:Lbound},
 \begin{equation}
-    \| L(F) \| \leq \mu + \mathcal{K}(J) \|F^{-1}\|^2
+    \| \mathbb{L}(\bm{F}) \| \leq \mu_e + \Theta(J)\, \|\bm{F}^{-1}\|^2 .
 \end{equation}
-Assuming the volumetric penalty $f(J)$ is chosen such that $\mathcal{K}(J)$ remains bounded or scales no worse than
-$J^{-1}$ near $J=0$, the dominant singularity is driven by $\|F^{-1}\|^2$.
-
-Substituting the kinematic bound derived from the imperfect bifurcation analysis:
+For the logarithmic penalty $\Theta(J)=\mathcal{O}(\log\tfrac1J)$ remains subordinate near $J=0$, so the dominant
+singularity is driven by $\|\bm{F}^{-1}\|^2$; substituting the bifurcation bound,
 \begin{equation}
-    \max_{x \in \Omega} \| L(x, \epsilon) \| \leq C \| F^{-1} \|^2 \sim \mathcal{O} \left( (\epsilon^{-2/3})^2 \right) = \mathcal{O}(\epsilon^{-4/3})
+    \max_{\bm{x} \in \Omega} \| \mathbb{L}(\bm{x}, \epsilon) \| \leq C\, \|\bm{F}^{-1}\|^2 \sim
+    \mathcal{O}\!\big((\epsilon^{-2/3})^2\big) = \mathcal{O}(\epsilon^{-4/3}) .
 \end{equation}
+The imperfection thus converts the unbounded tangent of the perfect compressive path into a finite quantity that
+diverges only algebraically as the noise is removed, at the rate $\epsilon^{-4/3}$.
 
 \section{Conclusions}
 \label{sec:conclusions}
-
