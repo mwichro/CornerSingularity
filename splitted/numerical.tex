@@ -127,3 +127,10 @@ Sweeping the physical rectangle, $b<0$ \emph{throughout} $(\nu,\hat K)$: the cor
 crease-analogue. The computation is reproduced by \texttt{graded\_buckling.py}, which reuses the validated linear
 building blocks of \S\ref{sub:numpencil}--\S\ref{sub:numbiot} (\texttt{williams\_clampedfree.py} /
 \texttt{mellin\_chebyshev\_pencil.py} for $\alpha$; \texttt{surface\_instability.py} for $\lambda_\star$).
+
+As a byproduct, the same critical mode furnishes the asymptotic-rotation check of Assumption~\ref{ass:rot}
+(Remark~\ref{rem:rotnum}): the neutral co-energy $\langle\bm\phi,\mathcal L\bm\phi\rangle\approx10^{-8}$ confirms the
+mode is a genuine kernel, and the dimensionless rotation defect $\|\delta J\|/\|\Grad\bm\phi\|\approx0.08$--$0.16$ (stable
+under deepening compression) confirms it is nearly volume-preserving. The decomposition of \eqref{eq:secondvar} shows the
+singular determinant term to be $6$--$10\times$ the $f''(\delta J)^2$ term, so the co-energy is bounded by cancellation
+against the shear term, not by the $f''$ term alone --- the honest mechanism behind the relief estimate.

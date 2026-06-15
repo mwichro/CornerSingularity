@@ -1073,7 +1073,8 @@ The heart of the regularisation is geometric: the buckling mode trades pure comp
 lifts the determinant off zero. The reason the relief is second order in $w$---and hence why the scaling exponents
 below are what they are---is that the mode is, to leading order, a \emph{rotation}, and rotations do not change volume
 at first order. We do \emph{not} assume the first-order volume change vanishes exactly; we use the quantitative bound on
-it furnished by the energy barrier (Lemma~\ref{lem:rot}) and show it is dominated by the second-order relief.
+it posited by Assumption~\ref{ass:rot} (the asymptotic-rotation hypothesis, verified numerically in
+Remark~\ref{rem:rotnum}) and show it is dominated by the second-order relief.
 
 \begin{lemma}[Determinant relief]
     \label{lem:relief}
@@ -1083,9 +1084,9 @@ it furnished by the energy barrier (Lemma~\ref{lem:rot}) and show it is dominate
         \label{eq:rotcond}
         D_1:=\operatorname{cof}\bm{F}_0:\Grad\bm{\phi} = J_0\,\bm{F}_0^{-T}:\Grad\bm{\phi} .
     \end{equation}
-    By the barrier estimate \eqref{eq:rotrate} of Lemma~\ref{lem:rot}, the critical mode is \emph{asymptotically}
-    volume-preserving, $|D_1|\le c_\phi\,J_0/\sqrt{|\log J_0|}$, so $D_1$ does not vanish at finite load but is itself
-    small with $J_0$. Let
+    By the asymptotic-rotation estimate \eqref{eq:rotrate} of Assumption~\ref{ass:rot}, the critical mode is
+    \emph{asymptotically} volume-preserving, $|D_1|\le c_\phi\,J_0/\sqrt{|\log J_0|}$, so $D_1$ does not vanish at finite
+    load but is itself small with $J_0$. Let
     $d_\phi:=\tfrac12\,\tfrac{d^2}{dw^2}\big|_{0}\det(\bm{F}_0+w\,\Grad\bm{\phi})>0$ be the second-order coefficient of
     the determinant --- the second mixed discriminant of $\bm{F}_0$ ($d-2$ copies) with $\Grad\bm{\phi}$ (two copies),
     which for $d=2$ reduces to $\det(\Grad\bm{\phi})$. Then
@@ -1139,41 +1140,66 @@ Outside that regime ($\lambda_c\gtrsim\epsilon^{2/3}$) the floor $C_1\lambda_c$ 
 \eqref{eq:lminscale} is the worst case. On the stable physical branch the picture is milder still; we contrast the two
 after Theorem~\ref{thm:reg}.
 
-The smallness of the first-order volume change $D_1$ in \eqref{eq:rotcond} is not an extra assumption: it is
-\emph{forced}, quantitatively, by the energy barrier, as we now show. This is the precise content of the informal
-statement ``buckling relieves compression''---the barrier penalises any finite-energy mode that changes volume at first
-order, driving $D_1\to0$ with $J_0$ at the rate \eqref{eq:rotrate}, which (Lemma~\ref{lem:relief}) is fast enough for
-the second-order relief to dominate.
+We now examine the smallness of the first-order volume change $D_1$ in \eqref{eq:rotcond}. The exact contraction of
+the tangent \eqref{eq:Lnh} gives the second variation of $\Psi$ on the fundamental state $\bm{F}_0$ in a direction
+$\bm{\phi}$ (plane strain),
+\begin{equation}
+    \label{eq:secondvar}
+    \langle\bm{\phi},\mathcal{L}\bm{\phi}\rangle
+    = \mu_e\,|\Grad\bm{\phi}|^2 + f''(J_0)\,(\delta J)^2 + 2\,f'(J_0)\,\det(\Grad\bm{\phi}),
+    \qquad \delta J=\operatorname{cof}\bm{F}_0:\Grad\bm{\phi}.
+\end{equation}
+For $f_{\log}$ both volumetric prefactors diverge as $J_0\to0$,
+\begin{equation}
+    \label{eq:fppblow}
+    f''(J_0)=\frac{\mu_e+2\lambda_e-2\lambda_e\log J_0}{J_0^2}\sim\frac{2\lambda_e|\log J_0|}{J_0^2},
+    \qquad f'(J_0)\sim\frac{2\lambda_e\log J_0}{J_0}\to-\infty .
+\end{equation}
+Crucially, the determinant term $2f'(J_0)\det(\Grad\bm{\phi})$, with prefactor $\sim|\log J_0|/J_0$, is \emph{more}
+singular than the term $f''(J_0)(\delta J)^2\sim|\log J_0|$ (recall $\delta J\sim J_0\cdot\mathcal{O}(1)$). Hence
+$\delta J$ cannot be bounded by isolating the $f''$ term and discarding the rest; the two regimes below treat its
+smallness honestly.
 
-\begin{lemma}[The barrier forces the rotation condition]
-    \label{lem:rot}
-    Let $f=f_{\log}$. Then the bulk modulus diverges at collapse,
-    \begin{equation}
-        \label{eq:fppblow}
-        f''(J) = \frac{\mu_e + 2\lambda_e - 2\lambda_e\log J}{J^2} \sim \frac{2\lambda_e\,|\log J|}{J^2}
-        \to +\infty \qquad (J\to0^+),
-    \end{equation}
-    and consequently any mode $\bm{\phi}$ of bounded second-variation energy
-    $\langle\bm{\phi},\mathcal{L}\bm{\phi}\rangle\le C$ on the near-collapse fundamental state $\bm{F}_0$ satisfies
-    \begin{equation}
-        \label{eq:rotrate}
-        \operatorname{cof}\bm{F}_0:\Grad\bm{\phi}
-        = \mathcal{O}\!\Big(\frac{J_0}{\sqrt{|\log J_0|}}\Big) \to 0 \qquad (J_0\to0^+).
-    \end{equation}
-    In particular the critical buckling mode is first-order volume-preserving in the collapse limit, so
-    \eqref{eq:rotcond} holds asymptotically along the loaded path, and the residual first-order term in \eqref{eq:Jexp}
-    is dominated by the relief term $w^2 d_\phi$.
+\begin{lemma}[Bifurcation regularity]
+    \label{lem:rotreg}
+    At the bifurcation load $t_c$ the fundamental determinant is bounded below, $J_0(t_c)>0$ (buckling precedes
+    collapse, Remark~\ref{rem:framework}). Then $f'(J_0),f''(J_0)$ are finite, \eqref{eq:secondvar} is a regular
+    quadratic form, and the neutral mode satisfies $\langle\bm{\phi},\mathcal{L}\bm{\phi}\rangle=0$ with $\delta J$ and
+    $\det\Grad\bm{\phi}$ finite. No rotation condition is needed at $t_c$, and Lemma~\ref{lem:relief} applies in its
+    proven range $|w|\le w_0$.
 \end{lemma}
 
-\begin{proof}
-    Differentiating $f_{\log}'(J)=-\mu_e/J+2\lambda_e\log J/J$ gives \eqref{eq:fppblow}. The volumetric part of the
-    second variation of $\Psi$ in the direction $\bm{\phi}$ contains the term $f''(J_0)\,(\delta J)^2$, where
-    $\delta J=\operatorname{cof}\bm{F}_0:\Grad\bm{\phi}=J_0\,\bm{F}_0^{-T}:\Grad\bm{\phi}$ is the first variation of the
-    determinant. Since every term other than this one is bounded on the fundamental state, boundedness of
-    $\langle\bm{\phi},\mathcal{L}\bm{\phi}\rangle$ forces $f''(J_0)\,(\delta J)^2\le C'$, hence
-    $(\delta J)^2\le C'/f''(J_0)\sim C'\,J_0^2/(2\lambda_e|\log J_0|)$. Taking square roots yields
-    \eqref{eq:rotrate}. \qed
-\end{proof}
+\noindent Along the \emph{unstable continuation} the fundamental state is driven toward collapse, $J_0\to0$, and there
+the relief estimate \eqref{eq:Jlower} requires the residual first-order term to stay subordinate. By
+\eqref{eq:secondvar} this is no longer automatic, so we isolate it as a hypothesis on the low-energy modes, verified
+numerically below in place of the (false) claim that it follows from the $f''$ term alone.
+
+\begin{assumption}[Asymptotic rotation, (AR)]
+    \label{ass:rot}
+    Along the near-collapse continuation the buckling mode $\bm{\phi}$ keeps $\langle\bm{\phi},\mathcal{L}\bm{\phi}\rangle$
+    bounded through cancellation in \eqref{eq:secondvar} (the shear term balancing the singular determinant term), and
+    its first-order volume change obeys
+    \begin{equation}
+        \label{eq:rotrate}
+        \delta J=\operatorname{cof}\bm{F}_0:\Grad\bm{\phi}
+        = \mathcal{O}\!\Big(\frac{J_0}{\sqrt{|\log J_0|}}\Big) \to 0 \qquad (J_0\to0^+),
+    \end{equation}
+    so the mode is asymptotically volume-preserving at the rate that makes the relief term $w^2 d_\phi$ dominate the
+    residual first-order term in \eqref{eq:Jexp}.
+\end{assumption}
+
+\begin{remark}[Numerical verification of (AR)]
+    \label{rem:rotnum}
+    Both parts are confirmed by the consistent weak solver of \S\ref{sub:numb} (\texttt{graded\_buckling.py}),
+    evaluated on the \emph{same} critical mode that fixes the subcritical sign. The neutral co-energy vanishes,
+    $\langle\bm{\phi},\mathcal{L}\bm{\phi}\rangle\approx10^{-8}$, confirming Lemma~\ref{lem:rotreg}; the dimensionless
+    rotation defect $\rho_{\mathrm{rot}}:=\|\delta J\|_2/\|\Grad\bm{\phi}\|_2\approx0.08$--$0.16$ across the
+    $(\nu,\hat K)$ rectangle, and remains small and stable ($\approx0.07$--$0.09$) as the base compression is deepened,
+    so the mode is indeed nearly volume-preserving. The decomposition also makes the mechanism explicit: the
+    determinant term is $6$--$10\times$ the $f''(\delta J)^2$ term---so the latter cannot be isolated, exactly as
+    \eqref{eq:secondvar} warns---and the bounded co-energy is achieved by cancellation against the shear term, which is
+    the content of (AR).
+\end{remark}
 
 \subsection{Regularised tangent bound and spatial localisation}
 
@@ -1197,8 +1223,9 @@ the second-order relief to dominate.
 
 \begin{theorem}[Unstable continuation branch: regularised blow-up]
     \label{thm:reg}
-    Under Assumptions~\ref{ass:reg}, \ref{ass:bif}, \ref{ass:subcrit} and the conclusions \eqref{eq:lminscale} of
-    Lemma~\ref{lem:relief}, with the barrier penalty $f_{\log}$, the tangent \emph{along the unstable continuation
+    Under Assumptions~\ref{ass:reg}, \ref{ass:bif}, \ref{ass:subcrit}, \ref{ass:rot} and the conclusions
+    \eqref{eq:lminscale} of Lemma~\ref{lem:relief}, with the barrier penalty $f_{\log}$, the tangent \emph{along the
+    unstable continuation
         branch} \eqref{eq:wscale}---the branch tracked by a displacement- or arc-length-controlled solver---satisfies
     \begin{equation}
         \label{eq:Lreg}
@@ -1304,8 +1331,9 @@ $\mathcal{O}(\epsilon^{2/3})$ (Proposition~\ref{prop:koiter}), keeping a bounded
 (Proposition~\ref{prop:physical}). The much-discussed divergence is therefore not seen by the physical system at all;
 it is the worst case for an algorithm---displacement or arc-length control, numerical continuation---that suppresses
 the snap and tracks the \emph{unstable} branch through the instability. On that branch the determinant is still lifted
-off zero (Lemma~\ref{lem:relief}, with the volume-preserving character of the mode \emph{forced} by the energy barrier,
-Lemma~\ref{lem:rot}), the tangent diverges only algebraically, $\epsilon^{-4/3}$ up to a logarithm
+off zero (Lemma~\ref{lem:relief}, with the asymptotically volume-preserving character of the mode posited by
+Assumption~\ref{ass:rot} and confirmed numerically, Remark~\ref{rem:rotnum}), the tangent diverges only algebraically,
+$\epsilon^{-4/3}$ up to a logarithm
 (Theorem~\ref{thm:reg}), and the singular character is confined to a tube of width
 $\ell(\epsilon)\sim\epsilon^{2/3}\to0$ about the collapse locus, remaining $L^q$-integrable for all $q<\tfrac12$
 (Lemma~\ref{lem:sval}, Proposition~\ref{prop:narrow}). That algebraic rate is the mirror image---through the inverse

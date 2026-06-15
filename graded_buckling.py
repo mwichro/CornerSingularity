@@ -261,8 +261,35 @@ class GradedCell:
         # phi^4, so their ratio is independent of the (arbitrary) mode amplitude;
         # b < 0  <=>  ratio < -1  (feedback overwhelms the adverse frozen term).
         ratio = (2.0 * Rchi) / (4.0 * E4) if E4 != 0 else np.nan
+
+        # --- rotation-condition diagnostics (Lemma lem:rot / finding #4) -------
+        # On the SAME critical mode, the second variation is
+        #   <phi, L phi> = mu |grad phi|^2 + f''(J0) (dJ)^2 + 2 f'(J0) det(grad phi),
+        # with the first-order volume change dJ = cof F0 : grad phi  (= p_ here)
+        # and det(grad phi) = dphi.  The reviewer's worry is that the LAST term
+        # (prefactor 2 f' ~ |log J0|/J0, more singular than f'' ~ |log J0|) is
+        # neither bounded nor sign-controlled.  We measure all three pieces on the
+        # actual mode, plus the dimensionless ROTATION DEFECT
+        #   rho_rot = ||dJ||_2 / ||grad phi||_2   (amplitude-invariant),
+        # small <=> the critical mode is asymptotically volume-preserving.
+        fp_nd = self._tile(mat['fp'])
+        w = self.omega
+        grad_l2 = np.sqrt(np.sum(np.sum(gphi ** 2, axis=0) * w))
+        dJ_l2 = np.sqrt(np.sum(p_ ** 2 * w))
+        rho_rot = dJ_l2 / grad_l2                          # rotation defect (invariant)
+        T_shear = np.sum(self.mu * np.sum(gphi ** 2, axis=0) * w)
+        T_vol2 = np.sum(fpp_nd * p_ ** 2 * w)              # f''(dJ)^2   term
+        T_det = np.sum(2.0 * fp_nd * dphi * w)             # 2 f' det    term (the omitted one)
+        coen = T_shear + T_vol2 + T_det                    # = <phi, L phi>
+        J0min = float(np.min(mat['J0']))
+        # lem:rot predicts (at unit gradient) rho_rot = O(J0 / sqrt|log J0|):
+        rate = rho_rot * np.sqrt(abs(np.log(J0min))) / J0min
+        # how much the "omitted" 2 f' det term dominates the kept f''(dJ)^2 term:
+        det_ratio = T_det / T_vol2 if T_vol2 != 0 else np.nan
         return dict(b=b, bdir=bdir, b_E4=4 * E4, b_feedback=2 * Rchi,
-                    ratio=ratio, kernel_eig=ev[0], gap=gap)
+                    ratio=ratio, kernel_eig=ev[0], gap=gap,
+                    rho_rot=rho_rot, coen=coen, T_shear=T_shear, T_vol2=T_vol2,
+                    T_det=T_det, det_ratio=det_ratio, J0min=J0min, rate=rate)
 
 
 def nu_of(Lam, mu):
@@ -344,3 +371,43 @@ if __name__ == "__main__":
     print("\n  sign(b):", "uniform" if len(set(signs)) == 1 else "mixed",
           "->", "subcritical (b<0) everywhere" if all(s < 0 for s in signs) else
           ("supercritical (b>0)" if all(s > 0 for s in signs) else "geometry-dependent"))
+
+    # (E) Rotation-condition diagnostic (finding #4): on the SAME critical mode,
+    #     report the dimensionless rotation defect rho_rot = ||dJ||/||grad phi||
+    #     and the second-variation decomposition.  The claim under scrutiny is that
+    #     the "omitted" 2 f' det term does NOT dominate and that the mode is nearly
+    #     volume-preserving (rho_rot small).  At the bifurcation J0>0 is finite, so
+    #     the second variation 'coen' is finite -- the rigorous core of lem:rot.
+    print("\n(E) Rotation condition on the critical mode (finding #4):")
+    print("    rho_rot=||dJ||/||grad phi||  (small => mode ~ volume-preserving);")
+    print("    coen=<phi,L phi> finite at the bifurcation; |T_det/T_vol2|<~1 means")
+    print("    the 'omitted' 2f'det term does NOT dominate the kept f''(dJ)^2 term.")
+    print(f"{'nu':>7} {'Khat':>6} {'J0min':>8} {'rho_rot':>9} {'coen':>10}"
+          f" {'T_det/T_vol2':>13}")
+    for Lam in [1.0, 5.0]:
+        cell = GradedCell(mu, Lam, NX=12, N=28)
+        for Khat in [0.10, 0.20, 0.30]:
+            lc = cell.critical_l1(Khat)
+            if not np.isfinite(lc):
+                continue
+            r = cell.landau_b(lc, Khat)
+            print(f"{nu_of(Lam,mu):7.3f} {Khat:6.2f} {r['J0min']:8.4f}"
+                  f" {r['rho_rot']:9.4f} {r['coen']:10.3e} {r['det_ratio']:13.4f}")
+
+    # (F) Asymptotic-rate probe of lem:rot: drive the base compression DEEPER
+    #     (fundamental J0 -> 0) at fixed grading, tracking the softest localised
+    #     mode (lowest eigenvector of the symmetric weak operator).  lem:rot
+    #     predicts rho_rot = O(J0/sqrt|log J0|), i.e. the invariant
+    #     rate = rho_rot*sqrt|log J0|/J0 stays BOUNDED as J0 -> 0.
+    print("\n(F) Asymptotic-rate probe (lem:rot): deeper compression, J0->0.")
+    print("    rate = rho_rot*sqrt|log J0|/J0 bounded <=> rotation rate holds.")
+    Lam, Khat = 5.0, 0.20
+    cell = GradedCell(mu, Lam, NX=12, N=28)
+    lc = cell.critical_l1(Khat)
+    print(f"    Lam={Lam}, nu={nu_of(Lam,mu):.3f}, Khat={Khat}, l1c={lc:.4f}")
+    print(f"{'l1bar':>8} {'J0min':>8} {'rho_rot':>9} {'rate':>9} {'T_det/T_vol2':>13}")
+    for frac in [1.00, 0.85, 0.70, 0.55, 0.40]:
+        l1b = lc * frac
+        r = cell.landau_b(l1b, Khat)
+        print(f"{l1b:8.4f} {r['J0min']:8.4f} {r['rho_rot']:9.4f}"
+              f" {r['rate']:9.4f} {r['det_ratio']:13.4f}")

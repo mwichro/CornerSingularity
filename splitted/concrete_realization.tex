@@ -347,7 +347,7 @@ posit:
               $D_2$ are $R$-even; the integrand is therefore odd over the $R$-symmetric $B_\rho$ and $c_2=0$. This
               \emph{proves} the vanishing-quadratic clause of Assumption~\ref{ass:subcrit}.
         \item[\textup{(ii)}] \emph{The frozen cubic and quintic are sign-definite, and adverse to subcriticality.} With
-              $D_1$ asymptotically small (Lemma~\ref{lem:rot}) and $d_\phi>0$ (Lemma~\ref{lem:sval}), the leading frozen
+              $D_1$ asymptotically small (Assumption~\ref{ass:rot}) and $d_\phi>0$ (Lemma~\ref{lem:sval}), the leading frozen
               parts are $b_{\mathrm{dir}}=2\int_{B_\rho} f''(J_0)\,d_\phi^2\,dV$ and
               $d_{\mathrm{dir}}=\int_{B_\rho} f'''(J_0)\,d_\phi^3\,dV$. For the logarithmic penalty
               $f''_{\log}(J_0)=(\mu_e+2\lambda_e-2\lambda_e\log J_0)/J_0^2>0$ and
@@ -483,20 +483,25 @@ second discriminant scales as $d_\phi=\det\Grad\bm{\phi}=\mathcal{O}(r^{2(\alpha
 \subsection{Kinematic relief}
 \label{sub:reliefd}
 
-The kinematic relief is already dimension-independent, and --- in contrast to the original formulation --- it no longer
-rests on an assumed rotation condition. Earlier drafts \emph{posited} that the critical mode be exactly
-volume-preserving at first order, $\operatorname{cof}\bm{F}_0:\Grad\bm{\phi}=0$. That hypothesis is now \emph{discharged}:
-Lemma~\ref{lem:rot} bounds the first-order volume change by the barrier alone,
-$D_1=\operatorname{cof}\bm{F}_0:\Grad\bm{\phi}=\mathcal{O}(J_0/\sqrt{|\log J_0|})$ --- small with $J_0$, but not assumed
-zero --- and Lemma~\ref{lem:relief} then proves the unconditional lower bound
+The kinematic relief is dimension-independent, and --- in contrast to the original formulation --- it does not require
+the critical mode to be \emph{exactly} volume-preserving at first order. Earlier drafts \emph{posited}
+$\operatorname{cof}\bm{F}_0:\Grad\bm{\phi}=0$; that exact condition is replaced by the weaker asymptotic smallness
+$D_1=\operatorname{cof}\bm{F}_0:\Grad\bm{\phi}=\mathcal{O}(J_0/\sqrt{|\log J_0|})$ of Assumption~\ref{ass:rot} --- small
+with $J_0$, but not zero. We are careful about its status: at the bifurcation
+$J_0(t_c)>0$ and the second variation \eqref{eq:secondvar} is a regular form, so the smallness is automatic
+(Lemma~\ref{lem:rotreg}); along the near-collapse continuation it is a hypothesis, \emph{not} derivable by isolating
+$f''(J)(\delta J)^2$ (the determinant term in \eqref{eq:secondvar} is in fact more singular and numerically dominant,
+Remark~\ref{rem:rotnum}), and is verified directly on the computed mode (rotation defect $\approx0.08$--$0.16$). Granting
+it, Lemma~\ref{lem:relief} gives the lower bound
 \begin{equation}
     \label{eq:reliefd}
     J=J_0+w\,D_1+w^2 d_\phi+\mathcal{O}(w^3) \ \ge\ \tfrac12 J_0+\tfrac12 w^2 d_\phi
     \qquad\text{in } \mathbb{R}^d,
 \end{equation}
 with $d_\phi$ the second mixed discriminant of $\bm{F}_0$ and $\Grad\bm{\phi}$ (the second-order coefficient of the
-determinant, $=\det\Grad\bm{\phi}$ for $d=2$). The proof of Lemma~\ref{lem:rot} uses only $f''(J)(\delta J)^2\le C$ and
-is valid for all $d$, so the relief is genuinely a theorem in every dimension rather than a kinematic assumption. For
+determinant, $=\det\Grad\bm{\phi}$ for $d=2$). The relief mechanism itself is valid for all $d$ once
+Assumption~\ref{ass:rot} is granted, so it is a kinematic statement in every dimension rather than a special
+two-dimensional accident. For
 the concrete model the only points to add are that the genericity $d_\phi>0$ holds off a measure-zero set of modes, by
 the transversality argument of Lemma~\ref{lem:sval}, and that the collapse locus $\Sigma_{\mathrm{c}}$ is generically the
 codimension-one set inside $B_\rho$ along which the relieved branch would still collapse (or, when the severest
@@ -643,7 +648,7 @@ in concrete, checkable form rather than as opaque spectral postulates:
         Mode simplicity (Ass.~\ref{ass:bif})                         & assumed             & \textbf{generic} per symmetry sector (\S\ref{sub:symmetry}) \\
         Quadratic coeff.\ vanishes (Ass.~\ref{ass:subcrit})          & assumed by symmetry & \textbf{proved}: $c_2$ odd in $D_1$, $R$-forced (Lem.~\ref{lem:volcoeff}) \\
         Mode attainment (Ass.~\ref{ass:bif})                         & assumed             & \textbf{proved} under (BC) (Lem.~\ref{lem:attain}) \\
-        First-order relief / rotation (Lem.~\ref{lem:rot},~\ref{lem:relief}) & was posited; now \textbf{proved} (all $d$)  & genericity $d_\phi>0$ (\S\ref{sub:reliefd}) \\
+        First-order relief / rotation (Ass.~\ref{ass:rot}, Lem.~\ref{lem:relief}) & finite at $t_c$ (Lem.~\ref{lem:rotreg}); near-collapse posited & \emph{numerical}: rotation defect ${\approx}0.08$--$0.16$ (Rem.~\ref{rem:rotnum}) \\
         \midrule
         Buckling precedes collapse (BC) (Ass.~\ref{ass:bc})          & ---                 & \emph{numerical}, wedge $(\nu)$ only (Lem.~\ref{lem:bcwedge}, Rem.~\ref{rem:bc}) \\
         Subcriticality $b<0<d$ (Ass.~\ref{ass:subcrit})              & assumed             & \emph{numerical}, phase diagram $b(\nu,\hat K)$; $\alpha{>}\tfrac12$ (Prop.~\ref{prop:bcount}) \\
