@@ -830,8 +830,15 @@ subcritical---we assume it here rather than pretend to derive it.
         \qquad
         d:=\tfrac1{120}\langle\bm{\phi},\partial^5_{\bm{u}}G[\bm{\phi},\dots,\bm{\phi}]\rangle>0,
     \end{equation}
-    and the quadratic coefficient vanishes by the reflection symmetry $w\mapsto-w$ of the perfect compressive state
-    about the corner bisector.
+    and the quadratic coefficient
+    $c_2:=\tfrac12\langle\bm{\phi},\partial^2_{\bm{u}}G[\bm{\phi},\bm{\phi}]\rangle$ vanishes whenever the critical mode
+    is \emph{antisymmetric} under a reflection symmetry of the loaded configuration that maps each boundary face to
+    itself. We stress that this is \emph{not} the corner-bisector reflection $\theta\mapsto\tfrac\pi2-\theta$, which
+    interchanges $\Gamma_D$ and $\Gamma_N$ and is therefore not a symmetry of the mixed problem at all; it is the
+    lateral reflection $R$ fixing each face, realised concretely for the model bodies in \S\ref{sub:symmetry}. When no
+    such symmetry is available, or the ground mode lies in the symmetric sector, $c_2\neq0$ and the reduction is
+    transcritical rather than a pitchfork; this case leaves the conclusions of the section intact and is treated in
+    Remark~\ref{rem:transcritical}.
 \end{assumption}
 
 \subsection{Lyapunov--Schmidt reduction}
@@ -953,6 +960,33 @@ $t=t_c$, $b\,w^3=\epsilon\eta\,(1+o(1))$ with the quintic subdominant, so
 \end{equation}
 This is the branch a displacement- or arc-length-controlled solver tracks through the instability, and it is the one
 that feeds the tangent estimate below; it is \emph{not} the branch a load-controlled physical system follows.
+
+\begin{remark}[Robustness to the bifurcation type: pitchfork vs.\ transcritical]
+    \label{rem:transcritical}
+    Assumption~\ref{ass:subcrit} takes the reduced potential to be odd ($c_2=0$), a subcritical \emph{pitchfork}; by the
+    discussion there this holds when the critical mode is antisymmetric under the lateral reflection $R$ of
+    \S\ref{sub:symmetry}. If that symmetry is absent or the ground mode lies in the symmetric sector, the quadratic
+    coefficient $c_2\neq0$ survives and \eqref{eq:bifeq} is instead \emph{transcritical},
+    \begin{equation}
+        \label{eq:bifeqtrans}
+        a\,(t_c-t)\,w + c_2\,w^2 + \mathcal{O}(w^3) = \epsilon\,\eta .
+    \end{equation}
+    The qualitative architecture of the section is unaffected. Repeating the limit-point analysis of
+    Proposition~\ref{prop:koiter} on \eqref{eq:bifeqtrans} (solve $g=g_w=0$ with $g=a(t_c-t)w+c_2w^2-\epsilon\eta$) gives
+    a turning amplitude $w_\ast^2=-\epsilon\eta/c_2=\mathcal{O}(\epsilon)$ and a snap load depressed by the classical
+    Koiter \emph{one-half} law,
+    \begin{equation}
+        t_s(\epsilon)=t_c-C'\,|\eta\,\epsilon|^{1/2}+o(\epsilon^{1/2}),
+    \end{equation}
+    in place of the $\tfrac23$ law and $w_\ast=\mathcal{O}(\epsilon^{1/3})$ of the pitchfork. The determinant relief
+    \eqref{eq:Jexp}--\eqref{eq:lminrelief} still lifts $\lambda_{\min}$ off zero, now at order
+    $w_\ast^2=\mathcal{O}(\epsilon)$ rather than $\mathcal{O}(\epsilon^{2/3})$, so the regularised tangent bound of
+    \S\ref{sub:core} reads $\|\mathbb{L}\|=\mathcal{O}(\epsilon^{-2}\log\tfrac1\epsilon)$ in place of
+    $\mathcal{O}(\epsilon^{-4/3})$, and the localisation of Proposition~\ref{prop:narrow} persists with the
+    correspondingly shifted exponents. In particular the central result --- a bounded physical branch carrying a
+    vanishingly localised, regularised tangent blow-up for every $\epsilon>0$ --- is insensitive to whether the corner
+    bifurcation is a subcritical pitchfork or a transcritical fold; only the imperfection-sensitivity exponents change.
+\end{remark}
 
 \subsection{Kinematic relief: lower bound on \texorpdfstring{$J$}{J}}
 
