@@ -28,6 +28,9 @@ We consider two model bodies in $\Omega\subset\mathbb{R}^d$.
 
 In both cases the load is a monotone compression transmitted through $\Gamma_N$ (a pressure or an inward normal
 displacement on the cap, respectively the lateral/top faces), scaled by the pseudo-time $t\in[0,1]$ of \S\ref{sec:iba}.
+We carry two bodies not because they require two analyses --- by the blow-up reduction of \S\ref{sub:blowup} they do
+not, see Remark~\ref{rem:cleanmodel} --- but because they bracket the two situations one meets in practice: a globally
+smooth edge (H) and a polyhedral one with vertices (C).
 
 The \emph{singular set} $\Sigma\subset\partial\Omega$ is the locus where $\overline{\Gamma_D}$ meets
 $\overline{\Gamma_N}$:
@@ -43,14 +46,102 @@ two-plane normal to $\Sigma$. In the slice $\Pi$ the boundary reduces to a Diric
 $90^\circ$: \emph{exactly} the planar junction of \S\ref{sub:scenarioA}. We write $B_\rho$ for a tubular neighbourhood
 of $\Sigma$ of radius $\rho$ and use $(r,\theta)$ for polar coordinates in $\Pi$ as before.
 
-\begin{remark}[Why the half-ball is the clean model]
+\begin{remark}[The two bodies are one edge analysis]
     \label{rem:cleanmodel}
-    For (H) the singular set $\Sigma$ is a smooth closed manifold with no vertices, so the singularity is a \emph{pure
-        edge} everywhere on $\Sigma$ and the transverse problem is the planar right-angle junction at every point. For (C)
-    the edge interiors behave identically, but the bottom vertices carry an additional, generally stronger,
-    polyhedral-vertex singularity \cite{MazyaRossmann2010} that is outside the scope of the edge analysis; one either
-    rounds the vertices or restricts $B_\rho$ to the edge interior. We therefore state the dimension-independent results
-    for (H) and note that they hold verbatim on the edge interiors of (C).
+    The blow-up reduction (Proposition~\ref{prop:blowup}) makes precise that (H) and (C) are \emph{not} two cases but
+    one: at any non-vertex point of $\Sigma$ the transverse problem is the same planar right-angle clamped--free wedge,
+    with the \emph{same} exponent $\alpha$, angular profile $\bm{\Phi}$ and reduced data, the bodies differing only
+    through the scalar stress-intensity $\hat K$ (a point in the phase diagram of Remark~\ref{rem:sifparam}) and through
+    edge curvature, which enters only at the subleading order $\mathcal{O}(\lambda^{g})$. The \emph{single} genuine
+    distinction is topological. For (H) the singular set $\Sigma\cong S^{d-2}$ is a smooth closed manifold with no
+    vertices, so the singularity is a pure edge everywhere on $\Sigma$ and the analysis holds verbatim at every point.
+    For (C) the edge interiors are identical, but the bottom vertices, where $d$ faces meet, carry an additional,
+    generally stronger, polyhedral-vertex singularity \cite{MazyaRossmann2010} outside the scope of the edge analysis;
+    one either rounds the vertices or restricts $B_\rho$ to the edge interior. We therefore state the
+    dimension-independent results once, read on (H) as the clean smooth-edge representative, and note that they hold
+    verbatim on the edge interiors of (C) --- which is the geometry of the motivating computation \cite{cutfemAD}.
+\end{remark}
+
+\subsection{The blow-up principle: reduction to the model wedge}
+\label{sub:blowup}
+
+The analysis of \S\ref{sec:asymptotics}--\S\ref{sec:iba} works on a tubular neighbourhood $B_\rho$ of $\Sigma$ cut from
+a \emph{specific} body. The informal reason the two bodies of \S\ref{sub:geom} share the same corner physics is that
+the singularity is localised at $\Sigma$: the leading data at the edge cannot feel the far field except through the
+single amplitude $K$. We now make this precise as a blow-up (tangent-cone) reduction, which is what licenses replacing
+``numerics on (H) and (C)'' by ``numerics on one universal model.''
+
+Fix $\bm{x}_0\in\Sigma$ away from any vertex and let $W:=\Pi_W\times T_{\bm{x}_0}\Sigma$ be the \emph{tangent wedge},
+with $\Pi_W=\{(r,\theta):r>0,\ 0<\theta<\tfrac\pi2\}$ the right-angle Dirichlet--Neumann quarter-plane in the normal
+two-plane $\Pi$. For $\lambda\in(0,1]$ introduce the rescaling $\bm{\xi}\mapsto\bm{x}_0+\lambda\bm{\xi}$, under which
+$B_{\lambda R}(\bm{x}_0)$ maps to $B_R(\bm0)\cap W$ and $\Omega_\lambda:=\lambda^{-1}(\Omega-\bm{x}_0)\to W$ as
+$\lambda\to0$. Write the fundamental displacement on the loaded path as
+$\bm{u}_0=K\,r^{\alpha}\bm{\Phi}(\theta)+\bm{u}_0^{\sharp}$, where by the Kondratiev expansion the remainder collects the
+next exponents, $\bm{u}_0^{\sharp}=\mathcal{O}(r^{\alpha'})$ with $\alpha'>\alpha$ the second singular exponent of the
+pencil, and set the \emph{spectral gap} $g:=\alpha'-\alpha>0$. Define the rescaled displacement, tangent and operator
+\begin{equation}
+    \label{eq:rescale}
+    \hat{\bm{u}}_\lambda(\bm{\xi}):=\lambda^{-\alpha}\big(\bm{u}_0(\bm{x}_0+\lambda\bm{\xi})-\bm{u}_0(\bm{x}_0)\big),
+    \qquad
+    \widehat{\mathbb{L}}_\lambda(\bm{\xi}):=\mathbb{L}\big(\bm{F}_0(\bm{x}_0+\lambda\bm{\xi})\big),
+    \qquad
+    \widehat{\mathcal{L}}_\lambda:=\partial_{\bm{u}}G\big(\bm{u}_0,\cdot,0\big)\big|_{\bm{x}_0+\lambda\bm{\xi}} .
+\end{equation}
+
+\begin{proposition}[Blow-up reduction to the model wedge]
+    \label{prop:blowup}
+    Let $\bm{x}_0\in\Sigma$ be a non-vertex point and let $\beta_\star$ be the Fredholm weight of \S\ref{sec:asymptotics}.
+    Then, as $\lambda\to0$:
+    \begin{enumerate}
+        \item[\textup{(i)}] \emph{Kinematics.} $\hat{\bm{u}}_\lambda\to\hat{\bm{u}}_W:=K\,r^{\alpha}\bm{\Phi}(\theta)$ in
+              $V^{1,2}_{\beta_\star}(B_R\cap W)$ for every $R>0$, with rate
+              $\|\hat{\bm{u}}_\lambda-\hat{\bm{u}}_W\|_{V^{1,2}_{\beta_\star}(B_R\cap W)}=\mathcal{O}(\lambda^{g})$. The
+              limit solves the homogeneous linear pencil on $W$ and is fixed by the wedge geometry up to the scalar $K$.
+        \item[\textup{(ii)}] \emph{Operator and spectrum.} The rescaled operator $\widehat{\mathcal{L}}_\lambda$ converges,
+              on compact subsets of $\overline{W}\setminus\{r=0\}$ and in the weighted operator norm on $B_R\cap W$, to
+              the model-wedge operator $\mathcal{L}_W$ obtained by freezing the coefficients along the self-similar field
+              $\hat{\bm{u}}_W$; consequently the singular exponents and the leading reduced bifurcation data computed on
+              $\widehat{\mathcal{L}}_\lambda$ agree with those of $\mathcal{L}_W$ up to $\mathcal{O}(\lambda^{g})$. Only the
+              dimensionless amplitude $K$ (equivalently the normalised stress-intensity $\hat K$ of
+              Remark~\ref{rem:sifparam}) survives from the global problem.
+        \item[\textup{(iii)}] \emph{Dimensional reduction $d\ge3\Rightarrow d=2$.} Since $\Sigma$ is smooth and the
+              coefficients are constant along $T_{\bm{x}_0}\Sigma$ in the limit, the Fourier transform in the edge variable
+              $\bm{s}\in T_{\bm{x}_0}\Sigma$ decomposes $\mathcal{L}_W$ into a one-parameter family
+              $\{\mathcal{L}_W(\bm{\zeta})\}_{\bm{\zeta}\in\widehat{T_{\bm{x}_0}\Sigma}}$ of operators on the planar
+              quarter-plane $\Pi_W$, each the transverse two-dimensional pencil of \eqref{eq:kondratiev}; the leading edge
+              exponent is carried by the zero wavenumber $\bm{\zeta}=\bm0$. The model problem is therefore genuinely
+              two-dimensional.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    Statement (i) is the leading-term extraction of the Kondratiev--Maz'ya--Rossmann expansion
+    \cite{KMR2001,MazyaRossmann2010}: on the Fredholm weight $\beta_\star$ the solution admits
+    $\bm{u}_0=K r^{\alpha}\bm{\Phi}+\mathcal{O}(r^{\alpha'})$, and the rescaling \eqref{eq:rescale} maps the leading term
+    to the $\lambda$-independent field $K r^{\alpha}\bm{\Phi}$ exactly while shrinking the remainder by
+    $\lambda^{\alpha'-\alpha}=\lambda^{g}$ in the homogeneous weighted norm. Statement (ii) follows because
+    $\mathbb{L}$ is a smooth (algebraic) function of $\bm{F}_0=\bm{I}+\Grad\bm{u}_0$ and $\Grad\hat{\bm{u}}_\lambda\to
+    \Grad\hat{\bm{u}}_W$ off the tip by (i); freezing along the self-similar limit defines $\mathcal{L}_W$, and the
+    error inherits the $\mathcal{O}(\lambda^{g})$ rate of (i) on every annulus bounded away from $r=0$, where the
+    weighted estimates of Lemma~\ref{lem:korn} and Theorem~\ref{thm:A} apply uniformly. The tip itself contributes
+    through the weight, not through the body. Statement (iii) is the standard edge-to-corner reduction: translation
+    invariance along $T_{\bm{x}_0}\Sigma$ in the limit diagonalises $\mathcal{L}_W$ under the partial Fourier transform,
+    and each fibre is the planar pencil whose smallest root is $\alpha$, attained at $\bm{\zeta}=\bm0$ (the cited edge
+    calculus). \qed
+\end{proof}
+
+\begin{remark}[The one surviving global datum, and what it costs]
+    \label{rem:sifparam}
+    Proposition~\ref{prop:blowup} isolates exactly what does and does not localise. The exponent $\alpha$, the angular
+    profile $\bm{\Phi}$, and the wedge operator $\mathcal{L}_W$ are \emph{universal}: functions of the opening
+    ($90^\circ$) and the Poisson ratio alone. The only trace of the finite body is the scalar $K$, conveniently made
+    dimensionless as $\hat K:=K\,\rho^{\,\alpha-1}/\mu_e$ (the normalised stress-intensity over the neighbourhood scale).
+    Thus every quantity in the corner reduces to a computation on $\mathcal{L}_W$ as a function of $(\nu,\hat K)$ --- a
+    two-parameter \emph{phase diagram}, not a per-body spot check. Whether a given quantity depends on $\hat K$ at all,
+    or only on $(\nu)$, is decided by a homogeneity count against $\alpha$, carried out for the two open conditions in
+    \S\ref{sub:attain} (condition (BC), which needs only $\nu$) and \S\ref{sub:bcount} (the cubic $b$, which retains the
+    $\hat K$-dependence). This is the precise, and sharper, replacement for ``the singularity is localised to the
+    corner.''
 \end{remark}
 
 \subsection{Tier 1: the material assumptions are already discharged}
@@ -277,7 +368,93 @@ What symmetry fixes is thus the quadratic coefficient; what it does \emph{not} f
 quintic $d$. Indeed the explicit single-mode parts \eqref{eq:bvol} point \emph{against} subcriticality
 ($b_{\mathrm{dir}}>0$, $d_{\mathrm{dir}}<0$ by Lemma~\ref{lem:volcoeff}(ii)), so the subcritical pattern $b<0<d$ rests
 entirely on the geometry-dependent orthogonal-mode feedback --- the irreducible core, which we settle numerically
-rather than by analogy (Remark~\ref{rem:bsign}).
+rather than by analogy (Remark~\ref{rem:bsign}). Proposition~\ref{prop:bcount} below explains, by a homogeneity count
+against the edge exponent $\alpha$, \emph{why} this feedback cannot be reduced to a universal corner number.
+
+\subsection{The homogeneity count for the cubic}
+\label{sub:bcount}
+
+The blow-up reduction of \S\ref{sub:blowup} promised a dichotomy: a corner quantity localises to a universal
+model-wedge number only when its defining integral is dominated by the tip. We now carry out the count for the cubic
+coefficient and find that, for the right-angle clamped--free pencil, it sits on the \emph{non}-localising side --- which
+is exactly why the sign of $b$ is a genuine, $\hat K$-dependent computation rather than an inheritance from flat
+creasing.
+
+Near the edge the critical mode $\bm{\phi}\in V$ inherits the admissible singular behaviour of the pencil,
+$\Grad\bm{\phi}=\mathcal{O}(r^{\alpha-1})$ (the least-singular $H^1$ exponent of \eqref{eq:kondratiev}), so the
+second discriminant scales as $d_\phi=\det\Grad\bm{\phi}=\mathcal{O}(r^{2(\alpha-1)})$ in $d=2$.
+
+\begin{proposition}[Homogeneity count: the cubic does not localise to the bare wedge]
+    \label{prop:bcount}
+    In $d=2$ the single-mode integrand of $b_{\mathrm{dir}}=2\!\int_{B_\rho}f''(J_0)\,d_\phi^2\,dV$ scales as
+    $d_\phi^2=\mathcal{O}(r^{4(\alpha-1)})$, so
+    \begin{equation}
+        \label{eq:bcount}
+        \int_{B_\rho} d_\phi^2\,dV \ \sim\ \int_0 r^{4(\alpha-1)}\,r\,dr \ =\ \int_0 r^{\,4\alpha-3}\,dr,
+    \end{equation}
+    which converges at the tip $r=0$ iff $4\alpha-3>-1$, i.e.\ iff $\alpha>\tfrac12$.
+    \begin{enumerate}
+        \item[\textup{(i)}] \emph{The clamped--free pencil lies above the threshold.} The smallest root of the
+              right-angle clamped--free Williams secular equation (plane strain, $\kappa=3-4\nu$) is
+              $\alpha=\alpha(\nu)\in(0.60,0.87)$ for $\nu\in(0,\tfrac12)$ --- e.g.\ $\alpha(0.3)\approx0.711$,
+              $\alpha(0.45)\approx0.622$, $\alpha(0.499)\approx0.595$ --- so $\alpha>\tfrac12$ throughout the physical
+              range (Figure~\ref{fig:williams}).
+        \item[\textup{(ii)}] \emph{Consequence: tip-convergent but not tip-dominated.} For $\alpha>\tfrac12$ the integral
+              \eqref{eq:bcount} converges \emph{without} barrier regularisation, but its mass is spread over the annulus
+              rather than concentrated at the tip; the cut-off radius $\rho$ and the matching to the far field leave an
+              $\mathcal{O}(1)$ residue. By Proposition~\ref{prop:blowup} this residue is carried by the normalised
+              stress-intensity $\hat K$. Hence $b$ does \emph{not} collapse to a bare-wedge number: it is a functional
+              $b=b(\nu,\hat K)$ on the graded-substrate creasing model (a half-space crease seated in the linear
+              pre-stress gradient of the edge field), and the subcritical sign $b<0$ is the sign of $b(\nu,\hat K)$ over
+              the physical $(\nu,\hat K)$ rectangle --- a two-parameter phase diagram, not a single number.
+        \item[\textup{(iii)}] \emph{The complementary regime.} Were $\alpha<\tfrac12$ (e.g.\ at sharper or
+              differently-loaded openings), \eqref{eq:bcount} would diverge at the tip, the barrier/collapse-locus
+              regularisation of \S\ref{sub:reliefd} would render it finite, and $b$ \emph{would} be set by an
+              arbitrarily small tip neighbourhood --- a genuinely localised, $\hat K$-free wedge functional. The present
+              geometry is firmly in case (ii).
+    \end{enumerate}
+\end{proposition}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.72\textwidth]{figures/williams_exponent.pdf}
+    \caption{Leading Williams singular exponent $\alpha(\nu)$ for the right-angle clamped--free (Dirichlet--Neumann)
+        wedge (plane strain, $\kappa=3-4\nu$), the smallest root in $(0,1)$ of the $4\times4$ secular determinant of
+        Proposition~\ref{prop:bcount}. Across the entire physical range the curve lies in the regime
+        $\alpha>\tfrac12$ (upper band), where the cubic integral \eqref{eq:bcount} is tip-convergent but not
+        tip-dominated, so the reduced coefficient retains its dependence on the normalised stress-intensity,
+        $b=b(\nu,\hat K)$. The lower band $\alpha<\tfrac12$ (tip-dominated, $b$ a universal wedge functional) is not
+        reached by this geometry. The exponent rises to $\alpha\to1$ as $\nu\to0$, i.e.\ the singularity \emph{weakens}
+        for small Poisson ratio and the stress concentration disappears in the limit ($\bm{F}$ bounded for
+        $\alpha\ge1$); this is expected, the corner stress singularity being driven by the volumetric coupling that
+        vanishes as $\nu\to0$. Reproduced by \texttt{williams\_clampedfree.py} / \texttt{plot\_williams\_exponent.py}.}
+    \label{fig:williams}
+\end{figure}
+
+\begin{proof}
+    The scaling \eqref{eq:bcount} is immediate from $d_\phi=\det\Grad\bm{\phi}=\mathcal{O}(r^{2(\alpha-1)})$ and the
+    area element $r\,dr\,d\theta$; convergence at $r=0$ is the elementary condition $4\alpha-3>-1$. The factor
+    $f''(J_0)$ is bounded away from the collapse locus and only strengthens convergence under compression
+    ($f''_{\log}>0$), so it does not change the count. The exponents in (i) are the smallest real roots in $(0,1)$ of
+    the $4\times4$ boundary-condition determinant for the clamped ($u_r=u_\theta=0$ at $\theta=0$) and traction-free
+    ($\sigma_{\theta\theta}=\sigma_{r\theta}=0$ at $\theta=\tfrac\pi2$) Kolosov--Muskhelishvili eigensolutions
+    $\varphi=Cz^{\alpha}$, $\psi=Ez^{\alpha}$; the value $\alpha(0.3)\approx0.711$ reproduces the classical
+    $90^\circ$ fixed--free corner. Statements (ii)--(iii) are the localisation/non-localisation alternative of the
+    blow-up dichotomy (Remark~\ref{rem:sifparam}) applied to the convergent, respectively divergent, case of
+    \eqref{eq:bcount}. \qed
+\end{proof}
+
+\begin{remark}[Two scales, and why flat creasing does not hand over the sign]
+    \label{rem:twoscales}
+    Case (ii) has a transparent mechanical reading. The buckling mode of Lemma~\ref{lem:biot} is a crease localised at
+    an interior free-face point $P$ on the wavelength scale $1/k$, while the edge field varies on the scale $r_P$ of the
+    distance from $P$ to $\Sigma$. If $1/k\ll r_P$ the crease sees a locally \emph{homogeneous} pre-stress and inherits
+    the flat-surface sign $b<0$ for free; that limit is precisely the one $\alpha<\tfrac12$ would enforce, and it is
+    \emph{not} the present case. For $\alpha>\tfrac12$ the surviving contribution lives at $1/k\sim r_P$, where the crease
+    sits in the \emph{graded} pre-stress of the corner; the substrate gradient enters through $\hat K$ and the flat
+    result no longer dictates the sign. This is the analytic origin of the ``$\mathcal{O}(1)$ geometry competition'' that
+    makes $b$ the one irreducibly numerical coefficient.
+\end{remark}
 
 \subsection{Kinematic relief}
 \label{sub:reliefd}
@@ -361,6 +538,39 @@ has bounded coefficients and the spectrum is discrete.
     open, in place of the opaque spectral hypothesis.
 \end{remark}
 
+\begin{lemma}[\textup{(BC)} is a model-wedge inequality]
+    \label{lem:bcwedge}
+    The threshold comparison $t_c<t_{\mathrm{coll}}$ underlying (BC) is, to leading order in the neighbourhood scale,
+    a comparison of two \emph{scale-invariant} quantities of the model wedge $\mathcal{L}_W$ of
+    Proposition~\ref{prop:blowup}; in particular it depends on the geometry only through $(\nu)$ and not on the body,
+    and is free of the stress-intensity amplitude $\hat K$.
+\end{lemma}
+
+\begin{proof}
+    Both loads are read off the same self-similar field $\hat{\bm{u}}_W=Kr^{\alpha}\bm{\Phi}$ of
+    Proposition~\ref{prop:blowup}(i). The buckling load is bounded above by the surface-creasing load of
+    Lemma~\ref{lem:biot}, $t_c\le t_*$, attained where the surface-parallel stretch first reaches the half-space
+    threshold $\lambda_\parallel=\lambda_\star=\mathcal{O}(1)$; both $\lambda_\star$ (Remark~\ref{rem:threshold}) and the
+    Biot secular form $q(\lambda_\parallel)$ are functions of $\nu$ alone, and the localisation of Lemma~\ref{lem:biot}
+    ($k\to\infty$, $\delta=k^{-1/2}$) is exactly the statement that $t_*$ is set by the half-space model, a sub-object of
+    $\mathcal{L}_W$. The collapse load $t_{\mathrm{coll}}$ is the value at which the barrier-regularised continuation of
+    the self-similar field first reaches $\lambda_{\min}=0$; since $\lambda_{\min}(\hat{\bm{u}}_W)$ and the barrier
+    $f_{\log}$ are both homogeneous data on $W$, $t_{\mathrm{coll}}$ rescales as a wedge quantity. Multiplying the load by
+    a constant translates both thresholds equally, so their \emph{ordering} $t_c<t_{\mathrm{coll}}$ is amplitude-free:
+    it is invariant under $\hat K\mapsto c\,\hat K$ and therefore a property of $(\nu)$ and the $90^\circ$ wedge alone.
+    By Proposition~\ref{prop:blowup}(ii) the finite-body corrections are $\mathcal{O}(\lambda^{g})$. \qed
+\end{proof}
+
+\begin{remark}[Why (BC) localises but the cubic sign need not]
+    \label{rem:bclocalises}
+    Lemma~\ref{lem:bcwedge} is the easy half of the localisation programme: a comparison of \emph{thresholds} is
+    insensitive to the overall amplitude, so it collapses to a one-parameter ($\nu$) statement on the model wedge and is
+    decided by a single computation independent of (H) versus (C). The subcritical \emph{sign} of \S\ref{sub:bcount} is
+    the hard half: there the relevant object is an integral, not a threshold, and whether it localises is governed by the
+    homogeneity count of Proposition~\ref{prop:bcount}. The two open conditions thus sit on opposite sides of the
+    blow-up dichotomy of Remark~\ref{rem:sifparam}.
+\end{remark}
+
 \subsection{The irreducible core}
 \label{sub:core}
 
@@ -375,14 +585,20 @@ in concrete, checkable form rather than as opaque spectral postulates:
           $t_c<t_{\mathrm{coll}}$ that powers attainment (Lemma~\ref{lem:attain}). It is bounded on one side by
           Lemma~\ref{lem:biot} ($t_c\le t_*$, at $\lambda_{\min}=\mathcal{O}(1)$) and supported by the energy barrier
           (Remark~\ref{rem:bc}); the residual content is a lower bound on the barrier-regularised tip collapse load,
-          which we verify numerically.
+          which we verify numerically. By Lemma~\ref{lem:bcwedge} this is a comparison of two scale-invariant wedge
+          thresholds, so it reduces to a one-parameter ($\nu$) computation on the model wedge, independent of the body
+          and of the stress-intensity $\hat K$.
     \item \emph{Subcritical sign pattern}, $b<0<d$ (Assumption~\ref{ass:subcrit}): the directions in which the cubic and
           quintic bend the branch. Here the neo-Hookean structure is doubly informative. Lemma~\ref{lem:volcoeff}
           reduces the coefficients to volumetric integrals and shows the explicit single-mode parts are \emph{adverse}
           to subcriticality ($b_{\mathrm{dir}}>0$, $d_{\mathrm{dir}}<0$ in compression), so $b<0<d$ can come only from
           the geometry-dependent orthogonal-mode feedback. The creasing literature \cite{Biot1963,Hong2009} establishes
           subcriticality for the flat surface, but the sign at a \emph{corner} is delivered neither by symmetry nor by
-          the frozen terms; we evaluate the feedback-corrected coefficients numerically (Remark~\ref{rem:bsign}).
+          the frozen terms; we evaluate the feedback-corrected coefficients numerically (Remark~\ref{rem:bsign}). The
+          homogeneity count of Proposition~\ref{prop:bcount} pins down \emph{why} this is irreducible: because the edge
+          exponent satisfies $\alpha>\tfrac12$ here, the cubic integral is tip-convergent but not tip-dominated, so $b$
+          does not collapse to a universal wedge number but remains a functional $b(\nu,\hat K)$ of the Poisson ratio and
+          the normalised stress-intensity --- the quantity the computation maps out.
 \end{enumerate}
 
 \begin{table}[t]
@@ -392,7 +608,8 @@ in concrete, checkable form rather than as opaque spectral postulates:
         Hypothesis & Abstract status & Status for the concrete model \\
         \midrule
         Reg./growth/ellip./mild (Ass.~\ref{ass:reg}--\ref{ass:mild}) & standing assumptions & \textbf{proved} (Lem.~\ref{lem:nh}, \S\ref{sub:tier1}) \\
-        Edge exponent $\alpha$, scenario selection                   & abstract pencil      & \textbf{computed}; B selected by $K<0$ (\S\ref{sub:edgeexp}) \\
+        Edge exponent $\alpha$, scenario selection                   & abstract pencil      & \textbf{computed} $\alpha(\nu){\in}(0.6,0.87)$; B by $K{<}0$ (\S\ref{sub:edgeexp}) \\
+        Localisation to model wedge                                  & informal             & \textbf{proved}: blow-up reduction (Prop.~\ref{prop:blowup}) \\
         Critical load $t_c$ exists (Lem.~\ref{lem:tc}(ii))           & not established      & \textbf{proved} under (SC) (Lem.~\ref{lem:biot}) \\
         Transversality (M) (Lem.~\ref{lem:transversal})              & input on loading    & \textbf{holds} for monotone compression \\
         Mode simplicity (Ass.~\ref{ass:bif})                         & assumed             & \textbf{generic} per symmetry sector (\S\ref{sub:symmetry}) \\
@@ -400,8 +617,8 @@ in concrete, checkable form rather than as opaque spectral postulates:
         Mode attainment (Ass.~\ref{ass:bif})                         & assumed             & \textbf{proved} under (BC) (Lem.~\ref{lem:attain}) \\
         First-order relief / rotation (Lem.~\ref{lem:rot},~\ref{lem:relief}) & was posited; now \textbf{proved} (all $d$)  & genericity $d_\phi>0$ (\S\ref{sub:reliefd}) \\
         \midrule
-        Buckling precedes collapse (BC) (Ass.~\ref{ass:bc})          & ---                 & \emph{numerical}: $t_c<t_{\mathrm{coll}}$ (Rem.~\ref{rem:bc}) \\
-        Subcriticality $b<0<d$ (Ass.~\ref{ass:subcrit})              & assumed             & \emph{numerical}; frozen parts adverse (Lem.~\ref{lem:volcoeff}) \\
+        Buckling precedes collapse (BC) (Ass.~\ref{ass:bc})          & ---                 & \emph{numerical}, wedge $(\nu)$ only (Lem.~\ref{lem:bcwedge}, Rem.~\ref{rem:bc}) \\
+        Subcriticality $b<0<d$ (Ass.~\ref{ass:subcrit})              & assumed             & \emph{numerical}, phase diagram $b(\nu,\hat K)$; $\alpha{>}\tfrac12$ (Prop.~\ref{prop:bcount}) \\
         \bottomrule
     \end{tabular}
     \caption{Hypothesis ledger for the concrete clamped--free neo-Hookean model. Fixing the material and geometry
@@ -421,3 +638,16 @@ preservation (rotation condition) that the relief once posited is now itself a b
 and numerically checkable conditions: that buckling precedes pointwise collapse ($t_c<t_{\mathrm{coll}}$), and that the
 reduced cubic is subcritical ($b<0$). Both are exactly what the creasing problem on a flat surface also leaves to
 computation, and they are inherited here rather than created by the corner.
+
+Finally, the blow-up reduction of \S\ref{sub:blowup} sharpens what ``numerical'' means for these two residues. By
+Proposition~\ref{prop:blowup} the singularity is localised to the model wedge $\mathcal{L}_W$, all of whose data are
+functions of $(\nu,\hat K)$ alone; the finite body (H) or (C) enters only through the single scalar $\hat K$ and through
+corrections $\mathcal{O}(\lambda^{g})$. The two residual conditions then occupy opposite sides of a clean homogeneity
+dichotomy (Remark~\ref{rem:sifparam}): condition (BC) is a comparison of \emph{scale-invariant thresholds} and collapses
+to a one-parameter ($\nu$) statement on $\mathcal{L}_W$ (Lemma~\ref{lem:bcwedge}), whereas the cubic sign is an
+\emph{integral} with $\alpha>\tfrac12$, hence tip-convergent but not tip-dominated, and remains a genuine two-parameter
+functional $b(\nu,\hat K)$ (Proposition~\ref{prop:bcount}). In both cases the verification is thus a computation on a
+\emph{universal} object --- a curve or a phase diagram of the corner singularity itself --- rather than a spot check on a
+particular body, and in three dimensions it is the same two-dimensional object, the leading edge data being carried by
+the zero along-edge wavenumber (Proposition~\ref{prop:blowup}(iii)). This is the precise content of the heuristic that
+the singularity ``does not depend on what happens elsewhere.''

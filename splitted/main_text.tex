@@ -877,8 +877,12 @@ verified numerically (Remark~\ref{rem:bsign}) rather than asserted from the crea
     Lyapunov--Schmidt feedback through the orthogonal complement $V^\perp$: quadratic forms in the second-order field
     $\bm\psi$ that depend on the opening angle, the Dirichlet--Neumann arrangement and the mode $\bm\phi$ --- on the
     geometry, not on $f$. Subcriticality thus requires $b_\psi$ to overturn the explicit positive $b_{\mathrm{dir}}$
-    (and likewise for $d$). We do not sign $b_\psi,d_\psi$ analytically; they are read off directly from the
-    finite-element eigenmode and reduced operator of the cut-FEM study \cite{cutfemAD}, the proper arbiter of a
+    (and likewise for $d$). The reason this does not reduce to a single universal corner number is a homogeneity count
+    (Proposition~\ref{prop:bcount}, \S\ref{sub:bcount}): the clamped--free edge exponent satisfies $\alpha>\tfrac12$, so
+    the cubic integral is convergent at the tip but \emph{not} dominated by it, leaving an $\mathcal{O}(1)$ dependence on
+    the normalised stress-intensity $\hat K$; the sign of $b$ is therefore a function $b(\nu,\hat K)$ on the model wedge
+    rather than an inheritance from flat creasing. We do not sign $b_\psi,d_\psi$ analytically; they are read off directly
+    from the finite-element eigenmode and reduced operator of the cut-FEM study \cite{cutfemAD}, the proper arbiter of a
     geometry-dependent sign. Were the verdict $b>0$ instead, the bifurcation would be supercritical and \emph{more}
     benign --- the physical branch smooth through $t_c$ with no snap at onset --- and the regularisation conclusions of
     \S\ref{sub:core} and Proposition~\ref{prop:narrow} would hold a fortiori; the complementary transcritical case
