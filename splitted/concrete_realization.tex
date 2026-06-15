@@ -225,12 +225,59 @@ posit:
           Remark~\ref{rem:framework}) remains genuinely open.
     \item \emph{Vanishing quadratic coefficient (part of Assumption~\ref{ass:subcrit}).} The reduced potential of
           Proposition~\ref{prop:LS} inherits the $\mathcal{R}$-symmetry of the perfect state. If $\bm{\phi}$ lies in the
-          antisymmetric sector then $w\mapsto-w$ is a symmetry of the reduced equation, forcing the quadratic coefficient
-          to vanish exactly, as Assumption~\ref{ass:subcrit} stipulated ``by the reflection symmetry about the corner
-          bisector.'' Here that bisector symmetry is realized concretely by $R$.
+          antisymmetric sector, $w\mapsto-w$ is a symmetry of the reduced equation and the quadratic coefficient
+          vanishes. For the neo-Hookean model this is made fully explicit in Lemma~\ref{lem:volcoeff}: $c_2$ is odd in
+          the first-order volume change $D_1$, which $R$ flips, so $c_2=0$ exactly. The relevant reflection $R$ is the
+          lateral, \emph{face-preserving} symmetry of the model bodies of \S\ref{sub:geom}, \emph{not} the corner
+          bisector (which would interchange $\Gamma_D$ and $\Gamma_N$ and is no symmetry of the mixed problem).
 \end{itemize}
 
-What symmetry does \emph{not} give is the sign of the cubic, $b<0$; that is the irreducible core addressed below.
+\begin{lemma}[Neo-Hookean reduced coefficients are volumetric; the quadratic vanishes]
+    \label{lem:volcoeff}
+    For the neo-Hookean energy \eqref{eq:neohooke} the deviatoric term $\tfrac{\mu_e}{2}(\tr\bm F^T\bm F-d)$ is quadratic
+    in $\bm F$, so its third and higher Fr\'echet derivatives vanish; hence \emph{every} reduced bifurcation coefficient
+    of order $\ge3$ is purely volumetric, determined by $f$ alone. Writing
+    $J(w)=\det(\bm F_0+w\Grad\bm\phi)=\sum_k D_k\,w^k$ with $D_k$ the mixed discriminants of Lemma~\ref{lem:relief}
+    ($D_1=\operatorname{cof}\bm F_0:\Grad\bm\phi$, $D_2=d_\phi$, $D_{k}=0$ for $k>d$) and $f^{(k)}=f^{(k)}(J_0)$, the
+    single-mode coefficients are
+    \begin{align}
+        \label{eq:c2vol}
+        c_2          &= \tfrac12\!\int_{B_\rho}\!\big[f''' D_1^3+6 f'' D_1 D_2+6 f' D_3\big]\,dV,\\
+        \label{eq:bvol}
+        b_{\mathrm{dir}} &= \tfrac16\!\int_{B_\rho}\!\big[f'''' D_1^4+12 f''' D_1^2 D_2+12 f'' D_2^2
+                            +24 f'' D_1 D_3+24 f' D_4\big]\,dV.
+    \end{align}
+    Two consequences hold for the concrete geometry, whose fundamental state is $R$-symmetric.
+    \begin{enumerate}
+        \item[\textup{(i)}] \emph{The quadratic vanishes, exactly and without correction.} As a \emph{third}-order
+              quantity $c_2$ receives no orthogonal-mode (Lyapunov--Schmidt) feedback --- that correction first enters
+              at fourth order --- so \eqref{eq:c2vol} is the full $c_2$. Every term of \eqref{eq:c2vol} is \emph{odd} in
+              $D_1$, and $D_1$ is $R$-odd for an $R$-antisymmetric mode while $f^{(k)}(J_0)$ and the even discriminants
+              $D_2$ are $R$-even; the integrand is therefore odd over the $R$-symmetric $B_\rho$ and $c_2=0$. This
+              \emph{proves} the vanishing-quadratic clause of Assumption~\ref{ass:subcrit}.
+        \item[\textup{(ii)}] \emph{The frozen cubic and quintic are sign-definite, and adverse to subcriticality.} With
+              $D_1$ asymptotically small (Lemma~\ref{lem:rot}) and $d_\phi>0$ (Lemma~\ref{lem:sval}), the leading frozen
+              parts are $b_{\mathrm{dir}}=2\int_{B_\rho} f''(J_0)\,d_\phi^2\,dV$ and
+              $d_{\mathrm{dir}}=\int_{B_\rho} f'''(J_0)\,d_\phi^3\,dV$. For the logarithmic penalty
+              $f''_{\log}(J_0)=(\mu_e+2\lambda_e-2\lambda_e\log J_0)/J_0^2>0$ and
+              $f'''_{\log}(J_0)=(4\lambda_e\log J_0-6\lambda_e-2\mu_e)/J_0^3<0$ throughout compression $J_0<1$, so
+              $b_{\mathrm{dir}}>0$ and $d_{\mathrm{dir}}<0$ --- the \emph{opposite} of the subcritical pattern $b<0<d$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    Expand $\Psi(\bm F_0+w\Grad\bm\phi)=\tfrac{\mu_e}2(\tr\bm F^T\bm F-d)+f(J(w))$ in $w$. The deviatoric part is a
+    polynomial of degree two in $w$, so it contributes only to the coefficients of $w^0,w^1,w^2$; all coefficients of
+    order $\ge3$ come from $f(J(w))$, whose $w$-derivatives are given by Fa\`a di Bruno's formula in the
+    $J$-derivatives $f^{(k)}$ and the discriminants $D_k=\tfrac1{k!}\partial_w^k\det(\bm F_0+w\Grad\bm\phi)|_0$. Reading
+    off the third and fourth derivatives gives \eqref{eq:c2vol}--\eqref{eq:bvol}; statements (i)--(ii) are then as
+    stated, using $f''_{\log}>0$, $f'''_{\log}<0$ on $J_0<1$. \qed
+\end{proof}
+
+What symmetry fixes is thus the quadratic coefficient; what it does \emph{not} fix is the sign of the cubic $b$ and
+quintic $d$. Indeed the explicit single-mode parts \eqref{eq:bvol} point \emph{against} subcriticality
+($b_{\mathrm{dir}}>0$, $d_{\mathrm{dir}}<0$ by Lemma~\ref{lem:volcoeff}(ii)), so the subcritical pattern $b<0<d$ rests
+entirely on the geometry-dependent orthogonal-mode feedback --- the irreducible core, which we settle numerically
+rather than by analogy (Remark~\ref{rem:bsign}).
 
 \subsection{Kinematic relief}
 \label{sub:reliefd}
@@ -327,10 +374,13 @@ in concrete, checkable form rather than as opaque spectral postulates:
           Lemma~\ref{lem:biot} ($t_c\le t_*$, at $\lambda_{\min}=\mathcal{O}(1)$) and supported by the energy barrier
           (Remark~\ref{rem:bc}); the residual content is a lower bound on the barrier-regularised tip collapse load,
           which we verify numerically.
-    \item \emph{Subcriticality}, $b<0$ (the sign in Assumption~\ref{ass:subcrit}): the direction in which the cubic bends
-          the branch. The creasing literature \cite{Biot1963,Hong2009} establishes subcriticality for the flat surface,
-          which makes $b<0$ overwhelmingly likely here, but the sign of the reduced cubic at a \emph{corner} is not
-          delivered by symmetry and we verify it only numerically.
+    \item \emph{Subcritical sign pattern}, $b<0<d$ (Assumption~\ref{ass:subcrit}): the directions in which the cubic and
+          quintic bend the branch. Here the neo-Hookean structure is doubly informative. Lemma~\ref{lem:volcoeff}
+          reduces the coefficients to volumetric integrals and shows the explicit single-mode parts are \emph{adverse}
+          to subcriticality ($b_{\mathrm{dir}}>0$, $d_{\mathrm{dir}}<0$ in compression), so $b<0<d$ can come only from
+          the geometry-dependent orthogonal-mode feedback. The creasing literature \cite{Biot1963,Hong2009} establishes
+          subcriticality for the flat surface, but the sign at a \emph{corner} is delivered neither by symmetry nor by
+          the frozen terms; we evaluate the feedback-corrected coefficients numerically (Remark~\ref{rem:bsign}).
 \end{enumerate}
 
 \begin{table}[t]
@@ -344,12 +394,12 @@ in concrete, checkable form rather than as opaque spectral postulates:
         Critical load $t_c$ exists (Lem.~\ref{lem:tc}(ii))           & not established      & \textbf{proved} under (SC) (Lem.~\ref{lem:biot}) \\
         Transversality (M) (Lem.~\ref{lem:transversal})              & input on loading    & \textbf{holds} for monotone compression \\
         Mode simplicity (Ass.~\ref{ass:bif})                         & assumed             & \textbf{generic} per symmetry sector (\S\ref{sub:symmetry}) \\
-        Quadratic coeff.\ vanishes (Ass.~\ref{ass:subcrit})          & assumed by symmetry & \textbf{forced} by reflection $R$ (\S\ref{sub:symmetry}) \\
+        Quadratic coeff.\ vanishes (Ass.~\ref{ass:subcrit})          & assumed by symmetry & \textbf{proved}: $c_2$ odd in $D_1$, $R$-forced (Lem.~\ref{lem:volcoeff}) \\
         Mode attainment (Ass.~\ref{ass:bif})                         & assumed             & \textbf{proved} under (BC) (Lem.~\ref{lem:attain}) \\
         First-order relief / rotation (Lem.~\ref{lem:rot},~\ref{lem:relief}) & was posited; now \textbf{proved} (all $d$)  & genericity $d_\phi>0$ (\S\ref{sub:reliefd}) \\
         \midrule
         Buckling precedes collapse (BC) (Ass.~\ref{ass:bc})          & ---                 & \emph{numerical}: $t_c<t_{\mathrm{coll}}$ (Rem.~\ref{rem:bc}) \\
-        Subcriticality $b<0$ (Ass.~\ref{ass:subcrit})                & assumed             & \emph{numerical} (irreducible core) \\
+        Subcriticality $b<0<d$ (Ass.~\ref{ass:subcrit})              & assumed             & \emph{numerical}; frozen parts adverse (Lem.~\ref{lem:volcoeff}) \\
         \bottomrule
     \end{tabular}
     \caption{Hypothesis ledger for the concrete clamped--free neo-Hookean model. Fixing the material and geometry

@@ -818,28 +818,47 @@ the solution.
     $\eta:=\int_{B_\rho}\bm{p}\cdot\bm{\phi}\,dV\neq0$. Hence $\eta\neq0$ for generic imperfection.
 \end{lemma}
 
-\paragraph{The bifurcation is subcritical (assumed).}
-The one ingredient genuinely beyond reach of soft arguments is the \emph{sign} of the nonlinearity. Guided by the
-creasing analogy \cite{Biot1963,Hong2009}---surface instabilities of compressed elastomers are well known to be
-subcritical---we assume it here rather than pretend to derive it.
-\begin{assumption}[Subcritical, non-degenerate reduced potential]
+\paragraph{The nonlinearity is explicit; only the sign of its orthogonal-mode feedback is open.}
+For the neo-Hookean model the reduced coefficients are not opaque. By Lemma~\ref{lem:volcoeff} the deviatoric energy is
+quadratic and drops out, so every coefficient of order $\ge3$ is purely volumetric; moreover the quadratic coefficient
+$c_2:=\tfrac12\langle\bm{\phi},\partial^2_{\bm{u}}G[\bm{\phi},\bm{\phi}]\rangle$ vanishes \emph{identically} for a mode
+antisymmetric under the lateral, face-preserving reflection $R$ of \S\ref{sub:symmetry} --- not the corner bisector
+$\theta\mapsto\tfrac\pi2-\theta$, which swaps $\Gamma_D$ and $\Gamma_N$ and is no symmetry at all. What these
+structural facts do \emph{not} settle is the \emph{sign} of the cubic and quintic coefficients; indeed, by
+Lemma~\ref{lem:volcoeff}(ii), the explicit single-mode (frozen) parts point \emph{against} subcriticality,
+$b_{\mathrm{dir}}>0$ and $d_{\mathrm{dir}}<0$ in compression. The subcritical pattern therefore hinges on the
+geometry-dependent orthogonal-mode feedback overturning these signs; we record it as a residual hypothesis to be
+verified numerically (Remark~\ref{rem:bsign}) rather than asserted from the creasing analogy
+\cite{Biot1963,Hong2009}.
+\begin{assumption}[Subcritical sign pattern (residual, geometry-dependent)]
     \label{ass:subcrit}
-    The reduced bifurcation equation is subcritical with quintic saturation,
+    With $c_2=0$ by Lemma~\ref{lem:volcoeff}(i), the full reduced cubic and quintic coefficients
     \begin{equation}
-        b:=\tfrac16\langle\bm{\phi},\partial^3_{\bm{u}}G[\bm{\phi},\bm{\phi},\bm{\phi}]\rangle<0,
+        b:=\tfrac16\langle\bm{\phi},\partial^3_{\bm{u}}G[\bm{\phi},\bm{\phi},\bm{\phi}]\rangle,
         \qquad
-        d:=\tfrac1{120}\langle\bm{\phi},\partial^5_{\bm{u}}G[\bm{\phi},\dots,\bm{\phi}]\rangle>0,
+        d:=\tfrac1{120}\langle\bm{\phi},\partial^5_{\bm{u}}G[\bm{\phi},\dots,\bm{\phi}]\rangle,
     \end{equation}
-    and the quadratic coefficient
-    $c_2:=\tfrac12\langle\bm{\phi},\partial^2_{\bm{u}}G[\bm{\phi},\bm{\phi}]\rangle$ vanishes whenever the critical mode
-    is \emph{antisymmetric} under a reflection symmetry of the loaded configuration that maps each boundary face to
-    itself. We stress that this is \emph{not} the corner-bisector reflection $\theta\mapsto\tfrac\pi2-\theta$, which
-    interchanges $\Gamma_D$ and $\Gamma_N$ and is therefore not a symmetry of the mixed problem at all; it is the
-    lateral reflection $R$ fixing each face, realised concretely for the model bodies in \S\ref{sub:symmetry}. When no
-    such symmetry is available, or the ground mode lies in the symmetric sector, $c_2\neq0$ and the reduction is
-    transcritical rather than a pitchfork; this case leaves the conclusions of the section intact and is treated in
-    Remark~\ref{rem:transcritical}.
+    each the frozen part of Lemma~\ref{lem:volcoeff} corrected by the orthogonal-mode feedback, satisfy $b<0<d$
+    (subcritical with quintic saturation). This is a condition on the corner geometry, not on the material model.
 \end{assumption}
+\begin{remark}[Status of the subcritical signs: geometry-decided, checked numerically]
+    \label{rem:bsign}
+    Assumption~\ref{ass:subcrit} is the one genuinely residual hypothesis of the construction, and
+    Lemma~\ref{lem:volcoeff} localises exactly where its content lies. The deviatoric response and the quadratic
+    coefficient are settled ($c_2=0$, no feedback correction); the cubic and quintic decompose as
+    $b=b_{\mathrm{dir}}+b_\psi$ and $d=d_{\mathrm{dir}}+d_\psi$, with the single-mode parts explicit and, in
+    compression, of definite but \emph{adverse} sign ($b_{\mathrm{dir}}=2\!\int_{B_\rho} f''(J_0)d_\phi^2\,dV>0$,
+    $d_{\mathrm{dir}}=\!\int_{B_\rho} f'''(J_0)d_\phi^3\,dV<0$). The corrections $b_\psi,d_\psi$ are the
+    Lyapunov--Schmidt feedback through the orthogonal complement $V^\perp$: quadratic forms in the second-order field
+    $\bm\psi$ that depend on the opening angle, the Dirichlet--Neumann arrangement and the mode $\bm\phi$ --- on the
+    geometry, not on $f$. Subcriticality thus requires $b_\psi$ to overturn the explicit positive $b_{\mathrm{dir}}$
+    (and likewise for $d$). We do not sign $b_\psi,d_\psi$ analytically; they are read off directly from the
+    finite-element eigenmode and reduced operator of the cut-FEM study \cite{cutfemAD}, the proper arbiter of a
+    geometry-dependent sign. Were the verdict $b>0$ instead, the bifurcation would be supercritical and \emph{more}
+    benign --- the physical branch smooth through $t_c$ with no snap at onset --- and the regularisation conclusions of
+    \S\ref{sub:core} and Proposition~\ref{prop:narrow} would hold a fortiori; the complementary transcritical case
+    $c_2\neq0$ is covered in Remark~\ref{rem:transcritical}.
+\end{remark}
 
 \subsection{Lyapunov--Schmidt reduction}
 
