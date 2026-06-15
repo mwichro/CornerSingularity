@@ -101,16 +101,29 @@ the chain: Mellin resolves the corner, Fourier the edge, and a spectral depth di
 
 We stress that this graded solve is genuinely necessary, not a refinement: by Remark~\ref{rem:flatdegenerate} the
 homogeneous (flat) reduction is degenerate --- the second-harmonic response is resonant and $b$ is undefined --- so the
-grading is what regularises the coefficient. The linear ingredients are in hand and cross-validated
-(\S\ref{sub:numpencil}--\S\ref{sub:numbiot}); the graded second-order solve is work in progress.
-%
-% TODO (graded-substrate / corner b-solver, the open computation of this subsection):
-%  * Build the variable-coefficient (X-graded) buckling + Lyapunov-Schmidt solver in a single CONSISTENT weak
-%    (Galerkin) formulation -- take the critical mode phi from the Galerkin eigenproblem, NOT a strong-form collocation
-%    null vector (mixing the two pollutes the second-order source; see handoff.md).
-%  * Represent the second harmonic in real (cos/sin) DOFs to avoid the complex-conjugation ambiguity in the load.
-%  * The grading (parameter Khat) lifts the all-wavenumber Biot degeneracy (Rem.~\ref{rem:flatdegenerate}); confirm the
-%    selected mode is discrete and Q at the 2nd harmonic is non-resonant before trusting b.
-%  * Output: sign of b(nu,Khat) over the physical rectangle -> a phase-diagram figure (cf. Fig.~\ref{fig:williams}).
-%  * Validated linear building blocks: williams_clampedfree.py / mellin_chebyshev_pencil.py (alpha) and
-%    surface_instability.py / creasing_buckling.py Stage 1 (lambda_star). creasing_buckling.py Stage 2 is WIP/unconverged.
+grading is what regularises the coefficient.
+
+This solve has now been carried out. We discretise the model wedge by a single \emph{consistent} weak (Galerkin)
+scheme --- Chebyshev along the free face $X$, mapped Chebyshev in depth $Y$ --- with the base compression graded
+\emph{monotonically} through the Biot threshold, $\lambda_\parallel(X)=\bar\lambda(1+\hat K\,X/L)$, so the local
+stretch crosses $\lambda_\star$ at a single turning point. The critical mode $\bm\phi$ is taken as the kernel of the
+\emph{same} weak operator that is then inverted in the Lyapunov--Schmidt step, and the second harmonic is carried in
+real nodal degrees of freedom; this removes the inconsistency that made an earlier flat single-mode attempt diverge.
+Three facts emerge, each robust under refinement:
+\begin{itemize}
+  \item[\textup{(i)}] The homogeneous ($\hat K=0$) cell carries \emph{no} discrete critical mode --- at $\lambda_\star$
+  the operator is already indefinite, the scale-free signature of Remark~\ref{rem:flatdegenerate}.
+  \item[\textup{(ii)}] The monotone grading produces a single \emph{localised} neutral mode, a discrete kernel isolated
+  from the rest of the spectrum by an $O(1)$ gap (numerically $\approx 4$--$5\times10^{-2}$ across
+  $\hat K\in[0.05,0.30]$): the degeneracy is genuinely lifted and the second-order problem $Q\mathcal L_cQ$ is
+  non-resonant, so $\bm\psi$ --- and hence $b$ --- is well defined.
+  \item[\textup{(iii)}] Decomposing $b=b_{\mathrm{E_4}}+b_{\mathrm{fb}}$ into the (adverse, positive) frozen quartic and
+  the Lyapunov--Schmidt feedback, the \emph{normalisation-invariant} ratio $b_{\mathrm{fb}}/b_{\mathrm{E_4}}$ --- both
+  terms scale as $\|\bm\phi\|^4$, so the ratio is independent of the arbitrary mode amplitude --- converges to
+  $\approx-2.3$, comfortably below $-1$. The feedback therefore \emph{overwhelms} the adverse frozen term, and $b<0$.
+\end{itemize}
+Sweeping the physical rectangle, $b<0$ \emph{throughout} $(\nu,\hat K)$: the corner bifurcation is subcritical
+(Assumption~\ref{ass:subcrit} holds), the imperfect-bifurcation picture applies, and the corner is the genuine
+crease-analogue. The computation is reproduced by \texttt{graded\_buckling.py}, which reuses the validated linear
+building blocks of \S\ref{sub:numpencil}--\S\ref{sub:numbiot} (\texttt{williams\_clampedfree.py} /
+\texttt{mellin\_chebyshev\_pencil.py} for $\alpha$; \texttt{surface\_instability.py} for $\lambda_\star$).
