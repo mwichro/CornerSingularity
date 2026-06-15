@@ -497,7 +497,12 @@ $\|\bm{v}\|_{V^{1,2}_\beta}^2 = \int_{B_\rho} \big(r^{2\beta}|\Grad\bm{v}|^2 + r
 \end{lemma}
 
 Let $\beta_\star$ be the weight exponent for which the \emph{linear} elasticity corner problem at this
-Dirichlet--Neumann junction is Fredholm (equivalently $\beta_\star$ avoids the singular exponents $\alpha$). We may
+Dirichlet--Neumann junction is Fredholm (equivalently $\beta_\star$ avoids the singular exponents $\alpha$). The
+existence of such a weight, and the resulting Fredholm property in the weighted space $V^{1,2}_{\beta_\star}$, is the
+standard Kondratiev--Maz'ya--Nazarov--Plamenevsky theory for elliptic systems with conical/edge singularities
+\cite{KMR2001,NazarovPlamenevsky1994}: the operator is Fredholm precisely when $\beta_\star$ avoids the discrete
+spectrum of the corner operator pencil (the singular exponents), and the resolvent is then compact, so the spectrum is
+discrete and the critical mode $\bm{\phi}$ of Assumption~\ref{ass:bif} is genuinely attained. We may
 write the Newton-step bilinear form as
 \begin{equation}
     \label{eq:formA}
@@ -579,7 +584,11 @@ write the Newton-step bilinear form as
     elasticity'' on $A_*$, and the only obstruction is the material law's own loss of ellipticity past $J_*$---a property
     of $f_{\log}$, not of the corner. (iii) \emph{Open inner problem}: a complete vertex theory for $f_{\log}$ requires a
     separate analysis inside the non-elliptic core, which we leave open; a globally convex-volumetric barrier
-    ($f''\ge0$, $r_*=0$) removes the issue entirely and recovers the unrestricted statement.
+    ($f''\ge0$, $r_*=0$) removes the issue entirely and recovers the unrestricted statement. Physically, the loss of
+    ellipticity past $J_*$ is an artefact of the unbounded dilation that $f_{\log}$ permits: real polymer networks reach
+    \emph{finite extensibility}, and a volumetric law that caps the dilation, $J<J_{\max}$ (the bulk analogue of the
+    Gent deviatoric model), with $J_{\max}\le J_*$ keeps $f''>0$ throughout the attainable range and so eliminates the
+    core. The dilation core is thus a feature of the specific large-$J$ tail of $f_{\log}$, not a physical catastrophe.
 \end{remark}
 
 \begin{remark}[Stress is singular, operator is not]
@@ -817,6 +826,22 @@ the solution.
     For every $\bm{p}$ outside the closed codimension-one subspace $\bm{\phi}^\perp$, the projection
     $\eta:=\int_{B_\rho}\bm{p}\cdot\bm{\phi}\,dV\neq0$. Hence $\eta\neq0$ for generic imperfection.
 \end{lemma}
+
+\begin{remark}[Universality of the imperfection]
+    \label{rem:imperfuniv}
+    The volumetric body force $\epsilon\,\bm{p}$ is chosen only for concreteness; the analysis depends on the
+    imperfection \emph{solely} through the scalar $\eta=\langle\bm{p},\bm{\phi}\rangle$, so any perturbation with a
+    nonzero $\bm{\phi}$-projection produces the identical reduced equation \eqref{eq:bifeq}. Indeed, write a generic
+    imperfect equilibrium as $G(\bm{u},t,0)=\epsilon\,\bm{h}$ with $\bm{h}\in V'$ the (linearised) imperfection
+    functional. A boundary-traction defect on $\Gamma_N$ contributes $\bm{h}(\bm{v})=\int_{\Gamma_N}\bm{t}_1\cdot\bm{v}\,dS$;
+    a geometric imperfection --- rounding the corner with radius $\sim\epsilon$, or a small shape variation
+    $\bm{x}\mapsto\bm{x}+\epsilon\,\bm{\theta}(\bm{x})$ --- enters, after pulling back to the reference domain, as a
+    fixed load functional $\bm{h}(\bm{v})=\int_{B_\rho}\mathbb{S}[\bm{\theta}]:\Grad\bm{v}\,dV$ linear in the shape field
+    $\bm{\theta}$. In every case the kernel projection $\langle G,\bm{\phi}\rangle=0$ yields the same normal form with
+    $\eta$ replaced by $\langle\bm{h},\bm{\phi}\rangle$, nonzero for $\bm{h}$ outside the closed codimension-one subspace
+    $\bm{\phi}^\perp$ (Lemma~\ref{lem:eta}). The Koiter $\tfrac23$ law \eqref{eq:koiter} and all subsequent bounds are
+    therefore universal across generic imperfections, not an artefact of the body-force model.
+\end{remark}
 
 \paragraph{The nonlinearity is explicit; only the sign of its orthogonal-mode feedback is open.}
 For the neo-Hookean model the reduced coefficients are not opaque. By Lemma~\ref{lem:volcoeff} the deviatoric energy is
@@ -1173,6 +1198,19 @@ The relevant geometry is the \emph{collapse locus} of the perfect field.
     Hence the localisation exponent is $s=1$. (A non-generic tangential contact, $\nabla\lambda_{\min}=0$ on $\Sigma_{\mathrm{c}}$,
     would give $s\ge2$.)
 \end{lemma}
+
+\begin{remark}[Extended arc versus point vertex]
+    \label{rem:locus}
+    The codimension-one hypothesis is generic but not forced. In a compressive mixed corner the most severe contraction
+    is frequently attained \emph{exactly at the vertex} $r=0$, in which case the collapse locus degenerates to the single
+    point $\Sigma_{\mathrm{c}}=\{0\}$ --- codimension \emph{two} in $d=2$. The localisation conclusion then only improves:
+    the relieved floor $\lambda_{\min}\gtrsim\max\{\kappa_*\,r,\,c\,\epsilon^{2/3}\}$ now confines the high-stiffness set
+    to a \emph{disc} of radius $\ell(\epsilon)\sim\epsilon^{2/3}$ rather than a tube of fixed length, so its area is
+    $\mathcal{O}(\ell(\epsilon)^2)=\mathcal{O}(\epsilon^{4/3})$ rather than $\mathcal{O}(\epsilon^{2/3})$, and the
+    $L^q$-bound of Proposition~\ref{prop:narrow} acquires the stronger tube contribution
+    $\epsilon^{-4q/3}\,\ell(\epsilon)^2=\epsilon^{\frac43(1-q)}$, finite for every $q<1$ instead of $q<\tfrac12$. The
+    extended-arc estimate below is therefore the conservative case; a point vertex is strictly more integrable.
+\end{remark}
 
 \begin{proof}
     Where the smallest singular value is simple it is an analytic function of the entries of $\bm{F}$, hence smooth in
