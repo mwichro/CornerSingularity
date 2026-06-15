@@ -72,9 +72,11 @@ $\lambda_\star$ as a function of the material ratio, e.g.
         \bottomrule
     \end{tabular}
 \end{center}
-This is the input that decides (BC): the buckling load $t_c\le t_*$ is attained while the fundamental stretch is still
-$\lambda_\parallel=\lambda_\star=\mathcal{O}(1)$, away from collapse, confirming $t_c<t_{\mathrm{coll}}$ for the regimes
-in which the barrier keeps $t_{\mathrm{coll}}$ high (Remark~\ref{rem:bc}). The computation is reproduced by
+This is the input that controls the \emph{buckling side} of (BC): the buckling load $t_c\le t_*$ is attained while the
+fundamental stretch is still $\lambda_\parallel=\lambda_\star=\mathcal{O}(1)$, away from collapse. It settles the
+ordering $t_c<t_{\mathrm{coll}}$ only together with a lower bound on the competing collapse load $t_{\mathrm{coll}}$,
+which the barrier keeps high but whose quantitative tip bound is left open (Lemma~\ref{lem:bcwedge},
+Remark~\ref{rem:bc}). The computation is reproduced by
 \texttt{surface\_instability.py}, validated against the incompressible Biot threshold.
 
 \subsection{The one remaining solve: the subcritical sign \texorpdfstring{$b(\nu,\hat K)$}{b(nu,Khat)}}
@@ -96,3 +98,19 @@ Proposition~\ref{prop:blowup}(iii) in three dimensions. The buckling eigenproble
 the two ingredients validated in \S\ref{sub:numpencil}--\S\ref{sub:numbiot}; assembling them over the
 $(\nu,\hat K)$ rectangle produces the phase diagram whose sign is the last open condition. No finite-element model enters
 the chain: Mellin resolves the corner, Fourier the edge, and a spectral depth discretisation the buckling.
+
+We stress that this graded solve is genuinely necessary, not a refinement: by Remark~\ref{rem:flatdegenerate} the
+homogeneous (flat) reduction is degenerate --- the second-harmonic response is resonant and $b$ is undefined --- so the
+grading is what regularises the coefficient. The linear ingredients are in hand and cross-validated
+(\S\ref{sub:numpencil}--\S\ref{sub:numbiot}); the graded second-order solve is work in progress.
+%
+% TODO (graded-substrate / corner b-solver, the open computation of this subsection):
+%  * Build the variable-coefficient (X-graded) buckling + Lyapunov-Schmidt solver in a single CONSISTENT weak
+%    (Galerkin) formulation -- take the critical mode phi from the Galerkin eigenproblem, NOT a strong-form collocation
+%    null vector (mixing the two pollutes the second-order source; see handoff.md).
+%  * Represent the second harmonic in real (cos/sin) DOFs to avoid the complex-conjugation ambiguity in the load.
+%  * The grading (parameter Khat) lifts the all-wavenumber Biot degeneracy (Rem.~\ref{rem:flatdegenerate}); confirm the
+%    selected mode is discrete and Q at the 2nd harmonic is non-resonant before trusting b.
+%  * Output: sign of b(nu,Khat) over the physical rectangle -> a phase-diagram figure (cf. Fig.~\ref{fig:williams}).
+%  * Validated linear building blocks: williams_clampedfree.py / mellin_chebyshev_pencil.py (alpha) and
+%    surface_instability.py / creasing_buckling.py Stage 1 (lambda_star). creasing_buckling.py Stage 2 is WIP/unconverged.

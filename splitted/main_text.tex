@@ -239,7 +239,9 @@ $\lambda_{\max}$ directly rather than through $\Theta(\det\bm F)$, violate \eqre
         \label{eq:Thetagen}
         \Theta(J) = \big|\,f''(J)J^2 + f'(J)J\,\big| + \big|\,f'(J)J\,\big|,
     \end{equation}
-    and Assumption~\ref{ass:ellip} holds (rank-one convexity away from $\det\bm{F}=0$). Assumption~\ref{ass:reg}
+    and Assumption~\ref{ass:ellip} holds on the convexity set $\{f''(J)\ge0\}$ --- in particular on all of compression
+    $J\le1$ and moderate tension for $f_{\log}$, and globally for $f_{\mathrm{quad}}$ ($f''=\kappa>0$); it can fail under
+    extreme dilation $J>J_*$ for $f_{\log}$ (Remark~\ref{rem:SEcaveat}). Assumption~\ref{ass:reg}
     additionally requires the barrier property $f(J)\to\infty$ as $J\to0^+$: this holds for $f_{\log}$ but \emph{fails}
     for $f_{\mathrm{quad}}$, since $f_{\mathrm{quad}}(J)\to\tfrac{\kappa}{2}<\infty$ (see Remark~\ref{rem:quad} and
     Scenario~B).
@@ -449,9 +451,12 @@ $f_{\mathrm{quad}}$ does not.
         L_{iJkL}(\bm{x})\,m_iN_Jm_kN_L \ \ge\ \mu_e\,|\bm{m}|^2|\bm{N}|^2
         \qquad \text{for a.e. } \bm{x}\in A_*,\ \ \forall\,\bm{m},\bm{N}\in\mathbb{R}^2.
     \end{equation}
-    On the complementary core $\{r\le r_*\}$, where $J>J_*$, strong ellipticity of $f_{\log}$ is genuinely lost
-    (Remark~\ref{rem:SEcaveat}): the bound \eqref{eq:LHcorner} fails and the modulus $\mu_e+f''(J)J^2\,\xi^2/(|\bm m|^2|\bm N|^2)$
-    can turn negative.
+    On the complementary core $\{r\le r_*\}$, where $J>J_*$, the constant-modulus bound \eqref{eq:LHcorner} no longer
+    holds, and strong ellipticity of $f_{\log}$ \emph{can} fail (Remark~\ref{rem:SEcaveat}): wherever the sharper
+    condition $|f''(J)|J^2\,\|\bm{F}^{-1}\|^2>\mu_e$ is met, the directional modulus
+    $\mu_e+f''(J)J^2\,\xi^2/(|\bm m|^2|\bm N|^2)$ turns negative for $\xi$ near its maximum. We do not claim the loss is
+    pointwise throughout the core --- only that the core is where it can occur, since $f''(J)J^2<0$ there is necessary
+    for it.
 \end{lemma}
 
 \begin{proof}
@@ -472,7 +477,8 @@ $f_{\mathrm{quad}}$ does not.
 
 \noindent The picture is therefore sharper, and more honest, than ``tension is harmless'': for the logarithmic penalty
 the tensile corner is strongly elliptic on the annulus $A_*$ outside a \emph{dilation core} $\{r\le r_*\}$, inside which
-$f_{\log}$ itself --- not the corner --- ceases to be strongly elliptic because the material is dilated past $J_*$. The
+$f_{\log}$ itself --- not the corner --- \emph{may} cease to be strongly elliptic because the material is dilated past
+$J_*$ (where the sharper condition $|f''(J)|J^2\|\bm F^{-1}\|^2>\mu_e$ binds). The
 core radius $r_*$ in \eqref{eq:rstar} shrinks as the threshold $J_*=\exp(1+\mu_e/(2\lambda_e))$ grows, i.e. as the
 penalty is made stiffer against extreme dilation (large $\lambda_e/\mu_e$); a model with $f''\ge0$ globally would have
 $r_*=0$ and no core. This is the tensile mirror of the model-dependence already seen for $\Theta$ in
@@ -1259,8 +1265,9 @@ half-width $\ell(\epsilon)$ around $\Sigma_{\mathrm{c}}$ in which the floor is a
 \subsection{Discussion}
 
 The structure of the result is the one anticipated physically, and it splits cleanly along the stability of the branch
-followed. The idealised noiseless problem ($\epsilon=0$) is singular---the tangent is unbounded and ellipticity is
-lost---but it is a measure-zero idealisation. Because the corner instability is subcritical (the creasing analogy,
+followed. The idealised noiseless problem ($\epsilon=0$) is singular---the tangent \emph{norm} is unbounded
+($\|\mathbb{L}\|\to\infty$), even though the corner remains strongly elliptic pointwise
+(Lemma~\ref{lem:SEcompress})---but it is a measure-zero idealisation. Because the corner instability is subcritical (the creasing analogy,
 Assumption~\ref{ass:subcrit}), a load-controlled physical system never traverses the singular continuation: it stays on
 the compressed branch and \emph{snaps} to a finite-amplitude crease at a load reduced by only
 $\mathcal{O}(\epsilon^{2/3})$ (Proposition~\ref{prop:koiter}), keeping a bounded tangent throughout

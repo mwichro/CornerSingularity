@@ -456,6 +456,30 @@ second discriminant scales as $d_\phi=\det\Grad\bm{\phi}=\mathcal{O}(r^{2(\alpha
     makes $b$ the one irreducibly numerical coefficient.
 \end{remark}
 
+\begin{remark}[The flat reduction is degenerate; the corner is what makes $b$ exist]
+    \label{rem:flatdegenerate}
+    The phrase ``inherits the flat sign $b<0$'' in Remark~\ref{rem:twoscales} must be read with care, because the flat
+    single-mode reduction is in fact \emph{singular}. The Biot surface-instability threshold of the homogeneous
+    half-space is \emph{scale-free}: the secular condition is independent of the surface wavenumber $k$, so at
+    $\lambda_\parallel=\lambda_\star$ \emph{every} harmonic is simultaneously neutral. The Lyapunov--Schmidt reduction of
+    a single mode of wavenumber $k$ then feeds, at second order, a response at wavenumber $2k$ --- which is itself a
+    neutral mode of the same operator. The second-harmonic problem is therefore \emph{resonant}, the orthogonal-mode
+    field $\bm\psi$ does not exist as a bounded correction, and the single-mode cubic coefficient $b$ is undefined for the
+    flat surface. (Numerically, the smallest singular value of the incremental operator at $\lambda_\star$ is at machine
+    level for $k=1,2,3,4$ alike.) This is the precise analytic reason that flat creasing is a \emph{localised},
+    finite-amplitude instability rather than a sinusoidal supercritical/subcritical bifurcation
+    \cite{Hong2009}: there is no single-mode normal form to carry a sign.
+
+    The corner removes exactly this degeneracy. The pre-stress is graded along the free face on the scale $r_P$
+    (Remark~\ref{rem:twoscales}), which breaks the translational/scale invariance, couples the wavenumbers, and selects a
+    \emph{discrete} critical mode --- the attainment of Lemma~\ref{lem:attain} under (BC). With the spectrum discrete and
+    simple, the second-harmonic operator is no longer resonant, $\bm\psi$ exists, and $b=b(\nu,\hat K)$ is a
+    well-defined number. Thus the corner is not merely the setting in which $b$ happens to be computed: it is what makes
+    the reduced cubic \emph{exist} at all. This sharpens Proposition~\ref{prop:bcount} --- $b$ cannot be a bare-wedge,
+    $\hat K$-independent constant, because the $\hat K\to0$ (flat) limit is not a regular point of the reduction but the
+    degenerate one.
+\end{remark}
+
 \subsection{Kinematic relief}
 \label{sub:reliefd}
 
@@ -540,10 +564,11 @@ has bounded coefficients and the spectrum is discrete.
 
 \begin{lemma}[\textup{(BC)} is a model-wedge inequality]
     \label{lem:bcwedge}
-    The threshold comparison $t_c<t_{\mathrm{coll}}$ underlying (BC) is, to leading order in the neighbourhood scale,
-    a comparison of two \emph{scale-invariant} quantities of the model wedge $\mathcal{L}_W$ of
-    Proposition~\ref{prop:blowup}; in particular it depends on the geometry only through $(\nu)$ and not on the body,
-    and is free of the stress-intensity amplitude $\hat K$.
+    The buckling side of (BC), $t_c\le t_*$, reduces to a \emph{scale-invariant} threshold of the model wedge
+    $\mathcal{L}_W$ of Proposition~\ref{prop:blowup}, depending on the geometry only through $\nu$ and free of the
+    stress-intensity amplitude $\hat K$. \emph{Provided} the barrier-regularised collapse load $t_{\mathrm{coll}}$
+    rescales as a wedge quantity --- the lower bound on $t_{\mathrm{coll}}$ left open in Remark~\ref{rem:bc} --- the full
+    ordering $t_c<t_{\mathrm{coll}}$ is likewise amplitude-free and a property of $\nu$ alone.
 \end{lemma}
 
 \begin{proof}
@@ -553,12 +578,15 @@ has bounded coefficients and the spectrum is discrete.
     threshold $\lambda_\parallel=\lambda_\star=\mathcal{O}(1)$; both $\lambda_\star$ (Remark~\ref{rem:threshold}) and the
     Biot secular form $q(\lambda_\parallel)$ are functions of $\nu$ alone, and the localisation of Lemma~\ref{lem:biot}
     ($k\to\infty$, $\delta=k^{-1/2}$) is exactly the statement that $t_*$ is set by the half-space model, a sub-object of
-    $\mathcal{L}_W$. The collapse load $t_{\mathrm{coll}}$ is the value at which the barrier-regularised continuation of
-    the self-similar field first reaches $\lambda_{\min}=0$; since $\lambda_{\min}(\hat{\bm{u}}_W)$ and the barrier
-    $f_{\log}$ are both homogeneous data on $W$, $t_{\mathrm{coll}}$ rescales as a wedge quantity. Multiplying the load by
-    a constant translates both thresholds equally, so their \emph{ordering} $t_c<t_{\mathrm{coll}}$ is amplitude-free:
-    it is invariant under $\hat K\mapsto c\,\hat K$ and therefore a property of $(\nu)$ and the $90^\circ$ wedge alone.
-    By Proposition~\ref{prop:blowup}(ii) the finite-body corrections are $\mathcal{O}(\lambda^{g})$. \qed
+    $\mathcal{L}_W$; this establishes the buckling side unconditionally. For the collapse load $t_{\mathrm{coll}}$ ---
+    the value at which the barrier-regularised continuation of the self-similar field first reaches $\lambda_{\min}=0$
+    --- the data $\lambda_{\min}(\hat{\bm{u}}_W)$ and the barrier $f_{\log}$ are homogeneous on $W$, which makes a
+    wedge-scaling of $t_{\mathrm{coll}}$ \emph{plausible}; but the nonlinear threshold is set at the tip, where the
+    linear prediction wants to collapse for any load, and a quantitative lower bound there is the content left open in
+    Remark~\ref{rem:bc}. Granting that scaling, multiplying the load by a constant translates both thresholds equally,
+    so the \emph{ordering} $t_c<t_{\mathrm{coll}}$ is amplitude-free: invariant under $\hat K\mapsto c\,\hat K$ and a
+    property of $\nu$ and the $90^\circ$ wedge alone. By Proposition~\ref{prop:blowup}(ii) the finite-body corrections
+    are $\mathcal{O}(\lambda^{g})$. \qed
 \end{proof}
 
 \begin{remark}[Why (BC) localises but the cubic sign need not]
