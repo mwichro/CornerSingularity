@@ -881,9 +881,9 @@ verified numerically (Remark~\ref{rem:bsign}) rather than asserted from the crea
     (Proposition~\ref{prop:bcount}, \S\ref{sub:bcount}): the clamped--free edge exponent satisfies $\alpha>\tfrac12$, so
     the cubic integral is convergent at the tip but \emph{not} dominated by it, leaving an $\mathcal{O}(1)$ dependence on
     the normalised stress-intensity $\hat K$; the sign of $b$ is therefore a function $b(\nu,\hat K)$ on the model wedge
-    rather than an inheritance from flat creasing. We do not sign $b_\psi,d_\psi$ analytically; they are read off directly
-    from the finite-element eigenmode and reduced operator of the cut-FEM study \cite{cutfemAD}, the proper arbiter of a
-    geometry-dependent sign. Were the verdict $b>0$ instead, the bifurcation would be supercritical and \emph{more}
+    rather than an inheritance from flat creasing. We do not sign $b_\psi,d_\psi$ analytically; they are evaluated
+    numerically from the eigenmode and reduced operator of the two-dimensional model wedge of Proposition~\ref{prop:blowup}
+    as a function of $(\nu,\hat K)$, which is the proper arbiter of a geometry-dependent sign. Were the verdict $b>0$ instead, the bifurcation would be supercritical and \emph{more}
     benign --- the physical branch smooth through $t_c$ with no snap at onset --- and the regularisation conclusions of
     \S\ref{sub:core} and Proposition~\ref{prop:narrow} would hold a fortiori; the complementary transcritical case
     $c_2\neq0$ is covered in Remark~\ref{rem:transcritical}.
@@ -1273,12 +1273,19 @@ Lemma~\ref{lem:rot}), the tangent diverges only algebraically, $\epsilon^{-4/3}$
 $\ell(\epsilon)\sim\epsilon^{2/3}\to0$ about the collapse locus, remaining $L^q$-integrable for all $q<\tfrac12$
 (Lemma~\ref{lem:sval}, Proposition~\ref{prop:narrow}). That algebraic rate is the mirror image---through the inverse
 channel---of the benign tensile growth of \S\ref{sub:growth}; the same logarithm, traceable to the barrier $f_{\log}$,
-appears in both. Two practical consequences follow. First, the bifurcation is the corner-localised analogue of the
-classical \emph{creasing} instability of compressed elastomers \cite{Biot1963,Hong2009}, now seated at a geometric
-Dirichlet--Neumann junction rather than on a flat surface. Second, the dichotomy is a concrete warning for computation:
-a solver that continues through the instability will see the conditioning degrade as $\epsilon^{-4/3}$ and should
-either admit the snap or refine inside the tube \eqref{eq:locallength}; the load-control reduction \eqref{eq:koiter}
-tells it when the snap is due. The reduction to scalar imperfect-bifurcation form follows the classical theory
+appears in both. The headline is therefore analytical rather than computational: a compressed clamped--free corner
+harbours a genuine structural bifurcation --- the corner-localised analogue of the classical \emph{creasing} instability
+of compressed elastomers \cite{Biot1963,Hong2009}, now seated at a geometric Dirichlet--Neumann junction rather than on a
+flat surface --- whose apparent tangent catastrophe is, on every physical branch, regularised by the barrier-forced
+kinematic relief. That the phenomenon first surfaced as ill-conditioning in a numerical computation is incidental to its
+nature; the conditioning degradation is a corollary, not the subject. It does carry a concrete computational reading ---
+a solver that suppresses the snap and tracks the unstable branch sees the conditioning degrade as $\epsilon^{-4/3}$ and
+should either admit the snap or refine inside the tube \eqref{eq:locallength}, the load-control reduction
+\eqref{eq:koiter} telling it when the snap is due --- but this is one consequence among others, not the result.
+Section~\ref{sec:concrete} pursues the sharper, opposite direction: fixing a concrete material and geometry, it
+discharges the abstract hypotheses to theorems and shows, through a blow-up reduction, that the entire phenomenon
+localises to a \emph{universal} model wedge governed only by the Poisson ratio and a single stress-intensity amplitude.
+The reduction to scalar imperfect-bifurcation form follows the classical theory
 \cite{GolubitskySchaeffer1985,KeenerKeller1973,Koiter1945}.
 
 \input{splitted/concrete_realization.tex}
