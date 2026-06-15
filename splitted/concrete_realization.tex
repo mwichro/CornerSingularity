@@ -649,6 +649,7 @@ in concrete, checkable form rather than as opaque spectral postulates:
         Quadratic coeff.\ vanishes (Ass.~\ref{ass:subcrit})          & assumed by symmetry & \textbf{proved}: $c_2$ odd in $D_1$, $R$-forced (Lem.~\ref{lem:volcoeff}) \\
         Mode attainment (Ass.~\ref{ass:bif})                         & assumed             & \textbf{proved} under (BC) (Lem.~\ref{lem:attain}) \\
         First-order relief / rotation (Ass.~\ref{ass:rot}, Lem.~\ref{lem:relief}) & finite at $t_c$ (Lem.~\ref{lem:rotreg}); near-collapse posited & \emph{numerical}: rotation defect ${\approx}0.08$--$0.16$ (Rem.~\ref{rem:rotnum}) \\
+        Stable-branch non-degeneracy (Ass.~\ref{ass:nd})             & posited             & \emph{physical} (bounded-distortion crease); not computed here (Prop.~\ref{prop:physical}) \\
         \midrule
         Buckling precedes collapse (BC) (Ass.~\ref{ass:bc})          & ---                 & \emph{numerical}, wedge $(\nu)$ only (Lem.~\ref{lem:bcwedge}, Rem.~\ref{rem:bc}) \\
         Subcriticality $b<0<d$ (Ass.~\ref{ass:subcrit})              & assumed             & \emph{numerical}, phase diagram $b(\nu,\hat K)$; $\alpha{>}\tfrac12$ (Prop.~\ref{prop:bcount}) \\
@@ -664,10 +665,11 @@ The upshot is that for the clamped--free neo-Hookean corner under compression th
 \S\ref{sec:asymptotics}--\S\ref{sec:iba} is, but for two clearly delimited conditions, a sequence of theorems: the
 material bounds are explicit, the corner is genuinely compressive, the instability is a localized creasing event with a
 constructed destabilising mode, the critical mode is simple and attained (no quadratic term, by symmetry), and the
-kinematic relief that regularises the tangent holds in every dimension. Notably, the spectral postulates of the
-abstract theory --- attainment and simplicity --- are no longer assumed but proved, and the first-order volume
-preservation (rotation condition) that the relief once posited is now itself a barrier-forced theorem
-(\S\ref{sub:reliefd}); what remains are two \emph{concrete}
+kinematic relief that regularises the tangent holds in every dimension once the asymptotic-rotation hypothesis is
+granted. Notably, the spectral postulates of the abstract theory --- attainment and simplicity --- are no longer assumed
+but proved; the first-order volume preservation (rotation condition) that the relief once posited as an exact identity is
+now the weaker explicit assumption (AR, \S\ref{sub:reliefd}), automatic at the bifurcation (Lemma~\ref{lem:rotreg}) and
+numerically supported toward collapse rather than a barrier-forced theorem. What remains are two \emph{concrete}
 and numerically checkable conditions: that buckling precedes pointwise collapse ($t_c<t_{\mathrm{coll}}$), and that the
 reduced cubic is subcritical ($b<0$). Both are exactly what the creasing problem on a flat surface also leaves to
 computation, and they are inherited here rather than created by the corner.

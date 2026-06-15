@@ -530,8 +530,9 @@ write the Newton-step bilinear form as
     \end{align}
     The consequences split according to whether the vertex lies in the elliptic region.
 
-    \emph{(A) Globally convex-volumetric barrier ($f''\ge0$, e.g.\ $f_{\mathrm{quad}}$, or $f_{\log}$ capped at
-    $J_{\max}\le J_*$).} Then the dilation core is empty, $r_*=0$, ellipticity holds on the \emph{full} corner
+    \emph{(A) Globally convex-volumetric barrier ($f''\ge0$ together with the standing
+    Assumptions~\ref{ass:reg}--\ref{ass:mild}, e.g.\ $f_{\log}$ with a finite-extensibility cap $J_{\max}\le J_*$ on the
+    dilation).} Then the dilation core is empty, $r_*=0$, ellipticity holds on the \emph{full} corner
     neighbourhood $\Omega=B_\rho$ \emph{including the vertex}, and \eqref{eq:Abounded}--\eqref{eq:Agaarding} hold on
     $V^{1,2}_{\beta_\star}(B_\rho)$. Hence the linearised corner operator is Fredholm of index zero in
     $V^{1,2}_{\beta_\star}(B_\rho)$; for $\beta_\star$ avoiding the corner spectrum it is an isomorphism, its solutions
@@ -1112,13 +1113,22 @@ Remark~\ref{rem:rotnum}) and show it is dominated by the second-order relief.
     Expanding the determinant in $w$, $\det(\bm{F}_0+w\,\Grad\bm{\phi})=\sum_{k=0}^{d}w^k\,D_k(\bm{F}_0,\Grad\bm{\phi})$
     with $D_k$ the $k$-th mixed discriminant; $D_0=\det\bm{F}_0=J_0$, $D_1=\operatorname{cof}\bm{F}_0:\Grad\bm{\phi}$, and
     $D_2=d_\phi$, giving \eqref{eq:Jexp} (the $\mathcal{O}(w^3)$ collecting $D_3,\dots,D_d$). For \eqref{eq:Jlower} we
-    bound the linear term two ways using $|D_1|\le c_\phi J_0/\sqrt{|\log J_0|}$. By Young's inequality
+    bound the linear term $wD_1$ in two complementary regimes; in both, $\mathcal{O}(w^3)$ is absorbed into the constants
+    for $|w|\le w_0$.
+
+    \emph{(i) Finite $J_0$ (at and near the bifurcation).} Here $J_0\ge c>0$ and $D_1$ is finite, so the bound needs no
+    smallness of $D_1$, only of $w$: choosing $w_0\le J_0/(4|D_1|)$ gives $|w\,D_1|\le\tfrac14 J_0$ for $|w|\le w_0$,
+    whence $J = J_0 + w D_1 + w^2 d_\phi+\mathcal{O}(w^3)\ge \tfrac34 J_0 + \tfrac12 w^2 d_\phi\ge\tfrac12 J_0+\tfrac12
+    w^2 d_\phi$. This is the regularity-only argument: at $t_c$, where $J_0(t_c)>0$, \eqref{eq:Jlower} holds with no
+    rotation condition (cf.\ Lemma~\ref{lem:rotreg}).
+
+    \emph{(ii) Near collapse ($J_0\to0$).} Now $w_0$ from (i) would shrink with $J_0$, so we use instead the
+    asymptotic-rotation bound $|D_1|\le c_\phi J_0/\sqrt{|\log J_0|}$ of Assumption~\ref{ass:rot}. By Young's inequality
     $|w\,D_1|\le \tfrac12 d_\phi w^2 + \tfrac1{2d_\phi}D_1^2$, and $D_1^2\le c_\phi^2 J_0^2/|\log J_0|\le \tfrac12 d_\phi J_0$
     once $J_0$ is small (the factor $J_0/|\log J_0|\to0$). Hence $|w\,D_1|\le \tfrac12 d_\phi w^2+\tfrac12 J_0$, and
-    inserting into \eqref{eq:Jexp} (absorbing the $\mathcal{O}(w^3)$ into the constants for $|w|\le w_0$) yields
-    \eqref{eq:Jlower}. Thus the residual first-order term, far from dominating, is swallowed by the barrier-controlled
-    $J_0$ and the relief $w^2 d_\phi$ --- this is the precise content of ``buckling relieves compression'' at finite
-    load, with no appeal to an exact rotation condition. Since $J=\prod_i\lambda_i$ and the $d-1$ largest stretches are
+    inserting into \eqref{eq:Jexp} yields \eqref{eq:Jlower}. Thus the residual first-order term, far from dominating, is
+    swallowed by the barrier-controlled $J_0$ and the relief $w^2 d_\phi$ --- the precise content of ``buckling relieves
+    compression,'' with no appeal to an exact rotation condition. Since $J=\prod_i\lambda_i$ and the $d-1$ largest stretches are
     $\mathcal{O}(1)$ on the relieved branch (the buckling redirects, but does not unboundedly stretch, the material near
     the corner), \eqref{eq:Jexp} gives \eqref{eq:lminrelief}. \qed
 \end{proof}
@@ -1165,8 +1175,9 @@ smallness honestly.
     At the bifurcation load $t_c$ the fundamental determinant is bounded below, $J_0(t_c)>0$ (buckling precedes
     collapse, Remark~\ref{rem:framework}). Then $f'(J_0),f''(J_0)$ are finite, \eqref{eq:secondvar} is a regular
     quadratic form, and the neutral mode satisfies $\langle\bm{\phi},\mathcal{L}\bm{\phi}\rangle=0$ with $\delta J$ and
-    $\det\Grad\bm{\phi}$ finite. No rotation condition is needed at $t_c$, and Lemma~\ref{lem:relief} applies in its
-    proven range $|w|\le w_0$.
+    $\det\Grad\bm{\phi}$ finite. No rotation condition is needed at $t_c$: the relief bound \eqref{eq:Jlower} holds there
+    by the finite-$J_0$ case~(i) of Lemma~\ref{lem:relief}, which uses only $J_0(t_c)>0$ and smallness of $w$ (not of
+    $D_1$).
 \end{lemma}
 
 \noindent Along the \emph{unstable continuation} the fundamental state is driven toward collapse, $J_0\to0$, and there
@@ -1190,35 +1201,54 @@ numerically below in place of the (false) claim that it follows from the $f''$ t
 
 \begin{remark}[Numerical verification of (AR)]
     \label{rem:rotnum}
-    Both parts are confirmed by the consistent weak solver of \S\ref{sub:numb} (\texttt{graded\_buckling.py}),
-    evaluated on the \emph{same} critical mode that fixes the subcritical sign. The neutral co-energy vanishes,
-    $\langle\bm{\phi},\mathcal{L}\bm{\phi}\rangle\approx10^{-8}$, confirming Lemma~\ref{lem:rotreg}; the dimensionless
-    rotation defect $\rho_{\mathrm{rot}}:=\|\delta J\|_2/\|\Grad\bm{\phi}\|_2\approx0.08$--$0.16$ across the
-    $(\nu,\hat K)$ rectangle, and remains small and stable ($\approx0.07$--$0.09$) as the base compression is deepened,
-    so the mode is indeed nearly volume-preserving. The decomposition also makes the mechanism explicit: the
-    determinant term is $6$--$10\times$ the $f''(\delta J)^2$ term---so the latter cannot be isolated, exactly as
-    \eqref{eq:secondvar} warns---and the bounded co-energy is achieved by cancellation against the shear term, which is
-    the content of (AR).
+    The \emph{qualitative} content of (AR) is supported by the consistent weak solver of \S\ref{sub:numb}
+    (\texttt{graded\_buckling.py}), evaluated on the \emph{same} critical mode that fixes the subcritical sign. The
+    neutral co-energy vanishes, $\langle\bm{\phi},\mathcal{L}\bm{\phi}\rangle\approx10^{-8}$, confirming
+    Lemma~\ref{lem:rotreg}; the dimensionless rotation defect
+    $\rho_{\mathrm{rot}}:=\|\delta J\|_2/\|\Grad\bm{\phi}\|_2\approx0.08$--$0.16$ across the $(\nu,\hat K)$ rectangle, and
+    remains small and stable ($\approx0.07$--$0.09$) as the base compression is deepened, so the mode is indeed nearly
+    volume-preserving. The decomposition also makes the mechanism explicit: the determinant term is $6$--$10\times$ the
+    $f''(\delta J)^2$ term---so the latter cannot be isolated, exactly as \eqref{eq:secondvar} warns---and the bounded
+    co-energy is achieved by cancellation against the shear term, the structural content of (AR). We stress what these
+    data do and do not establish: they confirm that the critical mode is nearly volume-preserving with bounded co-energy
+    by cancellation, but they do \emph{not} verify the precise $J_0$-dependent rate $\delta J=\mathcal{O}(J_0/\sqrt{|\log
+    J_0|})$ of \eqref{eq:rotrate} --- the accessible base states reach only $J_0\approx0.56$, not the asymptotic limit
+    $J_0\to0^+$. That rate, which is what Lemma~\ref{lem:relief} and Theorem~\ref{thm:reg} actually invoke, remains a
+    genuine assumption, consistent with but not proved by the computation.
 \end{remark}
 
 \subsection{Regularised tangent bound and spatial localisation}
+
+\begin{assumption}[Non-degeneracy of the stable branch, (ND)]
+    \label{ass:nd}
+    The stable creased equilibrium reached after the snap has bounded distortion uniformly in $\epsilon$: there is
+    $c'>0$ with $\lambda_{\min}(\bm{F})\ge c'$ (equivalently $J=\det\bm{F}\ge J_{\mathrm{floor}}>0$ pointwise) and the
+    remaining $d-1$ stretches are $\mathcal{O}(1)$, throughout $B_\rho$.
+\end{assumption}
+
+\noindent We state (ND) as a hypothesis, not a consequence of the energy bound: an integral bound $\int f(J)<\infty$
+gives only measure-type control of $\{J\ \text{small}\}$, not a pointwise floor. It is the finite-amplitude analogue of
+the small-$w$ relief of Lemma~\ref{lem:relief}, which it does \emph{not} invoke --- the lemma is local ($|w|\le w_0$)
+while the snap is to $\mathcal{O}(1)$ amplitude. Physically it is the standard expectation for creasing: the post-snap
+state is a finite-amplitude fold of bounded distortion, not a collapse, and the barrier $f_{\log}(J)\to\infty$ makes
+collapse energetically prohibitive. We emphasise that, unlike (AR), it is \emph{not} checked by the spectral computation
+of \S\ref{sub:numb}: that computation reaches the critical mode and the subcritical sign but does not track the
+nonlinear branch past the snap. A direct verification would require a full nonlinear path-following continuation onto the
+$\mathcal{O}(1)$ creased branch, which we do not carry out here; (ND) is therefore posited, on physical grounds, and
+left as the one regularity hypothesis of the physical-branch statement.
 
 \begin{proposition}[Stable physical branch: bounded tangent]
     \label{prop:physical}
     Under load control the structure follows the compressed fundamental branch up to the snap at $t_s(\epsilon)\le t_c$
     (Proposition~\ref{prop:koiter}) and then jumps to the creased branch of amplitude $w=\mathcal{O}(1)$. On the
-    compressed branch $\lambda_{\min}\ge\lambda_c(t)\ge\lambda_c(t_c)>0$. After the snap the configuration is a
-    \emph{finite-energy} equilibrium of the barrier model: since $f_{\log}(J)\to\infty$ as $J\to0^+$, a uniform energy
-    bound forces $J=\det\bm{F}\ge J_{\mathrm{floor}}>0$ pointwise, with $J_{\mathrm{floor}}$ depending only on the energy
-    level, hence (the remaining $d-1$ stretches being $\mathcal{O}(1)$ on the crease) $\lambda_{\min}=\mathcal{O}(1)$
-    uniformly in $\epsilon$. This is the finite-amplitude counterpart of the small-$w$ relief mechanism of
-    Lemma~\ref{lem:relief}, which it does not invoke (the lemma is local, $|w|\le w_0$); the barrier alone furnishes the
-    bound at $\mathcal{O}(1)$ amplitude. Hence on the physical branch
+    compressed branch the bound is unconditional: $\lambda_{\min}\ge\lambda_c(t)\ge\lambda_c(t_c)>0$ (buckling precedes
+    collapse), so $\|\mathbb{L}\|=\mathcal{O}(1)$ there. Under the non-degeneracy hypothesis~\ref{ass:nd} the post-snap
+    branch is likewise controlled, and on the whole physical branch
     \begin{equation}
         \max_{\bm{x}\in B_\rho}\|\mathbb{L}(\bm{x},\epsilon)\| = \mathcal{O}(1) \quad\text{uniformly in } \epsilon,
     \end{equation}
-    and the sole effect of the imperfection is the $\mathcal{O}(\epsilon^{2/3})$ reduction \eqref{eq:koiter} of the snap
-    load. There is no tangent blow-up on the physical branch.
+    so the sole effect of the imperfection is the $\mathcal{O}(\epsilon^{2/3})$ reduction \eqref{eq:koiter} of the snap
+    load: there is no tangent blow-up on the physical branch.
 \end{proposition}
 
 \begin{theorem}[Unstable continuation branch: regularised blow-up]
@@ -1341,8 +1371,8 @@ channel---of the benign tensile growth of \S\ref{sub:growth}; the same logarithm
 appears in both. The headline is therefore analytical rather than computational: a compressed clamped--free corner
 harbours a genuine structural bifurcation --- the corner-localised analogue of the classical \emph{creasing} instability
 of compressed elastomers \cite{Biot1963,Hong2009}, now seated at a geometric Dirichlet--Neumann junction rather than on a
-flat surface --- whose apparent tangent catastrophe is, on every physical branch, regularised by the barrier-forced
-kinematic relief. That the phenomenon first surfaced as ill-conditioning in a numerical computation is incidental to its
+flat surface --- whose apparent tangent catastrophe is, on every physical branch, regularised by the
+kinematic relief (Assumption~\ref{ass:rot}, numerically supported). That the phenomenon first surfaced as ill-conditioning in a numerical computation is incidental to its
 nature; the conditioning degradation is a corollary, not the subject. It does carry a concrete computational reading ---
 a solver that suppresses the snap and tracks the unstable branch sees the conditioning degrade as $\epsilon^{-4/3}$ and
 should either admit the snap or refine inside the tube \eqref{eq:locallength}, the load-control reduction
