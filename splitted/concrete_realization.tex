@@ -97,18 +97,24 @@ pencil, and set the \emph{spectral gap} $g:=\alpha'-\alpha>0$. Define the rescal
               $V^{1,2}_{\beta_\star}(B_R\cap W)$ for every $R>0$, with rate
               $\|\hat{\bm{u}}_\lambda-\hat{\bm{u}}_W\|_{V^{1,2}_{\beta_\star}(B_R\cap W)}=\mathcal{O}(\lambda^{g})$. The
               limit solves the homogeneous linear pencil on $W$ and is fixed by the wedge geometry up to the scalar $K$.
-        \item[\textup{(ii)}] \emph{Operator convergence away from the tip.} On every annulus
+        \item[\textup{(ii)}] \emph{Operator convergence away from the tip; common vertex pencil.} On every annulus
               $\{0<r_0\le r\le R\}\cap W$ bounded away from the vertex, the coefficients of $\widehat{\mathcal{L}}_\lambda$
               converge in $C^0$, with rate $\mathcal{O}(\lambda^{g})$, to those of the model-wedge operator
-              $\mathcal{L}_W$ obtained by freezing along the self-similar field $\hat{\bm{u}}_W$. Consequently the leading
-              singular exponent and angular profile of $\widehat{\mathcal{L}}_\lambda$ agree with those of $\mathcal{L}_W$
-              in the limit $\lambda\to0$, and only the dimensionless amplitude $K$ (equivalently the normalised
-              stress-intensity $\hat K$ of Remark~\ref{rem:sifparam}) survives from the global problem. We emphasise what
-              is \emph{not} asserted: this annular ($C^0$, away-from-tip) convergence does not by itself control the
-              operator in a weighted norm \emph{up to} $r=0$, and the resulting agreement of the full Lyapunov--Schmidt
-              reduced data is here a leading-order, formal statement rather than a quantitative $\mathcal{O}(\lambda^{g})$
-              spectral-perturbation theorem; the tip enters through the weight, and a uniform-to-the-tip operator-norm
-              estimate would require the inner vertex theory left open in Remark~\ref{rem:core}.
+              $\mathcal{L}_W$ obtained by freezing along the self-similar field $\hat{\bm{u}}_W$. The leading singular
+              exponent $\alpha$ and angular profile $\bm{\Phi}$ are \emph{not} inferred from this annular convergence
+              (they are pencil/vertex data, which annular $C^0$ control cannot reach); rather, they are
+              \emph{identical} for $\widehat{\mathcal{L}}_\lambda$, $\mathcal{L}_W$ and the linearised-elasticity operator
+              alike, because all three share the \emph{same} leading vertex pencil. Indeed at the tip the nonlinear
+              correction to the principal symbol is subordinate ($o(r^{-\delta})$ for every $\delta$, Lemma~\ref{lem:Abound}),
+              so by Theorem~\ref{thm:A} the corner pencil --- and hence its eigenvalues $\alpha$ and eigenprofiles
+              $\bm{\Phi}$ --- coincides with that of constant-coefficient linear elasticity, unchanged by the
+              nonlinearity and independent of $\lambda$. Thus only the dimensionless amplitude $K$ (equivalently the
+              normalised stress-intensity $\hat K$ of Remark~\ref{rem:sifparam}) survives from the global problem. We
+              emphasise what is \emph{not} asserted: the away-from-tip convergence governs only the lower-order
+              (non-principal) coefficients; it does not control the operator in a weighted norm \emph{up to} $r=0$, and
+              the agreement of the full Lyapunov--Schmidt reduced data is a leading-order statement rather than a
+              quantitative $\mathcal{O}(\lambda^{g})$ spectral-perturbation theorem, a uniform-to-the-tip estimate
+              requiring the inner vertex theory left open in Remark~\ref{rem:core}.
         \item[\textup{(iii)}] \emph{Dimensional reduction $d\ge3\Rightarrow d=2$.} Since $\Sigma$ is smooth and the
               coefficients are constant along $T_{\bm{x}_0}\Sigma$ in the limit, the Fourier transform in the edge variable
               $\bm{s}\in T_{\bm{x}_0}\Sigma$ decomposes $\mathcal{L}_W$ into a one-parameter family
@@ -128,9 +134,12 @@ pencil, and set the \emph{spectral gap} $g:=\alpha'-\alpha>0$. Define the rescal
     $\mathbb{L}$ is a smooth (algebraic) function of $\bm{F}_0=\bm{I}+\Grad\bm{u}_0$ and $\Grad\hat{\bm{u}}_\lambda\to
     \Grad\hat{\bm{u}}_W$ off the tip by (i); freezing along the self-similar limit defines $\mathcal{L}_W$, and the
     coefficient error inherits the $\mathcal{O}(\lambda^{g})$ rate of (i) on every annulus
-    $\{r_0\le r\le R\}$ bounded away from $r=0$. The leading exponent and angular profile, being determined by the
-    coefficient values on such annuli together with the (fixed) Dirichlet--Neumann boundary conditions, therefore
-    converge to those of $\mathcal{L}_W$. We do \emph{not} claim a weighted operator-norm estimate uniform up to $r=0$:
+    $\{r_0\le r\le R\}$ bounded away from $r=0$. The leading exponent and angular profile are obtained not from this
+    annular convergence but from the principal-symbol structure at the vertex: by Lemma~\ref{lem:Abound} the nonlinear
+    correction to the principal symbol is subordinate (relative bound $0$), so by Theorem~\ref{thm:A} the corner pencils
+    of $\widehat{\mathcal{L}}_\lambda$ and of $\mathcal{L}_W$ both coincide with that of constant-coefficient linear
+    elasticity at $\bm{x}_0$; their eigenvalues $\alpha$ and eigenprofiles $\bm{\Phi}$ are therefore equal (not merely
+    close), independently of $\lambda$. We do \emph{not} claim a weighted operator-norm estimate uniform up to $r=0$:
     the tip contributes through the weight, not through the body, and its quantitative control is the open inner problem
     of Remark~\ref{rem:core}; accordingly the agreement of the full reduced bifurcation data is asserted only at leading
     order. Statement (iii) is the standard edge-to-corner reduction: translation
@@ -374,12 +383,15 @@ posit:
               disposes of it in $d\ge3$.) This \emph{proves} the vanishing-quadratic clause of
               Assumption~\ref{ass:subcrit}.
         \item[\textup{(ii)}] \emph{The frozen cubic and quintic are sign-definite, and adverse to subcriticality.} With
-              $D_1$ asymptotically small (Assumption~\ref{ass:rot}) and $d_\phi>0$ (Lemma~\ref{lem:sval}), the leading frozen
+              $D_1$ asymptotically small (Assumption~\ref{ass:rot}), the leading frozen
               parts are $b_{\mathrm{dir}}=2\int_{B_\rho} f''(J_0)\,d_\phi^2\,dV$ and
               $d_{\mathrm{dir}}=\int_{B_\rho} f'''(J_0)\,d_\phi^3\,dV$. For the logarithmic penalty
               $f''_{\log}(J_0)=(\mu_e+2\lambda_e-2\lambda_e\log J_0)/J_0^2>0$ and
-              $f'''_{\log}(J_0)=(4\lambda_e\log J_0-6\lambda_e-2\mu_e)/J_0^3<0$ throughout compression $J_0<1$, so
-              $b_{\mathrm{dir}}>0$ and $d_{\mathrm{dir}}<0$ --- the \emph{opposite} of the subcritical pattern $b<0<d$.
+              $f'''_{\log}(J_0)=(4\lambda_e\log J_0-6\lambda_e-2\mu_e)/J_0^3<0$ throughout compression $J_0<1$. The cubic
+              part carries $d_\phi^2\ge0$, so $b_{\mathrm{dir}}>0$ follows from $f''_{\log}>0$ \emph{alone}, with no sign
+              hypothesis on $d_\phi$. The quintic part carries $d_\phi^3$; under the orientation condition $d_\phi>0$
+              (the generic, relief-orienting sign of the second mixed discriminant, \eqref{eq:dphisign} below) and
+              $f'''_{\log}<0$ one gets $d_{\mathrm{dir}}<0$ --- the \emph{opposite} of the subcritical pattern $b<0<d$.
     \end{enumerate}
 \end{lemma}
 \begin{proof}
@@ -528,9 +540,21 @@ it, Lemma~\ref{lem:relief} gives the lower bound
 with $d_\phi$ the second mixed discriminant of $\bm{F}_0$ and $\Grad\bm{\phi}$ (the second-order coefficient of the
 determinant, $=\det\Grad\bm{\phi}$ for $d=2$). The relief mechanism itself is valid for all $d$ once
 Assumption~\ref{ass:rot} is granted, so it is a kinematic statement in every dimension rather than a special
-two-dimensional accident. For
-the concrete model the only points to add are that the genericity $d_\phi>0$ holds off a measure-zero set of modes, by
-the transversality argument of Lemma~\ref{lem:sval}, and that the collapse locus $\Sigma_{\mathrm{c}}$ is generically the
+two-dimensional accident. The relief floor requires the \emph{orientation} of this second-order coefficient,
+\begin{equation}
+    \label{eq:dphisign}
+    d_\phi>0 \qquad\text{(a.e.\ on $B_\rho$, the relief-orienting sign of the mode),}
+\end{equation}
+which we record as a genericity property of the critical mode, \emph{not} as a consequence of
+Lemma~\ref{lem:sval} (that lemma concerns the transversal vanishing of $\lambda_{\min}$, a different field). Two
+remarks make \eqref{eq:dphisign} the natural generic condition. First, $d_\phi=\det\Grad\bm\phi$ ($d=2$) is an analytic
+function of the mode, so the locus $\{d_\phi=0\}$ is non-generic (measure zero among modes) and $d_\phi$ has a definite
+sign on each nodal cell; second, $d_\phi>0$ is exactly the statement that the mode \emph{relieves} rather than deepens
+the local volume change at second order --- the sign for which $\tfrac12 w^2 d_\phi$ in \eqref{eq:reliefd} is a floor
+rather than a further compression. A mode with $d_\phi<0$ on a set of positive measure is collapse-\emph{driving} there
+and is excluded by this condition; on the computed critical mode of \S\ref{sec:numerical} the relief orientation is the
+observed one. The remaining points for the concrete model are that the collapse locus $\Sigma_{\mathrm{c}}$ is
+generically the
 codimension-one set inside $B_\rho$ along which the relieved branch would still collapse (or, when the severest
 compression sits at the vertex, the point $\Sigma_{\mathrm{c}}=\{0\}$ of codimension two, Remark~\ref{rem:locus}, which
 only sharpens the integrability); the regularised bound of
@@ -559,7 +583,10 @@ has bounded coefficients and the spectrum is discrete.
 
 \begin{lemma}[Attainment under (BC)]
     \label{lem:attain}
-    Under Assumption~\ref{ass:bc}, for every $t\le t_c$ the tangent $\mathbb{L}(\bm{F}_0(t))$ is bounded on $B_\rho$, the
+    Assume, in addition to \textup{(BC)}, that the fundamental state $(t,\bm x)\mapsto\bm F_0(t,\bm x)$ is continuous on
+    the compact cylinder $[0,t_c]\times\overline{B_\rho}$ --- a standing regularity of the load path, automatic for a
+    fundamental branch depending continuously on the load with bounded data. Then for every $t\le t_c$ the tangent
+    $\mathbb{L}(\bm{F}_0(t))$ is bounded on $B_\rho$, the
     operator $\mathcal{L}_c=\partial_{\bm{u}}G(\bm{u}_0(t_c),t_c,0)$ has compact resolvent and discrete spectrum, and the
     critical value $\mu_1(t_c)=0$ is attained by an eigenmode $\bm{\phi}\in V$. This discharges the
     \emph{attainment} clause of Assumption~\ref{ass:bif}; the \emph{simplicity} clause is reduced, by the symmetry
@@ -569,9 +596,9 @@ has bounded coefficients and the spectrum is discrete.
 
 \begin{proof}
     Condition \eqref{eq:bc} supplies the \emph{lower} stretch bound, $\|\bm{F}_0(t)^{-1}\|=\lambda_{\min}^{-1}\le
-    c^{-1}$. The matching \emph{upper} bound is not part of (BC) --- which constrains only $\lambda_{\min}$ --- but is
-    automatic: the fundamental state $(t,\bm x)\mapsto\bm F_0(t,\bm x)$ is continuous on the compact set
-    $[0,t_c]\times\overline{B_\rho}$ (it solves the equilibrium problem along the load path with bounded data), so all
+    c^{-1}$. The matching \emph{upper} bound is not part of (BC) --- which constrains only $\lambda_{\min}$ --- but follows
+    from the stated continuity hypothesis: $(t,\bm x)\mapsto\bm F_0(t,\bm x)$ is continuous on the compact set
+    $[0,t_c]\times\overline{B_\rho}$, so all
     its stretches, and in particular $\det\bm F_0$, are bounded above by a constant $C_0=C_0(t_c)<\infty$ there.
     Together with $\Theta_{\log}$ being continuous and finite on the compact range $[\,(\det\bm F_0)_{\min},C_0\,]$
     (which avoids $J=0$ by (BC)), the structural bound \eqref{eq:Lbound},
@@ -601,38 +628,45 @@ has bounded coefficients and the spectrum is discrete.
     open, in place of the opaque spectral hypothesis.
 \end{remark}
 
-\begin{lemma}[\textup{(BC)} is a model-wedge inequality]
+\begin{lemma}[\textup{(BC)} reduces to a comparison of wedge \emph{stretch} thresholds]
     \label{lem:bcwedge}
-    The buckling side of (BC), $t_c\le t_*$, reduces to a \emph{scale-invariant} threshold of the model wedge
-    $\mathcal{L}_W$ of Proposition~\ref{prop:blowup}, depending on the geometry only through $\nu$ and free of the
-    stress-intensity amplitude $\hat K$. \emph{Provided} the barrier-regularised collapse load $t_{\mathrm{coll}}$
-    rescales as a wedge quantity --- the lower bound on $t_{\mathrm{coll}}$ left open in Remark~\ref{rem:bc} --- the full
-    ordering $t_c<t_{\mathrm{coll}}$ is likewise amplitude-free and a property of $\nu$ alone.
+    The two thresholds that (BC) compares are \emph{stretch} values, and as such are scale-invariant data of the model
+    wedge $\mathcal{L}_W$ of Proposition~\ref{prop:blowup}, depending on the geometry only through $\nu$ and free of the
+    stress-intensity amplitude $\hat K$: the surface-instability stretch $\lambda_\star=\lambda_\star(\nu)\in(0,1)$ at
+    which buckling is triggered, and the collapse stretch $\lambda_{\min}=0$. The conversion of these stretch thresholds
+    into the load ordering $t_c<t_{\mathrm{coll}}$ is \emph{not} itself a wedge statement: it requires the fundamental
+    state's load-to-stretch map $t\mapsto\lambda_\parallel(\bm F_0(t);P)$, a global datum. Under monotone compression
+    (condition \textup{(M)} of Lemma~\ref{lem:transversal}) this map is monotone, so the stretch ordering
+    $\lambda_\star>0$ transfers to the load ordering, \emph{provided} the barrier-regularised collapse load
+    $t_{\mathrm{coll}}$ admits the lower bound left open in Remark~\ref{rem:bc}.
 \end{lemma}
 
 \begin{proof}
-    Both loads are read off the same self-similar field $\hat{\bm{u}}_W=Kr^{\alpha}\bm{\Phi}$ of
-    Proposition~\ref{prop:blowup}(i). The buckling load is bounded above by the surface-creasing load of
-    Lemma~\ref{lem:biot}, $t_c\le t_*$, attained where the surface-parallel stretch first reaches the half-space
-    threshold $\lambda_\parallel=\lambda_\star=\mathcal{O}(1)$; both $\lambda_\star$ (Remark~\ref{rem:threshold}) and the
-    Biot secular form $q(\lambda_\parallel)$ are functions of $\nu$ alone, and the localisation of Lemma~\ref{lem:biot}
-    ($k\to\infty$, $\delta=k^{-1/2}$) is exactly the statement that $t_*$ is set by the half-space model, a sub-object of
-    $\mathcal{L}_W$; this establishes the buckling side unconditionally. For the collapse load $t_{\mathrm{coll}}$ ---
-    the value at which the barrier-regularised continuation of the self-similar field first reaches $\lambda_{\min}=0$
-    --- the data $\lambda_{\min}(\hat{\bm{u}}_W)$ and the barrier $f_{\log}$ are homogeneous on $W$, which makes a
-    wedge-scaling of $t_{\mathrm{coll}}$ \emph{plausible}; but the nonlinear threshold is set at the tip, where the
-    linear prediction wants to collapse for any load, and a quantitative lower bound there is the content left open in
-    Remark~\ref{rem:bc}. Granting that scaling, multiplying the load by a constant translates both thresholds equally,
-    so the \emph{ordering} $t_c<t_{\mathrm{coll}}$ is amplitude-free: invariant under $\hat K\mapsto c\,\hat K$ and a
-    property of $\nu$ and the $90^\circ$ wedge alone. By Proposition~\ref{prop:blowup}(ii) the finite-body corrections
-    are $\mathcal{O}(\lambda^{g})$. \qed
+    What localises to the wedge is the pair of \emph{stretch} thresholds. The surface-instability stretch
+    $\lambda_\star$ and the Biot secular form $q(\lambda_\parallel)$ are functions of $\nu$ alone
+    (Remark~\ref{rem:threshold}), evaluated on the half-space tangent to the free face --- a sub-object of
+    $\mathcal{L}_W$; the collapse stretch is the universal value $\lambda_{\min}=0$. Both are amplitude-free.
+    Lemma~\ref{lem:biot} shows that once the fundamental state drives $\lambda_\parallel$ below $\lambda_\star$ at some
+    free-face point, a destabilising field exists, hence $t_c\le t_*$ where $t_*$ is the load realising
+    $\lambda_\parallel=\lambda_\star$. This load $t_*$ is \emph{not} a wedge quantity: it is the value of the global
+    map $t\mapsto\lambda_\parallel(\bm F_0(t);P)$ at the threshold stretch, and that map is set by the fundamental
+    state, not by the half-space model. The earlier draft conflated the (wedge) threshold stretch with the (global)
+    threshold load; we separate them here. The load \emph{ordering} $t_c<t_{\mathrm{coll}}$ is what (BC) needs, and it
+    follows once two genuinely non-wedge facts are granted: (a) under monotone compression (M) the map
+    $t\mapsto\lambda_\parallel$ (resp.\ $\lambda_{\min}$) is monotone decreasing, so the stretch ordering
+    $\lambda_\star>0=\lambda_{\min}^{\mathrm{coll}}$ converts to $t_*\le t_{\mathrm{coll}}$; and (b) the
+    barrier-regularised $t_{\mathrm{coll}}$ is bounded below at the tip, the open content of Remark~\ref{rem:bc}. What
+    the wedge reduction \emph{does} deliver, free of $\hat K$, is that the thresholds being compared are amplitude-free,
+    $\nu$-only stretches; the amplitude $\hat K$ and the finite body enter only through the load-to-stretch map and
+    through the $\mathcal{O}(\lambda^{g})$ corrections of Proposition~\ref{prop:blowup}(ii). \qed
 \end{proof}
 
 \begin{remark}[Why (BC) localises but the cubic sign need not]
     \label{rem:bclocalises}
-    Lemma~\ref{lem:bcwedge} is the easy half of the localisation programme: a comparison of \emph{thresholds} is
-    insensitive to the overall amplitude, so it collapses to a one-parameter ($\nu$) statement on the model wedge and is
-    decided by a single computation independent of (H) versus (C). The subcritical \emph{sign} of \S\ref{sub:bcount} is
+    Lemma~\ref{lem:bcwedge} is the easy half of the localisation programme: the \emph{stretch thresholds} being
+    compared ($\lambda_\star$ and $0$) are amplitude-free, $\nu$-only wedge data, decided by a single computation
+    independent of (H) versus (C); the only non-wedge ingredient is the monotone load-to-stretch map that turns the
+    stretch comparison into a load ordering. The subcritical \emph{sign} of \S\ref{sub:bcount} is
     the hard half: there the relevant object is an integral, not a threshold, and whether it localises is governed by the
     homogeneity count of Proposition~\ref{prop:bcount}. The two open conditions thus sit on opposite sides of the
     blow-up dichotomy of Remark~\ref{rem:sifparam}.
@@ -652,9 +686,9 @@ in concrete, checkable form rather than as opaque spectral postulates:
           $t_c<t_{\mathrm{coll}}$ that powers attainment (Lemma~\ref{lem:attain}). It is bounded on one side by
           Lemma~\ref{lem:biot} ($t_c\le t_*$, at $\lambda_{\min}=\mathcal{O}(1)$) and supported by the energy barrier
           (Remark~\ref{rem:bc}); the residual content is a lower bound on the barrier-regularised tip collapse load,
-          which we verify numerically. By Lemma~\ref{lem:bcwedge} this is a comparison of two scale-invariant wedge
-          thresholds, so it reduces to a one-parameter ($\nu$) computation on the model wedge, independent of the body
-          and of the stress-intensity $\hat K$.
+          which we verify numerically. By Lemma~\ref{lem:bcwedge} the two \emph{stretch} thresholds being compared are
+          amplitude-free, one-parameter ($\nu$) wedge data, independent of the body and of $\hat K$; the conversion to
+          the load ordering uses only the monotone load-to-stretch map of the fundamental state (condition (M)).
     \item \emph{Subcritical sign pattern}, $b<0<d$ (Assumption~\ref{ass:subcrit}): the directions in which the cubic and
           quintic bend the branch. Here the neo-Hookean structure is doubly informative. Lemma~\ref{lem:volcoeff}
           reduces the coefficients to volumetric integrals and shows the explicit single-mode parts are \emph{adverse}
@@ -685,7 +719,7 @@ in concrete, checkable form rather than as opaque spectral postulates:
         First-order relief / rotation (Ass.~\ref{ass:rot}, Lem.~\ref{lem:relief}) & finite at $t_c$ (Lem.~\ref{lem:rotreg}); near-collapse posited & \emph{numerical}: rotation defect ${\approx}0.08$--$0.16$ (Rem.~\ref{rem:rotnum}) \\
         Stable-branch non-degeneracy (Ass.~\ref{ass:nd})             & posited             & \emph{physical} (bounded-distortion crease); not computed here (Prop.~\ref{prop:physical}) \\
         \midrule
-        Buckling precedes collapse (BC) (Ass.~\ref{ass:bc})          & ---                 & \emph{numerical}, wedge $(\nu)$ only (Lem.~\ref{lem:bcwedge}, Rem.~\ref{rem:bc}) \\
+        Buckling precedes collapse (BC) (Ass.~\ref{ass:bc})          & ---                 & \emph{numerical}; $\nu$-only stretch thresholds + monotone load map (Lem.~\ref{lem:bcwedge}, Rem.~\ref{rem:bc}) \\
         Subcriticality $b<0<d$ (Ass.~\ref{ass:subcrit})              & assumed             & \emph{numerical}, phase diagram $b(\nu,\hat K)$; $\alpha{>}\tfrac12$ (Prop.~\ref{prop:bcount}) \\
         \bottomrule
     \end{tabular}
@@ -714,8 +748,9 @@ Finally, the blow-up reduction of \S\ref{sub:blowup} sharpens what ``numerical''
 Proposition~\ref{prop:blowup} the singularity is localised to the model wedge $\mathcal{L}_W$, all of whose data are
 functions of $(\nu,\hat K)$ alone; the finite body (H) or (C) enters only through the single scalar $\hat K$ and through
 corrections $\mathcal{O}(\lambda^{g})$. The two residual conditions then occupy opposite sides of a clean homogeneity
-dichotomy (Remark~\ref{rem:sifparam}): condition (BC) is a comparison of \emph{scale-invariant thresholds} and collapses
-to a one-parameter ($\nu$) statement on $\mathcal{L}_W$ (Lemma~\ref{lem:bcwedge}), whereas the cubic sign is an
+dichotomy (Remark~\ref{rem:sifparam}): condition (BC) compares two \emph{scale-invariant stretch thresholds}, which are
+one-parameter ($\nu$) wedge data on $\mathcal{L}_W$ (the conversion to a load ordering using only the monotone
+load-to-stretch map, Lemma~\ref{lem:bcwedge}), whereas the cubic sign is an
 \emph{integral} with $\alpha>\tfrac12$, hence tip-convergent but not tip-dominated, and remains a genuine two-parameter
 functional $b(\nu,\hat K)$ (Proposition~\ref{prop:bcount}). In both cases the verification is thus a computation on a
 \emph{universal} object --- a curve or a phase diagram of the corner singularity itself --- rather than a spot check on a

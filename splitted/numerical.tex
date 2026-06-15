@@ -72,11 +72,14 @@ $\lambda_\star$ as a function of the material ratio, e.g.
         \bottomrule
     \end{tabular}
 \end{center}
-This is the input that controls the \emph{buckling side} of (BC): the buckling load $t_c\le t_*$ is attained while the
-fundamental stretch is still $\lambda_\parallel=\lambda_\star=\mathcal{O}(1)$, away from collapse. It settles the
-ordering $t_c<t_{\mathrm{coll}}$ only together with a lower bound on the competing collapse load $t_{\mathrm{coll}}$,
-which the barrier keeps high but whose quantitative tip bound is left open (Lemma~\ref{lem:bcwedge},
-Remark~\ref{rem:bc}). The computation is reproduced by
+What this computes is the \emph{stretch} threshold $\lambda_\star(\nu)$, which is the amplitude-free, $\nu$-only wedge
+datum on the buckling side of (BC) (Lemma~\ref{lem:bcwedge}); the buckling load $t_c\le t_*$ is then attained while the
+fundamental stretch is still $\lambda_\parallel=\lambda_\star=\mathcal{O}(1)$, away from collapse. We stress that
+$\lambda_\star$ is a stretch, not a load: converting it to the corner load $t_*$ requires the global fundamental-state
+map $t\mapsto\lambda_\parallel(\bm F_0(t);P)$, which we do not compute here and which is monotone under the assumed
+loading. The threshold thus settles the ordering $t_c<t_{\mathrm{coll}}$ only together with that monotone map and with a
+lower bound on the competing collapse load $t_{\mathrm{coll}}$, which the barrier keeps high but whose quantitative tip
+bound is left open (Lemma~\ref{lem:bcwedge}, Remark~\ref{rem:bc}). The computation is reproduced by
 \texttt{surface\_instability.py}, validated against the incompressible Biot threshold.
 
 \subsection{The one remaining solve: the subcritical sign \texorpdfstring{$b(\nu,\hat K)$}{b(nu,Khat)}}
