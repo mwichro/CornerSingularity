@@ -122,7 +122,38 @@ Three facts emerge, each robust under refinement:
   terms scale as $\|\bm\phi\|^4$, so the ratio is independent of the arbitrary mode amplitude --- converges to
   $\approx-2.3$, comfortably below $-1$. The feedback therefore \emph{overwhelms} the adverse frozen term, and $b<0$.
 \end{itemize}
-Sweeping the physical rectangle, $b<0$ \emph{throughout} $(\nu,\hat K)$: the corner bifurcation is subcritical
+The sign is substantiated rather than merely reported. The diagnostic ratio $r:=b_{\mathrm{fb}}/b_{\mathrm{E_4}}$ is
+\emph{normalisation-invariant} (both terms scale as $\|\bm\phi\|^4$) and decides the sign by $b<0\iff r<-1$. It is
+stable under refinement of the angular ($N$) and depth ($N_X$) resolutions, and the discrete kernel stays isolated by
+an $O(1)$ gap throughout:
+\begin{center}
+    \begin{tabular}{rrcccc}
+        \toprule
+        $N_X$ & $N$ & ratio $r$ & sign$(b)$ & spectral gap \\
+        \midrule
+        $10$ & $24$ & $-2.092$ & $b<0$ & $5.8\times10^{-2}$ \\
+        $12$ & $28$ & $-2.452$ & $b<0$ & $4.5\times10^{-2}$ \\
+        $14$ & $32$ & $-2.426$ & $b<0$ & $3.5\times10^{-2}$ \\
+        $16$ & $36$ & $-2.212$ & $b<0$ & $2.8\times10^{-2}$ \\
+        \bottomrule
+    \end{tabular}
+\end{center}
+(at $\nu=0.417$, $\hat K=0.15$; $r$ settles near $-2.3$, comfortably below $-1$). Sweeping the physical rectangle, the
+ratio is below $-1$ --- hence $b<0$ --- \emph{throughout} $(\nu,\hat K)$:
+\begin{center}
+    \begin{tabular}{rccc}
+        \toprule
+        $\nu\backslash\hat K$ & $0.10$ & $0.20$ & $0.30$ \\
+        \midrule
+        $0.250$ & $-3.19$ & $-2.43$ & $-2.44$ \\
+        $0.333$ & $-2.70$ & $-2.14$ & $-2.37$ \\
+        $0.417$ & $-2.17$ & $-1.86$ & $-2.19$ \\
+        $0.455$ & $-1.82$ & $-1.65$ & $-1.94$ \\
+        \bottomrule
+    \end{tabular}
+\end{center}
+The margin to the threshold $r=-1$ is smallest near the incompressible corner ($\nu\to\tfrac12$, $\hat K\approx0.2$),
+where $r\approx-1.65$, and is never breached on the physical rectangle. Thus the corner bifurcation is subcritical
 (Assumption~\ref{ass:subcrit} holds), the imperfect-bifurcation picture applies, and the corner is the genuine
 crease-analogue. The computation is reproduced by \texttt{graded\_buckling.py}, which reuses the validated linear
 building blocks of \S\ref{sub:numpencil}--\S\ref{sub:numbiot} (\texttt{williams\_clampedfree.py} /

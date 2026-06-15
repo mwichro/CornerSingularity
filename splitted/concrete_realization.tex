@@ -97,13 +97,18 @@ pencil, and set the \emph{spectral gap} $g:=\alpha'-\alpha>0$. Define the rescal
               $V^{1,2}_{\beta_\star}(B_R\cap W)$ for every $R>0$, with rate
               $\|\hat{\bm{u}}_\lambda-\hat{\bm{u}}_W\|_{V^{1,2}_{\beta_\star}(B_R\cap W)}=\mathcal{O}(\lambda^{g})$. The
               limit solves the homogeneous linear pencil on $W$ and is fixed by the wedge geometry up to the scalar $K$.
-        \item[\textup{(ii)}] \emph{Operator and spectrum.} The rescaled operator $\widehat{\mathcal{L}}_\lambda$ converges,
-              on compact subsets of $\overline{W}\setminus\{r=0\}$ and in the weighted operator norm on $B_R\cap W$, to
-              the model-wedge operator $\mathcal{L}_W$ obtained by freezing the coefficients along the self-similar field
-              $\hat{\bm{u}}_W$; consequently the singular exponents and the leading reduced bifurcation data computed on
-              $\widehat{\mathcal{L}}_\lambda$ agree with those of $\mathcal{L}_W$ up to $\mathcal{O}(\lambda^{g})$. Only the
-              dimensionless amplitude $K$ (equivalently the normalised stress-intensity $\hat K$ of
-              Remark~\ref{rem:sifparam}) survives from the global problem.
+        \item[\textup{(ii)}] \emph{Operator convergence away from the tip.} On every annulus
+              $\{0<r_0\le r\le R\}\cap W$ bounded away from the vertex, the coefficients of $\widehat{\mathcal{L}}_\lambda$
+              converge in $C^0$, with rate $\mathcal{O}(\lambda^{g})$, to those of the model-wedge operator
+              $\mathcal{L}_W$ obtained by freezing along the self-similar field $\hat{\bm{u}}_W$. Consequently the leading
+              singular exponent and angular profile of $\widehat{\mathcal{L}}_\lambda$ agree with those of $\mathcal{L}_W$
+              in the limit $\lambda\to0$, and only the dimensionless amplitude $K$ (equivalently the normalised
+              stress-intensity $\hat K$ of Remark~\ref{rem:sifparam}) survives from the global problem. We emphasise what
+              is \emph{not} asserted: this annular ($C^0$, away-from-tip) convergence does not by itself control the
+              operator in a weighted norm \emph{up to} $r=0$, and the resulting agreement of the full Lyapunov--Schmidt
+              reduced data is here a leading-order, formal statement rather than a quantitative $\mathcal{O}(\lambda^{g})$
+              spectral-perturbation theorem; the tip enters through the weight, and a uniform-to-the-tip operator-norm
+              estimate would require the inner vertex theory left open in Remark~\ref{rem:core}.
         \item[\textup{(iii)}] \emph{Dimensional reduction $d\ge3\Rightarrow d=2$.} Since $\Sigma$ is smooth and the
               coefficients are constant along $T_{\bm{x}_0}\Sigma$ in the limit, the Fourier transform in the edge variable
               $\bm{s}\in T_{\bm{x}_0}\Sigma$ decomposes $\mathcal{L}_W$ into a one-parameter family
@@ -122,9 +127,13 @@ pencil, and set the \emph{spectral gap} $g:=\alpha'-\alpha>0$. Define the rescal
     $\lambda^{\alpha'-\alpha}=\lambda^{g}$ in the homogeneous weighted norm. Statement (ii) follows because
     $\mathbb{L}$ is a smooth (algebraic) function of $\bm{F}_0=\bm{I}+\Grad\bm{u}_0$ and $\Grad\hat{\bm{u}}_\lambda\to
     \Grad\hat{\bm{u}}_W$ off the tip by (i); freezing along the self-similar limit defines $\mathcal{L}_W$, and the
-    error inherits the $\mathcal{O}(\lambda^{g})$ rate of (i) on every annulus bounded away from $r=0$, where the
-    weighted estimates of Lemma~\ref{lem:korn} and Theorem~\ref{thm:A} apply uniformly. The tip itself contributes
-    through the weight, not through the body. Statement (iii) is the standard edge-to-corner reduction: translation
+    coefficient error inherits the $\mathcal{O}(\lambda^{g})$ rate of (i) on every annulus
+    $\{r_0\le r\le R\}$ bounded away from $r=0$. The leading exponent and angular profile, being determined by the
+    coefficient values on such annuli together with the (fixed) Dirichlet--Neumann boundary conditions, therefore
+    converge to those of $\mathcal{L}_W$. We do \emph{not} claim a weighted operator-norm estimate uniform up to $r=0$:
+    the tip contributes through the weight, not through the body, and its quantitative control is the open inner problem
+    of Remark~\ref{rem:core}; accordingly the agreement of the full reduced bifurcation data is asserted only at leading
+    order. Statement (iii) is the standard edge-to-corner reduction: translation
     invariance along $T_{\bm{x}_0}\Sigma$ in the limit diagonalises $\mathcal{L}_W$ under the partial Fourier transform,
     and each fibre is the planar pencil whose smallest root is $\alpha$, attained at $\bm{\zeta}=\bm0$ (the cited edge
     calculus). \qed
@@ -280,9 +289,17 @@ always be met by loading hard enough, provided the material does not fail elsewh
 \begin{remark}[What this closes]
     Lemma~\ref{lem:biot} converts the existence of the critical load $t_c$ --- previously conditional on the unproved
     hypothesis (ii) --- into a \emph{theorem} for the concrete clamped--free geometry, contingent only on the loading
-    hypothesis (SC). The mechanism is made explicit: the corner instability \emph{is} the half-space surface (creasing)
-    instability, localised to the free face near the edge by the cut-off \eqref{eq:biotmode}--\eqref{eq:biotscale}. This
-    is the precise sense in which the corner bifurcation is ``the corner analogue of creasing.''
+    hypothesis (SC). What the construction delivers, and what it does not, should be stated precisely. It exhibits a
+    single admissible field $\bm{v}_*$ with $Q_{t_*}(\bm{v}_*)<0$, which by Lemma~\ref{lem:tc} is all that is needed to
+    force a crossing $\mu_1(t_c)=0$ at some $t_c\in(0,t_*]$. The destabilising mechanism is the half-space surface
+    (creasing) instability, seated at an interior free-face point $P$ of the edge neighbourhood $B_\rho$ and confined to
+    it by the cut-off \eqref{eq:biotmode}--\eqref{eq:biotscale}; the witness $\bm{v}_*$ is supported away from the tip
+    $r=0$ (indeed (SC) places $P$ at positive distance from $\Sigma$), so the lemma certifies a surface instability
+    \emph{within $B_\rho$}, not a mode pinned at the corner vertex. This is the precise sense in which the corner
+    bifurcation is ``the corner analogue of creasing'': the same free-face mechanism, activated near --- not at --- the
+    edge. The location and shape of the genuine \emph{critical} mode $\bm{\phi}$ at $t_c$ is a separate question,
+    settled by the attainment analysis of \S\ref{sub:attain} (which gives $\bm{\phi}\in V$ supported in $B_\rho$), and
+    the role of the edge proper enters quantitatively only through the graded pre-stress of Remark~\ref{rem:twoscales}.
 \end{remark}
 
 \begin{remark}[On the threshold $\lambda_\star$: compressible vs.\ incompressible]
@@ -310,10 +327,12 @@ posit:
 
 \begin{itemize}
     \item \emph{Simplicity (part of Assumption~\ref{ass:bif}).} The lowest eigenvalue within a fixed symmetry sector is
-          generically simple, and the critical mode $\bm{\phi}$ is the ground state of one sector; the genericity is the
-          standard one for self-adjoint operators commuting with a finite symmetry group. Thus simplicity need not be
-          assumed separately --- only the spectral \emph{attainment} (the borderline-elliptic point of
-          Remark~\ref{rem:framework}) remains genuinely open.
+          generically simple; the genericity is the standard one for self-adjoint operators commuting with a finite
+          symmetry group. This reduces simplicity to two residual genericity statements --- that the crossing eigenvalue
+          is the ground state of its sector, and that no accidental degeneracy across sectors occurs at $t_c$ --- rather
+          than discharging it unconditionally. With that caveat, simplicity need not be assumed as an independent
+          spectral postulate, and only the \emph{attainment} clause (the borderline-elliptic point of
+          Remark~\ref{rem:framework}) requires the separate analysis of \S\ref{sub:attain}.
     \item \emph{Vanishing quadratic coefficient (part of Assumption~\ref{ass:subcrit}).} The reduced potential of
           Proposition~\ref{prop:LS} inherits the $\mathcal{R}$-symmetry of the perfect state. If $\bm{\phi}$ lies in the
           antisymmetric sector, $w\mapsto-w$ is a symmetry of the reduced equation and the quadratic coefficient
@@ -342,10 +361,18 @@ posit:
     \begin{enumerate}
         \item[\textup{(i)}] \emph{The quadratic vanishes, exactly and without correction.} As a \emph{third}-order
               quantity $c_2$ receives no orthogonal-mode (Lyapunov--Schmidt) feedback --- that correction first enters
-              at fourth order --- so \eqref{eq:c2vol} is the full $c_2$. Every term of \eqref{eq:c2vol} is \emph{odd} in
-              $D_1$, and $D_1$ is $R$-odd for an $R$-antisymmetric mode while $f^{(k)}(J_0)$ and the even discriminants
-              $D_2$ are $R$-even; the integrand is therefore odd over the $R$-symmetric $B_\rho$ and $c_2=0$. This
-              \emph{proves} the vanishing-quadratic clause of Assumption~\ref{ass:subcrit}.
+              at fourth order --- so \eqref{eq:c2vol} is the full $c_2$. The key parity fact is that each mixed
+              discriminant $D_k=\tfrac1{k!}\partial_w^k\det(\bm F_0+w\Grad\bm\phi)|_0$ is exactly the degree-$k$ part of
+              the determinant in $\Grad\bm\phi$, hence carries $k$ factors of $\Grad\bm\phi$ and one factor of an
+              $R$-even cofactor of $\bm F_0$ per term. For an $R$-antisymmetric mode $\Grad\bm\phi$ reverses sign under
+              the reflection (composed with the change of variables $\bm x\mapsto R\bm x$ on the $R$-symmetric domain
+              $B_\rho$), so $D_k$ acquires the parity $(-1)^k$: $D_1$ and $D_3$ are $R$-odd, $D_2$ is $R$-even, while
+              $f^{(k)}(J_0)$ is $R$-even (the base state is $R$-invariant). Each term of \eqref{eq:c2vol} thus carries an
+              \emph{odd} total number of $\Grad\bm\phi$ factors --- $D_1^3$ (three), $D_1D_2$ (three), and $D_3$ (three)
+              --- and is therefore $R$-odd; the integrand is odd over the $R$-symmetric $B_\rho$ and $c_2=0$. (In $d=2$
+              the term $6f'D_3$ is moreover identically zero, since $D_k=0$ for $k>d$; the parity argument is what
+              disposes of it in $d\ge3$.) This \emph{proves} the vanishing-quadratic clause of
+              Assumption~\ref{ass:subcrit}.
         \item[\textup{(ii)}] \emph{The frozen cubic and quintic are sign-definite, and adverse to subcriticality.} With
               $D_1$ asymptotically small (Assumption~\ref{ass:rot}) and $d_\phi>0$ (Lemma~\ref{lem:sval}), the leading frozen
               parts are $b_{\mathrm{dir}}=2\int_{B_\rho} f''(J_0)\,d_\phi^2\,dV$ and
@@ -534,14 +561,21 @@ has bounded coefficients and the spectrum is discrete.
     \label{lem:attain}
     Under Assumption~\ref{ass:bc}, for every $t\le t_c$ the tangent $\mathbb{L}(\bm{F}_0(t))$ is bounded on $B_\rho$, the
     operator $\mathcal{L}_c=\partial_{\bm{u}}G(\bm{u}_0(t_c),t_c,0)$ has compact resolvent and discrete spectrum, and the
-    critical value $\mu_1(t_c)=0$ is attained by an eigenmode $\bm{\phi}\in V$. Together with the simplicity argument of
-    \S\ref{sub:symmetry}, this discharges Assumption~\ref{ass:bif} in full.
+    critical value $\mu_1(t_c)=0$ is attained by an eigenmode $\bm{\phi}\in V$. This discharges the
+    \emph{attainment} clause of Assumption~\ref{ass:bif}; the \emph{simplicity} clause is reduced, by the symmetry
+    argument of \S\ref{sub:symmetry}, to the generic statement that the lowest eigenvalue \emph{within} the symmetry
+    sector carrying $\bm{\phi}$ is simple.
 \end{lemma}
 
 \begin{proof}
-    By \eqref{eq:bc}, $\|\bm{F}_0(t)^{-1}\|=\lambda_{\min}^{-1}\le c^{-1}$ and $\det\bm{F}_0(t)$ is bounded on the
-    fundamental path; hence by the structural bound \eqref{eq:Lbound} with $\Theta=\Theta_{\log}$,
-    $\|\mathbb{L}(\bm{F}_0(t))\|\le\mu_e+c^{-2}\Theta_{\log}(\det\bm{F}_0)$ is uniformly bounded on $B_\rho$ for
+    Condition \eqref{eq:bc} supplies the \emph{lower} stretch bound, $\|\bm{F}_0(t)^{-1}\|=\lambda_{\min}^{-1}\le
+    c^{-1}$. The matching \emph{upper} bound is not part of (BC) --- which constrains only $\lambda_{\min}$ --- but is
+    automatic: the fundamental state $(t,\bm x)\mapsto\bm F_0(t,\bm x)$ is continuous on the compact set
+    $[0,t_c]\times\overline{B_\rho}$ (it solves the equilibrium problem along the load path with bounded data), so all
+    its stretches, and in particular $\det\bm F_0$, are bounded above by a constant $C_0=C_0(t_c)<\infty$ there.
+    Together with $\Theta_{\log}$ being continuous and finite on the compact range $[\,(\det\bm F_0)_{\min},C_0\,]$
+    (which avoids $J=0$ by (BC)), the structural bound \eqref{eq:Lbound},
+    $\|\mathbb{L}(\bm{F}_0(t))\|\le\mu_e+c^{-2}\Theta_{\log}(\det\bm{F}_0)$, is uniformly bounded on $B_\rho$ for
     $t\le t_c$. By Lemma~\ref{lem:SEcompress} the same tensor is strongly elliptic with constant $\ge\mu_e$ throughout
     compression; with Korn's inequality the second-variation form obeys a G\aa rding estimate
     $Q_{t_c}(\bm{v})\ge\gamma\,\|\bm{v}\|_{H^1(B_\rho)}^2-C\,\|\bm{v}\|_{L^2(B_\rho)}^2$ on $V\subset H^1$. Thus
@@ -663,11 +697,13 @@ in concrete, checkable form rather than as opaque spectral postulates:
 
 The upshot is that for the clamped--free neo-Hookean corner under compression the abstract picture of
 \S\ref{sec:asymptotics}--\S\ref{sec:iba} is, but for two clearly delimited conditions, a sequence of theorems: the
-material bounds are explicit, the corner is genuinely compressive, the instability is a localized creasing event with a
-constructed destabilising mode, the critical mode is simple and attained (no quadratic term, by symmetry), and the
+material bounds are explicit, the corner is genuinely compressive, the instability is a free-face creasing event with a
+constructed destabilising field, the critical mode is attained and (generically, within its symmetry sector) simple,
+with no quadratic term by symmetry, and the
 kinematic relief that regularises the tangent holds in every dimension once the asymptotic-rotation hypothesis is
-granted. Notably, the spectral postulates of the abstract theory --- attainment and simplicity --- are no longer assumed
-but proved; the first-order volume preservation (rotation condition) that the relief once posited as an exact identity is
+granted. Notably, the spectral postulates of the abstract theory are sharply reduced: attainment is \emph{proved} under
+(BC), and simplicity is reduced to genericity within the symmetry sector carrying the critical mode rather than posited
+outright; the first-order volume preservation (rotation condition) that the relief once posited as an exact identity is
 now the weaker explicit assumption (AR, \S\ref{sub:reliefd}), automatic at the bifurcation (Lemma~\ref{lem:rotreg}) and
 numerically supported toward collapse rather than a barrier-forced theorem. What remains are two \emph{concrete}
 and numerically checkable conditions: that buckling precedes pointwise collapse ($t_c<t_{\mathrm{coll}}$), and that the

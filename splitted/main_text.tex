@@ -572,12 +572,19 @@ write the Newton-step bilinear form as
     excludes the vertex, the two Kondratiev norms $V^{1,2}_{\beta_\star}$ and $V^{1,2}_{\beta_\star-\delta}$ are then
     comparable (they differ only at the vertex, which $A_*$ omits), and \eqref{eq:Abounded} follows directly with
     $\Lambda=\Lambda(\delta)$. In case (A) the vertex is interior to $\Omega=B_\rho$ and the two norms are \emph{not}
-    comparable there; instead we read the bound as identifying the $\mathcal{O}(\log\tfrac1r)$ coefficient growth as a
-    perturbation subordinate to the principal (constant-coefficient elasticity) symbol with relative bound $0$. By the
-    Kondratiev--Maz'ya stability of the weighted estimate under such subordinate perturbations \cite{KMR2001}, the
-    admissible weight interval is unmoved and \eqref{eq:Abounded} holds on $V^{1,2}_{\beta_\star}(B_\rho)$. In both
-    cases the logarithmic growth does not shift the admissible interval; no singular weight is ``absorbed'' into
-    $\bm{v}$.
+    comparable there, so the same-space estimate is obtained by perturbation off the constant-coefficient symbol rather
+    than by norm comparison. Write $\mathbb{L}=\mathbb{L}_{\mathrm{lin}}+\mathbb{R}$, with $\mathbb{L}_{\mathrm{lin}}$
+    the frozen linear-elasticity tensor at the vertex (whose pencil is Fredholm in $V^{1,2}_{\beta_\star}(B_\rho)$ for
+    $\beta_\star$ off the corner spectrum, by Kondratiev--Maz'ya theory \cite{KMR2001}) and
+    $\mathbb{R}=\mathbb{L}-\mathbb{L}_{\mathrm{lin}}=\mathcal{O}(\log\tfrac1r)$ the nonlinear correction. The hypotheses
+    of the relevant stability theorem are exactly: (a) $\mathbb{L}_{\mathrm{lin}}$ is strongly elliptic and its pencil
+    has no eigenvalue on $\Re\lambda=\beta_\star$; and (b) $\mathbb{R}$ is \emph{subordinate} to the principal part,
+    $\|\mathbb{R}\|=o(r^{-\delta})$ for every $\delta>0$ (Lemma~\ref{lem:Abound}), hence of relative bound $0$ with
+    respect to the Hardy-weighted graph norm. Both are met here, so the standard subordinate-perturbation theorem of
+    \cite{KMR2001} applies: the admissible weight interval is unmoved and the \emph{full} pair of estimates
+    \eqref{eq:Abounded}--\eqref{eq:Agaarding} --- not boundedness alone --- transfers from $\mathbb{L}_{\mathrm{lin}}$
+    to $\mathbb{L}$ on $V^{1,2}_{\beta_\star}(B_\rho)$. In both cases the logarithmic growth does not shift the
+    admissible interval; no singular weight is ``absorbed'' into $\bm{v}$.
 
     \emph{G\aa rding inequality.} By Lemma~\ref{lem:Aellip} the symbol $\mathbb{L}(\bm{x})$ is strongly elliptic on
     $\Omega$ with the constant Legendre--Hadamard modulus $\mu_e$. Freezing the (measurable, uniformly elliptic)
@@ -588,7 +595,10 @@ write the Newton-step bilinear form as
         a(\bm{v},\bm{v}) \ge \mu_e\,c_K^{-1}\!\int_{\Omega} r^{2\beta_\star}|\Grad\bm{v}|^2\,dV
         - C\!\int_{\Omega} r^{2\beta_\star}|\bm{v}|^2\,dV,
     \]
-    where the Korn inequality \eqref{eq:korn} converts ellipticity of the symmetric part into control of the full gradient.
+    where the step from Legendre--Hadamard positivity to coercivity is the classical one for strongly elliptic systems:
+    strong ellipticity with modulus $\mu_e$ (Lemma~\ref{lem:Aellip}) gives the constant-coefficient G\aa rding bound for
+    the symmetrised gradient $\bm{\varepsilon}(\bm v)$ on each frozen annulus, and the weighted Korn inequality
+    \eqref{eq:korn} then converts control of $\bm{\varepsilon}(\bm v)$ into control of the full gradient $\Grad\bm v$.
     The remainder term has a strictly higher power of $r$ than the Hardy weight $r^{2\beta_\star-2}$, hence by
     \eqref{eq:hardy} it is relatively compact with respect to $\|\cdot\|_{V^{1,2}_{\beta_\star}}$; this is the compact form
     $k$, and we obtain \eqref{eq:Agaarding} with $\gamma_1=\mu_e\, c_K^{-1}$.
@@ -823,13 +833,16 @@ is the corner counterpart of the Biot/creasing instability \cite{Biot1963,Hong20
     \label{ass:bif}
     At $t_c$ the infimum $\mu_1(t_c)=0$ is attained at a mode $\bm{\phi}\in V$, $\|\bm{\phi}\|_V=1$, spanning a
     one-dimensional, isolated kernel of $\mathcal{L}_c$ (the rest of the spectrum bounded away from $0$), with
-    $\bm{\phi}$ localised near the corner.
+    $\bm{\phi}$ supported in the edge neighbourhood $B_\rho$.
 \end{assumption}
 \noindent This bundles two spectral facts: \emph{attainment} (the minimising sequence does not escape into the
-corner as essential spectrum) and \emph{simplicity}. Simplicity is generic and, for a symmetric corner, can be argued
-from a reflection symmetry about the bisector; attainment is the borderline-elliptic difficulty flagged in
-Remark~\ref{rem:framework}. Neither is irreducible: in the concrete setting both are \emph{proved}
-(\S\ref{sub:symmetry}, Lemma~\ref{lem:attain}), the only residue being the cleaner geometric condition that buckling
+corner as essential spectrum) and \emph{simplicity}. Simplicity is generic and, for the model bodies, can be argued
+from the lateral \emph{face-preserving} reflection $R$ of \S\ref{sub:symmetry} (\emph{not} the corner bisector
+$\theta\mapsto\tfrac\pi2-\theta$, which swaps $\Gamma_D$ and $\Gamma_N$ and is no symmetry of the mixed problem);
+attainment is the borderline-elliptic difficulty flagged in
+Remark~\ref{rem:framework}. Neither is irreducible: in the concrete setting attainment is \emph{proved}
+(Lemma~\ref{lem:attain}) and simplicity is reduced to genericity \emph{within} the symmetry sector carrying the
+critical mode (\S\ref{sub:symmetry}), the only residue being the cleaner geometric condition that buckling
 precede pointwise collapse.
 
 \paragraph{The crossing is transversal (provable under monotone loading).}
