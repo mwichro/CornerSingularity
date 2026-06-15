@@ -1,0 +1,62 @@
+We have analysed a compressible hyperelastic corner under mixed Dirichlet--Neumann boundary conditions and shown that
+the conditioning collapse first observed numerically is, in its essence, an analytical phenomenon: a corner-localised
+\emph{creasing} bifurcation seated at the geometric junction, of which the divergence of the linearised tangent is a
+symptom rather than the substance.
+
+The central finding is a dichotomy in the asymptotic behaviour of the linearised tangent operator, governed by the
+loading direction and the volumetric penalty. In tension the logarithmic barrier $f_{\log}$ yields a \emph{benign}
+singularity: the tangent stays strongly elliptic and Fredholm, the standard Kondratiev edge exponents survive, and the
+well-posedness of the linearised step holds in the weighted corner spaces (Theorem~\ref{thm:A}). Under compression the
+local volume contraction drives an algebraic blow-up of the operator norm. We proved that this breakdown is a
+\emph{structural bifurcation}, not a material loss of ellipticity (Lemma~\ref{lem:SEcompress}): the corner remains
+pointwise strongly elliptic throughout, while a localised surface instability preempts pointwise collapse. The apparent
+tangent catastrophe is, on every physical branch, regularised by the kinematic relief of the buckled mode
+(Assumption~\ref{ass:rot}, Lemma~\ref{lem:relief}); a load-controlled body snaps to a finite-amplitude crease at a load
+reduced by only $\mathcal{O}(\epsilon^{2/3})$, and only an algorithm that suppresses the snap and tracks the unstable
+continuation sees the $\epsilon^{-4/3}$ conditioning degradation, confined to a tube of vanishing area and integrable in
+$L^q$ for every $q<\tfrac12$ (Theorem~\ref{thm:reg}, Proposition~\ref{prop:narrow}).
+
+A tangent-cone blow-up reduction localises the entire phenomenon to a \emph{universal} model wedge, governed only by the
+Poisson ratio $\nu$ and a single normalised stress-intensity amplitude $\hat K$ (Proposition~\ref{prop:blowup}). Against
+this backdrop the imperfect-bifurcation analysis is sharp on two counts and honest about a third. The quadratic energy
+coefficient vanishes \emph{exactly} by reflection symmetry, with no Lyapunov--Schmidt correction (the parity argument of
+\S\ref{sub:symmetry}). The subcritical cubic coefficient is tip-convergent yet does \emph{not} localise: it retains an
+explicit dependence on the global stress-intensity factor, a direct consequence of the characteristic edge exponent
+satisfying $\alpha>\tfrac12$. The two surviving hypotheses --- buckling-precedes-collapse (BC) and the subcritical sign
+of $b$ --- sit on opposite sides of this blow-up dichotomy (Remark~\ref{rem:bclocalises}): the former compares
+amplitude-free, $\nu$-only \emph{stretch} thresholds and is settled by a single wedge computation, while the latter is an
+\emph{integral} whose sign is an $\mathcal{O}(1)$ geometric competition decided per configuration. The scale-covariant
+Mellin--Chebyshev spectral solver resolves the singular exponents and buckling thresholds with exponential accuracy and
+supplies the geometry-dependent diagnostics --- the surface-instability stretch $\lambda_\star(\nu)$, the rotation
+defect, and the sign of $b$ --- that the analysis isolates but cannot decide in closed form.
+
+What this concrete realisation buys is a sharp reduction of hypotheses. Fixing the clamped--free neo-Hookean material and
+geometry discharges, one by one, the spectral postulates of the abstract theory into theorems (the ledger of
+Table~\ref{tab:status}): the material bounds become explicit, the critical load is constructed from a localised surface
+instability (Lemma~\ref{lem:biot}), mode attainment is \emph{proved} under (BC) (Lemma~\ref{lem:attain}), simplicity is
+reduced from an outright postulate to genericity within the symmetry sector carrying the mode, the quadratic coefficient
+vanishes by symmetry (Lemma~\ref{lem:volcoeff}), and the exact first-order volume preservation once posited by the relief
+is weakened to the asymptotic-rotation hypothesis, automatic at the bifurcation (Lemma~\ref{lem:rotreg}) and numerically
+supported toward collapse. What is left after this reduction is not a residue of opaque spectral assumptions but exactly
+two \emph{concrete}, numerically checkable conditions --- buckling precedes pointwise collapse, and the reduced cubic is
+subcritical. Crucially, these are the \emph{same} two conditions that the classical creasing problem on a flat surface
+also leaves to computation \cite{Biot1963,Hong2009}: they are inherited here, not manufactured by the corner geometry,
+which adds the singular pre-stress and the localisation but no new open hypothesis.
+
+Both surviving conditions are, in practice, decided by the spectral computation of \S\ref{sec:numerical}. The sign of
+the cubic coefficient is the more complete of the two: the consistent graded-wedge solve of \S\ref{sub:numb} returns
+$b<0$ \emph{throughout} the physical $(\nu,\hat K)$ rectangle --- the normalisation-invariant feedback ratio stays below
+its critical value $-1$ everywhere, with the smallest margin near the incompressible corner --- so subcriticality
+(Assumption~\ref{ass:subcrit}) is numerically established, not merely posited. What remains genuinely beyond reach here is
+analytic rather than numerical: a \emph{closed-form, configuration-free} criterion for $\operatorname{sign} b$, which the
+homogeneity count of Proposition~\ref{prop:bcount} shows cannot exist in the localised form available for the stretch
+thresholds, precisely because $\alpha>\tfrac12$ keeps the cubic integral globally $\hat K$-dependent. The loading side of
+(BC) is likewise computed: \S\ref{sub:numbiot} delivers the amplitude-free stretch threshold $\lambda_\star(\nu)$ to
+spectral accuracy. The one item left open as a theorem is the inner vertex theory for the logarithmic barrier
+(Remark~\ref{rem:core}): away from the tip the model-wedge operator and its corner pencil are pinned to
+constant-coefficient linear elasticity, but a quantitative, uniform-to-the-tip spectral estimate --- and with it the
+lower bound on the barrier-regularised collapse load $t_{\mathrm{coll}}$ that would turn the computed stretch ordering
+into the load ordering $t_c<t_{\mathrm{coll}}$ --- is the irreducible analytic core of (BC). Beyond this, the natural
+continuations are the finite-amplitude creased state past the snap, the extension from the model wedge to fully
+three-dimensional edges with curvature, and the analogous dichotomy for other volumetric penalties, where the same
+competition between barrier growth and volumetric contraction should organise the asymptotics.
