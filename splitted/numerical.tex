@@ -1,0 +1,98 @@
+%!TEX root = ../main.tex
+\section{A spectral computational route}
+\label{sec:numerical}
+
+The blow-up reduction of \S\ref{sub:blowup} does more than clarify the theory: it dictates the \emph{discretisation}.
+Because every residual quantity localises to the universal model wedge $\mathcal{L}_W$ of Proposition~\ref{prop:blowup},
+governed by $(\nu,\hat K)$ alone, the natural object to compute on is the wedge, not a meshed body. This section records
+the resulting numerical route and the validation of its two building blocks. The guiding observation is that the corner
+is \emph{scale}-covariant ($r\mapsto cr$), not translation-covariant, so the transform that diagonalises it is the
+Mellin transform (Fourier in $\log r$), with a genuine Fourier transform reserved for the smooth edge
+(Proposition~\ref{prop:blowup}(iii)). A graded-mesh finite-element discretisation is therefore not required; a
+Mellin\,$\times$\,spectral scheme converges exponentially where a mesh converges only algebraically.
+
+\subsection{The corner pencil by a Mellin\,\texorpdfstring{$\times$}{x}\,Chebyshev scheme}
+\label{sub:numpencil}
+
+Substituting the separable Mellin ansatz $\bm{u}=r^{\lambda}\big(a(\theta),b(\theta)\big)$ into the plane-strain
+Navier--Lam\'e equations on the wedge $\theta\in(0,\tfrac\pi2)$ reduces the corner to an angular two-point eigenvalue
+problem --- a quadratic eigenvalue problem in $\lambda$,
+\begin{equation}
+    \label{eq:qep}
+    \big(\lambda^2\,\mathbb{M}_2+\lambda\,\mathbb{M}_1+\mathbb{M}_0\big)\,\big(a,b\big)^{\!\top}=0,
+\end{equation}
+with the clamped conditions $a=b=0$ at $\theta=0$ and the traction-free conditions $\sigma_{\theta\theta}=\sigma_{r\theta}=0$
+at $\theta=\tfrac\pi2$. Discretising the angular operators by Chebyshev collocation and linearising \eqref{eq:qep} to a
+generalised eigenvalue problem yields the singular exponents as the eigenvalues with $\Re\lambda\in(0,1)$; the smallest is
+the exponent $\alpha(\nu)$ of \eqref{eq:kondratiev} and Figure~\ref{fig:williams}.
+
+This spectral computation agrees with the independent Kolosov--Muskhelishvili secular determinant of
+Proposition~\ref{prop:bcount} to ten digits across the physical range (e.g.\ $\alpha(0.3)=0.7111729$ from both), and
+converges \emph{exponentially} in the number $N$ of angular modes:
+\begin{center}
+    \begin{tabular}{rl}
+        \toprule
+        $N$ & $|\alpha-\alpha_{\mathrm{ref}}|$ at $\nu=0.3$ \\
+        \midrule
+        $6$  & $1.1\times10^{-4}$ \\
+        $8$  & $9.1\times10^{-7}$ \\
+        $12$ & $3.6\times10^{-10}$ \\
+        \bottomrule
+    \end{tabular}
+\end{center}
+Twelve angular modes already reach machine precision, a saturation no graded mesh attains; this is the concrete sense in
+which the corner is better resolved spectrally than by FEM. The computation is reproduced by
+\texttt{mellin\_chebyshev\_pencil.py} (validated against \texttt{williams\_clampedfree.py}).
+
+\subsection{The buckling threshold \texorpdfstring{$\lambda_\star(\nu)$}{lambda*(nu)} and condition (BC)}
+\label{sub:numbiot}
+
+By Lemma~\ref{lem:bcwedge} condition (BC) reduces to a comparison of scale-invariant wedge thresholds and is set, on the
+loading side, by the surface-instability stretch $\lambda_\star$ of the compressed half-space (Assumption~\ref{ass:sc},
+Lemma~\ref{lem:biot}). For the compressible neo-Hookean energy \eqref{eq:neohooke} this is computed from the incremental
+moduli about the homogeneous base state $\bm{F}_0=\mathrm{diag}(\lambda_\parallel,\lambda_\perp)$ with the free surface
+in self-equilibrium, $\bm{P}_0\bm{N}=\bm0$. A surface mode $\bm{u}=\bm{U}\,e^{\mathrm{i}kx_1+sk x_2}$ decaying into the
+body ($\Re s>0$) exists when the $2\times2$ incremental-traction determinant vanishes; since the modulus is constant in
+the homogeneous base state the four roots $s$ follow from a characteristic quartic (a Stroh problem), and the secular
+condition is independent of the wavenumber $k$ --- the scale-free signature of creasing exploited in the limit
+$k\to\infty$ of Lemma~\ref{lem:biot}.
+
+The solver reproduces the classical incompressible Biot value: as $\lambda_e/\mu_e\to\infty$ (the incompressible limit,
+$\nu\to\tfrac12$) the threshold tends to $\lambda_\star=0.5437$. For the compressible model it furnishes
+$\lambda_\star$ as a function of the material ratio, e.g.
+\begin{center}
+    \begin{tabular}{rcc}
+        \toprule
+        $\lambda_e/\mu_e$ & $\nu$ & $\lambda_\star$ \\
+        \midrule
+        $1$    & $0.250$ & $0.514$ \\
+        $5$    & $0.417$ & $0.536$ \\
+        $50$   & $0.490$ & $0.543$ \\
+        $\infty$ & $0.5$ & $0.5437$ \\
+        \bottomrule
+    \end{tabular}
+\end{center}
+This is the input that decides (BC): the buckling load $t_c\le t_*$ is attained while the fundamental stretch is still
+$\lambda_\parallel=\lambda_\star=\mathcal{O}(1)$, away from collapse, confirming $t_c<t_{\mathrm{coll}}$ for the regimes
+in which the barrier keeps $t_{\mathrm{coll}}$ high (Remark~\ref{rem:bc}). The computation is reproduced by
+\texttt{surface\_instability.py}, validated against the incompressible Biot threshold.
+
+\subsection{The one remaining solve: the subcritical sign \texorpdfstring{$b(\nu,\hat K)$}{b(nu,Khat)}}
+\label{sub:numb}
+
+The two preceding quantities are essentially analytic. The single genuinely numerical residue is the sign of the reduced
+cubic coefficient (Assumption~\ref{ass:subcrit}), which by Proposition~\ref{prop:bcount} does \emph{not} collapse to a
+universal number --- with $\alpha>\tfrac12$ the cubic integral is tip-convergent but not tip-dominated, so $b=b(\nu,\hat
+K)$ retains the stress-intensity dependence. Its evaluation is a two-dimensional transverse solve on $\mathcal{L}_W$: the
+critical buckling mode $\bm{\phi}$, the second-order Lyapunov--Schmidt field $\bm{\psi}$ solving $Q\mathcal{L}_cQ\,\bm{\psi}
+= -\tfrac12 Q\,\partial^2 G[\bm{\phi},\bm{\phi}]$ on $V^\perp$, and the cubic integral $b=b_{\mathrm{dir}}+b_\psi$.
+
+We note for implementation that this last solve is the one place a plain Fourier discretisation does \emph{not} suffice:
+in two dimensions the crease oscillates along the free face in the same coordinate in which the corner pre-stress is
+graded, so the surface direction is not translation-invariant (the two-scale competition of
+Remark~\ref{rem:twoscales}). The appropriate discretisation is again Mellin\,$\times$\,Chebyshev --- Chebyshev in
+$\theta$, mapped-spectral in $\log r$ --- with the edge handled by the analytic Fourier reduction of
+Proposition~\ref{prop:blowup}(iii) in three dimensions. The buckling eigenproblem and the surface mechanism are exactly
+the two ingredients validated in \S\ref{sub:numpencil}--\S\ref{sub:numbiot}; assembling them over the
+$(\nu,\hat K)$ rectangle produces the phase diagram whose sign is the last open condition. No finite-element model enters
+the chain: Mellin resolves the corner, Fourier the edge, and a spectral depth discretisation the buckling.
