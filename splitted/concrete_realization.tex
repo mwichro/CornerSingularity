@@ -77,7 +77,9 @@ $\Pi$, modulated smoothly along $\Sigma$. That transverse pencil is the planar r
 \eqref{eq:kondratiev}; its leading exponent $\alpha\in(0,1)$ is the smallest root of the corresponding
 clamped--free Williams secular equation and depends only on the Poisson ratio. Consequently the kinematic blow-up
 \eqref{eq:Fblowup}, $\bm{F}=\bm{I}+\mathcal{O}(r^{\alpha-1})$, holds with a \emph{computable} exponent, and by
-Theorem~\ref{thm:A} the nonlinear tangent inherits exactly this $\alpha$ in the benign regime.
+Theorem~\ref{thm:A} the nonlinear tangent inherits exactly this $\alpha$ in the benign regime --- on the annulus
+outside the dilation core of Lemma~\ref{lem:Aellip}, the core being absent for mild loading or a globally
+convex-volumetric barrier.
 
 Which scenario of \S\ref{sec:asymptotics} is realized is governed by the sign of the dominant eigenvalue of
 $\Grad\bm{u}$ at the edge, equivalently by the sign of the stress-intensity factor $K$ in \eqref{eq:kondratiev}. This is
@@ -233,17 +235,24 @@ What symmetry does \emph{not} give is the sign of the cubic, $b<0$; that is the 
 \subsection{Kinematic relief}
 \label{sub:reliefd}
 
-The kinematic relief is already dimension-independent: Lemma~\ref{lem:relief} gives
-$J=J_0+w\,D_1+w^2 d_\phi+\mathcal{O}(w^3)\ge\tfrac12 J_0+\tfrac12 w^2 d_\phi$ in $\mathbb{R}^d$ with $d_\phi$ the second
-mixed discriminant of $\bm{F}_0$ and $\Grad\bm{\phi}$ (the second-order coefficient of the determinant,
-$=\det\Grad\bm{\phi}$ for $d=2$), and the first-order term $D_1=\operatorname{cof}\bm{F}_0:\Grad\bm{\phi}$ is suppressed
---- not to zero, but to $\mathcal{O}(J_0/\sqrt{|\log J_0|})$, fast enough to be dominated by the second-order relief ---
-by the barrier in every dimension via Lemma~\ref{lem:rot} (its proof uses only $f''(J)(\delta J)^2\le C$, valid for all
-$d$). For the concrete model the only
-points to add are that the genericity $d_\phi>0$ holds off a measure-zero set of modes, by the transversality argument
-of Lemma~\ref{lem:sval}, and that the collapse locus $\Sigma_{\mathrm{c}}$ is the codimension-one set inside $B_\rho$
-along which the relieved branch would still collapse; the regularised bound of Theorem~\ref{thm:reg} and the
-localisation of Proposition~\ref{prop:narrow} then apply verbatim.
+The kinematic relief is already dimension-independent, and --- in contrast to the original formulation --- it no longer
+rests on an assumed rotation condition. Earlier drafts \emph{posited} that the critical mode be exactly
+volume-preserving at first order, $\operatorname{cof}\bm{F}_0:\Grad\bm{\phi}=0$. That hypothesis is now \emph{discharged}:
+Lemma~\ref{lem:rot} bounds the first-order volume change by the barrier alone,
+$D_1=\operatorname{cof}\bm{F}_0:\Grad\bm{\phi}=\mathcal{O}(J_0/\sqrt{|\log J_0|})$ --- small with $J_0$, but not assumed
+zero --- and Lemma~\ref{lem:relief} then proves the unconditional lower bound
+\begin{equation}
+    \label{eq:reliefd}
+    J=J_0+w\,D_1+w^2 d_\phi+\mathcal{O}(w^3) \ \ge\ \tfrac12 J_0+\tfrac12 w^2 d_\phi
+    \qquad\text{in } \mathbb{R}^d,
+\end{equation}
+with $d_\phi$ the second mixed discriminant of $\bm{F}_0$ and $\Grad\bm{\phi}$ (the second-order coefficient of the
+determinant, $=\det\Grad\bm{\phi}$ for $d=2$). The proof of Lemma~\ref{lem:rot} uses only $f''(J)(\delta J)^2\le C$ and
+is valid for all $d$, so the relief is genuinely a theorem in every dimension rather than a kinematic assumption. For
+the concrete model the only points to add are that the genericity $d_\phi>0$ holds off a measure-zero set of modes, by
+the transversality argument of Lemma~\ref{lem:sval}, and that the collapse locus $\Sigma_{\mathrm{c}}$ is the
+codimension-one set inside $B_\rho$ along which the relieved branch would still collapse; the regularised bound of
+Theorem~\ref{thm:reg} and the localisation of Proposition~\ref{prop:narrow} then apply verbatim.
 
 \subsection{Attainment of the critical mode}
 \label{sub:attain}
@@ -337,7 +346,7 @@ in concrete, checkable form rather than as opaque spectral postulates:
         Mode simplicity (Ass.~\ref{ass:bif})                         & assumed             & \textbf{generic} per symmetry sector (\S\ref{sub:symmetry}) \\
         Quadratic coeff.\ vanishes (Ass.~\ref{ass:subcrit})          & assumed by symmetry & \textbf{forced} by reflection $R$ (\S\ref{sub:symmetry}) \\
         Mode attainment (Ass.~\ref{ass:bif})                         & assumed             & \textbf{proved} under (BC) (Lem.~\ref{lem:attain}) \\
-        Rotation condition / relief (Lem.~\ref{lem:rot},~\ref{lem:relief}) & \textbf{proved} (all $d$)  & genericity $d_\phi>0$ (\S\ref{sub:reliefd}) \\
+        First-order relief / rotation (Lem.~\ref{lem:rot},~\ref{lem:relief}) & was posited; now \textbf{proved} (all $d$)  & genericity $d_\phi>0$ (\S\ref{sub:reliefd}) \\
         \midrule
         Buckling precedes collapse (BC) (Ass.~\ref{ass:bc})          & ---                 & \emph{numerical}: $t_c<t_{\mathrm{coll}}$ (Rem.~\ref{rem:bc}) \\
         Subcriticality $b<0$ (Ass.~\ref{ass:subcrit})                & assumed             & \emph{numerical} (irreducible core) \\
@@ -354,7 +363,9 @@ The upshot is that for the clamped--free neo-Hookean corner under compression th
 material bounds are explicit, the corner is genuinely compressive, the instability is a localized creasing event with a
 constructed destabilising mode, the critical mode is simple and attained (no quadratic term, by symmetry), and the
 kinematic relief that regularises the tangent holds in every dimension. Notably, the spectral postulates of the
-abstract theory --- attainment and simplicity --- are no longer assumed but proved; what remains are two \emph{concrete}
+abstract theory --- attainment and simplicity --- are no longer assumed but proved, and the first-order volume
+preservation (rotation condition) that the relief once posited is now itself a barrier-forced theorem
+(\S\ref{sub:reliefd}); what remains are two \emph{concrete}
 and numerically checkable conditions: that buckling precedes pointwise collapse ($t_c<t_{\mathrm{coll}}$), and that the
 reduced cubic is subcritical ($b<0$). Both are exactly what the creasing problem on a flat surface also leaves to
 computation, and they are inherited here rather than created by the corner.
