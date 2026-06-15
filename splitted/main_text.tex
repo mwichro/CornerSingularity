@@ -563,13 +563,14 @@ write the Newton-step bilinear form as
         \le C_\delta \Big(\!\int_{\Omega} r^{2\beta_\star}|\Grad\bm{u}|^2\Big)^{1/2}
         \Big(\!\int_{\Omega} r^{-2\delta-2\beta_\star}|\Grad\bm{v}|^2\Big)^{1/2}.
     \end{align*}
-    This exhibits $a$ as bounded from $V^{1,2}_{\beta_\star}\times V^{1,2}_{\beta_\star-\delta}$. The logarithm is
+    This exhibits $a$ as bounded from $V^{1,2}_{\beta_\star}\times V^{1,2}_{-\beta_\star-\delta}$ (the dual pairing
+    $V^{1,2}_{\beta_\star}\times V^{1,2}_{-\beta_\star}$ with a $\delta$ of weighted slack). The logarithm is
     subordinate to \emph{every} algebraic weight, so the loss may be made smaller than the slack to the weight interval:
     let $(\beta_-,\beta_+)$ be the maximal open interval of weights for which the \emph{linear} corner pencil has no
     eigenvalue with $\Re$-part in $[\beta_\star-\delta,\beta_\star]$ (such a $\delta$-band exists because $\beta_\star$
     avoids the discrete corner spectrum, hence sits at a positive distance $\delta_0$ from it). Choose $\delta<\delta_0$,
     so $\beta_\star-\delta$ lies in the same admissible interval as $\beta_\star$. In case (B) the domain $\Omega=A_*$
-    excludes the vertex, the two Kondratiev norms $V^{1,2}_{\beta_\star}$ and $V^{1,2}_{\beta_\star-\delta}$ are then
+    excludes the vertex, the two Kondratiev norms $V^{1,2}_{\beta_\star}$ and $V^{1,2}_{-\beta_\star-\delta}$ are then
     comparable (they differ only at the vertex, which $A_*$ omits), and \eqref{eq:Abounded} follows directly with
     $\Lambda=\Lambda(\delta)$. In case (A) the vertex is interior to $\Omega=B_\rho$ and the two norms are \emph{not}
     comparable there, so the same-space estimate is obtained by perturbation off the constant-coefficient symbol rather
@@ -1139,8 +1140,9 @@ Remark~\ref{rem:rotnum}) and show it is dominated by the second-order relief.
 
     \emph{(ii) Near collapse ($J_0\to0$).} Now $w_0$ from (i) would shrink with $J_0$, so we use instead the
     asymptotic-rotation bound $|D_1|\le c_\phi J_0/\sqrt{|\log J_0|}$ of Assumption~\ref{ass:rot}. By Young's inequality
-    $|w\,D_1|\le \tfrac12 d_\phi w^2 + \tfrac1{2d_\phi}D_1^2$, and $D_1^2\le c_\phi^2 J_0^2/|\log J_0|\le \tfrac12 d_\phi J_0$
-    once $J_0$ is small (the factor $J_0/|\log J_0|\to0$). Hence $|w\,D_1|\le \tfrac12 d_\phi w^2+\tfrac12 J_0$, and
+    $|w\,D_1|\le \tfrac12 d_\phi w^2 + \tfrac1{2d_\phi}D_1^2$, and $D_1^2\le c_\phi^2 J_0^2/|\log J_0|\le d_\phi J_0$
+    once $J_0$ is small (the factor $J_0/|\log J_0|\to0$). Hence $\tfrac1{2d_\phi}D_1^2\le\tfrac12 J_0$ and
+    $|w\,D_1|\le \tfrac12 d_\phi w^2+\tfrac12 J_0$, and
     inserting into \eqref{eq:Jexp} yields \eqref{eq:Jlower}. Thus the residual first-order term, far from dominating, is
     swallowed by the barrier-controlled $J_0$ and the relief $w^2 d_\phi$ --- the precise content of ``buckling relieves
     compression,'' with no appeal to an exact rotation condition. Since $J=\prod_i\lambda_i$ and the $d-1$ largest stretches are
