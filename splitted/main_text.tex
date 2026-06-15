@@ -517,55 +517,75 @@ write the Newton-step bilinear form as
 
 \begin{theorem}[Well-posedness of the linearised step, tensile corner]
     \label{thm:A}
-    Let $f=f_{\log}$ and work on the annular corner neighbourhood $A_*=\{r_*<r<\rho\}$ outside the dilation core
-    \eqref{eq:rstar} of Lemma~\ref{lem:Aellip} (for a globally convex-volumetric barrier the core is empty, $r_*=0$, and
-    $A_*=B_\rho$). Under Assumptions~\ref{ass:reg}--\ref{ass:mild} and the non-compressive hypothesis (NC), the form
-    \eqref{eq:formA}, restricted to $A_*$, is bounded and coercive on $V^{1,2}_{\beta_\star}(A_*)$ modulo a compact
-    perturbation: there exist constants $\Lambda<\infty$, $\gamma_1>0$ and a compact form $k(\cdot,\cdot)$ such that, for
-    all $\bm{u},\bm{v}\in V^{1,2}_{\beta_\star}(A_*)$,
+    Under Assumptions~\ref{ass:reg}--\ref{ass:mild} and the non-compressive hypothesis (NC), the Newton-step form
+    \eqref{eq:formA} is bounded and coercive modulo a compact perturbation: on any region $\Omega$ on which the tangent
+    is strongly elliptic with the constant Legendre--Hadamard modulus $\mu_e$ (Lemma~\ref{lem:Aellip}), there exist
+    constants $\Lambda<\infty$, $\gamma_1>0$ and a compact form $k(\cdot,\cdot)$ such that, for all
+    $\bm{u},\bm{v}\in V^{1,2}_{\beta_\star}(\Omega)$,
     \begin{align}
         \label{eq:Abounded}
         |a(\bm{u},\bm{v})| & \le \Lambda\,\|\bm{u}\|_{V^{1,2}_{\beta_\star}}\,\|\bm{v}\|_{V^{1,2}_{\beta_\star}}, \\
         \label{eq:Agaarding}
         a(\bm{v},\bm{v})   & \ge \gamma_1\,\|\bm{v}\|_{V^{1,2}_{\beta_\star}}^2 - k(\bm{v},\bm{v}).
     \end{align}
-    Consequently, on $A_*$, the linearised corner operator is Fredholm of index zero in $V^{1,2}_{\beta_\star}$; for
-    $\beta_\star$ avoiding the corner spectrum it is an isomorphism, its solutions admit the asymptotic expansion
-    \eqref{eq:kondratiev}, and the governing singular exponents coincide with those of the linearised elasticity
-    problem. The inner core $\{r\le r_*\}$, where $f_{\log}$ loses strong ellipticity (Lemma~\ref{lem:Aellip}), is a
-    fixed-size region carrying no vertex; it must be treated separately and is the price of the logarithmic penalty in
-    extreme tension (see Remark~\ref{rem:core}).
+    The consequences split according to whether the vertex lies in the elliptic region.
+
+    \emph{(A) Globally convex-volumetric barrier ($f''\ge0$, e.g.\ $f_{\mathrm{quad}}$, or $f_{\log}$ capped at
+    $J_{\max}\le J_*$).} Then the dilation core is empty, $r_*=0$, ellipticity holds on the \emph{full} corner
+    neighbourhood $\Omega=B_\rho$ \emph{including the vertex}, and \eqref{eq:Abounded}--\eqref{eq:Agaarding} hold on
+    $V^{1,2}_{\beta_\star}(B_\rho)$. Hence the linearised corner operator is Fredholm of index zero in
+    $V^{1,2}_{\beta_\star}(B_\rho)$; for $\beta_\star$ avoiding the corner spectrum it is an isomorphism, its solutions
+    admit the Kondratiev asymptotic expansion \eqref{eq:kondratiev} at the vertex, and the governing singular exponents
+    coincide with those of the linearised elasticity problem. This is the genuine corner result.
+
+    \emph{(B) Logarithmic barrier $f_{\log}$ ($r_*>0$).} The vertex sits inside the non-elliptic core $\{r\le r_*\}$
+    (Lemma~\ref{lem:Aellip}), so the estimates hold only on the \emph{vertex-free} annulus $\Omega=A_*=\{r_*<r<\rho\}$.
+    There the operator is a regular uniformly elliptic problem: \eqref{eq:Abounded}--\eqref{eq:Agaarding} give
+    Fredholmness of index zero in $V^{1,2}_{\beta_\star}(A_*)$ and well-posedness on the annulus, but \emph{no}
+    corner-pencil asymptotics are asserted across the inner boundary $r=r_*$, which is a smooth interface carrying no
+    vertex, not a conical point. The vertex behaviour of $f_{\log}$ is the open inner problem of Remark~\ref{rem:core}.
+    In the mild-loading limit $r_*\downarrow0$ (small $|K|$) the core shrinks below any fixed scale and the conclusion
+    of (A) is recovered on every fixed sub-annulus down to mesh resolution.
 \end{theorem}
 
 \begin{proof}
-    \emph{Boundedness.} By Cauchy--Schwarz and Lemma~\ref{lem:Abound}, on $A_*$ the coefficient obeys the sharp bound
+    The bounds \eqref{eq:Abounded}--\eqref{eq:Agaarding} are established on the elliptic region $\Omega$ ($=B_\rho$ in
+    case (A), $=A_*$ in case (B)); the case split affects only whether the vertex is interior to $\Omega$, hence whether
+    the Kondratiev corner analysis applies.
+
+    \emph{Boundedness.} By Cauchy--Schwarz and Lemma~\ref{lem:Abound}, on $\Omega$ the coefficient obeys the sharp bound
     $\|\mathbb{L}\|\le\mu_e+c^{-2}\Theta(J)=\mu_e+\mathcal{O}\!\big(\log\tfrac1r\big)$, a \emph{logarithm}, not a power.
     Hence for every $\delta>0$ there is $C_\delta$ with $\|\mathbb{L}\|\le C_\delta\,r^{-\delta}$, and
     \begin{align*}
         |a(\bm{u},\bm{v})|
-         & \le \int_{A_*} \|\mathbb{L}\|\,|\Grad\bm{u}|\,|\Grad\bm{v}|\,dV
-        \le C_\delta \Big(\!\int_{A_*} r^{2\beta_\star}|\Grad\bm{u}|^2\Big)^{1/2}
-        \Big(\!\int_{A_*} r^{-2\delta-2\beta_\star}|\Grad\bm{v}|^2\Big)^{1/2}.
+         & \le \int_{\Omega} \|\mathbb{L}\|\,|\Grad\bm{u}|\,|\Grad\bm{v}|\,dV
+        \le C_\delta \Big(\!\int_{\Omega} r^{2\beta_\star}|\Grad\bm{u}|^2\Big)^{1/2}
+        \Big(\!\int_{\Omega} r^{-2\delta-2\beta_\star}|\Grad\bm{v}|^2\Big)^{1/2}.
     \end{align*}
     This exhibits $a$ as bounded from $V^{1,2}_{\beta_\star}\times V^{1,2}_{\beta_\star-\delta}$. The logarithm is
     subordinate to \emph{every} algebraic weight, so the loss may be made smaller than the slack to the weight interval:
     let $(\beta_-,\beta_+)$ be the maximal open interval of weights for which the \emph{linear} corner pencil has no
     eigenvalue with $\Re$-part in $[\beta_\star-\delta,\beta_\star]$ (such a $\delta$-band exists because $\beta_\star$
-    avoids the discrete corner spectrum, hence sits at a positive distance $\delta_0$ from it). Choosing
-    $\delta<\delta_0$, the weight $\beta_\star-\delta$ lies in the same admissible interval as $\beta_\star$, the two
-    Kondratiev norms $V^{1,2}_{\beta_\star}$ and $V^{1,2}_{\beta_\star-\delta}$ are comparable on $A_*$ (the bounded
-    annulus excludes the vertex, where alone they would differ), and \eqref{eq:Abounded} follows with
-    $\Lambda=\Lambda(\delta)$. The point is that the logarithmic growth does not move the admissible weight interval; no
-    singular weight is ``absorbed'' into $\bm{v}$.
+    avoids the discrete corner spectrum, hence sits at a positive distance $\delta_0$ from it). Choose $\delta<\delta_0$,
+    so $\beta_\star-\delta$ lies in the same admissible interval as $\beta_\star$. In case (B) the domain $\Omega=A_*$
+    excludes the vertex, the two Kondratiev norms $V^{1,2}_{\beta_\star}$ and $V^{1,2}_{\beta_\star-\delta}$ are then
+    comparable (they differ only at the vertex, which $A_*$ omits), and \eqref{eq:Abounded} follows directly with
+    $\Lambda=\Lambda(\delta)$. In case (A) the vertex is interior to $\Omega=B_\rho$ and the two norms are \emph{not}
+    comparable there; instead we read the bound as identifying the $\mathcal{O}(\log\tfrac1r)$ coefficient growth as a
+    perturbation subordinate to the principal (constant-coefficient elasticity) symbol with relative bound $0$. By the
+    Kondratiev--Maz'ya stability of the weighted estimate under such subordinate perturbations \cite{KMR2001}, the
+    admissible weight interval is unmoved and \eqref{eq:Abounded} holds on $V^{1,2}_{\beta_\star}(B_\rho)$. In both
+    cases the logarithmic growth does not shift the admissible interval; no singular weight is ``absorbed'' into
+    $\bm{v}$.
 
     \emph{G\aa rding inequality.} By Lemma~\ref{lem:Aellip} the symbol $\mathbb{L}(\bm{x})$ is strongly elliptic on
-    $A_*$ with the constant Legendre--Hadamard modulus $\mu_e$. Freezing the (measurable, uniformly elliptic)
-    coefficients on a dyadic partition $\{r\sim 2^{-j}\}\cap A_*$ and applying the constant-coefficient G\aa rding
+    $\Omega$ with the constant Legendre--Hadamard modulus $\mu_e$. Freezing the (measurable, uniformly elliptic)
+    coefficients on a dyadic partition $\{r\sim 2^{-j}\}\cap \Omega$ and applying the constant-coefficient G\aa rding
     inequality on each annulus---valid because the principal symbol is positive definite on the Legendre--Hadamard
     cone---yields, after summation against the weight $r^{2\beta_\star}$,
     \[
-        a(\bm{v},\bm{v}) \ge \mu_e\,c_K^{-1}\!\int_{A_*} r^{2\beta_\star}|\Grad\bm{v}|^2\,dV
-        - C\!\int_{A_*} r^{2\beta_\star}|\bm{v}|^2\,dV,
+        a(\bm{v},\bm{v}) \ge \mu_e\,c_K^{-1}\!\int_{\Omega} r^{2\beta_\star}|\Grad\bm{v}|^2\,dV
+        - C\!\int_{\Omega} r^{2\beta_\star}|\bm{v}|^2\,dV,
     \]
     where the Korn inequality \eqref{eq:korn} converts ellipticity of the symmetric part into control of the full gradient.
     The remainder term has a strictly higher power of $r$ than the Hardy weight $r^{2\beta_\star-2}$, hence by
@@ -573,11 +593,16 @@ write the Newton-step bilinear form as
     $k$, and we obtain \eqref{eq:Agaarding} with $\gamma_1=\mu_e\, c_K^{-1}$.
 
     \emph{Fredholm property and exponents.} Estimates \eqref{eq:Abounded}--\eqref{eq:Agaarding} place the operator in the
-    Kondratiev--Maz'ya framework \cite{KMR2001}: it is Fredholm of index zero in $V^{1,2}_{\beta_\star}(A_*)$ whenever
-    $\beta_\star$ avoids the spectrum of the corner operator pencil. Because the nonlinear correction to the principal
-    symbol is subordinate (it is $o(r^{-\delta})$ for every $\delta$, by Lemma~\ref{lem:Abound}), the pencil
-    coincides with that of linearised elasticity; its eigenvalues are exactly the exponents $\alpha$ of
-    \eqref{eq:kondratiev}, which are therefore unchanged by the nonlinearity. \qed
+    Kondratiev--Maz'ya framework \cite{KMR2001}: it is Fredholm of index zero in $V^{1,2}_{\beta_\star}(\Omega)$ whenever
+    $\beta_\star$ avoids the spectrum of the corner operator pencil. In case (A), where $\Omega=B_\rho$ contains the
+    vertex, this is a genuine corner statement: because the nonlinear correction to the principal symbol is subordinate
+    (it is $o(r^{-\delta})$ for every $\delta$, by Lemma~\ref{lem:Abound}), the pencil coincides with that of linearised
+    elasticity, and its eigenvalues are exactly the exponents $\alpha$ of \eqref{eq:kondratiev}, unchanged by the
+    nonlinearity. In case (B), where $\Omega=A_*$ omits the vertex, the same estimates give Fredholmness and
+    well-posedness on the annulus, but the inner boundary $r=r_*$ is a smooth interface, not a conical point, so the
+    pencil eigenvalues describe no vertex asymptotics there; the corner expansion \eqref{eq:kondratiev} is recovered only
+    in the limit $r_*\downarrow0$ on fixed sub-annuli, and the genuine vertex theory for $f_{\log}$ remains the open
+    inner problem of Remark~\ref{rem:core}. \qed
 \end{proof}
 
 \begin{remark}[The dilation core]
@@ -1156,8 +1181,13 @@ the second-order relief to dominate.
     \label{prop:physical}
     Under load control the structure follows the compressed fundamental branch up to the snap at $t_s(\epsilon)\le t_c$
     (Proposition~\ref{prop:koiter}) and then jumps to the creased branch of amplitude $w=\mathcal{O}(1)$. On the
-    compressed branch $\lambda_{\min}\ge\lambda_c(t)\ge\lambda_c(t_c)>0$; after the snap the $\mathcal{O}(1)$ amplitude
-    relieves the compression to $\lambda_{\min}=\mathcal{O}(1)$ via Lemma~\ref{lem:relief}. Hence on the physical branch
+    compressed branch $\lambda_{\min}\ge\lambda_c(t)\ge\lambda_c(t_c)>0$. After the snap the configuration is a
+    \emph{finite-energy} equilibrium of the barrier model: since $f_{\log}(J)\to\infty$ as $J\to0^+$, a uniform energy
+    bound forces $J=\det\bm{F}\ge J_{\mathrm{floor}}>0$ pointwise, with $J_{\mathrm{floor}}$ depending only on the energy
+    level, hence (the remaining $d-1$ stretches being $\mathcal{O}(1)$ on the crease) $\lambda_{\min}=\mathcal{O}(1)$
+    uniformly in $\epsilon$. This is the finite-amplitude counterpart of the small-$w$ relief mechanism of
+    Lemma~\ref{lem:relief}, which it does not invoke (the lemma is local, $|w|\le w_0$); the barrier alone furnishes the
+    bound at $\mathcal{O}(1)$ amplitude. Hence on the physical branch
     \begin{equation}
         \max_{\bm{x}\in B_\rho}\|\mathbb{L}(\bm{x},\epsilon)\| = \mathcal{O}(1) \quad\text{uniformly in } \epsilon,
     \end{equation}
