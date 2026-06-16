@@ -31,7 +31,7 @@ ax.plot(nus, alphas, color="#103d6b", lw=2.2, zorder=3,
 ax.axhline(0.5, color="k", ls="--", lw=1.2, zorder=2)
 
 # annotate the two regimes
-ax.text(0.05, 0.93, r"$\alpha>\frac{1}{2}$: tip-convergent, not tip-dominated"
+ax.text(0.05, 0.70, r"$\alpha>\frac{1}{2}$: tip-convergent, not tip-dominated"
         "\n" r"$\Rightarrow\ b=b(\nu,\hat K)$ (phase diagram)",
         fontsize=8.5, va="top", color="#103d6b")
 ax.text(0.05, 0.16, r"$\alpha<\frac{1}{2}$: tip-dominated"
