@@ -75,21 +75,34 @@ class GradedCell:
     from the turning point; homogeneous Dirichlet at +-Lx), depth Y by mapped
     Chebyshev (free surface natural, decay at -inf essential)."""
 
-    def __init__(self, mu, Lam, NX=20, N=40, Lmap=4.0, Lx=6.0):
+    def __init__(self, mu, Lam, NX=20, N=40, Lmap=4.0, Lx=6.0, xcluster=0.0):
         self.mu, self.Lam = mu, Lam
         self.NX, self.N, self.Lmap, self.Lx = NX, N, Lmap, Lx
+        self.xcluster = xcluster
+        self._alpha = None                       # Williams exponent (lazy; Tier 2)
         DY, DY2, Y, xi = depth_ops(N, Lmap)
         self.DY, self.Y = DY, Y
         n = N + 1
         self.n = n
 
-        # Chebyshev in X on [-Lx, Lx]
+        # Chebyshev in X on [-Lx, Lx].  With xcluster>0 a sinh node map CLUSTERS
+        # nodes toward the turning point X=0 -- where the localized neutral mode
+        # sits and plain Chebyshev (dense at the ends) is sparsest.  This is the
+        # Tier-3 quadrature control for the L^4 integrals whose under-resolution
+        # is what makes |b| drift.  xcluster=0 reproduces the original grid exactly.
         Dc, xc = cheb(NX)
-        self.Xg = Lx * xc                       # (NX+1,) X nodes, descending
-        DX = Dc / Lx
+        if xcluster and xcluster > 0:
+            bb = float(xcluster)
+            self.Xg = Lx * np.sinh(bb * xc) / np.sinh(bb)      # cluster at X=0
+            dXdxc = Lx * bb * np.cosh(bb * xc) / np.sinh(bb)   # >0 throughout
+            DX = np.diag(1.0 / dXdxc) @ Dc                     # d/dX = (dxc/dX) d/dxc
+            wXc = clencurt(NX) * np.abs(dXdxc)                 # CC weights pulled to X
+        else:
+            self.Xg = Lx * xc                    # (NX+1,) X nodes, descending
+            DX = Dc / Lx
+            wXc = clencurt(NX) * Lx              # Clenshaw-Curtis on [-Lx,Lx]
         nx = NX + 1
         self.nx = nx
-        wXc = clencurt(NX) * Lx                  # Clenshaw-Curtis on [-Lx,Lx]
         self.wX = wXc
 
         wcc = clencurt(N)
@@ -127,10 +140,39 @@ class GradedCell:
         # full node weight for both components (mass), length 2m
         self.omega2 = np.concatenate([self.omega, self.omega])
 
+    # -- grading profiles ---------------------------------------------------------
+    def alpha(self):
+        """Leading Williams clamped--free exponent alpha(nu) (lazy, cached)."""
+        if self._alpha is None:
+            from williams_clampedfree import smallest_root
+            nu = nu_of(self.Lam, self.mu)
+            roots = smallest_root(3.0 - 4.0 * nu)
+            self._alpha = float(min(roots)) if roots else np.nan
+        return self._alpha
+
+    def _grade_shape(self, grading):
+        """Monotone-in-X grading shape in ~[-1,1] (most compressed at one end).
+
+        'linear' is the original ad-hoc grading lambda1=l1bar(1+Khat X/Lx).
+        'power' is the physical edge-field profile lambda_par(r) ~ 1 + Khat r^{a-1}
+        of the corner (Williams exponent a<1): tip at X=-Lx (r->0, most extreme),
+        far field at X=+Lx; still monotone, so the single-turning-point / discrete
+        localized-mode mechanism of rem:flatdegenerate is preserved.  Comparing the
+        two is the honest test of identifying Khat with the normalised SIF K-hat."""
+        if grading == 'linear':
+            return self.Xg / self.Lx
+        elif grading == 'power':
+            a = self.alpha()
+            r = (self.Xg + self.Lx) / (2.0 * self.Lx) + 1e-3   # (0,1], tip at X=-Lx
+            p = r ** (a - 1.0)                                  # decreasing (a<1)
+            s = (p - p.min()) / (p.max() - p.min())            # [0,1], 1 at tip
+            return 1.0 - 2.0 * s                               # [-1,1], -1 at tip
+        raise ValueError(f"unknown grading {grading!r}")
+
     # -- per-node base-state material data for a given load & grading -------------
-    def material(self, l1bar, Khat):
+    def material(self, l1bar, Khat, grading='linear'):
         mu, Lam = self.mu, self.Lam
-        l1 = l1bar * (1.0 + Khat * (self.Xg / self.Lx))        # monotone grading
+        l1 = l1bar * (1.0 + Khat * self._grade_shape(grading))  # monotone grading
         l2 = np.array([base_l2(v, mu, Lam) for v in l1])
         J0 = l1 * l2
         fp, fpp, fppp, fpppp = fderivs(J0, mu, Lam)            # each (nx,)
@@ -176,15 +218,26 @@ class GradedCell:
         return 0.5 * (Q + Q.T)
 
     # -- critical load: smallest eigenvalue of Q crosses zero --------------------
-    def min_eig(self, l1bar, Khat):
-        from scipy.linalg import eigvalsh
-        Q = self.stiffness(self.material(l1bar, Khat))
+    def min_eig(self, l1bar, Khat, grading='linear', sparse=False):
+        Q = self.stiffness(self.material(l1bar, Khat, grading))
         Qk = Q[np.ix_(self.keep, self.keep)]
+        if sparse:
+            # Tier 3.8 optional: Lanczos smallest-algebraic; falls back to dense if
+            # it fails to converge (e.g. clustered spectrum near the kernel).
+            try:
+                from scipy.sparse import csr_matrix
+                from scipy.sparse.linalg import eigsh
+                ev = eigsh(csr_matrix(Qk), k=1, which='SA', maxiter=5000,
+                           tol=1e-9, return_eigenvectors=False)
+                return float(ev[0])
+            except Exception:
+                pass
+        from scipy.linalg import eigvalsh
         return float(eigvalsh(Qk, subset_by_index=[0, 0])[0])
 
-    def critical_l1(self, Khat, lo=0.40, hi=0.88, npts=13):
+    def critical_l1(self, Khat, lo=0.40, hi=0.88, npts=13, grading='linear'):
         from scipy.optimize import brentq
-        f = lambda l: self.min_eig(l, Khat)
+        f = lambda l: self.min_eig(l, Khat, grading)
         # scan for a sign change (Q pos-def above threshold, indefinite below)
         grid = np.linspace(hi, lo, npts)
         vals = [f(g) for g in grid]
@@ -193,9 +246,24 @@ class GradedCell:
                 return brentq(f, grid[i], grid[i + 1], xtol=1e-5)
         return np.nan
 
+    def critical_Khat(self, l1bar, lo=0.02, hi=0.60, npts=16, grading='linear'):
+        """Tier-3: at a FIXED (deeper) mean stretch l1bar, find the grading
+        amplitude Khat that re-criticalises the cell (min eig = 0).  This keeps a
+        genuine discrete kernel as the base compression is deepened, so the
+        (AR)-rate probe measures rho_rot on an actual critical mode rather than on
+        the softest eigenvector of an off-critical operator."""
+        from scipy.optimize import brentq
+        f = lambda kh: self.min_eig(l1bar, kh, grading)
+        grid = np.linspace(lo, hi, npts)
+        vals = [f(g) for g in grid]
+        for i in range(len(grid) - 1):
+            if np.isfinite(vals[i]) and vals[i] * vals[i + 1] < 0:
+                return brentq(f, grid[i], grid[i + 1], xtol=1e-5)
+        return np.nan
+
     # -- the Landau coefficient b at a given (graded) critical state -------------
-    def landau_b(self, l1bar, Khat):
-        mat = self.material(l1bar, Khat)
+    def landau_b(self, l1bar, Khat, grading='linear', deflate2=False):
+        mat = self.material(l1bar, Khat, grading)
         Q = self.stiffness(mat)
         keep = self.keep
         Qk = Q[np.ix_(keep, keep)]
@@ -205,6 +273,7 @@ class GradedCell:
         ev, V = eigh(Qk, subset_by_index=[0, 1])
         gap = ev[1] - ev[0]                                    # spectral gap above kernel
         phi_k = V[:, 0]
+        phi2_k = V[:, 1]                                       # 2nd mode (for deflate2)
         phi = np.zeros(2 * self.m)
         phi[keep] = phi_k
 
@@ -219,9 +288,22 @@ class GradedCell:
         fppp_nd = self._tile(mat['fppp'])
         fpppp_nd = self._tile(mat['fpppp'])
 
-        p_ = np.sum(cv_nd * gphi, axis=0)                     # cv:gphi
-        dphi = gphi[0] * gphi[3] - gphi[1] * gphi[2]          # det gphi
+        p_ = np.sum(cv_nd * gphi, axis=0)                     # cv:gphi  (= D1)
+        dphi = gphi[0] * gphi[3] - gphi[1] * gphi[2]          # det gphi (= D2)
         Mgphi = MMAT @ gphi                                   # (4, NX*n)
+
+        # --- QUADRATIC coefficient c2 (PITCHFORK test, Tier 1.1) ---------------
+        # eq (c2vol), 2D (D3=0):  c2 = 1/2 INT [ f''' D1^3 + 6 f'' D1 D2 ].
+        # The paper proves c2=0 by a reflection symmetry of the body; the MONOTONE
+        # grading here BREAKS that X->-X symmetry, so c2 is not forced to vanish
+        # and must be checked: c2~0 => subcritical pitchfork (b decides); c2 of
+        # order |b| => the normal form is TRANSCRITICAL (rem:transcritical) and c2,
+        # not b, sets the leading branch behaviour.  c2 receives no LS feedback
+        # (it first enters at 4th order), so this direct integral is the full c2.
+        c2 = 0.5 * np.sum((fppp_nd * p_ ** 3 + 6.0 * fpp_nd * p_ * dphi) * self.omega)
+        # dphi orientation (relief floor of sub:reliefd needs d_phi>0 a.e.):
+        dphi_pos_frac = float(np.mean(dphi > 0))
+        dphi_min, dphi_max = float(dphi.min()), float(dphi.max())
 
         # second-order source Sfield (4, NX*n), all real
         scal = fpp_nd * dphi + 0.5 * fppp_nd * p_ ** 2
@@ -246,9 +328,36 @@ class GradedCell:
         sol = np.linalg.solve(B, rhs)
         chi = np.zeros(2 * self.m)
         chi[keep] = sol[:nk]
+        # Tier 1.3: conditioning of the V^perp solve.  As gap->0 the second mode is
+        # also near-null, B is near-singular, and chi (hence b_feedback, the term
+        # that flips the sign) is unreliable -- the flat resonance creeping back.
+        cond_B = float(np.linalg.cond(B))
 
         gchi = np.array([self.gradapply(p, chi) for p in range(4)])
         Rchi = np.sum(np.sum(gchi * Sfield, axis=0) * self.omega)
+
+        # Tier 1.3: optional TWO-mode deflation.  If the gap is small the kernel is
+        # effectively 2D; deflating BOTH lowest modes tests whether sign(b) is an
+        # artefact of a near-resonant single-mode reduction.  (Constraint scale is
+        # irrelevant, so phi2 need not be normalised.)
+        Rchi_d = np.nan
+        if deflate2:
+            phi2 = np.zeros(2 * self.m)
+            phi2[keep] = phi2_k
+            Mk2 = (self.omega2 * phi2)[keep]
+            B2 = np.zeros((nk + 2, nk + 2))
+            B2[:nk, :nk] = Qk
+            B2[:nk, nk] = Mk
+            B2[:nk, nk + 1] = Mk2
+            B2[nk, :nk] = Mk
+            B2[nk + 1, :nk] = Mk2
+            rhs2 = np.zeros(nk + 2)
+            rhs2[:nk] = -R[keep]
+            sol2 = np.linalg.solve(B2, rhs2)
+            chi_d = np.zeros(2 * self.m)
+            chi_d[keep] = sol2[:nk]
+            gchi_d = np.array([self.gradapply(p, chi_d) for p in range(4)])
+            Rchi_d = np.sum(np.sum(gchi_d * Sfield, axis=0) * self.omega)
 
         e4 = (0.5 * fpp_nd * dphi ** 2
               + 0.5 * fppp_nd * p_ ** 2 * dphi
@@ -257,10 +366,14 @@ class GradedCell:
         bdir = 4.0 * np.sum(0.5 * fpp_nd * dphi ** 2 * self.omega)
 
         b = 4.0 * E4 + 2.0 * Rchi
+        b_def2 = (4.0 * E4 + 2.0 * Rchi_d) if deflate2 else np.nan
         # normalisation-invariant sign diagnostic: both 4E4 and 2Rchi scale as
         # phi^4, so their ratio is independent of the (arbitrary) mode amplitude;
         # b < 0  <=>  ratio < -1  (feedback overwhelms the adverse frozen term).
         ratio = (2.0 * Rchi) / (4.0 * E4) if E4 != 0 else np.nan
+        # scale-INVARIANT pitchfork/transcritical measure: c2 ~ phi^3, b ~ phi^4,
+        # so c2^4/b^3 is independent of the mode amplitude.  ~0 => pitchfork.
+        pf_inv = (c2 ** 4 / b ** 3) if b != 0 else np.nan
 
         # --- rotation-condition diagnostics (Lemma lem:rot / finding #4) -------
         # On the SAME critical mode, the second variation is
@@ -287,7 +400,9 @@ class GradedCell:
         # how much the "omitted" 2 f' det term dominates the kept f''(dJ)^2 term:
         det_ratio = T_det / T_vol2 if T_vol2 != 0 else np.nan
         return dict(b=b, bdir=bdir, b_E4=4 * E4, b_feedback=2 * Rchi,
-                    ratio=ratio, kernel_eig=ev[0], gap=gap,
+                    ratio=ratio, kernel_eig=ev[0], ev1=ev[1], gap=gap,
+                    c2=c2, pf_inv=pf_inv, cond_B=cond_B, b_def2=b_def2,
+                    dphi_pos_frac=dphi_pos_frac, dphi_min=dphi_min, dphi_max=dphi_max,
                     rho_rot=rho_rot, coen=coen, T_shear=T_shear, T_vol2=T_vol2,
                     T_det=T_det, det_ratio=det_ratio, J0min=J0min, rate=rate)
 
@@ -339,13 +454,16 @@ if __name__ == "__main__":
     print("    (the Stage-2 failure mode is now consistent; b<0 iff r<-1)")
     Lam, Khat = 5.0, 0.15
     print(f"    Lam={Lam}, nu={nu_of(Lam,mu):.3f}, Khat={Khat}")
-    print(f"{'NX':>4} {'N':>4} {'ratio r':>10} {'sign(b)':>9} {'gap':>9}")
+    print("    [+ Tier-1 diagnostics: cond(B) of the LS solve, the quadratic c2,")
+    print("     and the scale-invariant pitchfork measure c2^4/b^3 (~0 => pitchfork)]")
+    print(f"{'NX':>4} {'N':>4} {'ratio r':>10} {'sign(b)':>8} {'gap':>10}"
+          f" {'cond(B)':>10} {'c2':>11} {'c2^4/b^3':>11}")
     for NX, N in [(10, 24), (12, 28), (14, 32), (16, 36)]:
         cell = GradedCell(mu, Lam, NX=NX, N=N)
         lc = cell.critical_l1(Khat)
         r = cell.landau_b(lc, Khat)
-        print(f"{NX:4d} {N:4d} {r['ratio']:10.4f} {'b<0' if r['b']<0 else 'b>0':>9}"
-              f" {r['gap']:9.2e}")
+        print(f"{NX:4d} {N:4d} {r['ratio']:10.4f} {'b<0' if r['b']<0 else 'b>0':>8}"
+              f" {r['gap']:10.2e} {r['cond_B']:10.2e} {r['c2']:11.3e} {r['pf_inv']:11.2e}")
 
     # (D) phase diagram: invariant sign ratio r=b_feedback/b_E4 over (nu, Khat);
     #     b<0 (subcritical) wherever r<-1.
@@ -394,20 +512,104 @@ if __name__ == "__main__":
             print(f"{nu_of(Lam,mu):7.3f} {Khat:6.2f} {r['J0min']:8.4f}"
                   f" {r['rho_rot']:9.4f} {r['coen']:10.3e} {r['det_ratio']:13.4f}")
 
-    # (F) Asymptotic-rate probe of lem:rot: drive the base compression DEEPER
-    #     (fundamental J0 -> 0) at fixed grading, tracking the softest localised
-    #     mode (lowest eigenvector of the symmetric weak operator).  lem:rot
-    #     predicts rho_rot = O(J0/sqrt|log J0|), i.e. the invariant
-    #     rate = rho_rot*sqrt|log J0|/J0 stays BOUNDED as J0 -> 0.
-    print("\n(F) Asymptotic-rate probe (lem:rot): deeper compression, J0->0.")
-    print("    rate = rho_rot*sqrt|log J0|/J0 bounded <=> rotation rate holds.")
-    Lam, Khat = 5.0, 0.20
+    # (F) Asymptotic-rate probe of lem:rot, FIXED (Tier 3.5).  The previous probe
+    #     evaluated landau_b at l1bar*frac -- OFF threshold -- so the "mode" was the
+    #     softest eigenvector of a non-critical operator, NOT a kernel.  Here we
+    #     RE-CRITICALISE at each deeper mean stretch (critical_Khat: find the grading
+    #     amplitude that puts min eig = 0), so rho_rot is measured on a genuine
+    #     critical mode.  lem:rot predicts rate = rho_rot*sqrt|log J0|/J0 BOUNDED.
+    # Deeper LOCAL compression while staying on a GENUINE kernel is reached by
+    # raising the grading amplitude Khat (the localized spot gets more compressed)
+    # and re-solving critical_l1 at each Khat -- kern_eig~0 throughout, J0min sinks.
+    print("\n(F) Asymptotic-rate probe (lem:rot), on a GENUINE critical mode at each")
+    print("    depth (sweep Khat up, re-solve critical_l1; kern_eig~0 confirms kernel).")
+    Lam = 5.0
     cell = GradedCell(mu, Lam, NX=12, N=28)
-    lc = cell.critical_l1(Khat)
-    print(f"    Lam={Lam}, nu={nu_of(Lam,mu):.3f}, Khat={Khat}, l1c={lc:.4f}")
-    print(f"{'l1bar':>8} {'J0min':>8} {'rho_rot':>9} {'rate':>9} {'T_det/T_vol2':>13}")
-    for frac in [1.00, 0.85, 0.70, 0.55, 0.40]:
-        l1b = lc * frac
-        r = cell.landau_b(l1b, Khat)
-        print(f"{l1b:8.4f} {r['J0min']:8.4f} {r['rho_rot']:9.4f}"
-              f" {r['rate']:9.4f} {r['det_ratio']:13.4f}")
+    print(f"    Lam={Lam}, nu={nu_of(Lam,mu):.3f}")
+    print(f"{'Khat':>6} {'l1c':>8} {'J0min':>8} {'kern_eig':>10} {'rho_rot':>9}"
+          f" {'rate':>9} {'Tdet/Tvol2':>11}")
+    for Khat in [0.10, 0.20, 0.30, 0.45, 0.60]:
+        lc = cell.critical_l1(Khat, lo=0.45, hi=0.98, npts=15)
+        if not np.isfinite(lc):
+            print(f"{Khat:6.2f}   (no critical l1 in window)")
+            continue
+        r = cell.landau_b(lc, Khat)
+        print(f"{Khat:6.2f} {lc:8.4f} {r['J0min']:8.4f} {r['kernel_eig']:+10.1e}"
+              f" {r['rho_rot']:9.4f} {r['rate']:9.4f} {r['det_ratio']:11.4f}")
+
+    # (G) CONVERGENCE / ISOLATION study (Tier 1.2): the headline 'b<0' rests on a
+    #     converged ratio r<-1 and a kernel ISOLATED by a gap that stays > 0.  We
+    #     refine N at fixed Lx, then vary Lx and Lmap, and watch (gap, r, cond B).
+    #     If gap -> const>0 the discrete mode is real; if gap -> 0 the flat
+    #     resonance of rem:flatdegenerate is returning and r is unreliable.
+    print("\n(G) Convergence / isolation study  (Lam=5, nu=0.417, Khat=0.15)")
+    Lam, Khat = 5.0, 0.15
+    print("   refine N at fixed Lx=6:")
+    # (one finer point, NX=18,N=40, continues the trend: gap=2.30e-2, r=-2.00,
+    #  cond(B)=1.18e9 -- gap still shrinking, cond still growing, r drifting up.)
+    print(f"{'NX':>4} {'N':>4} {'gap':>10} {'d(gap)':>10} {'ratio r':>10} {'d(r)':>9} {'cond(B)':>10}")
+    prev_gap = prev_r = None
+    for NX, N in [(10, 24), (13, 30), (16, 36)]:
+        cell = GradedCell(mu, Lam, NX=NX, N=N, Lx=6.0)
+        lc = cell.critical_l1(Khat, lo=0.55, hi=0.85, npts=9)
+        if not np.isfinite(lc):
+            print(f"{NX:4d} {N:4d}   (no critical l1 in window)"); continue
+        r = cell.landau_b(lc, Khat)
+        dg = (r['gap'] - prev_gap) if prev_gap is not None else np.nan
+        dr = (r['ratio'] - prev_r) if prev_r is not None else np.nan
+        print(f"{NX:4d} {N:4d} {r['gap']:10.3e} {dg:10.2e} {r['ratio']:10.4f}"
+              f" {dr:9.2e} {r['cond_B']:10.2e}")
+        prev_gap, prev_r = r['gap'], r['ratio']
+    print("   vary domain half-width Lx (NX=14,N=32):")
+    print(f"{'Lx':>5} {'gap':>10} {'ratio r':>10} {'cond(B)':>10}")
+    for Lx in [4.0, 6.0, 8.0, 10.0]:
+        cell = GradedCell(mu, Lam, NX=14, N=32, Lx=Lx)
+        lc = cell.critical_l1(Khat, lo=0.55, hi=0.90, npts=9)
+        if not np.isfinite(lc):
+            print(f"{Lx:5.1f}   (no critical l1)"); continue
+        r = cell.landau_b(lc, Khat)
+        print(f"{Lx:5.1f} {r['gap']:10.3e} {r['ratio']:10.4f} {r['cond_B']:10.2e}")
+    print("   vary depth map Lmap (NX=14,N=32,Lx=6):")
+    print(f"{'Lmap':>5} {'gap':>10} {'ratio r':>10} {'cond(B)':>10}")
+    for Lmap in [3.0, 4.0, 6.0, 8.0]:
+        cell = GradedCell(mu, Lam, NX=14, N=32, Lx=6.0, Lmap=Lmap)
+        lc = cell.critical_l1(Khat, lo=0.55, hi=0.85, npts=9)
+        if not np.isfinite(lc):
+            print(f"{Lmap:5.1f}   (no critical l1)"); continue
+        r = cell.landau_b(lc, Khat)
+        print(f"{Lmap:5.1f} {r['gap']:10.3e} {r['ratio']:10.4f} {r['cond_B']:10.2e}")
+
+    # (H) PITCHFORK vs TRANSCRITICAL (Tier 1.1): the monotone grading breaks the
+    #     X->-X reflection that the paper uses to force c2=0, so c2 need not vanish.
+    #     If |c2^4/b^3| is NOT ~0, the normal form is transcritical and c2 -- not b
+    #     -- is the leading coefficient.  Reported across the rectangle.
+    print("\n(H) Quadratic coefficient c2 across (nu,Khat) -- is it a pitchfork?")
+    print(f"{'nu':>7} {'Khat':>6} {'c2':>12} {'b':>12} {'c2^4/b^3':>11} {'dphi>0 %':>9}")
+    for Lam in [1.0, 5.0]:
+        cell = GradedCell(mu, Lam, NX=12, N=28)
+        for Khat in [0.10, 0.20, 0.30]:
+            lc = cell.critical_l1(Khat)
+            if not np.isfinite(lc):
+                continue
+            r = cell.landau_b(lc, Khat)
+            print(f"{nu_of(Lam,mu):7.3f} {Khat:6.2f} {r['c2']:12.4e} {r['b']:12.4e}"
+                  f" {r['pf_inv']:11.2e} {100*r['dphi_pos_frac']:9.1f}")
+
+    # (I) GRADING-PROFILE robustness (Tier 2.4): is sign(b) the same for the ad-hoc
+    #     LINEAR grading and the physical POWER (r^{alpha-1}) edge-field profile?
+    #     Plus a 2-mode-deflation cross-check (does deflating the near-resonant 2nd
+    #     mode change the sign?).
+    print("\n(I) Grading-profile robustness  +  two-mode deflation cross-check")
+    print(f"{'nu':>7} {'Khat':>6} {'r(linear)':>10} {'r(power)':>10}"
+          f" {'b(lin)':>11} {'b_deflate2':>12}")
+    for Lam in [1.0, 5.0]:
+        cell = GradedCell(mu, Lam, NX=12, N=28)
+        a = cell.alpha()
+        for Khat in [0.15, 0.25]:
+            lcl = cell.critical_l1(Khat, grading='linear')
+            rl = cell.landau_b(lcl, Khat, grading='linear', deflate2=True)
+            lcp = cell.critical_l1(Khat, grading='power')
+            rp = cell.landau_b(lcp, Khat, grading='power') if np.isfinite(lcp) else None
+            rpr = rp['ratio'] if rp else np.nan
+            print(f"{nu_of(Lam,mu):7.3f} {Khat:6.2f} {rl['ratio']:10.4f} {rpr:10.4f}"
+                  f" {rl['b']:11.3e} {rl['b_def2']:12.3e}   (alpha={a:.3f})")
