@@ -1104,9 +1104,11 @@ Remark~\ref{rem:rotnum}) and show it is dominated by the second-order relief.
     load but is itself small with $J_0$. Let
     $d_\phi:=\tfrac12\,\tfrac{d^2}{dw^2}\big|_{0}\det(\bm{F}_0+w\,\Grad\bm{\phi})$ be the second-order coefficient of
     the determinant --- the second mixed discriminant of $\bm{F}_0$ ($d-2$ copies) with $\Grad\bm{\phi}$ (two copies),
-    which for $d=2$ reduces to $\det(\Grad\bm{\phi})$. We take the mode to satisfy the relief-orienting genericity
-    condition $d_\phi>0$ a.e.\ (a property of the mode, discussed at \eqref{eq:dphisign} in \S\ref{sub:reliefd}; it is
-    \emph{not} supplied by the transversality Lemma~\ref{lem:sval}). Then
+    which for $d=2$ reduces to $\det(\Grad\bm{\phi})$. We take the mode to satisfy the relief-orienting condition
+    $d_\phi>0$ a.e.\ \emph{on a neighbourhood of the collapse locus} $\Sigma_{\mathrm{c}}$ --- the only region where the
+    relief floor is invoked (\eqref{eq:dphisign} in \S\ref{sub:reliefd}; a property of the mode, \emph{not} supplied by the
+    transversality Lemma~\ref{lem:sval}). Away from $\Sigma_{\mathrm{c}}$, where $J_0$ stays bounded below, the sign of
+    $d_\phi$ is immaterial: the finite-$J_0$ case~(i) below absorbs a negative $w^2 d_\phi$ into the $J_0$ margin. Then
     \begin{equation}
         \label{eq:Jexp}
         J = \det\bm{F} = J_0 + w\,D_1 + w^2\,d_\phi + \mathcal{O}(w^3),
@@ -1132,16 +1134,24 @@ Remark~\ref{rem:rotnum}) and show it is dominated by the second-order relief.
     bound the linear term $wD_1$ in two complementary regimes; in both, $\mathcal{O}(w^3)$ is absorbed into the constants
     for $|w|\le w_0$.
 
-    \emph{(i) Finite $J_0$ (at and near the bifurcation).} Here $J_0\ge c>0$ and $D_1$ is finite, so the bound needs no
-    smallness of $D_1$, only of $w$: choosing $w_0\le J_0/(4|D_1|)$ gives $|w\,D_1|\le\tfrac14 J_0$ for $|w|\le w_0$,
-    whence $J = J_0 + w D_1 + w^2 d_\phi+\mathcal{O}(w^3)\ge \tfrac34 J_0 + \tfrac12 w^2 d_\phi\ge\tfrac12 J_0+\tfrac12
-    w^2 d_\phi$. This is the regularity-only argument: at $t_c$, where $J_0(t_c)>0$, \eqref{eq:Jlower} holds with no
-    rotation condition (cf.\ Lemma~\ref{lem:rotreg}).
+    \emph{(i) Finite $J_0$ (at and near the bifurcation, and everywhere off $\Sigma_{\mathrm{c}}$).} Here $J_0\ge c>0$ and
+    $D_1$ is finite, so the bound needs no smallness of $D_1$, only of $w$: choosing $w_0\le J_0/(4|D_1|)$ gives
+    $|w\,D_1|\le\tfrac14 J_0$ for $|w|\le w_0$, whence $J = J_0 + w D_1 + w^2 d_\phi+\mathcal{O}(w^3)\ge \tfrac34 J_0 +
+    \tfrac12 w^2 d_\phi$. \emph{No sign of $d_\phi$ is used here}: if $d_\phi\ge0$ this is already $\ge\tfrac12
+    J_0+\tfrac12 w^2 d_\phi$, the relief bound \eqref{eq:Jlower}; if $d_\phi<0$ (the collapse-driving orientation, which the
+    computation finds confined to a thin surface layer, \S\ref{sub:reliefd}) shrink $w_0$ further to $w_0\le\sqrt{J_0/(4
+    |d_\phi|)}$ so that $\tfrac12 w^2|d_\phi|\le\tfrac14 J_0$, whence $J\ge\tfrac34 J_0-\tfrac14 J_0=\tfrac12 J_0$ and
+    \eqref{eq:lminrelief} holds with the load floor $C_1\lambda_c$ alone (no relief, but no collapse either). This is the
+    regularity-only argument: at $t_c$, where $J_0(t_c)>0$, and at every point off the collapse locus, \eqref{eq:Jlower}
+    (resp.\ its $d_\phi<0$ surrogate $J\ge\tfrac12 J_0$) holds with no rotation condition and with no sign hypothesis on
+    $d_\phi$ (cf.\ Lemma~\ref{lem:rotreg}).
 
-    \emph{(ii) Near collapse ($J_0\to0$).} Now $w_0$ from (i) would shrink with $J_0$, so we use instead the
-    asymptotic-rotation bound $|D_1|\le c_\phi J_0/\sqrt{|\log J_0|}$ of Assumption~\ref{ass:rot}. By Young's inequality
-    $|w\,D_1|\le \tfrac12 d_\phi w^2 + \tfrac1{2d_\phi}D_1^2$, and $D_1^2\le c_\phi^2 J_0^2/|\log J_0|\le d_\phi J_0$
-    once $J_0$ is small (the factor $J_0/|\log J_0|\to0$). Hence $\tfrac1{2d_\phi}D_1^2\le\tfrac12 J_0$ and
+    \emph{(ii) Near collapse ($J_0\to0$, on the tube around $\Sigma_{\mathrm{c}}$).} Now $w_0$ from (i) would shrink with
+    $J_0$, so we use instead the asymptotic-rotation bound $|D_1|\le c_\phi J_0/\sqrt{|\log J_0|}$ of
+    Assumption~\ref{ass:rot}, \emph{together with} the localised orientation $d_\phi>0$ of \eqref{eq:dphisign} --- the one
+    region where that sign is genuinely invoked, as the denominator in Young's inequality
+    $|w\,D_1|\le \tfrac12 d_\phi w^2 + \tfrac1{2d_\phi}D_1^2$. With $D_1^2\le c_\phi^2 J_0^2/|\log J_0|\le d_\phi J_0$
+    once $J_0$ is small (the factor $J_0/|\log J_0|\to0$), $\tfrac1{2d_\phi}D_1^2\le\tfrac12 J_0$ and
     $|w\,D_1|\le \tfrac12 d_\phi w^2+\tfrac12 J_0$, and
     inserting into \eqref{eq:Jexp} yields \eqref{eq:Jlower}. Thus the residual first-order term, far from dominating, is
     swallowed by the barrier-controlled $J_0$ and the relief $w^2 d_\phi$ --- the precise content of ``buckling relieves

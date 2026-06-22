@@ -35,10 +35,10 @@ smooth edge (H) and a polyhedral one with vertices (C).
 The \emph{singular set} $\Sigma\subset\partial\Omega$ is the locus where $\overline{\Gamma_D}$ meets
 $\overline{\Gamma_N}$:
 \begin{itemize}
-    \item for (H), $\Sigma=\{|\bm{x}|=1,\ x_d=0\}\cong S^{d-2}$, a \emph{smooth} codimension-two submanifold; the cap is
-          tangent to the vertical at the equator, so it meets the horizontal base at a right angle;
-    \item for (C), $\Sigma$ is the union of the bottom edges $\{x_d=0,\ x_i=\pm1\}$, again right-angle Dirichlet--Neumann
-          edges, \emph{together with} the bottom vertices, where $d$ faces meet.
+    \item for (H), $\Sigma=\{|\bm{x}|=1,\ x_d=0\}\cong S^{d-2}$, a \emph{smooth} codimension-two submanifold; the cap is tangent
+          to the vertical at the equator, so it meets the horizontal base at a right angle;
+    \item for (C), $\Sigma$ is the union of the bottom edges $\{x_d=0,\ x_i=\pm1\}$, again right-angle Dirichlet--Neumann edges,
+          \emph{together with} the bottom vertices, where $d$ faces meet.
 \end{itemize}
 
 Fix $\bm{x}_0\in\Sigma$ away from any vertex and split $\mathbb{R}^d=T_{\bm{x}_0}\Sigma\oplus\Pi$, with $\Pi$ the
@@ -76,9 +76,10 @@ with $\Pi_W=\{(r,\theta):r>0,\ 0<\theta<\tfrac\pi2\}$ the right-angle Dirichlet-
 two-plane $\Pi$. For $\lambda\in(0,1]$ introduce the rescaling $\bm{\xi}\mapsto\bm{x}_0+\lambda\bm{\xi}$, under which
 $B_{\lambda R}(\bm{x}_0)$ maps to $B_R(\bm0)\cap W$ and $\Omega_\lambda:=\lambda^{-1}(\Omega-\bm{x}_0)\to W$ as
 $\lambda\to0$. Write the fundamental displacement on the loaded path as
-$\bm{u}_0=K\,r^{\alpha}\bm{\Phi}(\theta)+\bm{u}_0^{\sharp}$, where by the Kondratiev expansion the remainder collects the
-next exponents, $\bm{u}_0^{\sharp}=\mathcal{O}(r^{\alpha'})$ with $\alpha'>\alpha$ the second singular exponent of the
-pencil, and set the \emph{spectral gap} $g:=\alpha'-\alpha>0$. Define the rescaled displacement, tangent and operator
+$\bm{u}_0=K\,r^{\alpha}\bm{\Phi}(\theta)+\bm{u}_0^{\sharp}$, where by the Kondratiev expansion the remainder collects
+the next exponents, $\bm{u}_0^{\sharp}=\mathcal{O}(r^{\alpha'})$ with $\alpha'>\alpha$ the second singular exponent of
+the pencil, and set the \emph{spectral gap} $g:=\alpha'-\alpha>0$. Define the rescaled displacement, tangent and
+operator
 \begin{equation}
     \label{eq:rescale}
     \hat{\bm{u}}_\lambda(\bm{\xi}):=\lambda^{-\alpha}\big(\bm{u}_0(\bm{x}_0+\lambda\bm{\xi})-\bm{u}_0(\bm{x}_0)\big),
@@ -132,7 +133,7 @@ pencil, and set the \emph{spectral gap} $g:=\alpha'-\alpha>0$. Define the rescal
     to the $\lambda$-independent field $K r^{\alpha}\bm{\Phi}$ exactly while shrinking the remainder by
     $\lambda^{\alpha'-\alpha}=\lambda^{g}$ in the homogeneous weighted norm. Statement (ii) follows because
     $\mathbb{L}$ is a smooth (algebraic) function of $\bm{F}_0=\bm{I}+\Grad\bm{u}_0$ and $\Grad\hat{\bm{u}}_\lambda\to
-    \Grad\hat{\bm{u}}_W$ off the tip by (i); freezing along the self-similar limit defines $\mathcal{L}_W$, and the
+        \Grad\hat{\bm{u}}_W$ off the tip by (i); freezing along the self-similar limit defines $\mathcal{L}_W$, and the
     coefficient error inherits the $\mathcal{O}(\lambda^{g})$ rate of (i) on every annulus
     $\{r_0\le r\le R\}$ bounded away from $r=0$. The leading exponent and angular profile are obtained not from this
     annular convergence but from the principal-symbol structure at the vertex: by Lemma~\ref{lem:Abound} the nonlinear
@@ -165,17 +166,16 @@ pencil, and set the \emph{spectral gap} $g:=\alpha'-\alpha>0$. Define the rescal
 \subsection{Tier 1: the material assumptions are already discharged}
 \label{sub:tier1}
 
-For the neo-Hookean energy \eqref{eq:neohooke} with $f_{\log}$, the standing assumptions of
-\S\ref{sec:asymptotics} hold with explicit constants and require no information about the domain:
-Assumption~\ref{ass:reg} (regularity, objectivity, and the collapse barrier $f_{\log}(J)\to\infty$),
-Assumption~\ref{ass:growth} (the inverse-channel bound, with $\Theta=\Theta_{\log}$ of \eqref{eq:Thetalog}),
-Assumption~\ref{ass:ellip} and the sharper Lemma~\ref{lem:SEcompress} (strong ellipticity with constant $\ge\mu_e$
-throughout compression), and Assumption~\ref{ass:mild} (logarithmic growth, $p=1$) are all established in
-Lemma~\ref{lem:nh}, Remark~\ref{rem:SEcaveat} and \S\ref{sub:growth}. None of these proofs uses $d=2$: the tangent
-formula \eqref{eq:Lnh}, the rank-one identity \eqref{eq:LHnh}, and the growth functions \eqref{eq:Thetalog} are
-algebraic identities in $\mathrm{GL}^+(d)$. Thus the entire material side of the hypothesis list is closed for the
-concrete model, in every dimension. What remains are the hypotheses on the \emph{solution and loading}, which is where
-the geometry enters.
+For the neo-Hookean energy \eqref{eq:neohooke} with $f_{\log}$, the standing assumptions of \S\ref{sec:asymptotics}
+hold with explicit constants and require no information about the domain: Assumption~\ref{ass:reg} (regularity,
+objectivity, and the collapse barrier $f_{\log}(J)\to\infty$), Assumption~\ref{ass:growth} (the inverse-channel bound,
+with $\Theta=\Theta_{\log}$ of \eqref{eq:Thetalog}), Assumption~\ref{ass:ellip} and the sharper
+Lemma~\ref{lem:SEcompress} (strong ellipticity with constant $\ge\mu_e$ throughout compression), and
+Assumption~\ref{ass:mild} (logarithmic growth, $p=1$) are all established in Lemma~\ref{lem:nh},
+Remark~\ref{rem:SEcaveat} and \S\ref{sub:growth}. None of these proofs uses $d=2$: the tangent formula \eqref{eq:Lnh},
+the rank-one identity \eqref{eq:LHnh}, and the growth functions \eqref{eq:Thetalog} are algebraic identities in
+$\mathrm{GL}^+(d)$. Thus the entire material side of the hypothesis list is closed for the concrete model, in every
+dimension. What remains are the hypotheses on the \emph{solution and loading}, which is where the geometry enters.
 
 \subsection{The edge exponent and the scenario it selects}
 \label{sub:edgeexp}
@@ -183,18 +183,17 @@ the geometry enters.
 By the edge-singularity calculus \cite{KMR2001,MazyaRossmann2010}, the leading singular exponents of the linearised
 elasticity operator along the smooth edge $\Sigma$ coincide with those of the transverse two-dimensional pencil in
 $\Pi$, modulated smoothly along $\Sigma$. That transverse pencil is the planar right-angle Dirichlet--Neumann corner of
-\eqref{eq:kondratiev}; its leading exponent $\alpha\in(0,1)$ is the smallest root of the corresponding
-clamped--free Williams secular equation and depends only on the Poisson ratio. Consequently the kinematic blow-up
-\eqref{eq:Fblowup}, $\bm{F}=\bm{I}+\mathcal{O}(r^{\alpha-1})$, holds with a \emph{computable} exponent, and by
-Theorem~\ref{thm:A} the nonlinear tangent inherits exactly this $\alpha$ in the benign regime --- on the annulus
-outside the dilation core of Lemma~\ref{lem:Aellip}, the core being absent for mild loading or a globally
-convex-volumetric barrier.
+\eqref{eq:kondratiev}; its leading exponent $\alpha\in(0,1)$ is the smallest root of the corresponding clamped--free
+Williams secular equation and depends only on the Poisson ratio. Consequently the kinematic blow-up \eqref{eq:Fblowup},
+$\bm{F}=\bm{I}+\mathcal{O}(r^{\alpha-1})$, holds with a \emph{computable} exponent, and by Theorem~\ref{thm:A} the
+nonlinear tangent inherits exactly this $\alpha$ in the benign regime --- on the annulus outside the dilation core of
+Lemma~\ref{lem:Aellip}, the core being absent for mild loading or a globally convex-volumetric barrier.
 
 Which scenario of \S\ref{sec:asymptotics} is realized is governed by the sign of the dominant eigenvalue of
-$\Grad\bm{u}$ at the edge, equivalently by the sign of the stress-intensity factor $K$ in \eqref{eq:kondratiev}. This is
-a global quantity, set by the far field, and is not determined by the local pencil alone. The compressive load we
-impose selects $K<0$: the material is pushed into the corner, the dominant eigenvalue of $\Grad\bm{u}$ is negative,
-and Scenario~B (\S\ref{sub:scenarioB}) is the relevant branch. The quantitative form of ``compressive enough'' is the
+$\Grad\bm{u}$ at the edge, equivalently by the sign of the stress-intensity factor $K$ in \eqref{eq:kondratiev}. This
+is a global quantity, set by the far field, and is not determined by the local pencil alone. The compressive load we
+impose selects $K<0$: the material is pushed into the corner, the dominant eigenvalue of $\Grad\bm{u}$ is negative, and
+Scenario~B (\S\ref{sub:scenarioB}) is the relevant branch. The quantitative form of ``compressive enough'' is the
 hypothesis (SC) below; it simultaneously selects Scenario~B and drives the structural instability of
 \S\ref{sub:concrete-tc}. The complementary tensile load ($K>0$) selects Scenario~A, where (NC) holds and
 Theorem~\ref{thm:A} applies; for the present geometry under compression that case does not arise near the edge.
@@ -202,17 +201,17 @@ Theorem~\ref{thm:A} applies; for the present geometry under compression that cas
 \subsection{Existence of the critical load via a localized surface instability}
 \label{sub:concrete-tc}
 
-The one genuinely non-elementary ingredient of \S\ref{sec:iba} was hypothesis (ii) of Lemma~\ref{lem:tc}: the
-existence of a structurally destabilising field, $Q_{t_*}(\bm{v}_*)<0$, which we there declined to establish and
-flagged as the corner counterpart of the Biot/creasing instability. For the concrete clamped--free geometry we now
-\emph{prove} it, by reduction to the surface instability of the compressed half-space.
+The one genuinely non-elementary ingredient of \S\ref{sec:iba} was hypothesis (ii) of Lemma~\ref{lem:tc}: the existence
+of a structurally destabilising field, $Q_{t_*}(\bm{v}_*)<0$, which we there declined to establish and flagged as the
+corner counterpart of the Biot/creasing instability. For the concrete clamped--free geometry we now \emph{prove} it, by
+reduction to the surface instability of the compressed half-space.
 
 The free face $\Gamma_N$ under compression is, locally, a traction-free surface compressed parallel to itself --- the
 exact configuration of Biot's classical analysis \cite{Biot1963}. A homogeneously compressed neo-Hookean half-space
-loses stability to a surface mode once the surface-parallel stretch falls below a threshold
-$\lambda_\star\in(0,1)$ (for the incompressible model $\lambda_\star\approx0.544$; for the compressible energy
-\eqref{eq:neohooke} the threshold is the corresponding root of the surface secular equation, still in $(0,1)$
-\cite{Hong2009}). We package the loading requirement as a single hypothesis.
+loses stability to a surface mode once the surface-parallel stretch falls below a threshold $\lambda_\star\in(0,1)$
+(for the incompressible model $\lambda_\star\approx0.544$; for the compressible energy \eqref{eq:neohooke} the
+threshold is the corresponding root of the surface secular equation, still in $(0,1)$ \cite{Hong2009}). We package the
+loading requirement as a single hypothesis.
 
 \begin{assumption}[Surface compression reaches threshold, (SC)]
     \label{ass:sc}
@@ -361,10 +360,10 @@ posit:
     single-mode coefficients are
     \begin{align}
         \label{eq:c2vol}
-        c_2          &= \tfrac12\!\int_{B_\rho}\!\big[f''' D_1^3+6 f'' D_1 D_2+6 f' D_3\big]\,dV,\\
+        c_2              & = \tfrac12\!\int_{B_\rho}\!\big[f''' D_1^3+6 f'' D_1 D_2+6 f' D_3\big]\,dV, \\
         \label{eq:bvol}
-        b_{\mathrm{dir}} &= \tfrac16\!\int_{B_\rho}\!\big[f'''' D_1^4+12 f''' D_1^2 D_2+12 f'' D_2^2
-                            +24 f'' D_1 D_3+24 f' D_4\big]\,dV.
+        b_{\mathrm{dir}} & = \tfrac16\!\int_{B_\rho}\!\big[f'''' D_1^4+12 f''' D_1^2 D_2+12 f'' D_2^2
+            +24 f'' D_1 D_3+24 f' D_4\big]\,dV.
     \end{align}
     Two consequences hold for the concrete geometry, whose fundamental state is $R$-symmetric.
     \begin{enumerate}
@@ -389,9 +388,11 @@ posit:
               $f''_{\log}(J_0)=(\mu_e+2\lambda_e-2\lambda_e\log J_0)/J_0^2>0$ and
               $f'''_{\log}(J_0)=(4\lambda_e\log J_0-6\lambda_e-2\mu_e)/J_0^3<0$ throughout compression $J_0<1$. The cubic
               part carries $d_\phi^2\ge0$, so $b_{\mathrm{dir}}>0$ follows from $f''_{\log}>0$ \emph{alone}, with no sign
-              hypothesis on $d_\phi$. The quintic part carries $d_\phi^3$; under the orientation condition $d_\phi>0$
-              (the generic, relief-orienting sign of the second mixed discriminant, \eqref{eq:dphisign} below) and
-              $f'''_{\log}<0$ one gets $d_{\mathrm{dir}}<0$ --- the \emph{opposite} of the subcritical pattern $b<0<d$.
+              hypothesis on $d_\phi$ (this is the only frozen sign the argument needs). The quintic part carries the
+              sign-indefinite $d_\phi^3$; on the relief-oriented region $d_\phi>0$ (\eqref{eq:dphisign} below) and
+              $f'''_{\log}<0$ give $d_{\mathrm{dir}}<0$ there --- the \emph{opposite} of the subcritical pattern $b<0<d$, so
+              the frozen quintic too is adverse where the relief acts, and subcriticality is decided by the feedback, not
+              by either frozen term.
     \end{enumerate}
 \end{lemma}
 \begin{proof}
@@ -415,13 +416,13 @@ against the edge exponent $\alpha$, \emph{why} this feedback cannot be reduced t
 
 The blow-up reduction of \S\ref{sub:blowup} promised a dichotomy: a corner quantity localises to a universal
 model-wedge number only when its defining integral is dominated by the tip. We now carry out the count for the cubic
-coefficient and find that, for the right-angle clamped--free pencil, it sits on the \emph{non}-localising side --- which
-is exactly why the sign of $b$ is a genuine, $\hat K$-dependent computation rather than an inheritance from flat
+coefficient and find that, for the right-angle clamped--free pencil, it sits on the \emph{non}-localising side ---
+which is exactly why the sign of $b$ is a genuine, $\hat K$-dependent computation rather than an inheritance from flat
 creasing.
 
 Near the edge the critical mode $\bm{\phi}\in V$ inherits the admissible singular behaviour of the pencil,
-$\Grad\bm{\phi}=\mathcal{O}(r^{\alpha-1})$ (the least-singular $H^1$ exponent of \eqref{eq:kondratiev}), so the
-second discriminant scales as $d_\phi=\det\Grad\bm{\phi}=\mathcal{O}(r^{2(\alpha-1)})$ in $d=2$.
+$\Grad\bm{\phi}=\mathcal{O}(r^{\alpha-1})$ (the least-singular $H^1$ exponent of \eqref{eq:kondratiev}), so the second
+discriminant scales as $d_\phi=\det\Grad\bm{\phi}=\mathcal{O}(r^{2(\alpha-1)})$ in $d=2$.
 
 \begin{proposition}[Homogeneity count: the cubic does not localise to the bare wedge]
     \label{prop:bcount}
@@ -512,10 +513,10 @@ second discriminant scales as $d_\phi=\det\Grad\bm{\phi}=\mathcal{O}(r^{2(\alpha
     The corner removes exactly this degeneracy. The pre-stress is graded along the free face on the scale $r_P$
     (Remark~\ref{rem:twoscales}), which breaks the translational/scale invariance, couples the wavenumbers, and selects a
     \emph{discrete} critical mode --- the attainment of Lemma~\ref{lem:attain} under (BC). With the spectrum discrete and
-    simple, the second-harmonic operator is no longer resonant, $\bm\psi$ exists, and $b=b(\nu,\hat K)$ is a
-    well-defined number. Thus the corner is not merely the setting in which $b$ happens to be computed: it is what makes
-    the reduced cubic \emph{exist} at all. This sharpens Proposition~\ref{prop:bcount} --- $b$ cannot be a bare-wedge,
-    $\hat K$-independent constant, because the $\hat K\to0$ (flat) limit is not a regular point of the reduction but the
+    simple, the second-harmonic operator is no longer resonant, $\bm\psi$ exists, and $b=b(\nu,\hat K)$ is a well-defined
+    number. Thus the corner is not merely the setting in which $b$ happens to be computed: it is what makes the reduced
+    cubic \emph{exist} at all. This sharpens Proposition~\ref{prop:bcount} --- $b$ cannot be a bare-wedge, $\hat
+        K$-independent constant, because the $\hat K\to0$ (flat) limit is not a regular point of the reduction but the
     degenerate one.
 \end{remark}
 
@@ -525,13 +526,13 @@ second discriminant scales as $d_\phi=\det\Grad\bm{\phi}=\mathcal{O}(r^{2(\alpha
 The kinematic relief is dimension-independent, and --- in contrast to the original formulation --- it does not require
 the critical mode to be \emph{exactly} volume-preserving at first order. Earlier drafts \emph{posited}
 $\operatorname{cof}\bm{F}_0:\Grad\bm{\phi}=0$; that exact condition is replaced by the weaker asymptotic smallness
-$D_1=\operatorname{cof}\bm{F}_0:\Grad\bm{\phi}=\mathcal{O}(J_0/\sqrt{|\log J_0|})$ of Assumption~\ref{ass:rot} --- small
-with $J_0$, but not zero. We are careful about its status: at the bifurcation
-$J_0(t_c)>0$ and the second variation \eqref{eq:secondvar} is a regular form, so the smallness is automatic
-(Lemma~\ref{lem:rotreg}); along the near-collapse continuation it is a hypothesis, \emph{not} derivable by isolating
-$f''(J)(\delta J)^2$ (the determinant term in \eqref{eq:secondvar} is in fact more singular and numerically dominant,
-Remark~\ref{rem:rotnum}), and is verified directly on the computed mode (rotation defect $\approx0.08$--$0.16$). Granting
-it, Lemma~\ref{lem:relief} gives the lower bound
+$D_1=\operatorname{cof}\bm{F}_0:\Grad\bm{\phi}=\mathcal{O}(J_0/\sqrt{|\log J_0|})$ of Assumption~\ref{ass:rot} ---
+small with $J_0$, but not zero. We are careful about its status: at the bifurcation $J_0(t_c)>0$ and the second
+variation \eqref{eq:secondvar} is a regular form, so the smallness is automatic (Lemma~\ref{lem:rotreg}); along the
+near-collapse continuation it is a hypothesis, \emph{not} derivable by isolating $f''(J)(\delta J)^2$ (the determinant
+term in \eqref{eq:secondvar} is in fact more singular and numerically dominant, Remark~\ref{rem:rotnum}), and is
+verified directly on the computed mode (rotation defect $\approx0.08$--$0.16$). Granting it, Lemma~\ref{lem:relief}
+gives the lower bound
 \begin{equation}
     \label{eq:reliefd}
     J=J_0+w\,D_1+w^2 d_\phi+\mathcal{O}(w^3) \ \ge\ \tfrac12 J_0+\tfrac12 w^2 d_\phi
@@ -540,20 +541,30 @@ it, Lemma~\ref{lem:relief} gives the lower bound
 with $d_\phi$ the second mixed discriminant of $\bm{F}_0$ and $\Grad\bm{\phi}$ (the second-order coefficient of the
 determinant, $=\det\Grad\bm{\phi}$ for $d=2$). The relief mechanism itself is valid for all $d$ once
 Assumption~\ref{ass:rot} is granted, so it is a kinematic statement in every dimension rather than a special
-two-dimensional accident. The relief floor requires the \emph{orientation} of this second-order coefficient,
+two-dimensional accident. The relief floor requires the \emph{orientation} of this second-order coefficient, but --- and this is the precise
+content of the localisation --- only \emph{where the relief term is actually invoked}, namely on a neighbourhood of the
+collapse locus $\Sigma_{\mathrm{c}}$ (the tube where $\lambda_{\min}\to0$); off $\Sigma_{\mathrm{c}}$, where $J_0$ stays
+bounded below, the sign of $d_\phi$ is immaterial (the finite-$J_0$ case~(i) of Lemma~\ref{lem:relief} absorbs a negative
+$w^2 d_\phi$ into the $J_0$ margin). The localised orientation condition is
 \begin{equation}
     \label{eq:dphisign}
-    d_\phi>0 \qquad\text{(a.e.\ on $B_\rho$, the relief-orienting sign of the mode),}
+    d_\phi>0 \qquad\text{a.e.\ on a neighbourhood of $\Sigma_{\mathrm{c}}$ (the relief-orienting sign of the mode),}
 \end{equation}
 which we record as a genericity property of the critical mode, \emph{not} as a consequence of
-Lemma~\ref{lem:sval} (that lemma concerns the transversal vanishing of $\lambda_{\min}$, a different field). Two
-remarks make \eqref{eq:dphisign} the natural generic condition. First, $d_\phi=\det\Grad\bm\phi$ ($d=2$) is an analytic
-function of the mode, so the locus $\{d_\phi=0\}$ is non-generic (measure zero among modes) and $d_\phi$ has a definite
-sign on each nodal cell; second, $d_\phi>0$ is exactly the statement that the mode \emph{relieves} rather than deepens
-the local volume change at second order --- the sign for which $\tfrac12 w^2 d_\phi$ in \eqref{eq:reliefd} is a floor
-rather than a further compression. A mode with $d_\phi<0$ on a set of positive measure is collapse-\emph{driving} there
-and is excluded by this condition; on the computed critical mode of \S\ref{sec:numerical} the relief orientation is the
-observed one. The remaining points for the concrete model are that the collapse locus $\Sigma_{\mathrm{c}}$ is
+Lemma~\ref{lem:sval} (that lemma concerns the transversal vanishing of $\lambda_{\min}$, a different field). The
+condition is local for a structural reason: $d_\phi=\det\Grad\bm\phi$ ($d=2$) is the Jacobian determinant of an
+\emph{oscillatory} mode, so $d_\phi$ flips sign cell-to-cell and a \emph{global} one-sign claim on $B_\rho$ would be
+generically false --- indeed on the computed mode of \S\ref{sec:numerical} the global positive fraction is only
+${\approx}25$--$36\%$. What the lemma needs, and all it needs, is $d_\phi>0$ where $\lambda_{\min}\to0$: $d_\phi>0$ is
+exactly the statement that the mode \emph{relieves} rather than deepens the local volume change at second order --- the
+sign for which $\tfrac12 w^2 d_\phi$ in \eqref{eq:reliefd} is a floor rather than a further compression. The numerical
+status of \eqref{eq:dphisign} parallels that of the rotation rate \eqref{eq:rotrate}: on the mode-active mid-compression
+region the orientation is the relieving one (the $|\Grad\bm\phi|^2$-weighted positive fraction is ${\approx}70$--$74\%$,
+rising to ${\approx}80\%$ on the next-deepest compression annulus), but the computed base states keep $J_0\gtrsim0.5$ and
+never reach collapse, where in fact $d_\phi$ reverses in a thin surface boundary layer; so the sign \emph{on}
+$\Sigma_{\mathrm{c}}$ ($J_0\to0$) is supported by, but not verified in, the accessible range, and remains --- exactly like
+the rate \eqref{eq:rotrate} --- a genuine hypothesis rather than an observation (Remark~\ref{rem:rotnum}). The remaining
+points for the concrete model are that the collapse locus $\Sigma_{\mathrm{c}}$ is
 generically the
 codimension-one set inside $B_\rho$ along which the relieved branch would still collapse (or, when the severest
 compression sits at the vertex, the point $\Sigma_{\mathrm{c}}=\{0\}$ of codimension two, Remark~\ref{rem:locus}, which
@@ -596,7 +607,7 @@ has bounded coefficients and the spectrum is discrete.
 
 \begin{proof}
     Condition \eqref{eq:bc} supplies the \emph{lower} stretch bound, $\|\bm{F}_0(t)^{-1}\|=\lambda_{\min}^{-1}\le
-    c^{-1}$. The matching \emph{upper} bound is not part of (BC) --- which constrains only $\lambda_{\min}$ --- but follows
+        c^{-1}$. The matching \emph{upper} bound is not part of (BC) --- which constrains only $\lambda_{\min}$ --- but follows
     from the stated continuity hypothesis: $(t,\bm x)\mapsto\bm F_0(t,\bm x)$ is continuous on the compact set
     $[0,t_c]\times\overline{B_\rho}$, so all
     its stretches, and in particular $\det\bm F_0$, are bounded above by a constant $C_0=C_0(t_c)<\infty$ there.
@@ -706,21 +717,21 @@ in concrete, checkable form rather than as opaque spectral postulates:
     \centering
     \begin{tabular}{lll}
         \toprule
-        Hypothesis & Abstract status & Status for the concrete model \\
+        Hypothesis                                                                & Abstract status                                                & Status for the concrete model                                                                                   \\
         \midrule
-        Reg./growth/ellip./mild (Ass.~\ref{ass:reg}--\ref{ass:mild}) & standing assumptions & \textbf{proved} (Lem.~\ref{lem:nh}, \S\ref{sub:tier1}) \\
-        Edge exponent $\alpha$, scenario selection                   & abstract pencil      & \textbf{computed} $\alpha(\nu){\in}(0.6,0.87)$; B by $K{<}0$ (\S\ref{sub:edgeexp}) \\
-        Localisation to model wedge                                  & informal             & \textbf{proved}: blow-up reduction (Prop.~\ref{prop:blowup}) \\
-        Critical load $t_c$ exists (Lem.~\ref{lem:tc}(ii))           & not established      & \textbf{proved} under (SC) (Lem.~\ref{lem:biot}) \\
-        Transversality (M) (Lem.~\ref{lem:transversal})              & input on loading    & \textbf{holds} for monotone compression \\
-        Mode simplicity (Ass.~\ref{ass:bif})                         & assumed             & \textbf{generic} per symmetry sector (\S\ref{sub:symmetry}) \\
-        Quadratic coeff.\ vanishes (Ass.~\ref{ass:subcrit})          & assumed by symmetry & \textbf{proved}: $c_2$ odd in $D_1$, $R$-forced (Lem.~\ref{lem:volcoeff}) \\
-        Mode attainment (Ass.~\ref{ass:bif})                         & assumed             & \textbf{proved} under (BC) (Lem.~\ref{lem:attain}) \\
-        First-order relief / rotation (Ass.~\ref{ass:rot}, Lem.~\ref{lem:relief}) & finite at $t_c$ (Lem.~\ref{lem:rotreg}); near-collapse posited & \emph{numerical}: rotation defect ${\approx}0.08$--$0.16$ (Rem.~\ref{rem:rotnum}) \\
-        Stable-branch non-degeneracy (Ass.~\ref{ass:nd})             & posited             & \emph{physical} (bounded-distortion crease); not computed here (Prop.~\ref{prop:physical}) \\
+        Reg./growth/ellip./mild (Ass.~\ref{ass:reg}--\ref{ass:mild})              & standing assumptions                                           & \textbf{proved} (Lem.~\ref{lem:nh}, \S\ref{sub:tier1})                                                          \\
+        Edge exponent $\alpha$, scenario selection                                & abstract pencil                                                & \textbf{computed} $\alpha(\nu){\in}(0.6,0.87)$; B by $K{<}0$ (\S\ref{sub:edgeexp})                              \\
+        Localisation to model wedge                                               & informal                                                       & \textbf{proved}: blow-up reduction (Prop.~\ref{prop:blowup})                                                    \\
+        Critical load $t_c$ exists (Lem.~\ref{lem:tc}(ii))                        & not established                                                & \textbf{proved} under (SC) (Lem.~\ref{lem:biot})                                                                \\
+        Transversality (M) (Lem.~\ref{lem:transversal})                           & input on loading                                               & \textbf{holds} for monotone compression                                                                         \\
+        Mode simplicity (Ass.~\ref{ass:bif})                                      & assumed                                                        & \textbf{generic} per symmetry sector (\S\ref{sub:symmetry})                                                     \\
+        Quadratic coeff.\ vanishes (Ass.~\ref{ass:subcrit})                       & assumed by symmetry                                            & \textbf{proved}: $c_2$ odd in $D_1$, $R$-forced (Lem.~\ref{lem:volcoeff})                                       \\
+        Mode attainment (Ass.~\ref{ass:bif})                                      & assumed                                                        & \textbf{proved} under (BC) (Lem.~\ref{lem:attain})                                                              \\
+        First-order relief / rotation (Ass.~\ref{ass:rot}, Lem.~\ref{lem:relief}) & finite at $t_c$ (Lem.~\ref{lem:rotreg}); near-collapse posited & \emph{numerical}: rotation defect ${\approx}0.08$--$0.16$ (Rem.~\ref{rem:rotnum})                               \\
+        Stable-branch non-degeneracy (Ass.~\ref{ass:nd})                          & posited                                                        & \emph{physical} (bounded-distortion crease); not computed here (Prop.~\ref{prop:physical})                      \\
         \midrule
-        Buckling precedes collapse (BC) (Ass.~\ref{ass:bc})          & ---                 & \emph{numerical}; $\nu$-only stretch thresholds + monotone load map (Lem.~\ref{lem:bcwedge}, Rem.~\ref{rem:bc}) \\
-        Subcriticality $b<0<d$ (Ass.~\ref{ass:subcrit})              & assumed             & \emph{numerical}, phase diagram $b(\nu,\hat K)$; $\alpha{>}\tfrac12$ (Prop.~\ref{prop:bcount}) \\
+        Buckling precedes collapse (BC) (Ass.~\ref{ass:bc})                       & ---                                                            & \emph{numerical}; $\nu$-only stretch thresholds + monotone load map (Lem.~\ref{lem:bcwedge}, Rem.~\ref{rem:bc}) \\
+        Subcriticality $b<0<d$ (Ass.~\ref{ass:subcrit})                           & assumed                                                        & \emph{numerical}, phase diagram $b(\nu,\hat K)$; $\alpha{>}\tfrac12$ (Prop.~\ref{prop:bcount})                  \\
         \bottomrule
     \end{tabular}
     \caption{Hypothesis ledger for the concrete clamped--free neo-Hookean model. Fixing the material and geometry
@@ -733,27 +744,27 @@ The upshot is that for the clamped--free neo-Hookean corner under compression th
 \S\ref{sec:asymptotics}--\S\ref{sec:iba} is, but for two clearly delimited conditions, a sequence of theorems: the
 material bounds are explicit, the corner is genuinely compressive, the instability is a free-face creasing event with a
 constructed destabilising field, the critical mode is attained and (generically, within its symmetry sector) simple,
-with no quadratic term by symmetry, and the
-kinematic relief that regularises the tangent holds in every dimension once the asymptotic-rotation hypothesis is
-granted. Notably, the spectral postulates of the abstract theory are sharply reduced: attainment is \emph{proved} under
-(BC), and simplicity is reduced to genericity within the symmetry sector carrying the critical mode rather than posited
-outright; the first-order volume preservation (rotation condition) that the relief once posited as an exact identity is
-now the weaker explicit assumption (AR, \S\ref{sub:reliefd}), automatic at the bifurcation (Lemma~\ref{lem:rotreg}) and
-numerically supported toward collapse rather than a barrier-forced theorem. What remains are two \emph{concrete}
-and numerically checkable conditions: that buckling precedes pointwise collapse ($t_c<t_{\mathrm{coll}}$), and that the
-reduced cubic is subcritical ($b<0$). Both are exactly what the creasing problem on a flat surface also leaves to
-computation, and they are inherited here rather than created by the corner.
+with no quadratic term by symmetry, and the kinematic relief that regularises the tangent holds in every dimension once
+the asymptotic-rotation hypothesis is granted. Notably, the spectral postulates of the abstract theory are sharply
+reduced: attainment is \emph{proved} under (BC), and simplicity is reduced to genericity within the symmetry sector
+carrying the critical mode rather than posited outright; the first-order volume preservation (rotation condition) that
+the relief once posited as an exact identity is now the weaker explicit assumption (AR, \S\ref{sub:reliefd}), automatic
+at the bifurcation (Lemma~\ref{lem:rotreg}) and numerically supported toward collapse rather than a barrier-forced
+theorem. What remains are two \emph{concrete} and numerically checkable conditions: that buckling precedes pointwise
+collapse ($t_c<t_{\mathrm{coll}}$), and that the reduced cubic is subcritical ($b<0$). Both are exactly what the
+creasing problem on a flat surface also leaves to computation, and they are inherited here rather than created by the
+corner.
 
 Finally, the blow-up reduction of \S\ref{sub:blowup} sharpens what ``numerical'' means for these two residues. By
 Proposition~\ref{prop:blowup} the singularity is localised to the model wedge $\mathcal{L}_W$, all of whose data are
-functions of $(\nu,\hat K)$ alone; the finite body (H) or (C) enters only through the single scalar $\hat K$ and through
-corrections $\mathcal{O}(\lambda^{g})$. The two residual conditions then occupy opposite sides of a clean homogeneity
-dichotomy (Remark~\ref{rem:sifparam}): condition (BC) compares two \emph{scale-invariant stretch thresholds}, which are
-one-parameter ($\nu$) wedge data on $\mathcal{L}_W$ (the conversion to a load ordering using only the monotone
-load-to-stretch map, Lemma~\ref{lem:bcwedge}), whereas the cubic sign is an
-\emph{integral} with $\alpha>\tfrac12$, hence tip-convergent but not tip-dominated, and remains a genuine two-parameter
-functional $b(\nu,\hat K)$ (Proposition~\ref{prop:bcount}). In both cases the verification is thus a computation on a
-\emph{universal} object --- a curve or a phase diagram of the corner singularity itself --- rather than a spot check on a
-particular body, and in three dimensions it is the same two-dimensional object, the leading edge data being carried by
-the zero along-edge wavenumber (Proposition~\ref{prop:blowup}(iii)). This is the precise content of the heuristic that
-the singularity ``does not depend on what happens elsewhere.''
+functions of $(\nu,\hat K)$ alone; the finite body (H) or (C) enters only through the single scalar $\hat K$ and
+through corrections $\mathcal{O}(\lambda^{g})$. The two residual conditions then occupy opposite sides of a clean
+homogeneity dichotomy (Remark~\ref{rem:sifparam}): condition (BC) compares two \emph{scale-invariant stretch
+    thresholds}, which are one-parameter ($\nu$) wedge data on $\mathcal{L}_W$ (the conversion to a load ordering using
+only the monotone load-to-stretch map, Lemma~\ref{lem:bcwedge}), whereas the cubic sign is an \emph{integral} with
+$\alpha>\tfrac12$, hence tip-convergent but not tip-dominated, and remains a genuine two-parameter functional
+$b(\nu,\hat K)$ (Proposition~\ref{prop:bcount}). In both cases the verification is thus a computation on a
+\emph{universal} object --- a curve or a phase diagram of the corner singularity itself --- rather than a spot check on
+a particular body, and in three dimensions it is the same two-dimensional object, the leading edge data being carried
+by the zero along-edge wavenumber (Proposition~\ref{prop:blowup}(iii)). This is the precise content of the heuristic
+that the singularity ``does not depend on what happens elsewhere.''
