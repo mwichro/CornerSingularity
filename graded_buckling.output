@@ -1,0 +1,107 @@
+========================================================================
+Stage 3: consistent weak graded-substrate Landau coefficient b(nu,Khat)
+========================================================================
+
+(A) Homogeneous (Khat=0) cell at l1=lambda_star: operator already
+    indefinite (min eig<0), no discrete critical mode -- degenerate
+   Lam      nu  lambda_star     min_eig(Q)
+/home/mwichro/Documents/CornerSingularity/creasing_buckling.py:38: RuntimeWarning: divide by zero encountered in divide
+  eta = Lmap * (1.0 + xi) / (1.0 - xi)
+/home/mwichro/Documents/CornerSingularity/graded_buckling.py:109: RuntimeWarning: divide by zero encountered in divide
+  dYdxi = -2.0 * Lmap / (1.0 - xi) ** 2
+   1.0  0.2500     0.514225     -2.509e-01
+   5.0  0.4167     0.536165     -2.959e-01
+
+(B) Degeneracy lift -- spectral gap above the critical (localised) mode
+    monotone grading -> discrete kernel (eig~0) isolated by an O(1) gap
+   Khat=0.05  l1bar= 0.6177  kernel_eig=+1.41e-07  gap=4.259e-02
+   Khat=0.10  l1bar= 0.6288  kernel_eig=+1.03e-07  gap=4.356e-02
+   Khat=0.20  l1bar= 0.6688  kernel_eig=+2.13e-07  gap=4.705e-02
+   Khat=0.30  l1bar= 0.7284  kernel_eig=-5.54e-08  gap=4.930e-02
+
+(C) Convergence of the sign diagnostic ratio r = b_feedback/b_E4
+    (the Stage-2 failure mode is now consistent; b<0 iff r<-1)
+    Lam=5.0, nu=0.417, Khat=0.15
+    [+ Tier-1 diagnostics: cond(B) of the LS solve, the quadratic c2,
+     and the scale-invariant pitchfork measure c2^4/b^3 (~0 => pitchfork)]
+  NX    N    ratio r  sign(b)        gap    cond(B)          c2    c2^4/b^3
+  10   24    -2.0917      b<0   5.83e-02   8.72e+06  -4.229e-02   -7.27e-04
+  12   28    -2.4515      b<0   4.53e-02   3.67e+07   1.034e-02   -2.50e-05
+  14   32    -2.4255      b<0   3.51e-02   1.38e+08   2.055e-03   -5.43e-07
+  16   36    -2.2123      b<0   2.81e-02   4.36e+08  -1.256e-04   -1.11e-10
+
+(D) Sign ratio r = b_feedback/b_E4 over the rectangle (b<0 iff r<-1)
+  nu \ Khat       0.10      0.20      0.30
+     0.250      -3.187    -2.431    -2.444
+     0.333      -2.704    -2.135    -2.372
+     0.417      -2.174    -1.861    -2.185
+     0.455      -1.821    -1.649    -1.937
+
+  sign(b): uniform -> subcritical (b<0) everywhere
+
+(E) Rotation condition on the critical mode (finding #4):
+    rho_rot=||dJ||/||grad phi||  (small => mode ~ volume-preserving);
+    coen=<phi,L phi> finite at the bifurcation; |T_det/T_vol2|<~1 means
+    the 'omitted' 2f'det term does NOT dominate the kept f''(dJ)^2 term.
+     nu   Khat    J0min   rho_rot       coen  T_det/T_vol2
+  0.250   0.10   0.7151    0.1599 -9.148e-08       -6.9796
+  0.250   0.20   0.6885    0.1601 -5.983e-08       -6.5838
+  0.250   0.30   0.6666    0.1608  1.003e-08       -6.2420
+  0.417   0.10   0.8717    0.0815  1.593e-08      -10.6247
+  0.417   0.20   0.8557    0.0818  3.067e-08      -10.1507
+  0.417   0.30   0.8416    0.0827 -8.008e-09       -9.6470
+
+(F) Asymptotic-rate probe (lem:rot), on a GENUINE critical mode at each
+    depth (sweep Khat up, re-solve critical_l1; kern_eig~0 confirms kernel).
+    Lam=5.0, nu=0.417
+  Khat      l1c    J0min   kern_eig   rho_rot      rate  Tdet/Tvol2
+  0.10   0.6288   0.8717   +7.1e-08    0.0815    0.0346    -10.6247
+  0.20   0.6688   0.8557   +8.1e-08    0.0818    0.0377    -10.1507
+  0.30   0.7284   0.8416   -1.4e-07    0.0827    0.0408     -9.6470
+  0.45   0.8563   0.8176   +7.4e-08    0.0852    0.0467     -8.7255
+  0.60   (no critical l1 in window)
+
+(G) Convergence / isolation study  (Lam=5, nu=0.417, Khat=0.15)
+   refine N at fixed Lx=6:
+  NX    N        gap     d(gap)    ratio r      d(r)    cond(B)
+  10   24  5.827e-02        nan    -2.0917       nan   8.72e+06
+  13   30  3.973e-02  -1.85e-02    -2.4856 -3.94e-01   7.28e+07
+  16   36  2.810e-02  -1.16e-02    -2.2123  2.73e-01   4.36e+08
+   vary domain half-width Lx (NX=14,N=32):
+   Lx        gap    ratio r    cond(B)
+  4.0  3.997e-02    -2.4268   6.29e+08
+  6.0  3.513e-02    -2.4255   1.38e+08
+  8.0  3.228e-02    -2.4254   4.90e+07
+ 10.0  3.034e-02    -2.4254   3.14e+07
+   vary depth map Lmap (NX=14,N=32,Lx=6):
+ Lmap        gap    ratio r    cond(B)
+  3.0  3.228e-02    -2.4254   1.10e+08
+  4.0  3.513e-02    -2.4255   1.38e+08
+  6.0  3.996e-02    -2.4267   1.88e+08
+  8.0  4.406e-02    -2.4310   2.38e+08
+
+(H) Quadratic coefficient c2 across (nu,Khat) -- is it a pitchfork?
+     nu   Khat           c2            b    c2^4/b^3  dphi>0 %
+  0.250   0.10   2.3956e-03  -3.6591e-02   -6.72e-07      35.8
+  0.250   0.20   1.4437e-02  -7.3554e-02   -1.09e-04      29.2
+  0.250   0.30  -2.5863e-02  -5.5363e-02   -2.64e-03      25.7
+  0.417   0.10  -3.2434e-03  -4.9168e-02   -9.31e-07      31.8
+  0.417   0.20   1.9079e-02  -8.6049e-02   -2.08e-04      25.2
+  0.417   0.30  -3.1700e-02  -7.4862e-02   -2.41e-03      23.9
+
+(I) Grading-profile robustness  +  two-mode deflation cross-check
+     nu   Khat  r(linear)   r(power)      b(lin)   b_deflate2
+  0.250   0.15    -3.8907    -2.2285  -6.080e-02   -5.960e-02   (alpha=0.745)
+  0.250   0.25    -3.3137    -2.8338  -6.847e-02   -5.344e-02   (alpha=0.745)
+  0.417   0.15    -2.4515    -1.5264  -7.708e-02   -7.457e-02   (alpha=0.640)
+  0.417   0.25    -2.1069    -1.6481  -7.949e-02   -6.505e-02   (alpha=0.640)
+
+(J) Localized relief orientation:  frac(d_phi>0) where it is USED
+    (global is the wrong statistic; proof needs it only near collapse)
+     nu   Khat   global   J0<=10%   J0<=25%   J0<=50%  |gphi|^2wt   1/J0 wt
+  0.250   0.10    35.8%      0.2%     80.2%     92.6%       74.3%     67.2%
+  0.250   0.20    29.2%      0.0%     80.8%     47.7%       74.3%     29.7%
+  0.250   0.30    25.7%      0.1%     81.0%     28.0%       73.3%     18.4%
+  0.417   0.10    31.8%      0.0%     80.6%     69.8%       69.3%     40.4%
+  0.417   0.20    25.2%      0.0%     80.9%     44.6%       69.3%     26.4%
+  0.417   0.30    23.9%      0.0%     81.1%     28.0%       67.4%     18.1%

@@ -305,6 +305,31 @@ class GradedCell:
         dphi_pos_frac = float(np.mean(dphi > 0))
         dphi_min, dphi_max = float(dphi.min()), float(dphi.max())
 
+        # --- LOCALIZED relief orientation (resolution #1) ---------------------
+        # The GLOBAL fraction dphi_pos_frac is the wrong statistic: for an
+        # oscillatory buckling mode det(grad phi) flips cell-to-cell, so
+        # "d_phi>0 a.e. on B_rho" is generically false.  The proof (lem:relief,
+        # thm:reg) only invokes d_phi>0 where lambda_min -> 0, i.e. on the
+        # CRITICAL-COMPRESSION set (smallest J0 / where the mode concentrates).
+        # We report the orientation fraction RESTRICTED/WEIGHTED to that set;
+        # if these are ~1, eq:dphisign holds exactly where it is used.
+        J0_nd = self._tile(mat['J0'])
+        gphi2 = np.sum(gphi ** 2, axis=0)                 # |grad phi|^2 density
+        w_ = self.omega
+        # (a) restrict to deepest-compression nodes (smallest-J0 quantiles)
+        relief_J0 = {}
+        for qv in (0.10, 0.25, 0.50):
+            thr = np.quantile(J0_nd, qv)
+            sel = J0_nd <= thr
+            relief_J0[qv] = float(np.sum((dphi > 0)[sel] * w_[sel])
+                                  / np.sum(w_[sel]))
+        # (b) mode-concentration weighted (where buckling actually lives)
+        relief_modewt = float(np.sum((dphi > 0) * gphi2 * w_)
+                              / np.sum(gphi2 * w_))
+        # (c) collapse-severity weighted (weight ~ 1/J0: where relief matters)
+        sev = w_ / J0_nd
+        relief_sevwt = float(np.sum((dphi > 0) * sev) / np.sum(sev))
+
         # second-order source Sfield (4, NX*n), all real
         scal = fpp_nd * dphi + 0.5 * fppp_nd * p_ ** 2
         Sfield = fpp_nd * p_[None, :] * Mgphi + scal[None, :] * cv_nd
@@ -403,6 +428,9 @@ class GradedCell:
                     ratio=ratio, kernel_eig=ev[0], ev1=ev[1], gap=gap,
                     c2=c2, pf_inv=pf_inv, cond_B=cond_B, b_def2=b_def2,
                     dphi_pos_frac=dphi_pos_frac, dphi_min=dphi_min, dphi_max=dphi_max,
+                    relief_J0_10=relief_J0[0.10], relief_J0_25=relief_J0[0.25],
+                    relief_J0_50=relief_J0[0.50], relief_modewt=relief_modewt,
+                    relief_sevwt=relief_sevwt,
                     rho_rot=rho_rot, coen=coen, T_shear=T_shear, T_vol2=T_vol2,
                     T_det=T_det, det_ratio=det_ratio, J0min=J0min, rate=rate)
 
@@ -613,3 +641,28 @@ if __name__ == "__main__":
             rpr = rp['ratio'] if rp else np.nan
             print(f"{nu_of(Lam,mu):7.3f} {Khat:6.2f} {rl['ratio']:10.4f} {rpr:10.4f}"
                   f" {rl['b']:11.3e} {rl['b_def2']:12.3e}   (alpha={a:.3f})")
+
+    # (J) LOCALIZED relief orientation (resolution #1 of the d_phi>0 finding).
+    #     The GLOBAL fraction (dphi>0 %) is small (~20-40%) only because det(grad
+    #     phi) oscillates for a wavy mode -- the wrong statistic.  lem:relief/
+    #     thm:reg invoke d_phi>0 ONLY where lambda_min->0, i.e. on the deepest-
+    #     compression set / where the mode concentrates.  If the localized
+    #     fractions below are ~1, eq:dphisign holds exactly where it is used and
+    #     the paper only needs to LOCALIZE the claim ("a.e. near Sigma_c"), not
+    #     drop it.  Columns: global %, then restricted to smallest-J0 10/25/50%
+    #     quantiles, then |grad phi|^2-weighted and (1/J0)-severity-weighted.
+    print("\n(J) Localized relief orientation:  frac(d_phi>0) where it is USED")
+    print("    (global is the wrong statistic; proof needs it only near collapse)")
+    print(f"{'nu':>7} {'Khat':>6} {'global':>8} {'J0<=10%':>9} {'J0<=25%':>9}"
+          f" {'J0<=50%':>9} {'|gphi|^2wt':>11} {'1/J0 wt':>9}")
+    for Lam in [1.0, 5.0]:
+        cell = GradedCell(mu, Lam, NX=12, N=28)
+        for Khat in [0.10, 0.20, 0.30]:
+            lc = cell.critical_l1(Khat)
+            if not np.isfinite(lc):
+                continue
+            r = cell.landau_b(lc, Khat)
+            print(f"{nu_of(Lam,mu):7.3f} {Khat:6.2f} {100*r['dphi_pos_frac']:7.1f}%"
+                  f" {100*r['relief_J0_10']:8.1f}% {100*r['relief_J0_25']:8.1f}%"
+                  f" {100*r['relief_J0_50']:8.1f}% {100*r['relief_modewt']:10.1f}%"
+                  f" {100*r['relief_sevwt']:8.1f}%")
