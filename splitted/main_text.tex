@@ -927,7 +927,10 @@ verified numerically (Remark~\ref{rem:bsign}) rather than asserted from the crea
     (Proposition~\ref{prop:bcount}, \S\ref{sub:bcount}): the clamped--free edge exponent satisfies $\alpha>\tfrac12$, so
     the cubic integral is convergent at the tip but \emph{not} dominated by it, leaving an $\mathcal{O}(1)$ dependence on
     the normalised stress-intensity $\hat K$; the sign of $b$ is therefore a function $b(\nu,\hat K)$ on the model wedge
-    rather than an inheritance from flat creasing. We do not sign $b_\psi,d_\psi$ analytically; they are evaluated
+    rather than an inheritance from flat creasing. The \emph{direction} of the cubic feedback can in fact be signed
+    analytically: $b_\psi\le0$ always, by the variational structure of the first crossing
+    (Lemma~\ref{lem:fbsign} below), so the genuinely open content is the magnitude comparison
+    $|b_\psi|>b_{\mathrm{dir}}$; the quintic feedback $d_\psi$ we do not sign. The magnitude is evaluated
     numerically from the eigenmode and reduced operator of the two-dimensional model wedge of Proposition~\ref{prop:blowup}
     as a function of $(\nu,\hat K)$, which is the proper arbiter of a geometry-dependent sign. Were the verdict $b>0$ instead, the bifurcation would be supercritical and \emph{more}
     benign --- the physical branch smooth through $t_c$ with no snap at onset --- and the regularisation conclusions of
@@ -966,6 +969,115 @@ verified numerically (Remark~\ref{rem:bsign}) rather than asserted from the crea
     vanishing by symmetry), and the inhomogeneity $\epsilon\eta$ from $-\epsilon\langle\bm{p},\bm{\phi}\rangle$. Because
     $b<0$, the cubic alone does not saturate the amplitude, which is why the quintic $dw^5$ ($d>0$) is retained. \qed
 \end{proof}
+
+\subsection{The sign of the orthogonal-mode feedback is not free}
+\label{sub:fbsign}
+
+Assumption~\ref{ass:subcrit} bundles two logically distinct statements about the cubic: that the Lyapunov--Schmidt
+feedback $b_\psi$ \emph{opposes} the frozen part ($b_\psi\le0$, against $b_{\mathrm{dir}}>0$ of
+Lemma~\ref{lem:volcoeff}(ii)), and that it does so with sufficient \emph{magnitude}, $|b_\psi|>b_{\mathrm{dir}}$. The
+first is not a hypothesis at all: at the first crossing it is a theorem, forced by the variational structure alone. We
+record it here, both because it halves the open content of Assumption~\ref{ass:subcrit} and because it converts the
+numerical verification of \S\ref{sec:numerical} from a sign determination into a magnitude comparison, with a
+certification principle (Corollary~\ref{cor:cert}) that requires no inversion of the reduced operator.
+
+Because the load terms in \eqref{eq:Gdef} are linear in $\bm{u}$, $G$ is a gradient,
+$G(\bm{u},t,\epsilon)=D\mathcal{E}_t(\bm{u})-\epsilon\,\bm{p}$ with $\mathcal{E}_t$ the total energy at load $t$; write
+$E_k:=D^k\mathcal{E}_{t_c}\big(\bm{u}_0(t_c)\big)$ for the symmetric $k$-th variation at the critical point, so that
+$\mathcal{L}_c=E_2$, $\partial^2_{\bm{u}}G=E_3$ and $\partial^3_{\bm{u}}G=E_4$ there.
+
+\begin{lemma}[The feedback is never adverse]
+    \label{lem:fbsign}
+    Let $t_c$ be the first crossing of Lemma~\ref{lem:tc} and let Assumption~\ref{ass:bif} hold, with $\delta>0$ the
+    spectral gap of $\mathcal{L}_c$ above its one-dimensional kernel $\operatorname{span}\{\bm{\phi}\}$. Define
+    $R\in(V^\perp)'$ by
+    \begin{equation}
+        \label{eq:Rdef}
+        \langle R,\bm{v}\rangle := \tfrac12\,E_3[\bm{\phi},\bm{\phi},\bm{v}], \qquad \bm{v}\in V^\perp .
+    \end{equation}
+    Then:
+    \begin{enumerate}
+        \item[\textup{(i)}] $\mathcal{L}_c\ge0$ on $V$ and $\mathcal{L}_c\ge\delta>0$ on $V^\perp$, so
+              $(Q\mathcal{L}_cQ)^{-1}$ is bounded on $V^\perp$ and the second-order Lyapunov--Schmidt field of
+              Proposition~\ref{prop:LS} is $\bm{\psi}_2=-(Q\mathcal{L}_cQ)^{-1}R$, i.e.
+              $\bm{\psi}=w^2\bm{\psi}_2+\mathcal{O}(w^3+\epsilon)$ at $t=t_c$.
+        \item[\textup{(ii)}] The reduced cubic of Assumption~\ref{ass:subcrit} decomposes as
+              $b=b_{\mathrm{dir}}+b_\psi$ with $b_{\mathrm{dir}}=\tfrac16E_4[\bm{\phi},\bm{\phi},\bm{\phi},\bm{\phi}]$
+              (the frozen quartic of Lemma~\ref{lem:volcoeff}) and
+              \begin{equation}
+                  \label{eq:fbsign}
+                  b_\psi \;=\; E_3[\bm{\phi},\bm{\phi},\bm{\psi}_2]
+                  \;=\; -\,2\,\big\langle R,\ (Q\mathcal{L}_cQ)^{-1}R\big\rangle \;\le\; 0,
+              \end{equation}
+              with equality if and only if $R=0$. In particular $b\le b_{\mathrm{dir}}$ always, and the
+              normalisation-invariant ratio $r:=b_\psi/b_{\mathrm{dir}}$ is nonpositive for \emph{every} geometry,
+              every $(\nu,\hat K)$.
+        \item[\textup{(iii)}] Variationally,
+              \begin{equation}
+                  \label{eq:fbvar}
+                  b_\psi \;=\; -\,2\,\sup_{\bm{v}\in V^\perp,\ \bm{v}\neq0}
+                  \frac{\langle R,\bm{v}\rangle^2}{\langle\bm{v},\mathcal{L}_c\bm{v}\rangle}
+                  \;=\; -\,\sup_{\bm{v}\in V^\perp,\ \bm{v}\neq0}
+                  \frac{E_3[\bm{\phi},\bm{\phi},\bm{v}]^2}{2\,\langle\bm{v},\mathcal{L}_c\bm{v}\rangle}\,.
+              \end{equation}
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    (i) $\mu_1(t_c)=0$ is by definition the infimum of the Rayleigh quotient of $\mathcal{L}_c$, so
+    $\mathcal{L}_c\ge0$; the kernel is $\operatorname{span}\{\bm{\phi}\}$ and the remaining spectrum is bounded below
+    by $\delta$ (Assumption~\ref{ass:bif}), giving $\mathcal{L}_c\ge\delta$ on $V^\perp$. The range equation of
+    Proposition~\ref{prop:LS} at order $w^2$ (at $\epsilon=0$, $t=t_c$) reads
+    $Q\mathcal{L}_c\bm{\psi}_2+\tfrac12\,Q\,E_3[\bm{\phi},\bm{\phi},\cdot\,]=0$, which is
+    $\bm{\psi}_2=-(Q\mathcal{L}_cQ)^{-1}R$.
+
+    (ii) Substituting $\bm{\psi}=w^2\bm{\psi}_2+\dots$ into the kernel equation and collecting the order $w^3$
+    (equivalently: Taylor-expanding the reduced energy $w\mapsto\mathcal{E}_{t_c}(\bm{u}_0+w\bm{\phi}+\bm{\psi}(w))$
+    to fourth order and differentiating) gives
+    $b=\tfrac16E_4[\bm{\phi}^{\otimes4}]+E_3[\bm{\phi},\bm{\phi},\bm{\psi}_2]$; the cross term
+    $\langle\mathcal{L}_c\bm{\psi}_2,\bm{\phi}\rangle$ vanishes because $\mathcal{L}_c$ is symmetric and
+    $\mathcal{L}_c\bm{\phi}=0$. By \eqref{eq:Rdef} and (i),
+    $E_3[\bm{\phi},\bm{\phi},\bm{\psi}_2]=2\langle R,\bm{\psi}_2\rangle
+        =-2\langle R,(Q\mathcal{L}_cQ)^{-1}R\rangle\le0$, since $(Q\mathcal{L}_cQ)^{-1}$ is a positive operator on
+    $V^\perp$; equality forces $R=0$. Both $b_{\mathrm{dir}}$ and $b_\psi$ scale as the fourth power of the mode
+    amplitude, so $r$ is normalisation-invariant.
+
+    (iii) For a self-adjoint $A\ge\delta>0$ one has $\langle R,A^{-1}R\rangle=\sup_{\bm{v}\neq0}\langle
+        R,\bm{v}\rangle^2/\langle\bm{v},A\bm{v}\rangle$ (Cauchy--Schwarz in the $A$-inner product, with equality at
+    $\bm{v}=A^{-1}R$). \qed
+\end{proof}
+
+\begin{corollary}[Variational certification of subcriticality]
+    \label{cor:cert}
+    For every $\bm{v}\in V^\perp$ with $\langle\bm{v},\mathcal{L}_c\bm{v}\rangle>0$,
+    \begin{equation}
+        \label{eq:cert}
+        b \;\le\; b_{\mathrm{dir}} \;-\; \frac{E_3[\bm{\phi},\bm{\phi},\bm{v}]^2}
+        {2\,\langle\bm{v},\mathcal{L}_c\bm{v}\rangle}\,.
+    \end{equation}
+    Hence the subcritical sign $b<0$ is \emph{certified} by a single explicit test field $\bm{v}$ satisfying
+    \begin{equation}
+        \label{eq:certcrit}
+        E_3[\bm{\phi},\bm{\phi},\bm{v}]^2 \;>\; 2\,b_{\mathrm{dir}}\,\langle\bm{v},\mathcal{L}_c\bm{v}\rangle .
+    \end{equation}
+    The criterion is invariant under independent rescaling of $\bm{\phi}$ and of $\bm{v}$, and its evaluation requires
+    one trilinear integral and one Rayleigh quotient --- \emph{no} solve with the reduced operator, which becomes
+    near-singular as the flat degeneracy of Remark~\ref{rem:flatdegenerate} is approached.
+\end{corollary}
+
+\begin{remark}[What remains open in Assumption~\ref{ass:subcrit}]
+    \label{rem:fbstatus}
+    Lemma~\ref{lem:fbsign} settles the direction of the competition identified in Remark~\ref{rem:bsign}: the frozen
+    term is provably adverse ($b_{\mathrm{dir}}>0$, Lemma~\ref{lem:volcoeff}) and the feedback provably favourable
+    ($b_\psi\le0$), for every geometry. The open content of the cubic clause of Assumption~\ref{ass:subcrit} is
+    therefore only the \emph{magnitude} inequality $|b_\psi|>b_{\mathrm{dir}}$, i.e.\ $r<-1$: a numerical table of $r$
+    tests this single scalar and nothing else, while Corollary~\ref{cor:cert} upgrades any sufficiently good explicit
+    $\bm{v}$ to a certificate. Two caveats. First, the argument is tied to the first crossing: along the unstable
+    continuation past $t_c$ the operator is indefinite and \eqref{eq:fbsign} does not apply there (nor is it needed:
+    $b$ is a datum of the critical point). Second, the same argument does \emph{not} sign the quintic feedback
+    $d_\psi$ --- the fourth-order Lyapunov--Schmidt correction mixes terms of both signs --- so the saturation clause
+    $d>0$ of Assumption~\ref{ass:subcrit} is untouched.
+\end{remark}
 
 \subsection{Subcritical branch structure and imperfection sensitivity}
 \label{sub:subcrit}

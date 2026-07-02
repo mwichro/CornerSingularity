@@ -520,6 +520,61 @@ discriminant scales as $d_\phi=\det\Grad\bm{\phi}=\mathcal{O}(r^{2(\alpha-1)})$ 
     degenerate one.
 \end{remark}
 
+The degeneracy just described is not only an obstruction; combined with the feedback-sign
+Lemma~\ref{lem:fbsign}, it is a \emph{mechanism}. Near the flat limit the second harmonic is nearly neutral, so the
+denominator of the certification criterion \eqref{eq:certcrit} is nearly zero --- and the feedback, which is exactly
+the supremum \eqref{eq:fbvar}, is correspondingly large. This can be turned into a theorem for the small-$\hat K$
+regime.
+
+\begin{proposition}[Certified subcriticality at the edge of the flat degeneracy]
+    \label{prop:certdeg}
+    Let $\{(\bm{\phi}_{\hat K},\mathcal{L}_{c,\hat K})\}_{\hat K>0}$ be the family of critical states of the graded
+    reduction (Proposition~\ref{prop:bcount}(ii)), and for each $\hat K$ let $\bm{v}_{\hat K}\in V^\perp$ be an
+    admissible comparison field --- the natural candidate is the doubled-wavenumber surface harmonic, which by
+    Remark~\ref{rem:flatdegenerate} goes neutral in the flat limit. With $E_3$ and $b_{\mathrm{dir}}$ as in
+    Lemma~\ref{lem:fbsign}, set the (scaling-invariant in both $\bm\phi$ and $\bm v$) certification ratio
+    \begin{equation}
+        \label{eq:gammadef}
+        \Gamma(\hat K) := \frac{E_3[\bm{\phi}_{\hat K},\bm{\phi}_{\hat K},\bm{v}_{\hat K}]^2}
+        {2\,b_{\mathrm{dir}}(\hat K)\,\langle\bm{v}_{\hat K},\mathcal{L}_{c,\hat K}\bm{v}_{\hat K}\rangle}\ ,
+    \end{equation}
+    so that, by Corollary~\ref{cor:cert}, $b\le b_{\mathrm{dir}}\,(1-\Gamma)$ and $b(\nu,\hat K)<0$ whenever
+    $\Gamma(\hat K)>1$. Suppose that, as $\hat K\to0^+$,
+    \begin{enumerate}
+        \item[\textup{(a)}] the comparison field goes neutral,
+              $\langle\bm{v},\mathcal{L}_c\bm{v}\rangle/\|\bm{v}\|_V^2\to0$ (the flat resonance of
+              Remark~\ref{rem:flatdegenerate}); and
+        \item[\textup{(b)}] the second-harmonic coupling does not degenerate along with it:
+              $E_3[\bm{\phi},\bm{\phi},\bm{v}]^2/\big(b_{\mathrm{dir}}\,\|\bm{v}\|_V^2\big)\ \ge\ c_0>0$ uniformly in
+              $\hat K$.
+    \end{enumerate}
+    Then $\Gamma(\hat K)\to\infty$; in particular there is $\hat K_0>0$ such that $b(\nu,\hat K)<0$ for all
+    $\hat K\in(0,\hat K_0)$, with diverging margin, $b_\psi/b_{\mathrm{dir}}\le-\Gamma\to-\infty$.
+\end{proposition}
+
+\begin{proof}
+    Immediate from Corollary~\ref{cor:cert}:
+    $\Gamma=\big[E_3^2/(b_{\mathrm{dir}}\|\bm{v}\|_V^2)\big]\cdot
+        \big[2\langle\bm{v},\mathcal{L}_c\bm{v}\rangle/\|\bm{v}\|_V^2\big]^{-1}
+        \ge \tfrac12\,c_0\,\big[\langle\bm{v},\mathcal{L}_c\bm{v}\rangle/\|\bm{v}\|_V^2\big]^{-1}\to\infty$
+    by (a)--(b), and $b\le b_{\mathrm{dir}}(1-\Gamma)$ with $b_{\mathrm{dir}}>0$. \qed
+\end{proof}
+
+\begin{remark}[Reading, and the computational route it recommends]
+    \label{rem:certnum}
+    Proposition~\ref{prop:certdeg} replaces the loose analogy ``flat creasing is subcritical, so the corner should
+    be'' by a statement internal to the corner: the closer the graded state sits to the degenerate flat limit, the
+    more violently subcritical it is, \emph{provided} the quadratic self-coupling of the critical mode into the second
+    harmonic survives the limit --- hypothesis (b), which is precisely the non-vanishing of the quantity whose
+    resonance makes the flat $b$ undefined (Remark~\ref{rem:flatdegenerate}). The proposition covers the
+    small-$\hat K$ regime only; on the finite $(\nu,\hat K)$ rectangle the criterion $\Gamma>1$ must still be checked.
+    But it also dictates \emph{how} to check it: $\Gamma$ is assembled from one trilinear integral and one Rayleigh
+    quotient, with no bordered solve, so it stays well-conditioned exactly where the direct Lyapunov--Schmidt assembly
+    degrades (the near-resonant regime in which the condition number of the reduced solve diverges). We therefore
+    regard \eqref{eq:certcrit}, evaluated on the computed pair $(\bm{\phi},\bm{v})$, as the proper numerical arbiter
+    of the cubic clause of Assumption~\ref{ass:subcrit}, in preference to a converged value of $b$ itself.
+\end{remark}
+
 \subsection{Kinematic relief}
 \label{sub:reliefd}
 
@@ -552,24 +607,123 @@ $w^2 d_\phi$ into the $J_0$ margin). The localised orientation condition is
 \end{equation}
 which we record as a genericity property of the critical mode, \emph{not} as a consequence of
 Lemma~\ref{lem:sval} (that lemma concerns the transversal vanishing of $\lambda_{\min}$, a different field). The
-condition is local for a structural reason: $d_\phi=\det\Grad\bm\phi$ ($d=2$) is the Jacobian determinant of an
-\emph{oscillatory} mode, so $d_\phi$ flips sign cell-to-cell and a \emph{global} one-sign claim on $B_\rho$ would be
-generically false --- indeed on the computed mode of \S\ref{sec:numerical} the global positive fraction is only
-${\approx}25$--$36\%$. What the lemma needs, and all it needs, is $d_\phi>0$ where $\lambda_{\min}\to0$: $d_\phi>0$ is
-exactly the statement that the mode \emph{relieves} rather than deepens the local volume change at second order --- the
-sign for which $\tfrac12 w^2 d_\phi$ in \eqref{eq:reliefd} is a floor rather than a further compression. The numerical
-status of \eqref{eq:dphisign} parallels that of the rotation rate \eqref{eq:rotrate}: on the mode-active mid-compression
-region the orientation is the relieving one (the $|\Grad\bm\phi|^2$-weighted positive fraction is ${\approx}70$--$74\%$,
-rising to ${\approx}80\%$ on the next-deepest compression annulus), but the computed base states keep $J_0\gtrsim0.5$ and
-never reach collapse, where in fact $d_\phi$ reverses in a thin surface boundary layer; so the sign \emph{on}
-$\Sigma_{\mathrm{c}}$ ($J_0\to0$) is supported by, but not verified in, the accessible range, and remains --- exactly like
-the rate \eqref{eq:rotrate} --- a genuine hypothesis rather than an observation (Remark~\ref{rem:rotnum}). The remaining
+condition is local for a structural reason made exact by the planar identity, valid pointwise for any $\Grad\bm\phi$,
+\begin{equation}
+    \label{eq:dphisplit}
+    d_\phi=\det\Grad\bm\phi=\det\bm E+\omega^2,\qquad
+    \bm E=\tfrac12(\Grad\bm\phi+\Grad\bm\phi^{T}),\quad \omega=\tfrac12(\partial_1\phi_2-\partial_2\phi_1),
+\end{equation}
+(the strain/spin split; the cross term vanishes because $\bm E$ is symmetric). Thus $d_\phi>0\iff\omega^2>|\det\bm E|$:
+the relief orientation is \emph{exactly} the statement that the local spin dominates the strain determinant --- the same
+rotation-dominance that underlies the asymptotic-rotation mechanism \eqref{eq:rotrate}, and the reason the relief is
+second order. Two consequences follow. First, $d_\phi$ is the Jacobian determinant of an \emph{oscillatory} mode, so it
+flips sign cell-to-cell and a \emph{global} one-sign claim on $B_\rho$ would be generically false --- on the computed
+mode of \S\ref{sec:numerical} the global positive fraction is only ${\approx}25$--$36\%$; what the lemma needs, and all
+it needs, is $d_\phi>0$ where $\lambda_{\min}\to0$. Second, \eqref{eq:dphisplit} makes the numerical test sharp, and we
+report its outcome honestly. Where the mode concentrates the spin dominates by ${\sim}2.4{:}1$ ($d_\phi>0$ on the
+$|\Grad\bm\phi|^2$-weighted measure at ${\approx}70$--$74\%$, rising to ${\approx}80\%$ on the sub-surface annulus
+carrying most modal energy), so on the bulk of the active mode the orientation is the relieving one. But the mode peaks
+within a thin surface skin that coincides with the deepest compression, and \emph{there} the strain is shear-dominated,
+$\det\bm E<0$ with $\omega^2/|\det\bm E|\approx0.6<1$, so $d_\phi<0$ on the deepest-$J_0$ decile. In the computable
+range this skin is harmless --- the base states keep $J_0\gtrsim0.5$, so $\lambda_c=\lambda_{\min}(\bm F_0)$ is bounded
+below and the finite-$J_0$ case~(i) of Lemma~\ref{lem:relief} absorbs the negative $w^2 d_\phi$ with no sign hypothesis
+(this part is \emph{proved}, not assumed). The relief floor $C_2 w^2$ is invoked only in the genuine collapse limit
+$J_0\to0$ along the unstable continuation, which the barrier $f''_{\log}\sim|\log J_0|/J_0^2$ puts beyond reach of the
+solver; a mode-following deepening sweep toward it finds the deep-skin ratio $\omega^2/|\det\bm E|$ \emph{drifting
+slightly downward} ($0.65\to0.61$), so the accessible evidence does not support $d_\phi>0$ at $\Sigma_{\mathrm{c}}$ and,
+if anything, leans against it. We therefore keep \eqref{eq:dphisign} as a genuine hypothesis on the same footing as the
+rate \eqref{eq:rotrate} --- needed only in the unreachable limit, neither verified nor, on present evidence, favoured
+there --- while stressing that the regularisation everywhere the computation reaches is independent of it
+(Remark~\ref{rem:rotnum}). Lemma~\ref{lem:orient} below sharpens this status considerably: the orientation is
+\emph{proved}, pointwise, wherever the mode is locally a quadrature surface wave with one-signed, monotonically
+decaying envelopes, and the possible failure is confined to --- and characterised on --- the strain-dominated skin. The remaining
 points for the concrete model are that the collapse locus $\Sigma_{\mathrm{c}}$ is
 generically the
 codimension-one set inside $B_\rho$ along which the relieved branch would still collapse (or, when the severest
 compression sits at the vertex, the point $\Sigma_{\mathrm{c}}=\{0\}$ of codimension two, Remark~\ref{rem:locus}, which
 only sharpens the integrability); the regularised bound of
 Theorem~\ref{thm:reg} and the localisation of Proposition~\ref{prop:narrow} then apply verbatim.
+
+The status of the orientation condition can be made exact rather than statistical. The following identities replace
+the sampled sign fractions of \S\ref{sec:numerical} by closed-form criteria on the mode itself.
+
+\begin{lemma}[Exact orientation identities for a surface-wave mode]
+    \label{lem:orient}
+    Let $d_\phi=\det\Grad\bm\phi$ in $d=2$, with components $\phi_1$ along the free face and $\phi_2$ normal to it.
+    \begin{enumerate}
+        \item[\textup{(i)}] \emph{(Null Lagrangian: the bulk carries no net orientation.)} For every Lipschitz
+              subdomain $\omega\subset B_\rho$,
+              \begin{equation}
+                  \label{eq:nulllag}
+                  \int_\omega d_\phi\,dV \;=\; \oint_{\partial\omega}\phi_1\,\partial_\tau\phi_2\,ds ,
+              \end{equation}
+              $\tau$ the positively oriented tangent. The net orientation of the mode over any cell is a boundary
+              quantity; over $B_\rho$ (where $\bm\phi$ vanishes on $\Gamma_D$ and, for the localised mode, on
+              $\partial B_\rho$) it is carried \emph{entirely by the free face}. In particular any global bulk
+              statistic of $\operatorname{sign}(d_\phi)$ is structurally uninformative --- the rescoping of
+              \eqref{eq:dphisign} to the collapse tube is forced, not merely prudent.
+        \item[\textup{(ii)}] \emph{(Surface-wave mean: an exact depth derivative.)} If locally
+              $\bm\phi=\mathrm{Re}\big[\bm U(n)\,e^{\mathrm{i}kx}\big]$, with $x$ the arc length along the free face
+              and $n\ge0$ the depth, the average over one wavelength is
+              \begin{equation}
+                  \label{eq:dbar}
+                  \bar d_\phi(n)=-\frac{k}{2}\,\frac{d}{dn}\,\mathrm{Im}\big(U_1\overline{U_2}\big),
+                  \qquad
+                  \int_0^\infty \bar d_\phi\,dn=\frac{k}{2}\,\mathrm{Im}\big(U_1\overline{U_2}\big)\Big|_{n=0}:
+              \end{equation}
+              the depth-integrated mean orientation is set by the relative phase of the two displacement components
+              \emph{at the surface} alone, consistently with (i).
+        \item[\textup{(iii)}] \emph{(Quadrature modes: pointwise sign.)} If moreover the mode is in exact quadrature,
+              \begin{equation}
+                  \label{eq:quadmode}
+                  \phi_1=-a(n)\,\sin kx,\qquad \phi_2=b(n)\,\cos kx
+              \end{equation}
+              (the form of a surface-instability eigenmode with real Stroh roots and real amplitude ratios), then
+              \emph{pointwise, at every} $(x,n)$,
+              \begin{equation}
+                  \label{eq:dpointwise}
+                  d_\phi=-k\,\big[a\,b'\,\cos^2 kx+a'\,b\,\sin^2 kx\big] .
+              \end{equation}
+              Hence $d_\phi>0$ everywhere if and only if $a\,b'<0$ and $a'\,b<0$; in particular, if the envelopes
+              $a,b$ share a common sign and both decay monotonically in depth, then $d_\phi>0$ \emph{pointwise} ---
+              the orientation condition \eqref{eq:dphisign} holds with no averaging and no genericity. Conversely, a
+              sign change of $\bar d_\phi$ at depth $n$ marks an interior extremum of the envelope product $ab$.
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    (i) $\det\Grad\bm\phi=\partial_1(\phi_1\partial_2\phi_2)-\partial_2(\phi_1\partial_1\phi_2)$, the mixed second
+    derivatives cancelling, i.e.\ $d_\phi=\operatorname{div}\big(\phi_1\partial_2\phi_2,\,-\phi_1\partial_1\phi_2\big)$;
+    the divergence theorem and $(\partial_2\phi_2,-\partial_1\phi_2)\cdot\bm{n}=\partial_\tau\phi_2$ give
+    \eqref{eq:nulllag}. (ii) With $\partial_x\phi_i=\mathrm{Re}[\mathrm{i}kU_ie^{\mathrm{i}kx}]$ and
+    $\partial_n\phi_i=\mathrm{Re}[U_i'e^{\mathrm{i}kx}]$, the product formula
+    $\mathrm{Re}[Ae^{\mathrm{i}kx}]\,\mathrm{Re}[Be^{\mathrm{i}kx}]
+        =\tfrac12\mathrm{Re}[A\bar B]+\tfrac12\mathrm{Re}[ABe^{2\mathrm{i}kx}]$ yields
+    $\bar d_\phi=\tfrac12\mathrm{Re}\big[\mathrm{i}k\,(U_1\bar U_2'+U_1'\bar U_2)\big]
+        =\tfrac12\mathrm{Re}\big[\mathrm{i}k\,(U_1\bar U_2)'\big]$, which is \eqref{eq:dbar}; the integral follows from
+    the decay at $n=\infty$. (iii) Direct differentiation of \eqref{eq:quadmode} gives
+    $d_\phi=(-ka\cos kx)(b'\cos kx)-(-a'\sin kx)(-kb\sin kx)$, which is \eqref{eq:dpointwise}; its mean
+    $-\tfrac k2(ab)'$ agrees with \eqref{eq:dbar} at $U_1=\mathrm{i}a$, $U_2=b$. \qed
+\end{proof}
+
+\begin{remark}[What the identities change]
+    \label{rem:orient}
+    Three consequences. \emph{First}, the localisation of \eqref{eq:dphisign} is structural: by \eqref{eq:nulllag}
+    the Jacobian of the mode has no bulk mass, so a global one-sign claim was never the right invariant. \emph{Second},
+    on the bulk of the active mode the orientation is now \emph{proved}, not sampled: where the computed mode is
+    locally a decaying quadrature surface wave with one-signed envelopes --- the sub-surface annulus carrying most of
+    the modal energy --- Lemma~\ref{lem:orient}(iii) gives $d_\phi>0$ pointwise, in agreement with the
+    ${\approx}70$--$80\%$ weighted fractions of \S\ref{sec:numerical} (the shortfall from $100\%$ measures exactly the
+    extent to which the grading modulates the envelope in $x$ and breaks exact quadrature). \emph{Third}, the possible
+    failure of \eqref{eq:dphisign} is localised and characterised: it can occur only where an envelope is
+    non-monotone or changes sign --- for the computed eigenmode, the thin strain-dominated skin above the envelope
+    extremum, where the observed $\omega^2/|\det\bm E|\approx0.6$ sits. The open content of \eqref{eq:dphisign} is
+    thereby reduced from a genericity postulate on $\bm\phi$ to a single explicit question: whether, in the collapse
+    limit $J_0\to0$, the envelope extremum of the critical mode detaches from the collapse tube (relief holds) or
+    rides on it (relief fails). That question is posed on the Stroh data of the compressible surface eigenmode ---
+    two exponents and two amplitude ratios fixed by the secular condition --- and is answerable in closed form; we
+    leave its evaluation to the planned wedge computation.
+\end{remark}
 
 \subsection{Attainment of the critical mode}
 \label{sub:attain}
@@ -636,8 +790,99 @@ has bounded coefficients and the spectrum is discrete.
     directly checkable in a computation, by monitoring $\min_{\bm{x}}\lambda_{\min}$ at the detected crossing. The one
     place it can fail is the edge tip, where the \emph{linear} prediction $\lambda_{\min}\sim1-|K|r^{\alpha-1}$ wants to
     collapse for any load; bounding the barrier-regularised tip collapse load from below is the concrete content left
-    open, in place of the opaque spectral hypothesis.
+    open, in place of the opaque spectral hypothesis. Lemma~\ref{lem:measrep} and Proposition~\ref{prop:tipdisc} below
+    make (ii) and the tip localisation quantitative: collapse is repelled in measure at an explicit logarithmic rate
+    and spatially confined to a disc whose radius is explicit in $(\hat K,\alpha)$; the residual content of (BC) is
+    thereby reduced to a pointwise floor on that single shrinking disc.
 \end{remark}
+
+\begin{lemma}[The barrier repels collapse in measure]
+    \label{lem:measrep}
+    For the energy \eqref{eq:neohooke} with $f_{\log}$ one has the pointwise coercivity
+    \begin{equation}
+        \label{eq:psicoerc}
+        \Psi(\bm F)\ \ge\ \lambda_e\,\log^2 J \qquad \text{for all } \bm F\in\mathrm{GL}^+(2).
+    \end{equation}
+    Suppose the loading is displacement-controlled, so that $\bm u_0(t)$ minimises $\mathcal E_t=\int\Psi$ among
+    admissible fields, and let $E(t):=\mathcal E_t(\bm u_{\mathrm{trial}})$ for any fixed admissible competitor
+    (finite and explicit for the bodies (H), (C), e.g.\ the smooth ramp extension of the boundary data). Then for
+    every $\delta\in(0,1)$,
+    \begin{equation}
+        \label{eq:measrep}
+        \big|\{\bm x\in B_\rho:\ J_0(t,\bm x)\le\delta\}\big|\ \le\ \frac{E(t)}{\lambda_e\,\log^2\delta}\ .
+    \end{equation}
+    In particular the sublevel sets of $J_0$ shrink at an explicit logarithmic rate: a collapse tube
+    $\{J_0\le\delta\}$ around a codimension-one locus $\Sigma_{\mathrm{c}}$ of length $|\Sigma_{\mathrm{c}}|$ has mean
+    half-width $\le E(t)/\big(2\lambda_e|\Sigma_{\mathrm{c}}|\log^2\delta\big)$, and pointwise collapse ($J_0=0$) can
+    occur at most on a null set at any finite load. The same holds under traction loading whenever the load
+    functional stays bounded along the path, with $E(t)$ replaced by
+    $E(t)+\sup_{s\le t}|\ell_s(\bm u_0(s))|$.
+\end{lemma}
+
+\begin{proof}
+    In $d=2$, writing the principal stretches $\lambda_i$ and using $\tr(\bm F^T\bm F)=\sum_i\lambda_i^2$,
+    $\log J=\sum_i\log\lambda_i$,
+    \begin{equation*}
+        \Psi(\bm F)=\sum_{i}\tfrac{\mu_e}{2}\big(\lambda_i^2-1-\log\lambda_i^2\big)\;+\;\lambda_e\log^2 J
+        \ \ge\ \lambda_e\log^2 J,
+    \end{equation*}
+    since $s-1-\log s\ge0$ at $s=\lambda_i^2$; this is \eqref{eq:psicoerc}. By minimality
+    $\int_{B_\rho}\lambda_e\log^2J_0\,dV\le\mathcal E_t(\bm u_0(t))\le E(t)$, and Chebyshev's inequality on
+    $\{J_0\le\delta\}$, where $\log^2J_0\ge\log^2\delta$, gives \eqref{eq:measrep}. \qed
+\end{proof}
+
+\begin{proposition}[Collapse, if anywhere, is confined to the tip disc]
+    \label{prop:tipdisc}
+    Along the fundamental path, for $t<t_{\mathrm{coll}}$, let the Kondratiev expansion of
+    Proposition~\ref{prop:blowup}(i) hold with the pointwise gradient bounds
+    $\big\|\Grad\big(K r^\alpha\bm\Phi\big)\big\|\le c_\Phi\,|\hat K(t)|\,\mu_e^{-1}\ldots$ --- concretely, set
+    $c_\Phi:=\max_\theta\big\|\alpha\,\bm\Phi\otimes\bm e_r+\bm\Phi'\otimes\bm e_\theta\big\|$ and let $C_\sharp(t)$
+    bound the remainder, $|\Grad\bm u_0^\sharp|\le C_\sharp(t)\,(r/\rho)^{\alpha'-1}$
+    \cite{KMR2001,MazyaRossmann2010}, with $M(t):=c_\Phi\,|\hat K(t)|\,+C_\sharp(t)$ bounded along the path. Then
+    \begin{equation}
+        \label{eq:tipfloor}
+        \lambda_{\min}\big(\bm F_0(t,\bm x)\big)\ \ge\ 1-M(t)\,\Big(\frac{r}{\rho}\Big)^{\alpha-1},
+        \qquad \bm x\in B_\rho ,
+    \end{equation}
+    so $\lambda_{\min}\ge\tfrac12$ everywhere outside the \emph{tip disc}
+    \begin{equation}
+        \label{eq:tipradius}
+        r\ \le\ r_0(t):=\rho\,\big(2M(t)\big)^{\frac{1}{1-\alpha}} .
+    \end{equation}
+    Consequently:
+    \begin{enumerate}
+        \item[\textup{(i)}] letting $t\uparrow t_{\mathrm{coll}}$, any collapse point lies in the closed disc
+              $\{r\le r_0(t_{\mathrm{coll}})\}$: condition (BC) can fail \emph{only through the tip}, the assertion of
+              Remark~\ref{rem:bc} upgraded from a heuristic to an estimate, with the failure region quantified by the
+              computable pair $(\hat K,\alpha)$;
+        \item[\textup{(ii)}] the surface-instability point $P$ of (SC), at fixed distance $r_P$ from $\Sigma$, is
+              provably not the collapse site whenever $r_0(t_*)<r_P$, i.e.\ whenever
+              \begin{equation}
+                  \label{eq:scsafe}
+                  M(t_*) \ <\ \tfrac12\,\Big(\frac{r_P}{\rho}\Big)^{1-\alpha},
+              \end{equation}
+              an explicit inequality between computable numbers; granted \eqref{eq:scsafe}, the destabilising field of
+              Lemma~\ref{lem:biot} lives entirely in the region where \eqref{eq:tipfloor} keeps the state uniformly
+              non-degenerate, and the ordering $t_c<t_{\mathrm{coll}}$ can fail only if the tip disc
+              \eqref{eq:tipradius} collapses before the free-face stretch reaches $\lambda_\star$;
+        \item[\textup{(iii)}] combined with Lemma~\ref{lem:measrep} the two smallness mechanisms compound: the
+              possible collapse set is contained in a disc of radius $r_0$ \emph{and} has measure
+              $\mathcal O\big(E(t)/\log^2\delta\big)$ at depth $\delta$.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    For $t<t_{\mathrm{coll}}$ the state is uniformly non-degenerate on $\overline{B_\rho}$, the coefficients are
+    bounded (Lemma~\ref{lem:attain}), and the linearised corner theory applies, so the expansion
+    $\bm u_0=K r^\alpha\bm\Phi(\theta)+\bm u_0^\sharp$ holds with the stated bounds. Then
+    $\Grad\bm u_0=K r^{\alpha-1}\big(\alpha\,\bm\Phi\otimes\bm e_r+\bm\Phi'\otimes\bm e_\theta\big)+\Grad\bm u_0^\sharp$
+    and, by Weyl's inequality for singular values,
+    $\lambda_{\min}(\bm I+\Grad\bm u_0)\ge1-\|\Grad\bm u_0\|$, which with
+    $(r/\rho)^{\alpha'-1}\le(r/\rho)^{\alpha-1}$ on $r\le\rho$ (recall $\alpha'>\alpha$) gives \eqref{eq:tipfloor}.
+    The right-hand side of \eqref{eq:tipfloor} is $\ge\tfrac12$ iff $r\ge r_0(t)$, giving the dichotomy; (i) follows
+    by continuity of $\lambda_{\min}$ in $t$ up to the first failure, (ii) by inserting $t=t_*$ and
+    Lemma~\ref{lem:biot}, (iii) by intersecting with \eqref{eq:measrep}. \qed
+\end{proof}
 
 \begin{lemma}[\textup{(BC)} reduces to a comparison of wedge \emph{stretch} thresholds]
     \label{lem:bcwedge}

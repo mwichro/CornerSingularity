@@ -440,12 +440,7 @@ def nu_of(Lam, mu):
     return Lam / (2.0 * (Lam + mu))
 
 
-if __name__ == "__main__":
-    mu = 1.0
-    print("=" * 72)
-    print("Stage 3: consistent weak graded-substrate Landau coefficient b(nu,Khat)")
-    print("=" * 72)
-
+def section_A(mu):
     # (A) Mechanism check: the homogeneous (Khat=0) cell is already indefinite at
     # the Biot stretch lambda_star (min eig < 0) -- the flat half-space is unstable
     # at/below onset, with NO discrete critical mode (the scale-free degeneracy of
@@ -459,6 +454,7 @@ if __name__ == "__main__":
         me = cell.min_eig(ls, 0.0)
         print(f"{Lam:6.1f} {nu_of(Lam,mu):7.4f} {ls:12.6f} {me:14.3e}")
 
+def section_B(mu):
     # (B) the degeneracy lift: spectral gap above the localised kernel vs Khat
     print("\n(B) Degeneracy lift -- spectral gap above the critical (localised) mode")
     print("    monotone grading -> discrete kernel (eig~0) isolated by an O(1) gap")
@@ -473,6 +469,7 @@ if __name__ == "__main__":
         print(f"   Khat={Khat:4.2f}  l1bar={lc:7.4f}  kernel_eig={r['kernel_eig']:+.2e}"
               f"  gap={r['gap']:.3e}")
 
+def section_C(mu):
     # (C) convergence of the SIGN diagnostic (the Stage-2 quantity that DIVERGED).
     # The absolute b carries the arbitrary mode-amplitude normalisation (here
     # max|grad phi|=1); as the mesh resolves the increasingly localised mode the
@@ -493,6 +490,7 @@ if __name__ == "__main__":
         print(f"{NX:4d} {N:4d} {r['ratio']:10.4f} {'b<0' if r['b']<0 else 'b>0':>8}"
               f" {r['gap']:10.2e} {r['cond_B']:10.2e} {r['c2']:11.3e} {r['pf_inv']:11.2e}")
 
+def section_D(mu):
     # (D) phase diagram: invariant sign ratio r=b_feedback/b_E4 over (nu, Khat);
     #     b<0 (subcritical) wherever r<-1.
     print("\n(D) Sign ratio r = b_feedback/b_E4 over the rectangle (b<0 iff r<-1)")
@@ -518,6 +516,7 @@ if __name__ == "__main__":
           "->", "subcritical (b<0) everywhere" if all(s < 0 for s in signs) else
           ("supercritical (b>0)" if all(s > 0 for s in signs) else "geometry-dependent"))
 
+def section_E(mu):
     # (E) Rotation-condition diagnostic (finding #4): on the SAME critical mode,
     #     report the dimensionless rotation defect rho_rot = ||dJ||/||grad phi||
     #     and the second-variation decomposition.  The claim under scrutiny is that
@@ -540,6 +539,7 @@ if __name__ == "__main__":
             print(f"{nu_of(Lam,mu):7.3f} {Khat:6.2f} {r['J0min']:8.4f}"
                   f" {r['rho_rot']:9.4f} {r['coen']:10.3e} {r['det_ratio']:13.4f}")
 
+def section_F(mu):
     # (F) Asymptotic-rate probe of lem:rot, FIXED (Tier 3.5).  The previous probe
     #     evaluated landau_b at l1bar*frac -- OFF threshold -- so the "mode" was the
     #     softest eigenvector of a non-critical operator, NOT a kernel.  Here we
@@ -565,6 +565,7 @@ if __name__ == "__main__":
         print(f"{Khat:6.2f} {lc:8.4f} {r['J0min']:8.4f} {r['kernel_eig']:+10.1e}"
               f" {r['rho_rot']:9.4f} {r['rate']:9.4f} {r['det_ratio']:11.4f}")
 
+def section_G(mu):
     # (G) CONVERGENCE / ISOLATION study (Tier 1.2): the headline 'b<0' rests on a
     #     converged ratio r<-1 and a kernel ISOLATED by a gap that stays > 0.  We
     #     refine N at fixed Lx, then vary Lx and Lmap, and watch (gap, r, cond B).
@@ -607,6 +608,7 @@ if __name__ == "__main__":
         r = cell.landau_b(lc, Khat)
         print(f"{Lmap:5.1f} {r['gap']:10.3e} {r['ratio']:10.4f} {r['cond_B']:10.2e}")
 
+def section_H(mu):
     # (H) PITCHFORK vs TRANSCRITICAL (Tier 1.1): the monotone grading breaks the
     #     X->-X reflection that the paper uses to force c2=0, so c2 need not vanish.
     #     If |c2^4/b^3| is NOT ~0, the normal form is transcritical and c2 -- not b
@@ -623,6 +625,7 @@ if __name__ == "__main__":
             print(f"{nu_of(Lam,mu):7.3f} {Khat:6.2f} {r['c2']:12.4e} {r['b']:12.4e}"
                   f" {r['pf_inv']:11.2e} {100*r['dphi_pos_frac']:9.1f}")
 
+def section_I(mu):
     # (I) GRADING-PROFILE robustness (Tier 2.4): is sign(b) the same for the ad-hoc
     #     LINEAR grading and the physical POWER (r^{alpha-1}) edge-field profile?
     #     Plus a 2-mode-deflation cross-check (does deflating the near-resonant 2nd
@@ -642,6 +645,7 @@ if __name__ == "__main__":
             print(f"{nu_of(Lam,mu):7.3f} {Khat:6.2f} {rl['ratio']:10.4f} {rpr:10.4f}"
                   f" {rl['b']:11.3e} {rl['b_def2']:12.3e}   (alpha={a:.3f})")
 
+def section_J(mu):
     # (J) LOCALIZED relief orientation (resolution #1 of the d_phi>0 finding).
     #     The GLOBAL fraction (dphi>0 %) is small (~20-40%) only because det(grad
     #     phi) oscillates for a wavy mode -- the wrong statistic.  lem:relief/
@@ -666,3 +670,30 @@ if __name__ == "__main__":
                   f" {100*r['relief_J0_10']:8.1f}% {100*r['relief_J0_25']:8.1f}%"
                   f" {100*r['relief_J0_50']:8.1f}% {100*r['relief_modewt']:10.1f}%"
                   f" {100*r['relief_sevwt']:8.1f}%")
+
+
+# section registry, in canonical order
+SECTIONS = {
+    'A': section_A, 'B': section_B, 'C': section_C, 'D': section_D, 'E': section_E,
+    'F': section_F, 'G': section_G, 'H': section_H, 'I': section_I, 'J': section_J,
+}
+
+
+if __name__ == "__main__":
+    import sys
+    mu = 1.0
+    # Usage: python3 graded_buckling.py [SECTIONS]
+    #   no args      -> run every section (slow; may exceed a 600s sandbox timeout)
+    #   "C" / "c"    -> run only section C
+    #   "C E J"      -> run sections C, E, J     (also accepts "CEJ" or "C,E,J")
+    raw = "".join(sys.argv[1:]).replace(",", " ").replace(";", " ")
+    want = [c for c in raw.upper() if c in SECTIONS] if raw.strip() else list(SECTIONS)
+    print("=" * 72)
+    print("Stage 3: consistent weak graded-substrate Landau coefficient b(nu,Khat)")
+    print(f"sections: {''.join(want)}   (pass letters as args to run a subset)")
+    print("=" * 72)
+    unknown = sorted(set(c for c in raw.upper() if c.isalpha()) - set(SECTIONS))
+    if unknown:
+        print(f"  [ignored unknown sections: {' '.join(unknown)}]")
+    for L in want:
+        SECTIONS[L](mu)
