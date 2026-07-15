@@ -834,11 +834,12 @@ has bounded coefficients and the spectrum is discrete.
 \begin{proposition}[Collapse, if anywhere, is confined to the tip disc]
     \label{prop:tipdisc}
     Along the fundamental path, for $t<t_{\mathrm{coll}}$, let the Kondratiev expansion of
-    Proposition~\ref{prop:blowup}(i) hold with the pointwise gradient bounds
-    $\big\|\Grad\big(K r^\alpha\bm\Phi\big)\big\|\le c_\Phi\,|\hat K(t)|\,\mu_e^{-1}\ldots$ --- concretely, set
-    $c_\Phi:=\max_\theta\big\|\alpha\,\bm\Phi\otimes\bm e_r+\bm\Phi'\otimes\bm e_\theta\big\|$ and let $C_\sharp(t)$
-    bound the remainder, $|\Grad\bm u_0^\sharp|\le C_\sharp(t)\,(r/\rho)^{\alpha'-1}$
-    \cite{KMR2001,MazyaRossmann2010}, with $M(t):=c_\Phi\,|\hat K(t)|\,+C_\sharp(t)$ bounded along the path. Then
+    Proposition~\ref{prop:blowup}(i) hold with pointwise gradient control of the remainder,
+    $|\Grad\bm u_0^\sharp|\le C_\sharp(t)\,(r/\rho)^{\alpha'-1}$ \cite{KMR2001,MazyaRossmann2010}, and set
+    $c_\Phi:=\max_\theta\big\|\alpha\,\bm\Phi\otimes\bm e_r+\bm\Phi'\otimes\bm e_\theta\big\|$, so that the leading
+    term obeys $\big\|\Grad\big(K r^\alpha\bm\Phi\big)\big\|\le c_\Phi\,\mu_e\,|\hat K(t)|\,(r/\rho)^{\alpha-1}$ by
+    the normalisation $\hat K=K\rho^{\alpha-1}/\mu_e$ of Remark~\ref{rem:sifparam}. With
+    $M(t):=c_\Phi\,\mu_e\,|\hat K(t)|+C_\sharp(t)$ bounded along the path,
     \begin{equation}
         \label{eq:tipfloor}
         \lambda_{\min}\big(\bm F_0(t,\bm x)\big)\ \ge\ 1-M(t)\,\Big(\frac{r}{\rho}\Big)^{\alpha-1},
@@ -941,21 +942,26 @@ in concrete, checkable form rather than as opaque spectral postulates:
     \item \emph{Buckling precedes collapse}, (BC) (Assumption~\ref{ass:bc}): the threshold inequality
           $t_c<t_{\mathrm{coll}}$ that powers attainment (Lemma~\ref{lem:attain}). It is bounded on one side by
           Lemma~\ref{lem:biot} ($t_c\le t_*$, at $\lambda_{\min}=\mathcal{O}(1)$) and supported by the energy barrier
-          (Remark~\ref{rem:bc}); the residual content is a lower bound on the barrier-regularised tip collapse load,
-          which we verify numerically. By Lemma~\ref{lem:bcwedge} the two \emph{stretch} thresholds being compared are
-          amplitude-free, one-parameter ($\nu$) wedge data, independent of the body and of $\hat K$; the conversion to
-          the load ordering uses only the monotone load-to-stretch map of the fundamental state (condition (M)).
+          (Remark~\ref{rem:bc}), now quantitatively: collapse is repelled in measure at an explicit logarithmic rate
+          (Lemma~\ref{lem:measrep}) and spatially confined to the tip disc of radius
+          $r_0\sim\rho\,(2M)^{1/(1-\alpha)}$ (Proposition~\ref{prop:tipdisc}), so the residual content is a pointwise
+          floor on that single shrinking disc, which we verify numerically. By Lemma~\ref{lem:bcwedge} the two
+          \emph{stretch} thresholds being compared are amplitude-free, one-parameter ($\nu$) wedge data, independent
+          of the body and of $\hat K$; the conversion to the load ordering uses only the monotone load-to-stretch map
+          of the fundamental state (condition (M)).
     \item \emph{Subcritical sign pattern}, $b<0<d$ (Assumption~\ref{ass:subcrit}): the directions in which the cubic and
           quintic bend the branch. Here the neo-Hookean structure is doubly informative. Lemma~\ref{lem:volcoeff}
           reduces the coefficients to volumetric integrals and shows the explicit single-mode parts are \emph{adverse}
           to subcriticality ($b_{\mathrm{dir}}>0$, $d_{\mathrm{dir}}<0$ in compression), so $b<0<d$ can come only from
-          the geometry-dependent orthogonal-mode feedback. The creasing literature \cite{Biot1963,Hong2009} establishes
-          subcriticality for the flat surface, but the sign at a \emph{corner} is delivered neither by symmetry nor by
-          the frozen terms; we evaluate the feedback-corrected coefficients numerically (Remark~\ref{rem:bsign}). The
-          homogeneity count of Proposition~\ref{prop:bcount} pins down \emph{why} this is irreducible: because the edge
-          exponent satisfies $\alpha>\tfrac12$ here, the cubic integral is tip-convergent but not tip-dominated, so $b$
-          does not collapse to a universal wedge number but remains a functional $b(\nu,\hat K)$ of the Poisson ratio and
-          the normalised stress-intensity --- the quantity the computation maps out.
+          the geometry-dependent orthogonal-mode feedback. For the cubic, the \emph{direction} of that feedback is now
+          a theorem, $b_\psi\le0$ (Lemma~\ref{lem:fbsign}), so the open content is the magnitude comparison
+          $|b_\psi|>b_{\mathrm{dir}}$: proved for small $\hat K$ under the coupling non-degeneracy of
+          Proposition~\ref{prop:certdeg}, and on the finite rectangle certifiable by the inversion-free criterion of
+          Corollary~\ref{cor:cert}, which we evaluate numerically (Remarks~\ref{rem:bsign}, \ref{rem:certnum}). The
+          homogeneity count of Proposition~\ref{prop:bcount} pins down \emph{why} the magnitude is irreducible:
+          because the edge exponent satisfies $\alpha>\tfrac12$ here, the cubic integral is tip-convergent but not
+          tip-dominated, so $b$ does not collapse to a universal wedge number but remains a functional $b(\nu,\hat K)$
+          of the Poisson ratio and the normalised stress-intensity --- the quantity the computation maps out.
 \end{enumerate}
 
 \begin{table}[t]
@@ -975,8 +981,8 @@ in concrete, checkable form rather than as opaque spectral postulates:
         First-order relief / rotation (Ass.~\ref{ass:rot}, Lem.~\ref{lem:relief}) & finite at $t_c$ (Lem.~\ref{lem:rotreg}); near-collapse posited & \emph{numerical}: rotation defect ${\approx}0.08$--$0.16$ (Rem.~\ref{rem:rotnum})                               \\
         Stable-branch non-degeneracy (Ass.~\ref{ass:nd})                          & posited                                                        & \emph{physical} (bounded-distortion crease); not computed here (Prop.~\ref{prop:physical})                      \\
         \midrule
-        Buckling precedes collapse (BC) (Ass.~\ref{ass:bc})                       & ---                                                            & \emph{numerical}; $\nu$-only stretch thresholds + monotone load map (Lem.~\ref{lem:bcwedge}, Rem.~\ref{rem:bc}) \\
-        Subcriticality $b<0<d$ (Ass.~\ref{ass:subcrit})                           & assumed                                                        & \emph{numerical}, phase diagram $b(\nu,\hat K)$; $\alpha{>}\tfrac12$ (Prop.~\ref{prop:bcount})                  \\
+        Buckling precedes collapse (BC) (Ass.~\ref{ass:bc})                       & ---                                                            & \emph{numerical} on tip disc only; measure-repelled + confined (Lem.~\ref{lem:measrep}, Prop.~\ref{prop:tipdisc}, Lem.~\ref{lem:bcwedge})  \\
+        Subcriticality $b<0<d$ (Ass.~\ref{ass:subcrit})                           & assumed                                                        & feedback sign \textbf{proved} $b_\psi{\le}0$ (Lem.~\ref{lem:fbsign}); magnitude \emph{numerical/certifiable} (Cor.~\ref{cor:cert}, Prop.~\ref{prop:certdeg})     \\
         \bottomrule
     \end{tabular}
     \caption{Hypothesis ledger for the concrete clamped--free neo-Hookean model. Fixing the material and geometry
@@ -996,7 +1002,10 @@ carrying the critical mode rather than posited outright; the first-order volume 
 the relief once posited as an exact identity is now the weaker explicit assumption (AR, \S\ref{sub:reliefd}), automatic
 at the bifurcation (Lemma~\ref{lem:rotreg}) and numerically supported toward collapse rather than a barrier-forced
 theorem. What remains are two \emph{concrete} and numerically checkable conditions: that buckling precedes pointwise
-collapse ($t_c<t_{\mathrm{coll}}$), and that the reduced cubic is subcritical ($b<0$). Both are exactly what the
+collapse ($t_c<t_{\mathrm{coll}}$) --- with the possible failure now confined to an explicit tip disc and repelled in
+measure (Proposition~\ref{prop:tipdisc}, Lemma~\ref{lem:measrep}) --- and that the reduced cubic is subcritical
+($b<0$) --- now a pure \emph{magnitude} comparison, its sign structure being settled by Lemma~\ref{lem:fbsign} and its
+small-$\hat K$ regime by Proposition~\ref{prop:certdeg}. Both are exactly what the
 creasing problem on a flat surface also leaves to computation, and they are inherited here rather than created by the
 corner.
 

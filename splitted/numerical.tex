@@ -125,8 +125,11 @@ Three facts emerge, each robust under refinement:
   terms scale as $\|\bm\phi\|^4$, so the ratio is independent of the arbitrary mode amplitude --- converges to
   $\approx-2.3$, comfortably below $-1$. The feedback therefore \emph{overwhelms} the adverse frozen term, and $b<0$.
 \end{itemize}
-The sign is substantiated rather than merely reported. The diagnostic ratio $r:=b_{\mathrm{fb}}/b_{\mathrm{E_4}}$ is
-\emph{normalisation-invariant} (both terms scale as $\|\bm\phi\|^4$) and decides the sign by $b<0\iff r<-1$. It is
+The status of the two terms is asymmetric, and the computation should be read accordingly: $b_{\mathrm{E_4}}>0$ and
+$b_{\mathrm{fb}}\le0$ are \emph{theorems} (Lemma~\ref{lem:volcoeff}(ii) and Lemma~\ref{lem:fbsign} --- the solver
+cannot find, and never finds, a positive feedback), so the tables below test only the \emph{magnitude} criterion
+$r<-1$. The diagnostic ratio $r:=b_{\mathrm{fb}}/b_{\mathrm{E_4}}$ is \emph{normalisation-invariant} (both terms scale
+as $\|\bm\phi\|^4$) and decides the sign by $b<0\iff r<-1$. It is
 stable under refinement of the angular ($N$) and depth ($N_X$) resolutions, and the discrete kernel stays isolated by
 an $O(1)$ gap throughout:
 \begin{center}
@@ -158,7 +161,11 @@ ratio is below $-1$ --- hence $b<0$ --- \emph{throughout} $(\nu,\hat K)$:
 The margin to the threshold $r=-1$ is smallest near the incompressible corner ($\nu\to\tfrac12$, $\hat K\approx0.2$),
 where $r\approx-1.65$, and is never breached on the physical rectangle. Thus the corner bifurcation is subcritical
 (Assumption~\ref{ass:subcrit} holds), the imperfect-bifurcation picture applies, and the corner is the genuine
-crease-analogue. The computation is reproduced by \texttt{graded\_buckling.py}, which reuses the validated linear
+crease-analogue. For the definitive computation we recommend, in place of the assembled $r$, the inversion-free
+certification criterion of Corollary~\ref{cor:cert}/Proposition~\ref{prop:certdeg}: the invariant $\Gamma$ of
+\eqref{eq:gammadef} needs only one trilinear integral and one Rayleigh quotient on an explicit test field, so it is
+immune to the growth of $\mathrm{cond}(B)$ that the bordered Lyapunov--Schmidt solve suffers as the flat resonance is
+approached, and $\Gamma>1$ certifies $b<0$ outright. The computation is reproduced by \texttt{graded\_buckling.py}, which reuses the validated linear
 building blocks of \S\ref{sub:numpencil}--\S\ref{sub:numbiot} (\texttt{williams\_clampedfree.py} /
 \texttt{mellin\_chebyshev\_pencil.py} for $\alpha$; \texttt{surface\_instability.py} for $\lambda_\star$).
 
