@@ -936,10 +936,92 @@ regularised equilibrium is $G(\bm{u},t,\epsilon)=0$,
 \end{equation}
 with $\bm{P}=\partial\Psi/\partial\bm{F}$, $V$ the admissible test space, and $\ell_t$ the (linear) load functional at
 pseudo-time $t$. Let $\bm{u}_0(t)$ denote the \emph{fundamental path}, i.e. the branch of \eqref{eq:Gdef} with
-$\epsilon=0$ that continues the low-load compressive solution. We use the barrier penalty $f_{\log}$ throughout, so the
+$\epsilon=0$ that continues the low-load compressive solution --- constructed in Lemma~\ref{lem:fundexist} and
+regulated by Assumption~\ref{ass:fp} below. We use the barrier penalty $f_{\log}$ throughout, so the
 collapse $J\to0$ is genuinely resisted (Assumption~\ref{ass:reg}); along $\bm{u}_0(t)$ the corner stretch
 $\lambda_c(t):=\lambda_{\min}(\bm{F}_0(t))$ decreases as $t\uparrow1$ but, on the bifurcating branch we construct, never
 reaches zero.
+
+% The fundamental path must be constructed, not defined by fiat: existence is variational and provable in 2D for a
+% convex penalty; what cannot be proved is collected in one standing assumption, stated before it is first consumed.
+The fundamental path deserves an existence statement rather than a definition by fiat. Existence is variational and,
+in two dimensions, genuinely provable --- for a \emph{globally convex} volumetric penalty, which is where the tempered
+class of Remark~\ref{rem:tempered} pays a second dividend; what resists proof is the \emph{regularity} of the path,
+and we collect exactly the regularity that the analysis below consumes into one standing assumption, stated here,
+before its first use, rather than discovered midway.
+
+\begin{lemma}[Existence and energy bound for the fundamental state]
+    \label{lem:fundexist}
+    Let $d=2$, let the loading be displacement-controlled ($\ell_t$ realised as boundary data $t\,\bm g$ on the
+    Dirichlet part, $\epsilon=0$), and let the volumetric penalty $f$ be convex on $(0,\infty)$ with the barrier
+    $f(J)\to\infty$ as $J\to0^+$ (the class of Remark~\ref{rem:tempered}; in particular the one-sided tempered
+    penalty, which coincides with $f_{\log}$ throughout compression). Extend $f\equiv+\infty$ on $(-\infty,0]$. Then
+    for every $t$ the energy $\mathcal E_t(\bm u)=\int_{B_\rho}\Psi(\bm I+\Grad\bm u)\,dV$ attains a global minimiser
+    $\bm u_0(t)$ over the admissible class $\{\bm u\in H^1:\ \bm u=t\bm g \text{ on } \Gamma_D\cup\text{outer arc}\}$,
+    and every minimiser satisfies $J_0>0$ a.e. The minimum value $E_{\min}(t)$ is continuous in $t$ and obeys
+    $E_{\min}(t)\le C\,t^2$ for any smooth extension competitor that stays orientation-preserving on $[0,1]$.
+\end{lemma}
+
+\begin{proof}
+    Coercivity: $\Psi\ge\tfrac{\mu_e}{2}|\bm F|^2+f(J)$ with $f$ convex, bounded below by an affine function of $J$
+    and $|J|\le\tfrac12|\bm F|^2$, so minimising sequences are bounded in $H^1$; pass to a weak limit. In $d=2$ the
+    cofactor is \emph{affine} in $\bm F$, whence for $\bm u_k\rightharpoonup\bm u$ in $H^1$ the identity
+    $\int J_k\,\varphi=-\tfrac12\int \bm u_k\cdot(\operatorname{cof}\Grad\bm u_k)\Grad\varphi+\dots$ pairs a strongly
+    $L^2$-convergent factor (Rellich) with a weakly convergent one: $\det\Grad\bm u_k\to\det\Grad\bm u$ in
+    $\mathcal D'$, and since the $J_k$ are bounded in $L^1$ with a distributional limit that is itself the $L^1$
+    function $J$, no singular part can form. Lower semicontinuity: the quadratic term is convex; for the penalty,
+    $f=\sup_\ell \ell$ over its affine minorants, $\int \ell(J_k)\to\int \ell(J)$ for each $\ell$, and monotone
+    approximation gives $\liminf\int f(J_k)\ge\int f(J)$ (Goffman--Serrin; the barrier side is Fatou). Finite energy
+    forces $J_0>0$ a.e. The bound $E_{\min}(t)\le\mathcal E_t(t\bm G)\le Ct^2$ is Taylor expansion of $\Psi$ at
+    $\bm I$ along the smooth competitor; continuity of $E_{\min}$ follows by comparing minimisers at nearby loads
+    after correcting the boundary data with the same extension and using the lower semicontinuity just proved. \qed
+\end{proof}
+
+% What the lemma does not give, stated honestly, and bundled into the one standing assumption on the path.
+Three caveats calibrate the lemma. For $f_{\log}$ itself the direct method is obstructed by the same large-$J$
+nonconvexity that creates the dilation core of Lemma~\ref{lem:Aellip} --- one more reason to temper the tail
+(Remark~\ref{rem:tempered}); minimisers need not be unique, so a \emph{selection} $t\mapsto\bm u_0(t)$ continuous in
+$t$ is not automatic; and minimisers of polyconvex energies carry essentially no regularity theory, so nothing in the
+lemma bounds $\lambda_{\min}(\bm F_0)$ below or gives the state a corner expansion. Those are precisely the
+unprovable inputs, and we now name them. Define the pointwise-collapse load
+$t_{\mathrm{coll}}:=\inf\{t:\ \operatorname*{ess\,inf}_{B_\rho}\lambda_{\min}(\bm F_0(t))=0\}$.
+
+\begin{assumption}[Regular fundamental path, (FP)]
+    \label{ass:fp}
+    There is a selection $t\mapsto\bm u_0(t)$ of solutions of \eqref{eq:Gdef} with $\epsilon=0$, continuous into
+    $H^1$ with $\bm u_0(0)=\bm 0$ (for a convex penalty, a selection of the minimisers of
+    Lemma~\ref{lem:fundexist}), such that:
+    \begin{enumerate}
+        \item[\textup{(i)}] \emph{Pre-collapse non-degeneracy.} $t_{\mathrm{coll}}>0$, and for every $\bar t<t_{\mathrm{coll}}$
+              there is $c(\bar t)>0$ with $\lambda_{\min}(\bm F_0(t))\ge c(\bar t)$ a.e.\ on $B_\rho$ for all
+              $t\le\bar t$; consequently $t\mapsto\mathbb{L}(\bm F_0(t))$ is bounded and continuous into $L^\infty$ on
+              $[0,\bar t]$.
+        \item[\textup{(ii)}] \emph{Corner expansion.} For $t<t_{\mathrm{coll}}$ the state admits the expansion
+              $\bm u_0=K(t)\,r^\alpha\bm\Phi(\theta)+\bm u_0^\sharp$ with the pointwise gradient envelope
+              $|\Grad\bm u_0^\sharp|\le C_\sharp(t)(r/\rho)^{\alpha'-1}$, $\alpha'>\alpha$, and $C_\sharp$, $K$
+              bounded on compact subsets of $[0,t_{\mathrm{coll}})$.
+        \item[\textup{(iii)}] \emph{Monotone load-to-stretch map.} Condition \textup{(M)}: at each material point the
+              relevant stretches $t\mapsto\lambda_\parallel$, $\lambda_{\min}$ are nonincreasing along the path.
+    \end{enumerate}
+\end{assumption}
+
+\begin{remark}[What (FP) costs, and how it removes a circularity]
+    \label{rem:fp}
+    Part (i) is the compressive analogue of (NC) and cannot be discharged by the tensile screening of
+    Lemma~\ref{lem:screen}: under compression the inverse channel $J\to0$ has no analogous cancellation, so the
+    coefficient field of the state genuinely may degenerate, and (i) is an assumption about where --- namely, not
+    before $t_{\mathrm{coll}}$, which (i) merely asserts is positive. Part (ii) is likewise a hypothesis, not a
+    citation: the linear Kondratiev theory applies to the \emph{nonlinear} state only through a
+    frozen-coefficient reading whose vertex behaviour is exactly the open inner problem of Remark~\ref{rem:core}.
+    The gain from stating (FP) here is logical hygiene downstream: previously, continuity of the second variation
+    for $t<t_c$ silently consumed a $\lambda_{\min}$ floor that only the later buckling-precedes-collapse condition
+    (BC) supplies --- a circle. Under (FP) the circle opens into a line: Lemma~\ref{lem:tc} needs (i) only on
+    $[0,t_*]$, where $t_*$ is the load at which a destabilising field first exists; if $t_*<t_{\mathrm{coll}}$
+    --- the single quantitative input, a tip floor at the \emph{Biot} load, not at collapse --- then the first
+    crossing satisfies $t_c\le t_*<t_{\mathrm{coll}}$, and the ordering (BC) is a \emph{conclusion}. The residual
+    open content is thus one lower bound on $t_{\mathrm{coll}}$, quantified in the concrete setting by the tip-disc
+    estimate there, and nothing else.
+\end{remark}
 
 \begin{remark}[The instability is structural, not material]
     \label{rem:framework}
@@ -972,17 +1054,21 @@ A clarification is essential here. By Lemma~\ref{lem:SEcompress} the neo-Hookean
 throughout compression, so $\mu_1(t)$ \emph{cannot} be driven negative by a rank-one (material) instability: any
 crossing must be a \emph{structural} loss of positivity of the global form $Q_t$, i.e. a buckling of the boundary-value
 problem in which the destabilising test field is not rank-one. This is the creasing mechanism.
-\begin{lemma}[Existence of the critical load]
+\begin{lemma}[Existence of the critical load, and the ordering it inherits]
     \label{lem:tc}
-    Assume (i) coercivity at zero load, $\mu_1(0)>0$, and (ii) a structural instability of the compressed state: there
-    exist $t_*\in(0,1)$ and $\bm{v}_*\in V$ with $Q_{t_*}(\bm{v}_*)<0$. Then $\mu_1$ is continuous on $[0,t_*]$ and there
-    is a first $t_c\in(0,t_*]$ with $\mu_1(t_c)=0$ and $\mu_1(t)>0$ for $t<t_c$.
+    Assume (i) coercivity at zero load, $\mu_1(0)>0$; (ii) a structural instability of the compressed state: there
+    exist $t_*\in(0,1)$ and $\bm{v}_*\in V$ with $Q_{t_*}(\bm{v}_*)<0$; and (iii) the destabilisation precedes
+    collapse, $t_*<t_{\mathrm{coll}}$, with (FP)(i) in force. Then $\mu_1$ is finite and continuous on $[0,t_*]$,
+    there is a first $t_c\in(0,t_*]$ with $\mu_1(t_c)=0$ and $\mu_1(t)>0$ for $t<t_c$, and the buckling load
+    automatically satisfies the ordering $t_c\le t_*<t_{\mathrm{coll}}$.
 \end{lemma}
 \begin{proof}
     At $t=0$, $\bm{F}_0=\bm{I}$ and $\mathbb{L}=\mu_e\mathbb{I}+(\text{volumetric at }J{=}1)$ is positive definite, so
-    with Korn's inequality $\mu_1(0)>0$. Hypothesis (ii) gives $\mu_1(t_*)\le Q_{t_*}(\bm{v}_*)/\|\bm{v}_*\|_V^2<0$. As
-    $t\mapsto\mathbb{L}(\bm{F}_0(t))$ is continuous, so is $\mu_1$, and the intermediate value theorem gives the first
-    zero $t_c$. \qed
+    with Korn's inequality $\mu_1(0)>0$. Hypothesis (ii) gives $\mu_1(t_*)\le Q_{t_*}(\bm{v}_*)/\|\bm{v}_*\|_V^2<0$.
+    By (iii) and (FP)(i) the coefficients $\mathbb{L}(\bm{F}_0(t))$ are bounded in $L^\infty$ \emph{uniformly} on
+    $[0,t_*]$ and continuous in $t$ --- this is where the finiteness of $Q_t$ comes from, and it is not free: without
+    the floor $\lambda_{\min}\ge c(t_*)$ the form need not even be bounded --- so $\mu_1$ is continuous, and the
+    intermediate value theorem gives the first zero $t_c\le t_*<t_{\mathrm{coll}}$. \qed
 \end{proof}
 \noindent Hypothesis (i) is provable for neo-Hookean (positive-definiteness at $\bm{F}=\bm{I}$ plus Korn). Hypothesis
 (ii) --- the existence of a structurally destabilising field --- is the genuine content and is \emph{not} elementary: it
