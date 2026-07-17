@@ -363,12 +363,14 @@ so
 The volumetric stiffening grows \emph{quadratically} in $J$.
 
 \paragraph{Consequence at the corner.}
-We combine \eqref{eq:Hessbound} with (NC) ($\|\bm{F}^{-1}\|^2\le c^{-2}$) and the tensile kinematics. In the
-non-compressive regime exactly one stretch diverges: $\lambda_{\max}\sim|K|\,r^{\alpha-1}$ while the remaining $d-1$
-stretches stay bounded (in particular $\lambda_{\min}$ bounded below), so $J=\det\bm{F}=\prod_i\lambda_i\sim
-r^{\alpha-1}$. (If instead $\Grad\bm{u}$ had two diverging eigenvalues, the corresponding subdeterminant would give
-$J\sim r^{2(\alpha-1)}$; we work in the one-large-stretch regime characteristic of a Dirichlet--Neumann opening, where
-$J\sim r^{\alpha-1}$.) The tangent norm near the corner then obeys
+We combine \eqref{eq:Hessbound} with (NC) ($\|\bm{F}^{-1}\|^2\le c^{-2}$) and the tensile kinematics. Two kinematic
+regimes are possible at fixed angle: either exactly one stretch diverges, $\lambda_{\max}\sim|K|\,r^{\alpha-1}$ with the
+remaining stretches bounded, giving $J=\det\bm{F}\sim r^{\alpha-1}$; or two stretches diverge and the corresponding
+subdeterminant gives $J\sim r^{2(\alpha-1)}$. For the norm bounds of this subsection the distinction is immaterial ---
+under Assumption~\ref{ass:mild} both give $\Theta(J)=\mathcal{O}\big((\log\tfrac1r)^p\big)$ --- and we quote the
+one-large-stretch scaling $J\sim r^{\alpha-1}$ as the representative case; the angular structure of the two regimes
+under the Williams ansatz, which turns out to \emph{sharpen} the corner theory, is resolved in
+Lemma~\ref{lem:screen} below. The tangent norm near the corner then obeys
 \begin{equation}
     \label{eq:Lcornergrowth}
     \|\mathbb{L}(\bm{x})\| \le \mu_e + c^{-2}\,\Theta\!\big(\det\bm{F}(\bm{x})\big) \sim
@@ -431,7 +433,8 @@ $f_{\mathrm{quad}}$ does not.
 
 \begin{proof}
     By \eqref{eq:Hessbound} and (NC), $\|\mathbb{L}\|\le \mu_e + c^{-2}\Theta(\det\bm{F})$. Assumption~\ref{ass:mild}
-    and $\det\bm{F}=\mathcal{O}(r^{\alpha-1})$ give $\Theta(\det\bm{F})=\mathcal{O}\big((\log\tfrac1r)^p\big)$, and
+    and $\det\bm{F}=\mathcal{O}(r^{-2(1-\alpha)})$ (either kinematic regime) give
+    $\Theta(\det\bm{F})=\mathcal{O}\big((\log\tfrac1r)^p\big)$, and
     $(\log\tfrac1r)^p\le C_\varepsilon r^{-\varepsilon}$ on $(0,\rho]$ for every $\varepsilon>0$. \qed
 \end{proof}
 
@@ -484,6 +487,91 @@ penalty is made stiffer against extreme dilation (large $\lambda_e/\mu_e$); a mo
 $r_*=0$ and no core. This is the tensile mirror of the model-dependence already seen for $\Theta$ in
 \S\ref{sub:growth}, and it confines the genuinely delicate behaviour to a controlled inner region.
 
+% The kinematic input for the corner theory: the Williams ansatz as a tensor statement, with its angular structure.
+The corner statements of Theorem~\ref{thm:A} require one further input, and it is kinematic: the norm bound of
+Lemma~\ref{lem:Abound} controls the \emph{size} of the tangent but not its \emph{limit} at the vertex, and it is the
+limit that fixes the corner pencil. We therefore impose the Williams ansatz in tensor form and record its consequence,
+which is stronger than one might expect: at the vertex the nonlinear tangent does not converge to the linearised
+elasticity tensor at all --- it converges to the \emph{scaled identity} $\mu_e\mathbb{I}$, because every nonlinear term
+of \eqref{eq:Lnh} carries two factors of $\bm{F}^{-T}$ and the extreme stretch drives $\bm{F}^{-1}\to0$. The large
+deformation \emph{screens} the volumetric coupling.
+
+\begin{assumption}[Williams-ansatz kinematics, (W)]
+    \label{ass:williams}
+    On $B_\rho$ the state satisfies
+    $\bar{\bm{F}}(r,\theta)=\bm{I}+K\,r^{\alpha-1}\big(\bm{G}(\theta)+o(1)\big)$ uniformly in $\theta$, with
+    $\bm{G}(\theta)=\alpha\,\bm{\Phi}(\theta)\otimes\hat{\bm{e}}_r+\bm{\Phi}'(\theta)\otimes\hat{\bm{e}}_\theta$ the
+    gradient profile of \eqref{eq:kondratiev}. The profile is \emph{nondegenerate}: the angular determinant
+    $\mu(\theta):=\det\bm{G}(\theta)=\alpha\,\bm{\Phi}(\theta)\!\times\!\bm{\Phi}'(\theta)$ is nonnegative on
+    $[0,\pi/2]$ with finitely many zeros, each of finite order, and $\tr\bm{G}\neq0$ at each zero. (The Dirichlet
+    condition $\bm{\Phi}(0)=\bm{0}$ forces a zero of order two at the clamped face; nonnegativity of $\mu$ is the
+    orientation consistency $J>0$ of the ansatz itself.)
+\end{assumption}
+
+\begin{lemma}[Vertex screening of the tangent]
+    \label{lem:screen}
+    Let Assumptions~\ref{ass:reg}, \ref{ass:growth}, \ref{ass:mild} and (W) hold, set
+    $r_K:=|K|^{-1/(1-\alpha)}$, and define the \emph{degenerate-ray layers}
+    \begin{equation}
+        \label{eq:layers}
+        \Lambda(r):=\Big\{\theta\in[0,\tfrac\pi2] : \mu(\theta)\le 2\,\|\bm{G}\|_\infty\,(r/r_K)^{1-\alpha}\Big\},
+        \qquad |\Lambda(r)|\le C\,(r/r_K)^{(1-\alpha)/q_0},
+    \end{equation}
+    with $q_0$ the maximal order of the zeros of $\mu$. Then, for $r$ small:
+    \begin{enumerate}
+        \item[\textup{(i)}] \emph{Off the layers} ($\theta\notin\Lambda(r)$) both transverse stretches diverge,
+              $J= K^2r^{2(\alpha-1)}\big(\mu(\theta)+o(1)\big)$, the inverse gradient decays algebraically,
+              $\|\bar{\bm{F}}^{-1}\|\le C\,(r/r_K)^{1-\alpha}/\mu(\theta)$, and hence
+              \begin{equation}
+                  \label{eq:screen}
+                  \big\|\mathbb{L}(\bar{\bm{F}})-\mu_e\mathbb{I}\big\|
+                  \;\le\; \Theta(J)\,\|\bar{\bm{F}}^{-1}\|^2
+                  \;\le\; C\,\big(\log\tfrac1r\big)^{p}\,(r/r_K)^{2(1-\alpha)}\,\mu(\theta)^{-2}\;\longrightarrow\;0 .
+              \end{equation}
+        \item[\textup{(ii)}] \emph{On the layers} the one-large-stretch regime of \S\ref{sub:growth} holds:
+              $J\sim K r^{\alpha-1}\tr\bm{G}$, the smallest stretch is bounded below by a constant $c(\bm{G})>0$ ---
+              so (NC) holds there automatically --- and $\|\mathbb{L}\|\le\mu_e+C(\log\tfrac1r)^p$ by
+              Lemma~\ref{lem:Abound}.
+        \item[\textup{(iii)}] Consequently $\mathbb{L}(\bar{\bm{F}}(r,\cdot))\to\mu_e\mathbb{I}$ in $L^q(0,\pi/2)$ for
+              every $q<\infty$ at an algebraic rate, though not in $L^\infty$; and off the layers the
+              Legendre--Hadamard form $\mu_e|\bm m|^2|\bm N|^2+f''(J)J^2\xi^2$ of \eqref{eq:LHnh} satisfies
+              $|f''(J)J^2|\,\|\bar{\bm{F}}^{-1}\|^2\to0$, so strong ellipticity holds down to the vertex there
+              \emph{even where} $f''<0$.
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    In two dimensions the cofactor is affine, $\operatorname{cof}(\bm{I}+\bm{M})=\bm{I}+\operatorname{cof}\bm{M}$, and
+    $\det(\bm{I}+\bm{M})=1+\tr\bm{M}+\det\bm{M}$. With $\bm{M}=K r^{\alpha-1}(\bm{G}+o(1))$ the determinant reads
+    $J=1+Kr^{\alpha-1}\big(\tr\bm{G}+o(1)\big)+K^2r^{2(\alpha-1)}\big(\mu(\theta)+o(1)\big)$. Off the layers the
+    quadratic term dominates by the defining inequality of \eqref{eq:layers}, giving the stated $J$ and, from
+    $\bar{\bm{F}}^{-1}=\operatorname{cof}\bar{\bm{F}}^{\,T}/J$ with
+    $\|\operatorname{cof}\bar{\bm{F}}\|\le 1+|K|r^{\alpha-1}\|\bm{G}\|_\infty$, the decay of
+    $\|\bar{\bm{F}}^{-1}\|$. The bound \eqref{eq:screen} then follows from \eqref{eq:Lnh}: both nonlinear terms are
+    quadratic contractions of $\bm{F}^{-T}$ with scalar prefactors dominated by $\Theta(J)$
+    (proof of Lemma~\ref{lem:nh}), and $\Theta(J)=\mathcal{O}((\log\tfrac1r)^p)$ by Assumption~\ref{ass:mild}. On a
+    layer, $\mu$ is small, the linear term $Kr^{\alpha-1}\tr\bm{G}$ dominates $J$ (using $\tr\bm{G}\neq0$ at the zeros
+    of $\mu$), $\bm{M}$ is a bounded perturbation of a large near-rank-one matrix, and
+    $\lambda_{\min}=J/\lambda_{\max}\to \tr\bm{G}/\|\bm{G}\|$-type constants: (NC) holds with a computable $c$. The
+    measure bound in \eqref{eq:layers} is the finite-order condition on the zeros of $\mu$. Part (iii) integrates
+    \eqref{eq:screen} in $\theta$ against the layer bound, and the ellipticity statement is \eqref{eq:LHnh} with
+    $|\xi|\le|\bm m||\bm N|\,\|\bar{\bm F}^{-1}\|$. \qed
+\end{proof}
+
+% What the screening lemma does to the corner picture: pencil at the vertex is the Laplacian, elasticity is intermediate.
+Lemma~\ref{lem:screen} replaces the naive expectation that the corner pencil of the nonlinear tangent should be that of
+linearised elasticity. It cannot be: for any $K\neq0$ the state leaves every neighbourhood of $\bm{I}$ as $r\to0$, so
+$\mathbb{L}(\bar{\bm{F}})$ never returns to $\mathbb{L}(\bm{I})$ at the vertex --- smallness of $|K|$ only shrinks the
+crossover radius $r_K$ below which the field is large. What the tangent \emph{does} approach is $\mu_e\mathbb{I}$, the
+decoupled vector Laplacian, whose mixed Dirichlet--Neumann pencil on the quarter-plane has spectrum
+$s\in\{1,3,5,\dots\}$ (each Cartesian component separates, $\sin(s\theta)$ with $\cos(s\pi/2)=0$): \emph{no exponent in
+$(0,1)$}. The corner operator is therefore a \emph{two-scale} operator --- linearised elasticity with the Williams
+exponents $\alpha(\nu)$ on the intermediate annulus $r_K\ll r\ll\rho$, the Laplacian pencil with Lipschitz-regular
+increments at the vertex itself --- and since every inner exponent exceeds $1>\alpha$, the $r^\alpha$ Williams field
+remains the dominant asymptotics visible from any fixed scale. This is the precise content we can prove of the slogan
+that the tensile corner \emph{passes like linear elasticity}: it passes like linear elasticity on the mesh-relevant
+intermediate range, and \emph{better} than linear elasticity at the vertex.
+
 For the weighted well-posedness we recall two standard inequalities in the Kondratiev space
 $V^{1,2}_\beta(B_\rho)$---the closure of smooth functions vanishing on $\Gamma_D\cap\partial B_\rho$ under
 $\|\bm{v}\|_{V^{1,2}_\beta}^2 = \int_{B_\rho} \big(r^{2\beta}|\Grad\bm{v}|^2 + r^{2\beta-2}|\bm{v}|^2\big)\,dV$.
@@ -531,13 +619,17 @@ write the Newton-step bilinear form as
     The consequences split according to whether the vertex lies in the elliptic region.
 
     \emph{(A) Globally convex-volumetric barrier ($f''\ge0$ together with the standing
-    Assumptions~\ref{ass:reg}--\ref{ass:mild}, e.g.\ $f_{\log}$ with a finite-extensibility cap $J_{\max}\le J_*$ on the
-    dilation).} Then the dilation core is empty, $r_*=0$, ellipticity holds on the \emph{full} corner
-    neighbourhood $\Omega=B_\rho$ \emph{including the vertex}, and \eqref{eq:Abounded}--\eqref{eq:Agaarding} hold on
-    $V^{1,2}_{\beta_\star}(B_\rho)$. Hence the linearised corner operator is Fredholm of index zero in
-    $V^{1,2}_{\beta_\star}(B_\rho)$; for $\beta_\star$ avoiding the corner spectrum it is an isomorphism, its solutions
-    admit the Kondratiev asymptotic expansion \eqref{eq:kondratiev} at the vertex, and the governing singular exponents
-    coincide with those of the linearised elasticity problem. This is the genuine corner result.
+    Assumptions~\ref{ass:reg}--\ref{ass:mild}; the pure logarithmic barrier $f(J)=-\mu_e\log J$, for which
+    $f''(J)J^2=\mu_e>0$ globally and $\Theta\equiv\mu_e$, is the model exemplar).} Then the dilation core is empty,
+    $r_*=0$, ellipticity holds on the \emph{full} corner neighbourhood $\Omega=B_\rho$ \emph{including the vertex}, and
+    \eqref{eq:Abounded}--\eqref{eq:Agaarding} hold on $V^{1,2}_{\beta_\star}(B_\rho)$. Hence the linearised corner
+    operator is Fredholm of index zero in $V^{1,2}_{\beta_\star}(B_\rho)$. Under the kinematic hypothesis (W) the
+    vertex asymptotics are \emph{two-scale} (Lemma~\ref{lem:screen}): at the vertex itself the governing pencil is that
+    of the screened limit $\mu_e\mathbb{I}$ --- the mixed Dirichlet--Neumann vector-Laplacian pencil, with exponents
+    $s\in\{1,3,5,\dots\}$, so the Newton increments are \emph{regular} at the tip --- while the Williams exponents
+    $\alpha(\nu)$ of linearised elasticity govern the intermediate annulus $r_K\ll r\ll\rho$ and remain the dominant
+    asymptotics visible from any fixed scale, every inner exponent exceeding $1>\alpha$. This is the genuine corner
+    result.
 
     \emph{(B) Logarithmic barrier $f_{\log}$ ($r_*>0$).} The vertex sits inside the non-elliptic core $\{r\le r_*\}$
     (Lemma~\ref{lem:Aellip}), so the estimates hold only on the \emph{vertex-free} annulus $\Omega=A_*=\{r_*<r<\rho\}$.
@@ -573,19 +665,21 @@ write the Newton-step bilinear form as
     excludes the vertex, the two Kondratiev norms $V^{1,2}_{\beta_\star}$ and $V^{1,2}_{-\beta_\star-\delta}$ are then
     comparable (they differ only at the vertex, which $A_*$ omits), and \eqref{eq:Abounded} follows directly with
     $\Lambda=\Lambda(\delta)$. In case (A) the vertex is interior to $\Omega=B_\rho$ and the two norms are \emph{not}
-    comparable there, so the same-space estimate is obtained by perturbation off the constant-coefficient symbol rather
-    than by norm comparison. Write $\mathbb{L}=\mathbb{L}_{\mathrm{lin}}+\mathbb{R}$, with $\mathbb{L}_{\mathrm{lin}}$
-    the frozen linear-elasticity tensor at the vertex (whose pencil is Fredholm in $V^{1,2}_{\beta_\star}(B_\rho)$ for
-    $\beta_\star$ off the corner spectrum, by Kondratiev--Maz'ya theory \cite{KMR2001}) and
-    $\mathbb{R}=\mathbb{L}-\mathbb{L}_{\mathrm{lin}}=\mathcal{O}(\log\tfrac1r)$ the nonlinear correction. The hypotheses
-    of the relevant stability theorem are exactly: (a) $\mathbb{L}_{\mathrm{lin}}$ is strongly elliptic and its pencil
-    has no eigenvalue on $\Re\lambda=\beta_\star$; and (b) $\mathbb{R}$ is \emph{subordinate} to the principal part,
-    $\|\mathbb{R}\|=o(r^{-\delta})$ for every $\delta>0$ (Lemma~\ref{lem:Abound}), hence of relative bound $0$ with
-    respect to the Hardy-weighted graph norm. Both are met here, so the standard subordinate-perturbation theorem of
-    \cite{KMR2001} applies: the admissible weight interval is unmoved and the \emph{full} pair of estimates
-    \eqref{eq:Abounded}--\eqref{eq:Agaarding} --- not boundedness alone --- transfers from $\mathbb{L}_{\mathrm{lin}}$
-    to $\mathbb{L}$ on $V^{1,2}_{\beta_\star}(B_\rho)$. In both cases the logarithmic growth does not shift the
-    admissible interval; no singular weight is ``absorbed'' into $\bm{v}$.
+    comparable there, so the same-space estimate is obtained by perturbation off a constant-coefficient symbol. The
+    correct reference symbol at the vertex is \emph{not} $\mathbb{L}_{\mathrm{lin}}=\mathbb{L}(\bm{I})$: for any
+    $K\neq0$ the state leaves every neighbourhood of $\bm{I}$ as $r\to0$, so
+    $\mathbb{L}-\mathbb{L}_{\mathrm{lin}}$ does not vanish at the vertex, and a non-vanishing (let alone
+    logarithmically growing) principal-symbol perturbation shifts a corner pencil --- the class $o(r^{-\delta})$ for
+    every $\delta$ contains bounded perturbations and is \emph{not} an admissible perturbation class for pencil
+    stability. The correct reference symbol is the screened limit of Lemma~\ref{lem:screen}: write
+    $\mathbb{L}=\mu_e\mathbb{I}+\mathbb{R}$, so that under (W) the perturbation obeys
+    $\|\mathbb{R}\|\le\varepsilon(r)\to0$ algebraically off the layers $\Lambda(r)$ of \eqref{eq:layers}, and
+    $\|\mathbb{R}\|=\mathcal{O}((\log\tfrac1r)^p)$ on the layers themselves, whose angular measure vanishes
+    algebraically. The off-layer part is a classical vanishing perturbation in the sense of Kondratiev--Maz'ya
+    \cite{KMR2001}, under which the admissible weight interval of the reference (vector-Laplacian) pencil is unmoved
+    and the \emph{full} pair of estimates \eqref{eq:Abounded}--\eqref{eq:Agaarding} transfers to $\mathbb{L}$ on
+    $V^{1,2}_{\beta_\star}(B_\rho)$; the layer part is controlled in the dual pairing by the $\delta$-slack exactly as
+    above, and its absorption into the pencil statement is the perturbation step singled out at the end of the proof.
 
     \emph{G\aa rding inequality.} By Lemma~\ref{lem:Aellip} the symbol $\mathbb{L}(\bm{x})$ is strongly elliptic on
     $\Omega$ with the constant Legendre--Hadamard modulus $\mu_e$. Freezing the (measurable, uniformly elliptic)
@@ -606,11 +700,20 @@ write the Newton-step bilinear form as
 
     \emph{Fredholm property and exponents.} Estimates \eqref{eq:Abounded}--\eqref{eq:Agaarding} place the operator in the
     Kondratiev--Maz'ya framework \cite{KMR2001}: it is Fredholm of index zero in $V^{1,2}_{\beta_\star}(\Omega)$ whenever
-    $\beta_\star$ avoids the spectrum of the corner operator pencil. In case (A), where $\Omega=B_\rho$ contains the
-    vertex, this is a genuine corner statement: because the nonlinear correction to the principal symbol is subordinate
-    (it is $o(r^{-\delta})$ for every $\delta$, by Lemma~\ref{lem:Abound}), the pencil coincides with that of linearised
-    elasticity, and its eigenvalues are exactly the exponents $\alpha$ of \eqref{eq:kondratiev}, unchanged by the
-    nonlinearity. In case (B), where $\Omega=A_*$ omits the vertex, the same estimates give Fredholmness and
+    $\beta_\star$ avoids the spectrum of the governing corner pencil. In case (A), where $\Omega=B_\rho$ contains the
+    vertex, the governing pencil is fixed by the vertex limit of the coefficients, and by Lemma~\ref{lem:screen} that
+    limit is $\mu_e\mathbb{I}$: the vertex pencil is the mixed Dirichlet--Neumann pencil of the decoupled vector
+    Laplacian, with spectrum $\{1,3,5,\dots\}$ and hence no eigenvalue in the strip $0<\Re\lambda<1$; the energy weight
+    is admissible with room to spare, and the elastic expansion \eqref{eq:kondratiev} with the Williams exponents
+    $\alpha$ is recovered as \emph{intermediate} asymptotics on $r_K\ll r\ll\rho$, where $\bar{\bm F}\approx\bm I$ and
+    $\mathbb{L}\approx\mathbb{L}_{\mathrm{lin}}$. Two technical steps in this transfer are stated as such rather than
+    hidden: the absorption of the degenerate-ray layers (a perturbation bounded, up to a logarithm, on angular sets of
+    algebraically vanishing measure, to be handled by higher integrability of the gradient on dyadic annuli), and the
+    transmission of the Dirichlet condition through the collapsing elastic boundary layer at the clamped face, inside
+    which the field stays moderate. Both are perturbation statements about a \emph{vanishing} deviation from the
+    screened limit --- an entirely lesser order of difficulty than the pencil statement for the non-vanishing deviation
+    from $\mathbb{L}_{\mathrm{lin}}$ that a naive comparison with linear elasticity would require. In case (B), where
+    $\Omega=A_*$ omits the vertex, the same estimates give Fredholmness and
     well-posedness on the annulus, but the inner boundary $r=r_*$ is a smooth interface, not a conical point, so the
     pencil eigenvalues describe no vertex asymptotics there; the corner expansion \eqref{eq:kondratiev} is recovered only
     in the limit $r_*\downarrow0$ on fixed sub-annuli, and the genuine vertex theory for $f_{\log}$ remains the open
@@ -620,18 +723,24 @@ write the Newton-step bilinear form as
 \begin{remark}[The dilation core]
     \label{rem:core}
     For $f_{\log}$ the conclusion of Theorem~\ref{thm:A} is genuinely confined to $A_*$: the vertex itself sits inside the
-    core $\{r\le r_*\}$, where $J>J_*$ and $f_{\log}$ is not strongly elliptic. Three readings are consistent with the
+    core $\{r\le r_*\}$, where $J>J_*$ and $f_{\log}$ is not strongly elliptic. Four readings are consistent with the
     analysis. (i) \emph{Mild loading}: for stress-intensity $|K|$ small the core radius $r_*=(|K|/J_*)^{1/(1-\alpha)}$ is
     so small that the corner is elliptic on all of $B_\rho$ down to mesh scale, and the theorem governs the entire
     computationally resolved region. (ii) \emph{Sharper model statement}: the tensile corner ``passes like linear
     elasticity'' on $A_*$, and the only obstruction is the material law's own loss of ellipticity past $J_*$---a property
     of $f_{\log}$, not of the corner. (iii) \emph{Open inner problem}: a complete vertex theory for $f_{\log}$ requires a
     separate analysis inside the non-elliptic core, which we leave open; a globally convex-volumetric barrier
-    ($f''\ge0$, $r_*=0$) removes the issue entirely and recovers the unrestricted statement. Physically, the loss of
-    ellipticity past $J_*$ is an artefact of the unbounded dilation that $f_{\log}$ permits: real polymer networks reach
-    \emph{finite extensibility}, and a volumetric law that caps the dilation, $J<J_{\max}$ (the bulk analogue of the
-    Gent deviatoric model), with $J_{\max}\le J_*$ keeps $f''>0$ throughout the attainable range and so eliminates the
-    core. The dilation core is thus a feature of the specific large-$J$ tail of $f_{\log}$, not a physical catastrophe.
+    ($f''\ge0$, $r_*=0$) removes the issue entirely and recovers the unrestricted statement. (iv) \emph{Screened core
+    geometry}: under the kinematic hypothesis (W) the core is not, in fact, a full disc. By Lemma~\ref{lem:screen}(iii)
+    the Legendre--Hadamard defect $f''(J)J^2\xi^2$ is damped by $\|\bar{\bm F}^{-1}\|^2\to0$ off the degenerate-ray
+    layers, so strong ellipticity survives \emph{down to the vertex} there even though $f''<0$; the genuinely delicate
+    set shrinks to the layers $\Lambda(r)$ of \eqref{eq:layers} together with a bounded transition collar $r\sim r_K$
+    where the field is $\mathcal{O}(1)$-nonlinear. One caution on the finite-extensibility reading sometimes offered
+    here: a volumetric law that caps the dilation, $J<J_{\max}$, is \emph{incompatible} with the assumed corner
+    kinematics rather than a cure for it --- under (NC) and $\lambda_{\max}\sim|K|r^{\alpha-1}$ one has
+    $J\ge c\,\lambda_{\max}\to\infty$, so a capped material cannot carry the Williams blow-up at all and the state
+    must reorganise, changing the ansatz rather than the tangent. The dilation core is thus a feature of the specific
+    large-$J$ tail of $f_{\log}$ interacting with the assumed kinematics, not a physical catastrophe.
 \end{remark}
 
 \begin{remark}[Stress is singular, operator is not]
@@ -1217,7 +1326,9 @@ Remark~\ref{rem:rotnum}) and show it is dominated by the second-order relief.
     $d_\phi:=\tfrac12\,\tfrac{d^2}{dw^2}\big|_{0}\det(\bm{F}_0+w\,\Grad\bm{\phi})$ be the second-order coefficient of
     the determinant --- the second mixed discriminant of $\bm{F}_0$ ($d-2$ copies) with $\Grad\bm{\phi}$ (two copies),
     which for $d=2$ reduces to $\det(\Grad\bm{\phi})$. We take the mode to satisfy the relief-orienting condition
-    $d_\phi>0$ a.e.\ \emph{on a neighbourhood of the collapse locus} $\Sigma_{\mathrm{c}}$ --- the only region where the
+    $d_\phi\ge c_d>0$ a.e.\ \emph{on a neighbourhood of the collapse locus} $\Sigma_{\mathrm{c}}$, with a uniform floor
+    $c_d$ (Young's inequality in case~(ii) below divides by $d_\phi$, so positivity without a floor would leave the
+    constants in \eqref{eq:Jlower} non-uniform on the tube) --- the only region where the
     relief floor is invoked (\eqref{eq:dphisign} in \S\ref{sub:reliefd}; a property of the mode, \emph{not} supplied by the
     transversality Lemma~\ref{lem:sval}). Away from $\Sigma_{\mathrm{c}}$, where $J_0$ stays bounded below, the sign of
     $d_\phi$ is immaterial: the finite-$J_0$ case~(i) below absorbs a negative $w^2 d_\phi$ into the $J_0$ margin. Then
@@ -1260,10 +1371,11 @@ Remark~\ref{rem:rotnum}) and show it is dominated by the second-order relief.
 
     \emph{(ii) Near collapse ($J_0\to0$, on the tube around $\Sigma_{\mathrm{c}}$).} Now $w_0$ from (i) would shrink with
     $J_0$, so we use instead the asymptotic-rotation bound $|D_1|\le c_\phi J_0/\sqrt{|\log J_0|}$ of
-    Assumption~\ref{ass:rot}, \emph{together with} the localised orientation $d_\phi>0$ of \eqref{eq:dphisign} --- the one
+    Assumption~\ref{ass:rot}, \emph{together with} the localised orientation $d_\phi\ge c_d>0$ of \eqref{eq:dphisign} --- the one
     region where that sign is genuinely invoked, as the denominator in Young's inequality
     $|w\,D_1|\le \tfrac12 d_\phi w^2 + \tfrac1{2d_\phi}D_1^2$. With $D_1^2\le c_\phi^2 J_0^2/|\log J_0|\le d_\phi J_0$
-    once $J_0$ is small (the factor $J_0/|\log J_0|\to0$), $\tfrac1{2d_\phi}D_1^2\le\tfrac12 J_0$ and
+    once $J_0$ is small enough that $c_\phi^2 J_0/|\log J_0|\le c_d$ --- a threshold \emph{uniform} on the tube thanks
+    to the floor $d_\phi\ge c_d$ --- $\tfrac1{2d_\phi}D_1^2\le\tfrac12 J_0$ and
     $|w\,D_1|\le \tfrac12 d_\phi w^2+\tfrac12 J_0$, and
     inserting into \eqref{eq:Jexp} yields \eqref{eq:Jlower}. Thus the residual first-order term, far from dominating, is
     swallowed by the barrier-controlled $J_0$ and the relief $w^2 d_\phi$ --- the precise content of ``buckling relieves
