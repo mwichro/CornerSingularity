@@ -71,6 +71,29 @@ paper should answer or explicitly concede (candidate obstruction: `f'' ≥ 0` wi
 Either exhibit a concrete admissible `f` in a remark, or downgrade (A) to a conditional
 statement.
 
+**STATUS (2026-07-17): closed — the class is nonempty with both moduli free, and the
+obstruction sharpened into a characterisation.** In log variables `t = log J`,
+`h(t) := f'(J)J`, convexity reads `h' ≥ h` and `Θ = |h'−h| + |h|`. (i) *Forced sign
+(proved, now `rem:tempered`(i)):* convexity + mild growth force `f' ≤ 0 everywhere` —
+admissible materials are never volumetrically tensile; `f_log` exits the class precisely
+because its volumetric stress turns positive past `J_p = e^{μ_e/2λ_e}`. (ii) *Explicit
+exemplar (`eq:ftempered`):* saturate `f_log`'s linear `h` with
+`h_T = −μ_e + 2λ_e T tanh(t/T)`, `0 < T < μ_e/(2λ_e)`, i.e.
+`f_T(J) = −μ_e log J + 2λ_e T² log cosh(log J / T)`. Verified (analytically and
+numerically): `C^∞`, `f_T(1)=0`, `f_T'(1)=−μ_e`, `f_T''(1)=μ_e+2λ_e` (identical linearised
+moduli and Poisson ratio to `f_log`; `f_T = f_log + O(log⁴J)` at `J=1`), global convexity
+floor `f''J² ≥ μ_e − 2λ_e T > 0`, `Θ ≤ 3μ_e + 2λ_e` bounded (`p=0`), log barrier at
+`J→0⁺`. Interpolates pure log (`T→0`) ↔ `f_log` (inadmissible limit `T→∞`).
+(iii) *One-sided temper:* gluing `f_log` on `J ≤ 1` to `f_T` on `J ≥ 1` is `C³` and leaves
+every compressive statement of the paper pointwise unchanged while removing the dilation
+core (`r_* = 0`) — the thm:A case split is an artefact of the untempered `log²` tail and
+can be deleted for the concrete model at no cost. Implemented: new `rem:tempered` after
+`ass:mild`, exemplar named in `thm:A`(A), table row in `§sub:growth`, finite-extensibility
+caution in `rem:core` now points to the tempered penalty. Open residue: whether to
+actually *adopt* the one-sided temper in the concrete realization (would make the tensile
+side unconditionally case (A)) is a modelling decision left to the authors; numerics for
+compressive states are unaffected by construction.
+
 ### A3. No existence/regularity theory for the compressive fundamental path — partial circularity
 The whole of §4 and §5 presupposes a fundamental branch `u_0(t)` that (a) exists and is
 continuous in `t`, (b) has second-variation form `Q_t` bounded (needed for `μ_1(t)` to be
