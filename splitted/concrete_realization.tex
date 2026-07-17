@@ -98,24 +98,28 @@ operator
               $V^{1,2}_{\beta_\star}(B_R\cap W)$ for every $R>0$, with rate
               $\|\hat{\bm{u}}_\lambda-\hat{\bm{u}}_W\|_{V^{1,2}_{\beta_\star}(B_R\cap W)}=\mathcal{O}(\lambda^{g})$. The
               limit solves the homogeneous linear pencil on $W$ and is fixed by the wedge geometry up to the scalar $K$.
-        \item[\textup{(ii)}] \emph{Operator convergence away from the tip; common vertex pencil.} On every annulus
+        \item[\textup{(ii)}] \emph{Operator convergence away from the tip; common intermediate pencil.} On every annulus
               $\{0<r_0\le r\le R\}\cap W$ bounded away from the vertex, the coefficients of $\widehat{\mathcal{L}}_\lambda$
               converge in $C^0$, with rate $\mathcal{O}(\lambda^{g})$, to those of the model-wedge operator
               $\mathcal{L}_W$ obtained by freezing along the self-similar field $\hat{\bm{u}}_W$. The leading singular
-              exponent $\alpha$ and angular profile $\bm{\Phi}$ are \emph{not} inferred from this annular convergence
-              (they are pencil/vertex data, which annular $C^0$ control cannot reach); rather, they are
-              \emph{identical} for $\widehat{\mathcal{L}}_\lambda$, $\mathcal{L}_W$ and the linearised-elasticity operator
-              alike, because all three share the \emph{same} leading vertex pencil. Indeed at the tip the nonlinear
-              correction to the principal symbol is subordinate ($o(r^{-\delta})$ for every $\delta$, Lemma~\ref{lem:Abound}),
-              so by Theorem~\ref{thm:A} the corner pencil --- and hence its eigenvalues $\alpha$ and eigenprofiles
-              $\bm{\Phi}$ --- coincides with that of constant-coefficient linear elasticity, unchanged by the
-              nonlinearity and independent of $\lambda$. Thus only the dimensionless amplitude $K$ (equivalently the
+              exponent $\alpha$ and angular profile $\bm{\Phi}$ are \emph{intermediate-range} data: they are identical
+              for $\widehat{\mathcal{L}}_\lambda$, $\mathcal{L}_W$ and the linearised-elasticity operator alike on the
+              matching region $r\gg r_{\hat K}$, where the frozen field is a small perturbation of the identity and all
+              three operators reduce to constant-coefficient linear elasticity, with the crossover radius
+              $r_{\hat K}\to0$ as $\hat K\to0$. They are \emph{not} asserted to be vertex-pencil data of the nonlinear
+              operators: at the tip the deviation of the coefficients from linear elasticity does not vanish for any
+              $\hat K\neq0$, and on the tensile side the vertex pencil stabilises instead to the screened
+              (vector-Laplacian) limit of Theorem~\ref{thm:A}(A), whose exponents all exceed one --- so the $r^\alpha$
+              field remains the dominant asymptotics visible from any fixed scale, which is exactly what the
+              universality claim uses. Thus only the dimensionless amplitude $K$ (equivalently the
               normalised stress-intensity $\hat K$ of Remark~\ref{rem:sifparam}) survives from the global problem. We
-              emphasise what is \emph{not} asserted: the away-from-tip convergence governs only the lower-order
-              (non-principal) coefficients; it does not control the operator in a weighted norm \emph{up to} $r=0$, and
-              the agreement of the full Lyapunov--Schmidt reduced data is a leading-order statement rather than a
-              quantitative $\mathcal{O}(\lambda^{g})$ spectral-perturbation theorem, a uniform-to-the-tip estimate
-              requiring the inner vertex theory left open in Remark~\ref{rem:core}.
+              emphasise what is \emph{not} asserted: the away-from-tip convergence does not control the operator in a
+              weighted norm \emph{up to} $r=0$; at the compressive corner no screening is available (the inverse
+              channel $J\to0$ drives the tangent up, and the non-compressive hypothesis behind
+              Lemma~\ref{lem:Abound} fails at the tip), so the agreement of the full Lyapunov--Schmidt reduced data is
+              a leading-order statement rather than a quantitative $\mathcal{O}(\lambda^{g})$ spectral-perturbation
+              theorem, a uniform-to-the-tip estimate requiring the inner vertex theory left open in
+              Remark~\ref{rem:core}.
         \item[\textup{(iii)}] \emph{Dimensional reduction $d\ge3\Rightarrow d=2$.} Since $\Sigma$ is smooth and the
               coefficients are constant along $T_{\bm{x}_0}\Sigma$ in the limit, the Fourier transform in the edge variable
               $\bm{s}\in T_{\bm{x}_0}\Sigma$ decomposes $\mathcal{L}_W$ into a one-parameter family
@@ -135,12 +139,13 @@ operator
     $\mathbb{L}$ is a smooth (algebraic) function of $\bm{F}_0=\bm{I}+\Grad\bm{u}_0$ and $\Grad\hat{\bm{u}}_\lambda\to
         \Grad\hat{\bm{u}}_W$ off the tip by (i); freezing along the self-similar limit defines $\mathcal{L}_W$, and the
     coefficient error inherits the $\mathcal{O}(\lambda^{g})$ rate of (i) on every annulus
-    $\{r_0\le r\le R\}$ bounded away from $r=0$. The leading exponent and angular profile are obtained not from this
-    annular convergence but from the principal-symbol structure at the vertex: by Lemma~\ref{lem:Abound} the nonlinear
-    correction to the principal symbol is subordinate (relative bound $0$), so by Theorem~\ref{thm:A} the corner pencils
-    of $\widehat{\mathcal{L}}_\lambda$ and of $\mathcal{L}_W$ both coincide with that of constant-coefficient linear
-    elasticity at $\bm{x}_0$; their eigenvalues $\alpha$ and eigenprofiles $\bm{\Phi}$ are therefore equal (not merely
-    close), independently of $\lambda$. We do \emph{not} claim a weighted operator-norm estimate uniform up to $r=0$:
+    $\{r_0\le r\le R\}$ bounded away from $r=0$. The leading exponent and angular profile are read on the matching
+    region: for $r\gg r_{\hat K}$ the frozen coefficients of $\widehat{\mathcal{L}}_\lambda$ and of $\mathcal{L}_W$
+    alike are $\mathcal{O}((r/r_{\hat K})^{-(1-\alpha)})$-close to constant-coefficient linear elasticity at
+    $\bm{x}_0$, whose Kondratiev data $(\alpha,\bm{\Phi})$ therefore govern both operators on that range,
+    independently of $\lambda$; on the tensile side Theorem~\ref{thm:A}(A) guarantees in addition that the vertex
+    contributes no competing exponent below one, so $(\alpha,\bm{\Phi})$ is the leading visible asymptotics. We do
+    \emph{not} claim a weighted operator-norm estimate uniform up to $r=0$:
     the tip contributes through the weight, not through the body, and its quantitative control is the open inner problem
     of Remark~\ref{rem:core}; accordingly the agreement of the full reduced bifurcation data is asserted only at leading
     order. Statement (iii) is the standard edge-to-corner reduction: translation
@@ -186,8 +191,9 @@ $\Pi$, modulated smoothly along $\Sigma$. That transverse pencil is the planar r
 \eqref{eq:kondratiev}; its leading exponent $\alpha\in(0,1)$ is the smallest root of the corresponding clamped--free
 Williams secular equation and depends only on the Poisson ratio. Consequently the kinematic blow-up \eqref{eq:Fblowup},
 $\bm{F}=\bm{I}+\mathcal{O}(r^{\alpha-1})$, holds with a \emph{computable} exponent, and by Theorem~\ref{thm:A} the
-nonlinear tangent inherits exactly this $\alpha$ in the benign regime --- on the annulus outside the dilation core of
-Lemma~\ref{lem:Aellip}, the core being absent for mild loading or a globally convex-volumetric barrier.
+nonlinear tangent inherits exactly this $\alpha$ in the benign regime on the intermediate annulus outside the
+nonlinear crossover scale (and outside the dilation core of Lemma~\ref{lem:Aellip}), while at the vertex itself the
+tensile tangent stabilises to the screened Laplacian limit, which contributes no competing exponent below one.
 
 Which scenario of \S\ref{sec:asymptotics} is realized is governed by the sign of the dominant eigenvalue of
 $\Grad\bm{u}$ at the edge, equivalently by the sign of the stress-intensity factor $K$ in \eqref{eq:kondratiev}. This
@@ -603,7 +609,7 @@ bounded below, the sign of $d_\phi$ is immaterial (the finite-$J_0$ case~(i) of 
 $w^2 d_\phi$ into the $J_0$ margin). The localised orientation condition is
 \begin{equation}
     \label{eq:dphisign}
-    d_\phi>0 \qquad\text{a.e.\ on a neighbourhood of $\Sigma_{\mathrm{c}}$ (the relief-orienting sign of the mode),}
+    d_\phi\ \ge\ c_d\ >\ 0 \qquad\text{a.e.\ on a neighbourhood of $\Sigma_{\mathrm{c}}$ (the relief-orienting sign of the mode, with a uniform floor $c_d$),}
 \end{equation}
 which we record as a genericity property of the critical mode, \emph{not} as a consequence of
 Lemma~\ref{lem:sval} (that lemma concerns the transversal vanishing of $\lambda_{\min}$, a different field). The

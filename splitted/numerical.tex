@@ -106,32 +106,38 @@ We stress that this graded solve is genuinely necessary, not a refinement: by Re
 homogeneous (flat) reduction is degenerate --- the second-harmonic response is resonant and $b$ is undefined --- so the
 grading is what regularises the coefficient.
 
-This solve has now been carried out. We discretise the model wedge by a single \emph{consistent} weak (Galerkin)
-scheme --- Chebyshev along the free face $X$, mapped Chebyshev in depth $Y$ --- with the base compression graded
-\emph{monotonically} through the Biot threshold, $\lambda_\parallel(X)=\bar\lambda(1+\hat K\,X/L)$, so the local
-stretch crosses $\lambda_\star$ at a single turning point. The critical mode $\bm\phi$ is taken as the kernel of the
+% Surrogate-cell computation: first evidence, not the prescribed wedge solve.
+A first version of this solve has been carried out on a \emph{surrogate} of the wedge: a graded half-space cell,
+discretised by a single \emph{consistent} weak (Galerkin) scheme --- Chebyshev along the free face $X$, mapped
+Chebyshev in depth $Y$ --- with the corner pre-stress mimicked by a \emph{linear} monotone grading
+$\lambda_\parallel(X)=\bar\lambda(1+\hat K\,X/L)$ through the Biot threshold, in place of the physical
+$r^{\alpha-1}$ profile; the Mellin\,$\times$\,Chebyshev wedge solve prescribed above has not yet been performed, and
+the results below should be read as evidence from that proxy. The critical mode $\bm\phi$ is taken as the kernel of the
 \emph{same} weak operator that is then inverted in the Lyapunov--Schmidt step, and the second harmonic is carried in
 real nodal degrees of freedom; this removes the inconsistency that made an earlier flat single-mode attempt diverge.
-Three facts emerge, each robust under refinement:
+Three facts emerge:
 \begin{itemize}
   \item[\textup{(i)}] The homogeneous ($\hat K=0$) cell carries \emph{no} discrete critical mode --- at $\lambda_\star$
   the operator is already indefinite, the scale-free signature of Remark~\ref{rem:flatdegenerate}.
-  \item[\textup{(ii)}] The monotone grading produces a single \emph{localised} neutral mode, a discrete kernel isolated
-  from the rest of the spectrum by an $O(1)$ gap (numerically $\approx 4$--$5\times10^{-2}$ across
-  $\hat K\in[0.05,0.30]$): the degeneracy is genuinely lifted and the second-order problem $Q\mathcal L_cQ$ is
-  non-resonant, so $\bm\psi$ --- and hence $b$ --- is well defined.
+  \item[\textup{(ii)}] The monotone grading produces a single \emph{localised} neutral mode with a discrete spectral
+  gap to the rest of the spectrum ($\approx 4$--$5\times10^{-2}$ across $\hat K\in[0.05,0.30]$ at the working
+  resolution), so on the discrete cell the second-order problem $Q\mathcal L_cQ$ is non-resonant and $\bm\psi$ ---
+  and hence $b$ --- is well defined. The gap, however, \emph{decreases} under refinement (table below), so the
+  isolation of the kernel in the continuum limit --- and with it the convergence of the reduced coefficients --- is
+  not established by this computation.
   \item[\textup{(iii)}] Decomposing $b=b_{\mathrm{E_4}}+b_{\mathrm{fb}}$ into the (adverse, positive) frozen quartic and
   the Lyapunov--Schmidt feedback, the \emph{normalisation-invariant} ratio $b_{\mathrm{fb}}/b_{\mathrm{E_4}}$ --- both
-  terms scale as $\|\bm\phi\|^4$, so the ratio is independent of the arbitrary mode amplitude --- converges to
-  $\approx-2.3$, comfortably below $-1$. The feedback therefore \emph{overwhelms} the adverse frozen term, and $b<0$.
+  terms scale as $\|\bm\phi\|^4$, so the ratio is independent of the arbitrary mode amplitude --- lies between
+  $-1.9$ and $-2.5$ at every tested resolution: below $-1$ in each case, though oscillating rather than settling to
+  a converged value. At the tested resolutions the feedback \emph{overwhelms} the adverse frozen term, giving $b<0$.
 \end{itemize}
 The status of the two terms is asymmetric, and the computation should be read accordingly: $b_{\mathrm{E_4}}>0$ and
 $b_{\mathrm{fb}}\le0$ are \emph{theorems} (Lemma~\ref{lem:volcoeff}(ii) and Lemma~\ref{lem:fbsign} --- the solver
 cannot find, and never finds, a positive feedback), so the tables below test only the \emph{magnitude} criterion
 $r<-1$. The diagnostic ratio $r:=b_{\mathrm{fb}}/b_{\mathrm{E_4}}$ is \emph{normalisation-invariant} (both terms scale
-as $\|\bm\phi\|^4$) and decides the sign by $b<0\iff r<-1$. It is
-stable under refinement of the angular ($N$) and depth ($N_X$) resolutions, and the discrete kernel stays isolated by
-an $O(1)$ gap throughout:
+as $\|\bm\phi\|^4$) and decides the sign by $b<0\iff r<-1$. Its behaviour under refinement of the angular ($N$) and
+depth ($N_X$) resolutions is shown below; $r$ stays below $-1$ throughout but does not settle, and the discrete
+spectral gap shrinks steadily:
 \begin{center}
     \begin{tabular}{rrcccc}
         \toprule
@@ -144,8 +150,9 @@ an $O(1)$ gap throughout:
         \bottomrule
     \end{tabular}
 \end{center}
-(at $\nu=0.417$, $\hat K=0.15$; $r$ settles near $-2.3$, comfortably below $-1$). Sweeping the physical rectangle, the
-ratio is below $-1$ --- hence $b<0$ --- \emph{throughout} $(\nu,\hat K)$:
+(at $\nu=0.417$, $\hat K=0.15$; $r$ stays below $-1$ at every resolution but oscillates between $-2.09$ and $-2.45$,
+and the concurrent decay of the gap warns that the surrogate cell may lack a well-defined continuum limit). Sweeping
+the physical rectangle at fixed resolution, the ratio is below $-1$ --- hence $b<0$ --- throughout $(\nu,\hat K)$:
 \begin{center}
     \begin{tabular}{rccc}
         \toprule
@@ -159,9 +166,11 @@ ratio is below $-1$ --- hence $b<0$ --- \emph{throughout} $(\nu,\hat K)$:
     \end{tabular}
 \end{center}
 The margin to the threshold $r=-1$ is smallest near the incompressible corner ($\nu\to\tfrac12$, $\hat K\approx0.2$),
-where $r\approx-1.65$, and is never breached on the physical rectangle. Thus the corner bifurcation is subcritical
-(Assumption~\ref{ass:subcrit} holds), the imperfect-bifurcation picture applies, and the corner is the genuine
-crease-analogue. For the definitive computation we recommend, in place of the assembled $r$, the inversion-free
+where $r\approx-1.65$, and is never breached on the physical rectangle. On this evidence the cubic clause of
+Assumption~\ref{ass:subcrit} holds and the corner behaves as the genuine crease-analogue; but the evidence comes
+from the surrogate cell and has not converged, so we treat it as strong support rather than verification. The
+quintic clause $d>0$ is not tested by this computation at all and remains fully open (Remark~\ref{rem:fbstatus}).
+For the definitive computation we recommend, in place of the assembled $r$, the inversion-free
 certification criterion of Corollary~\ref{cor:cert}/Proposition~\ref{prop:certdeg}: the invariant $\Gamma$ of
 \eqref{eq:gammadef} needs only one trilinear integral and one Rayleigh quotient on an explicit test field, so it is
 immune to the growth of $\mathrm{cond}(B)$ that the bordered Lyapunov--Schmidt solve suffers as the flat resonance is

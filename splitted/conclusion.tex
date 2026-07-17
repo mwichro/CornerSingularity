@@ -5,7 +5,9 @@ symptom rather than the substance.
 
 The central finding is a dichotomy in the asymptotic behaviour of the linearised tangent operator, governed by the
 loading direction and the volumetric penalty. In tension the logarithmic barrier $f_{\log}$ yields a \emph{benign}
-singularity: the tangent stays strongly elliptic and Fredholm, the standard Kondratiev edge exponents survive, and the
+singularity: the tangent stays strongly elliptic and Fredholm, the standard Kondratiev edge exponents survive as the
+intermediate asymptotics outside the nonlinear crossover scale --- at the vertex itself the extreme stretch screens the
+volumetric coupling and the tangent stabilises to a decoupled Laplacian with no singular exponent at all --- and the
 well-posedness of the linearised step holds in the weighted corner spaces (Theorem~\ref{thm:A}). Under compression the
 local volume contraction drives an algebraic blow-up of the operator norm. We proved that this breakdown is a
 \emph{structural bifurcation}, not a material loss of ellipticity (Lemma~\ref{lem:SEcompress}): the corner remains
@@ -44,10 +46,11 @@ also leaves to computation \cite{Biot1963,Hong2009}: they are inherited here, no
 which adds the singular pre-stress and the localisation but no new open hypothesis.
 
 Both surviving conditions are, in practice, decided by the spectral computation of \S\ref{sec:numerical}. The sign of
-the cubic coefficient is the more complete of the two: the consistent graded-wedge solve of \S\ref{sub:numb} returns
-$b<0$ \emph{throughout} the physical $(\nu,\hat K)$ rectangle --- the normalisation-invariant feedback ratio stays below
-its critical value $-1$ everywhere, with the smallest margin near the incompressible corner --- so subcriticality
-(Assumption~\ref{ass:subcrit}) is numerically established, not merely posited. What remains genuinely beyond reach here is
+the cubic coefficient is the more complete of the two: the graded-cell solve of \S\ref{sub:numb} returns
+$b<0$ throughout the tested $(\nu,\hat K)$ rectangle --- the normalisation-invariant feedback ratio stays below
+its critical value $-1$ at every tested resolution, with the smallest margin near the incompressible corner --- so the
+cubic clause of subcriticality is numerically supported, though on a surrogate cell whose refinement behaviour is not
+yet settled; the quintic clause $d>0$ remains untested. What remains genuinely beyond reach here is
 analytic rather than numerical: a \emph{closed-form, configuration-free} criterion for $\operatorname{sign} b$, which the
 homogeneity count of Proposition~\ref{prop:bcount} shows cannot exist in the localised form available for the stretch
 thresholds, precisely because $\alpha>\tfrac12$ keeps the cubic integral globally $\hat K$-dependent. The loading side of
