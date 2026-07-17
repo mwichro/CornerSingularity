@@ -110,6 +110,40 @@ the circularity acknowledged and localised), or a small-load existence lemma (im
 function theorem off `t = 0` in a weighted space) should be added — the latter seems
 provable with the tools already in the paper and would anchor the whole construction.
 
+**STATUS (2026-07-17): largely closed — existence proved, circularity dissolved,
+irreducible hypotheses named; A5 closed as a by-product, A4 folded into (FP).**
+Findings and implementation:
+1. *The IFT route proposed above does not work* — for any `t > 0` the linear Williams
+   field predicts `J < 0` inside the tip disc, so the linear solution is not even in the
+   energy's domain and no contraction around it is available. The correct anchor is
+   variational: new `lem:fundexist` proves existence of a global minimiser for every `t`
+   by the direct method, using (a) the 2D affine-cofactor identity ⇒ `det∇u` weakly
+   continuous along bounded-`H¹` sequences with no singular part (the distributional
+   limit is pinned to the `L¹` function `det∇u`), (b) Goffman–Serrin/affine-minorant
+   lower semicontinuity for the convex penalty (no superlinearity needed), (c) barrier ⇒
+   `J > 0` a.e. Also: `E_min(t) ≤ Ct²` and `E_min` continuous. Requires the penalty
+   globally convex — a *second dividend of the A2 tempered class* (`f_log` itself is
+   obstructed by the same large-`J` nonconvexity as its dilation core; stated honestly).
+2. *What remains unprovable is named once, up front:* new standing Assumption (FP)
+   (`ass:fp`), before its first use: (i) pre-collapse `λ_min` floor (compressive analogue
+   of (NC); no screening under compression, cf. A1), (ii) the corner expansion with
+   gradient envelope (the former `prop:tipdisc` hypothesis — A4 folded in), (iii) the
+   monotone load-to-stretch map (M). New `rem:fp` states why each resists proof
+   (minimisers of polyconvex energies have no regularity theory; selection continuity not
+   automatic).
+3. *The circularity is dissolved, not just acknowledged:* `lem:tc` rewired — it needs the
+   floor only on `[0, t_*]` (the Biot load, where `λ_min ≈ λ_★ = O(1)`), and under
+   `t_* < t_coll` it now *concludes* `t_c ≤ t_* < t_coll`: the (BC) ordering becomes a
+   theorem given one quantitative input, a tip floor at the Biot load (checkable via
+   `eq:scsafe`), rather than a hypothesis at `t_c`. Stated in `lem:tc`, `rem:fp`, and
+   appended to `rem:bc`.
+4. *A5 closed:* `lem:measrep` restated for any branch with `E ≤ E(t)` (minimality never
+   used, only the energy bound); the minimiser branch qualifies by construction, and
+   unstable continuations qualify whenever the monitored energy stays below the bound.
+Remaining open (as expected, now sharply localised): the single lower bound
+`t_coll > t_*` (item B2 of this review), and the (FP)(ii) expansion for the nonlinear
+compressive state (shares its fate with `rem:core`'s inner problem).
+
 ### A4. `prop:tipdisc` applies linear corner asymptotics to the nonlinear state
 The hypothesis "`|∇u_0^♯| ≤ C_♯ (r/ρ)^{α'−1}` \cite{KMR2001,MazyaRossmann2010}" cites
 linear theory for the expansion of the *nonlinear* fundamental state in the compressive
@@ -119,6 +153,11 @@ but it is currently listed in the ledger as an unconditional estimate. Mark its 
 as part of the same standing assumption as A3, or restrict it to the regime where a
 nonlinear expansion is actually available.
 
+**STATUS (2026-07-17): folded into (FP)(ii) — see A3 status.** `prop:tipdisc` now cites
+the expansion as hypothesis (FP)(ii) explicitly ("a genuine hypothesis on the nonlinear
+state, not a citation"), with the no-screening-under-compression reason recorded in
+`rem:fp`.
+
 ### A5. `lem:measrep` assumes the fundamental state is an energy minimiser
 The Chebyshev argument needs `E(u_0(t)) ≤ E(trial)`, i.e. global (or at least
 competitor-beating) minimality under displacement control. Before `t_c` the fundamental
@@ -127,6 +166,10 @@ threatened, it is unstable, so the lemma does not apply there at all). Either we
 "any branch along which the energy stays below the explicit trial bound" (which is what is
 really used, and is checkable), or restrict the statement to `t < t_c` with a stability
 argument.
+
+**STATUS (2026-07-17): closed — see A3 status, item 4.** `lem:measrep` restated for any
+energy-bounded branch; the global-minimiser branch of the new `lem:fundexist` supplies
+the bound by construction, and the past-`t_c` regime is covered by monitoring the energy.
 
 ### A6. Genericity invoked without a parameter
 Two places rely on "generic" with nothing being perturbed: simplicity of the ground state

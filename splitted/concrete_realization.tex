@@ -799,7 +799,13 @@ has bounded coefficients and the spectrum is discrete.
     open, in place of the opaque spectral hypothesis. Lemma~\ref{lem:measrep} and Proposition~\ref{prop:tipdisc} below
     make (ii) and the tip localisation quantitative: collapse is repelled in measure at an explicit logarithmic rate
     and spatially confined to a disc whose radius is explicit in $(\hat K,\alpha)$; the residual content of (BC) is
-    thereby reduced to a pointwise floor on that single shrinking disc.
+    thereby reduced to a pointwise floor on that single shrinking disc. One further consequence of stating the path
+    hypotheses up front (Assumption~\ref{ass:fp}) deserves emphasis: the floor is needed at the \emph{Biot} load
+    $t_*$, not at collapse. By Lemma~\ref{lem:tc}, once $t_*<t_{\mathrm{coll}}$ --- i.e.\ once the tip disc has not
+    collapsed by the load at which the free-face stretch reaches $\lambda_\star$, with the state there uniformly
+    non-degenerate ($\lambda_{\min}\approx\lambda_\star=\mathcal O(1)$ at the creasing point) --- the ordering
+    $t_c\le t_*<t_{\mathrm{coll}}$ is a \emph{conclusion}, not a separate hypothesis: (BC) collapses to the single
+    quantitative bound $t_{\mathrm{coll}}>t_*$, checkable through \eqref{eq:scsafe}.
 \end{remark}
 
 \begin{lemma}[The barrier repels collapse in measure]
@@ -809,9 +815,12 @@ has bounded coefficients and the spectrum is discrete.
         \label{eq:psicoerc}
         \Psi(\bm F)\ \ge\ \lambda_e\,\log^2 J \qquad \text{for all } \bm F\in\mathrm{GL}^+(2).
     \end{equation}
-    Suppose the loading is displacement-controlled, so that $\bm u_0(t)$ minimises $\mathcal E_t=\int\Psi$ among
-    admissible fields, and let $E(t):=\mathcal E_t(\bm u_{\mathrm{trial}})$ for any fixed admissible competitor
-    (finite and explicit for the bodies (H), (C), e.g.\ the smooth ramp extension of the boundary data). Then for
+    Let $\bm u_0(t)$ be \emph{any} admissible branch whose energy stays below an explicit finite bound,
+    $\mathcal E_t(\bm u_0(t))\le E(t)$: minimality itself is not used, only the energy bound. The global-minimiser
+    branch of Lemma~\ref{lem:fundexist} qualifies by construction under displacement control, with
+    $E(t):=\mathcal E_t(\bm u_{\mathrm{trial}})$ for any fixed admissible competitor (finite and explicit for the
+    bodies (H), (C), e.g.\ the smooth ramp extension of the boundary data); so does any stable or unstable
+    continuation --- past $t_c$ included --- on which the energy is monitored and found below $E(t)$. Then for
     every $\delta\in(0,1)$,
     \begin{equation}
         \label{eq:measrep}
@@ -832,16 +841,19 @@ has bounded coefficients and the spectrum is discrete.
         \Psi(\bm F)=\sum_{i}\tfrac{\mu_e}{2}\big(\lambda_i^2-1-\log\lambda_i^2\big)\;+\;\lambda_e\log^2 J
         \ \ge\ \lambda_e\log^2 J,
     \end{equation*}
-    since $s-1-\log s\ge0$ at $s=\lambda_i^2$; this is \eqref{eq:psicoerc}. By minimality
+    since $s-1-\log s\ge0$ at $s=\lambda_i^2$; this is \eqref{eq:psicoerc}. By the assumed energy bound
     $\int_{B_\rho}\lambda_e\log^2J_0\,dV\le\mathcal E_t(\bm u_0(t))\le E(t)$, and Chebyshev's inequality on
     $\{J_0\le\delta\}$, where $\log^2J_0\ge\log^2\delta$, gives \eqref{eq:measrep}. \qed
 \end{proof}
 
 \begin{proposition}[Collapse, if anywhere, is confined to the tip disc]
     \label{prop:tipdisc}
-    Along the fundamental path, for $t<t_{\mathrm{coll}}$, let the Kondratiev expansion of
-    Proposition~\ref{prop:blowup}(i) hold with pointwise gradient control of the remainder,
-    $|\Grad\bm u_0^\sharp|\le C_\sharp(t)\,(r/\rho)^{\alpha'-1}$ \cite{KMR2001,MazyaRossmann2010}, and set
+    Along the fundamental path, for $t<t_{\mathrm{coll}}$, assume the corner expansion of hypothesis (FP)(ii) ---
+    the Kondratiev form of Proposition~\ref{prop:blowup}(i) with pointwise gradient control of the remainder,
+    $|\Grad\bm u_0^\sharp|\le C_\sharp(t)\,(r/\rho)^{\alpha'-1}$; this is a genuine hypothesis on the nonlinear
+    state, not a citation, since the linear theory \cite{KMR2001,MazyaRossmann2010} attaches to it only through a
+    frozen-coefficient reading and, under compression, no screening mechanism pins the vertex behaviour
+    (Remark~\ref{rem:fp}). Set
     $c_\Phi:=\max_\theta\big\|\alpha\,\bm\Phi\otimes\bm e_r+\bm\Phi'\otimes\bm e_\theta\big\|$, so that the leading
     term obeys $\big\|\Grad\big(K r^\alpha\bm\Phi\big)\big\|\le c_\Phi\,\mu_e\,|\hat K(t)|\,(r/\rho)^{\alpha-1}$ by
     the normalisation $\hat K=K\rho^{\alpha-1}/\mu_e$ of Remark~\ref{rem:sifparam}. With
@@ -879,9 +891,9 @@ has bounded coefficients and the spectrum is discrete.
 \end{proposition}
 
 \begin{proof}
-    For $t<t_{\mathrm{coll}}$ the state is uniformly non-degenerate on $\overline{B_\rho}$, the coefficients are
-    bounded (Lemma~\ref{lem:attain}), and the linearised corner theory applies, so the expansion
-    $\bm u_0=K r^\alpha\bm\Phi(\theta)+\bm u_0^\sharp$ holds with the stated bounds. Then
+    For $t<t_{\mathrm{coll}}$ the state is uniformly non-degenerate on $\overline{B_\rho}$ by (FP)(i) and the
+    coefficients are bounded (Lemma~\ref{lem:attain}); the expansion
+    $\bm u_0=K r^\alpha\bm\Phi(\theta)+\bm u_0^\sharp$ holds with the stated bounds by hypothesis (FP)(ii). Then
     $\Grad\bm u_0=K r^{\alpha-1}\big(\alpha\,\bm\Phi\otimes\bm e_r+\bm\Phi'\otimes\bm e_\theta\big)+\Grad\bm u_0^\sharp$
     and, by Weyl's inequality for singular values,
     $\lambda_{\min}(\bm I+\Grad\bm u_0)\ge1-\|\Grad\bm u_0\|$, which with
