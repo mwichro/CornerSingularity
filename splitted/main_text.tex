@@ -395,6 +395,7 @@ loading a tensile corner imposes:
         volumetric model           & energy as $J\to\infty$   & tangent $\Theta(J)$   \\
         \midrule
         $\lambda_e\log^2 J$        & $\sim \log^2 J$ \ (soft) & $\mathcal{O}(\log J)$ \\
+        tempered log \eqref{eq:ftempered} & $\sim |\log J|$ \ (softest) & $\mathcal{O}(1)$ \\
         $\tfrac{\kappa}{2}(J-1)^2$ & $\sim J^2$ \ (stiff)     & $\mathcal{O}(J^2)$    \\
         \bottomrule
     \end{tabular}
@@ -418,6 +419,51 @@ We work under the mild-growth condition isolated above.
 
 \noindent By \eqref{eq:Thetalog}, $f_{\log}$ satisfies Assumption~\ref{ass:mild} with $p=1$; by \eqref{eq:Thetaquad},
 $f_{\mathrm{quad}}$ does not.
+
+% Who satisfies mild growth *and* global convexity: the class is characterised and populated here, since neither
+% standard penalty does, and the benign corner case of Theorem A would otherwise be a theorem about an empty class.
+The benign corner case of Theorem~\ref{thm:A} below will require Assumption~\ref{ass:mild} \emph{together with} global
+convexity $f''\ge0$, and neither standard penalty satisfies both: $f_{\mathrm{quad}}$ fails mild growth, $f_{\log}$
+fails convexity past $J_*$ (Remark~\ref{rem:SEcaveat}). Whether the combined class is nonempty --- with both elastic
+moduli still free --- deserves an explicit answer, and it has a clean one.
+
+\begin{remark}[The convex-mild class: forced sign, and an explicit two-parameter exemplar]
+    \label{rem:tempered}
+    Write $t=\log J$ and $h(t):=f'(J)J$, so that $f''(J)J^2=h'(t)-h(t)$; convexity reads $h'\ge h$ and
+    \eqref{eq:Thetagen} becomes $\Theta=|h'-h|+|h|$.
+    \emph{(i) Forced sign.} If $f''\ge0$ and $\Theta(J)=\mathcal{O}((\log J)^p)$, then $f'(J)\le 0$ for \emph{all}
+    $J$: were $f'(J_0)>0$, convexity would give $f'(J)\ge f'(J_0)$ for $J\ge J_0$, hence
+    $\Theta(J)\ge f'(J)J\ge f'(J_0)J$, algebraic growth. Every admissible material is therefore
+    \emph{never volumetrically tensile}: the bulk stress resists compression but never pushes back against dilation.
+    This is exactly where $f_{\log}$ exits the class --- its volumetric stress $h(t)=-\mu_e+2\lambda_e t$ turns
+    \emph{positive} past $J_p=e^{\mu_e/(2\lambda_e)}$, and mild growth then forbids the convexity needed to sustain it.
+    \emph{(ii) The class is nonempty, with both moduli free.} Saturate the linear $h$ of $f_{\log}$: for a temper scale
+    $0<T<\mu_e/(2\lambda_e)$ set $h_T(t):=-\mu_e+2\lambda_e T\tanh(t/T)$, i.e.
+    \begin{equation}
+        \label{eq:ftempered}
+        f_T(J) \;=\; -\mu_e\log J \;+\; 2\lambda_e T^2\,\log\cosh\!\Big(\frac{\log J}{T}\Big) .
+    \end{equation}
+    Then $f_T\in C^\infty(0,\infty)$, $f_T(1)=0$, $f_T'(1)=-\mu_e$, $f_T''(1)=\mu_e+2\lambda_e$ --- the linearised
+    moduli, hence the Poisson ratio, are \emph{identical} to those of $f_{\log}$, and indeed
+    $f_T=f_{\log}+\mathcal{O}(\log^4 J)$ near $J=1$ --- while globally
+    \begin{equation*}
+        f_T''(J)J^2 \;=\; \mu_e-2\lambda_e T\tanh\big(\tfrac{t}{T}\big)+2\lambda_e\operatorname{sech}^2\big(\tfrac{t}{T}\big)
+        \;\ge\; \mu_e-2\lambda_e T \;>\;0,
+        \qquad
+        \Theta_T(J)\;\le\;3\mu_e+2\lambda_e \quad (p=0),
+    \end{equation*}
+    with the barrier $f_T(J)\sim(\mu_e+2\lambda_e T)\,|\log J|\to\infty$ as $J\to0^+$, and $h_T<0$ everywhere
+    (the forced sign realised). The family interpolates between the pure logarithmic barrier ($T\to0$) and $f_{\log}$
+    itself (the inadmissible limit $T\to\infty$); its energy grows like $|\log J|$ under dilation, \emph{softer} than
+    $f_{\log}$'s $\log^2 J$, which is the analytic mechanism by which it keeps both convexity and mild growth.
+    \emph{(iii) One-sided temper.} Since $f_T$ and $f_{\log}$ agree to fourth order in $\log J$ at $J=1$, one may glue
+    $f_{\log}$ on $J\le1$ to $f_T$ on $J\ge1$ with $C^3$ regularity: the resulting penalty is \emph{pointwise
+    identical} to $f_{\log}$ throughout compression --- every compressive statement in this paper is untouched ---
+    while the dilation tail is tempered, $f''>0$ holds globally, and the dilation core of Lemma~\ref{lem:Aellip}
+    disappears ($r_*=0$). The case split of Theorem~\ref{thm:A} is thus a property of the untempered $\log^2$ tail of
+    $f_{\log}$, in the large-$J$ regime that (as \S\ref{sub:growth} already observed) was never physically
+    constrained, and it can be removed at no cost to the compressive analysis by this substitution.
+\end{remark}
 
 \begin{lemma}[Subordinate tangent]
     \label{lem:Abound}
@@ -619,8 +665,9 @@ write the Newton-step bilinear form as
     The consequences split according to whether the vertex lies in the elliptic region.
 
     \emph{(A) Globally convex-volumetric barrier ($f''\ge0$ together with the standing
-    Assumptions~\ref{ass:reg}--\ref{ass:mild}; the pure logarithmic barrier $f(J)=-\mu_e\log J$, for which
-    $f''(J)J^2=\mu_e>0$ globally and $\Theta\equiv\mu_e$, is the model exemplar).} Then the dilation core is empty,
+    Assumptions~\ref{ass:reg}--\ref{ass:mild}; the class is nonempty with both moduli free ---
+    Remark~\ref{rem:tempered} --- the simplest exemplars being the pure logarithmic barrier $f(J)=-\mu_e\log J$ and
+    the tempered penalties \eqref{eq:ftempered}).} Then the dilation core is empty,
     $r_*=0$, ellipticity holds on the \emph{full} corner neighbourhood $\Omega=B_\rho$ \emph{including the vertex}, and
     \eqref{eq:Abounded}--\eqref{eq:Agaarding} hold on $V^{1,2}_{\beta_\star}(B_\rho)$. Hence the linearised corner
     operator is Fredholm of index zero in $V^{1,2}_{\beta_\star}(B_\rho)$. Under the kinematic hypothesis (W) the
@@ -739,8 +786,11 @@ write the Newton-step bilinear form as
     here: a volumetric law that caps the dilation, $J<J_{\max}$, is \emph{incompatible} with the assumed corner
     kinematics rather than a cure for it --- under (NC) and $\lambda_{\max}\sim|K|r^{\alpha-1}$ one has
     $J\ge c\,\lambda_{\max}\to\infty$, so a capped material cannot carry the Williams blow-up at all and the state
-    must reorganise, changing the ansatz rather than the tangent. The dilation core is thus a feature of the specific
-    large-$J$ tail of $f_{\log}$ interacting with the assumed kinematics, not a physical catastrophe.
+    must reorganise, changing the ansatz rather than the tangent. The legitimate realisation of the
+    finite-extensibility intuition is the one-sided tempered penalty of Remark~\ref{rem:tempered}(iii): a $C^3$
+    energy, identical to $f_{\log}$ throughout compression, whose softened dilation tail keeps $f''>0$ globally and
+    so removes the core ($r_*=0$) while leaving both moduli free. The dilation core is thus a feature of the specific
+    large-$J$ tail of $f_{\log}$, in a regime never physically constrained, not a physical catastrophe.
 \end{remark}
 
 \begin{remark}[Stress is singular, operator is not]
