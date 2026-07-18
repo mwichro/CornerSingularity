@@ -618,6 +618,24 @@ remains the dominant asymptotics visible from any fixed scale. This is the preci
 that the tensile corner \emph{passes like linear elasticity}: it passes like linear elasticity on the mesh-relevant
 intermediate range, and \emph{better} than linear elasticity at the vertex.
 
+\begin{remark}[Status of (W): verified above $\nu_W\approx0.40$, fails below]
+    \label{rem:Wstatus}
+    Hypothesis (W) is a parameter-free, closed-form condition on the computed clamped--free profile, and checking it
+    (\S\ref{sub:numW}) returns a sharp split of the physical range: $\mu\ge0$ holds precisely for
+    $\nu>\nu_W\approx0.404$ (single order-two zero at the clamped face, $\tr\bm G\neq0$ there), while for $\nu<\nu_W$
+    the determinant is \emph{negative} on a clamped-side sector $(0,\theta_z(\nu))$ that widens as $\nu$ decreases.
+    Since the mode enters $\mu$ quadratically, the sign is intrinsic, and $J\sim K^2r^{2(\alpha-1)}\mu$ at depth for
+    either load sign: below $\nu_W$ the linear Williams field is orientation-reversing at depth on an $\mathcal O(1)$
+    sector, so the tensor ansatz cannot describe the state below the crossover scale there and the screened-vertex
+    conclusion of Theorem~\ref{thm:A}(A) is established only on the complementary free-face sector. Nothing above the
+    crossover scale is affected --- the intermediate-annulus asymptotics, which is what the blow-up reduction and the
+    numerics consume, holds for all $\nu$ --- but a complete vertex theory for $\nu<\nu_W$ requires the
+    self-consistent nonlinear inner state on the negative sector, the same open problem as the compressive inner
+    region of Remark~\ref{rem:core}. The layer structure, by contrast, is confirmed across the whole range:
+    $\tr\bm G\neq0$ at every zero of $\mu$, so the one-large-stretch regime of \S\ref{sub:growth} is exactly the
+    layer regime, as Lemma~\ref{lem:screen} asserts.
+\end{remark}
+
 For the weighted well-posedness we recall two standard inequalities in the Kondratiev space
 $V^{1,2}_\beta(B_\rho)$---the closure of smooth functions vanishing on $\Gamma_D\cap\partial B_\rho$ under
 $\|\bm{v}\|_{V^{1,2}_\beta}^2 = \int_{B_\rho} \big(r^{2\beta}|\Grad\bm{v}|^2 + r^{2\beta-2}|\bm{v}|^2\big)\,dV$.
@@ -1082,7 +1100,9 @@ is the corner counterpart of the Biot/creasing instability \cite{Biot1963,Hong20
     $\bm{\phi}$ supported in the edge neighbourhood $B_\rho$.
 \end{assumption}
 \noindent This bundles two spectral facts: \emph{attainment} (the minimising sequence does not escape into the
-corner as essential spectrum) and \emph{simplicity}. Simplicity is generic and, for the model bodies, can be argued
+corner as essential spectrum) and \emph{simplicity}. Simplicity is generic --- in the precise sense of holding for
+almost every point of the wedge parameter family $(\nu,\hat K)$, the only sense in which \emph{generic} carries
+content for a fixed body --- and, for the model bodies, can be argued
 from the lateral \emph{face-preserving} reflection $R$ of \S\ref{sub:symmetry} (\emph{not} the corner bisector
 $\theta\mapsto\tfrac\pi2-\theta$, which swaps $\Gamma_D$ and $\Gamma_N$ and is no symmetry of the mixed problem);
 attainment is the borderline-elliptic difficulty flagged in
@@ -1670,17 +1690,21 @@ The relevant geometry is the \emph{collapse locus} of the perfect field.
 \begin{lemma}[Transversal collapse: $s=1$]
     \label{lem:sval}
     On the perfect (unphysical) continuation of the fundamental path beyond $t_c$, let $\Sigma_{\mathrm{c}}\subset B_\rho$
-    be the collapse locus on which the smallest stretch vanishes, $\lambda_{\min}=0$ (equivalently $J=0$); it is
-    generically of codimension one. At any point of
-    $\Sigma_{\mathrm{c}}$ where $\lambda_{\min}$ is a simple singular value of $\bm{F}$, $\lambda_{\min}$ is a smooth function of
-    $\bm{x}$, and generically it vanishes \emph{transversally},
+    be the collapse locus on which the smallest stretch vanishes, $\lambda_{\min}=0$ (equivalently $J=0$). Assume the
+    \emph{transversality hypothesis}
+    \begin{itemize}
+        \item[\textup{(T)}] $\Sigma_{\mathrm{c}}$ is of codimension one, and at each of its points $\lambda_{\min}$ is a
+              simple singular value of $\bm{F}$ (hence smooth in $\bm x$) with $\nabla\lambda_{\min}\ne\bm 0$.
+    \end{itemize}
+    Then $\lambda_{\min}$ vanishes \emph{transversally},
     \begin{equation}
         \label{eq:transversal}
         \lambda_{\min}^{\mathrm{field}}(\bm{x}) = \kappa_*\,\operatorname{dist}(\bm{x},\Sigma_{\mathrm{c}}) + \mathcal{O}\!\big(\operatorname{dist}^2\big),
-        \qquad \kappa_*>0 .
+        \qquad \kappa_*>0 ,
     \end{equation}
-    Hence the localisation exponent is $s=1$. (A non-generic tangential contact, $\nabla\lambda_{\min}=0$ on $\Sigma_{\mathrm{c}}$,
-    would give $s\ge2$.)
+    and the localisation exponent is $s=1$. (A tangential contact, $\nabla\lambda_{\min}=\bm 0$ on $\Sigma_{\mathrm{c}}$,
+    would give $s\ge2$ and a \emph{wider} tube; Remark~\ref{rem:transgen} states in what sense (T) is generic and what
+    survives without it.)
 \end{lemma}
 
 \begin{remark}[Extended arc versus point vertex]
@@ -1700,9 +1724,27 @@ The relevant geometry is the \emph{collapse locus} of the perfect field.
     Where the smallest singular value is simple it is an analytic function of the entries of $\bm{F}$, hence smooth in
     $\bm{x}$. A smooth scalar field vanishing on $\Sigma_{\mathrm{c}}$ has, by Taylor expansion, $\lambda_{\min}=\nabla\lambda_{\min}
         \cdot\bm{n}\,\operatorname{dist}(\bm{x},\Sigma_{\mathrm{c}})+\mathcal{O}(\operatorname{dist}^2)$ with $\bm{n}$ the unit normal;
-    transversality $\nabla\lambda_{\min}\ne0$ (the generic case, by Sard's theorem) gives \eqref{eq:transversal} with
-    $\kappa_*=|\nabla\lambda_{\min}|>0$. \qed
+    hypothesis (T) gives \eqref{eq:transversal} with $\kappa_*=|\nabla\lambda_{\min}|>0$. \qed
 \end{proof}
+
+\begin{remark}[In what sense (T) is generic, and what survives without it]
+    \label{rem:transgen}
+    A word of hygiene on \emph{generic}. For the \emph{fixed} field of a fixed body, material and load path, (T) is
+    simply a hypothesis: Sard's theorem asserts that almost every \emph{level} $\delta$ of $\lambda_{\min}$ is regular,
+    but $\Sigma_{\mathrm{c}}$ is the specific level $\delta=0$, about which Sard says nothing, and there is no
+    parameter being perturbed. Genericity becomes meaningful only relative to a family, and the natural one is already
+    at hand: the phase-diagram parameters $(\nu,\hat K)$ of the model wedge together with the load $t$. Within a family
+    rich enough to move the field --- versality we do not verify here --- tangential contact of a scalar zero set is a
+    Thom-nongeneric event, and this is the honest content of calling (T) generic. Independently, (T) is
+    \emph{checkable}: $|\nabla\lambda_{\min}|$ along the computed continuation near its zero set is a by-product of the
+    same numerics that locate $\Sigma_{\mathrm{c}}$. Finally, the architecture does not stand or fall with (T). Without
+    any transversality, the barrier bound of Lemma~\ref{lem:measrep} confines the sublevel sets unconditionally,
+    $|\{J_0\le\delta\}|\lesssim E(t)/\log^2\delta$ --- a \emph{logarithmic} tube in place of the algebraic one --- so
+    the qualitative conclusion (the high-stiffness zone is confined and vanishes with $\epsilon$) is hypothesis-free;
+    what (T) buys is the sharp algebraic half-width \eqref{eq:locallength} and with it the $q<\tfrac12$ integrability
+    range of Proposition~\ref{prop:narrow}. And in the empirically expected geometry of Remark~\ref{rem:locus} --- the
+    collapse locus degenerating to the vertex point --- the localisation only improves.
+\end{remark}
 
 On the imperfect branch the relief of \eqref{eq:lminscale} imposes the floor $\lambda_{\min}(\bm{x},\epsilon)\gtrsim
     \max\{\kappa_*\operatorname{dist}(\bm{x},\Sigma_{\mathrm{c}}),\,c\,\epsilon^{2/3}\}$, so the high-stiffness zone is the tube of

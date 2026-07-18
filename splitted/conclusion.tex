@@ -48,9 +48,11 @@ which adds the singular pre-stress and the localisation but no new open hypothes
 Both surviving conditions are, in practice, decided by the spectral computation of \S\ref{sec:numerical}. The sign of
 the cubic coefficient is the more complete of the two: the graded-cell solve of \S\ref{sub:numb} returns
 $b<0$ throughout the tested $(\nu,\hat K)$ rectangle --- the normalisation-invariant feedback ratio stays below
-its critical value $-1$ at every tested resolution, with the smallest margin near the incompressible corner --- so the
-cubic clause of subcriticality is numerically supported, though on a surrogate cell whose refinement behaviour is not
-yet settled; the quintic clause $d>0$ remains untested. What remains genuinely beyond reach here is
+its critical value $-1$ at every tested resolution, with the smallest margin near the incompressible corner, and the
+inversion-free $\Gamma$ certificate of Corollary~\ref{cor:cert} now confirms the sign at every rectangle point
+without the ill-conditioned reduced solve --- so the cubic clause of subcriticality is numerically supported and
+internally cross-validated, though on a surrogate cell whose refinement behaviour is not yet settled; the quintic
+clause $d>0$ remains untested. What remains genuinely beyond reach here is
 analytic rather than numerical: a \emph{closed-form, configuration-free} criterion for $\operatorname{sign} b$, which the
 homogeneity count of Proposition~\ref{prop:bcount} shows cannot exist in the localised form available for the stretch
 thresholds, precisely because $\alpha>\tfrac12$ keeps the cubic integral globally $\hat K$-dependent. The loading side of

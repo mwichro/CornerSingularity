@@ -105,11 +105,30 @@ paper).
 
 ## 5. Next steps, in recommended order
 
+0. **ADDENDUM 2026-07-17/18 (later session): items 1 and 5 are DONE, plus a large
+   proof-repair pass.** See `gap_review.md` (status blocks under A1–A7, B5) and
+   `thmA_pencil_repair.md` for details. Headlines: thm:A's pencil step replaced by the
+   screening lemma (vertex limit is μ_e·Id, not L_lin; new ass (W) + lem:screen;
+   hypothesis (W) checked numerically — holds iff ν > ν_W ≈ 0.404,
+   `williams_profile_W.py`); case-(A) exemplar class populated (tempered log penalty
+   `eq:ftempered`, rem:tempered); fundamental path: existence proved for convex
+   penalty (lem:fundexist), standing assumption (FP) named, (BC)-circularity dissolved
+   (lem:tc now concludes t_c ≤ t_* < t_coll); lem:measrep freed of minimality;
+   genericity grounded in the (ν,K̂) family (hypothesis (T) + rem:transgen,
+   von Neumann–Wigner for simplicity). **Γ certificate run** (`gamma_certificate.py`,
+   output committed): certified b<0 at all 12 rectangle points via monotone CG-Krylov
+   test fields (k₁ = 66–184; single cheap fields insufficient, Γ(R) ≈ 0.1); deep CG
+   reproduces the bordered ratio (2.12 vs −r = 2.17) — cond(B) worry retired;
+   prop:certdeg's hypotheses (a)/(b) NOT operative on the monotone-graded cell (no
+   neutrality, erratic coupling) — that test still needs the periodic/wedge geometry.
+   numerical.tex §sub:numb softening also done (this covered old item 5).
+
 1. **Γ-based certification run** (cheapest, highest value): on the existing (or any)
    discretisation, compute Γ = E₃[φ,φ,v]²/(2 b_dir⟨v,L_c v⟩) with v = the
    second-harmonic test field, over the (ν,K̂) rectangle. Γ>1 certifies b<0
    (cor:cert) without the ill-conditioned bordered solve. Also directly tests
    prop:certdeg's hypothesis (b) (does the coupling die as K̂→0?).
+   **[DONE — see addendum 0.]**
 2. **Stroh/envelope evaluation for lem:orient(iii)**: closed-form envelopes a(n),
    b(n) of the compressible surface eigenmode from `surface_instability.py` data;
    locate the envelope extremum vs the collapse depth — settles the eq:dphisign
@@ -123,7 +142,7 @@ paper).
    bifurcation, continue post-snap. Hard: needs imperfection seeding + deflation +
    graded mesh. User was considering installing FEniCS; not started.
 5. Soften remaining over-claims in numerical.tex §sub:numb if the definitive
-   computation is still far off.
+   computation is still far off. **[DONE — see addendum 0.]**
 
 ## 6. Files & memory
 

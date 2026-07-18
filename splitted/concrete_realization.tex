@@ -340,12 +340,18 @@ commutes with $\mathcal{R}$, so its eigenspaces split into the symmetric ($\math
 posit:
 
 \begin{itemize}
-    \item \emph{Simplicity (part of Assumption~\ref{ass:bif}).} The lowest eigenvalue within a fixed symmetry sector is
-          generically simple; the genericity is the standard one for self-adjoint operators commuting with a finite
-          symmetry group. This reduces simplicity to two residual genericity statements --- that the crossing eigenvalue
-          is the ground state of its sector, and that no accidental degeneracy across sectors occurs at $t_c$ --- rather
-          than discharging it unconditionally. With that caveat, simplicity need not be assumed as an independent
-          spectral postulate, and only the \emph{attainment} clause (the borderline-elliptic point of
+    \item \emph{Simplicity (part of Assumption~\ref{ass:bif}).} The symmetry splitting reduces simplicity to two
+          residual statements --- that the crossing eigenvalue is the ground state of its sector, and that no
+          accidental degeneracy across sectors occurs at $t_c$. Calling these \emph{generic} requires a parameter to
+          be perturbed, and for the fixed body none is; the honest formulation uses the family the paper already
+          works on. For a real self-adjoint family, eigenvalue coincidence is a codimension-\emph{two} event
+          (von Neumann--Wigner), so within the two-parameter wedge family $(\nu,\hat K)$ the loads at which the
+          one-parameter path $t\mapsto\mathcal{L}(t)$ meets a degeneracy are avoided at the crossing for almost every
+          $(\nu,\hat K)$; both residual statements then hold off a null set of the phase diagram, though not
+          pointwise for a given body. At tested points they are moreover \emph{checked}, not assumed: the sector gap
+          computed in \S\ref{sub:numb} is exactly this quantity --- with the caveat, recorded there, that its
+          behaviour under refinement is not yet settled. With that framing, simplicity need not be assumed as an
+          independent spectral postulate, and only the \emph{attainment} clause (the borderline-elliptic point of
           Remark~\ref{rem:framework}) requires the separate analysis of \S\ref{sub:attain}.
     \item \emph{Vanishing quadratic coefficient (part of Assumption~\ref{ass:subcrit}).} The reduced potential of
           Proposition~\ref{prop:LS} inherits the $\mathcal{R}$-symmetry of the perfect state. If $\bm{\phi}$ lies in the
@@ -573,7 +579,10 @@ regime.
     more violently subcritical it is, \emph{provided} the quadratic self-coupling of the critical mode into the second
     harmonic survives the limit --- hypothesis (b), which is precisely the non-vanishing of the quantity whose
     resonance makes the flat $b$ undefined (Remark~\ref{rem:flatdegenerate}). The proposition covers the
-    small-$\hat K$ regime only; on the finite $(\nu,\hat K)$ rectangle the criterion $\Gamma>1$ must still be checked.
+    small-$\hat K$ regime only; on the finite $(\nu,\hat K)$ rectangle the criterion $\Gamma>1$ must be checked, and
+    \S\ref{sub:numb} now reports that check: certified at every tested rectangle point on the surrogate cell, while
+    hypothesis (b) itself remains untestable there because the monotone grading removes the very resonance the
+    proposition exploits.
     But it also dictates \emph{how} to check it: $\Gamma$ is assembled from one trilinear integral and one Rayleigh
     quotient, with no bordered solve, so it stays well-conditioned exactly where the direct Lyapunov--Schmidt assembly
     degrades (the near-resonant regime in which the condition number of the reduced solve diverges). We therefore
@@ -993,7 +1002,7 @@ in concrete, checkable form rather than as opaque spectral postulates:
         Localisation to model wedge                                               & informal                                                       & \textbf{proved}: blow-up reduction (Prop.~\ref{prop:blowup})                                                    \\
         Critical load $t_c$ exists (Lem.~\ref{lem:tc}(ii))                        & not established                                                & \textbf{proved} under (SC) (Lem.~\ref{lem:biot})                                                                \\
         Transversality (M) (Lem.~\ref{lem:transversal})                           & input on loading                                               & \textbf{holds} for monotone compression                                                                         \\
-        Mode simplicity (Ass.~\ref{ass:bif})                                      & assumed                                                        & \textbf{generic} per symmetry sector (\S\ref{sub:symmetry})                                                     \\
+        Mode simplicity (Ass.~\ref{ass:bif})                                      & assumed                                                        & \textbf{generic} in $(\nu,\hat K)$ per symmetry sector (\S\ref{sub:symmetry}); gap checked numerically          \\
         Quadratic coeff.\ vanishes (Ass.~\ref{ass:subcrit})                       & assumed by symmetry                                            & \textbf{proved}: $c_2$ odd in $D_1$, $R$-forced (Lem.~\ref{lem:volcoeff})                                       \\
         Mode attainment (Ass.~\ref{ass:bif})                                      & assumed                                                        & \textbf{proved} under (BC) (Lem.~\ref{lem:attain})                                                              \\
         First-order relief / rotation (Ass.~\ref{ass:rot}, Lem.~\ref{lem:relief}) & finite at $t_c$ (Lem.~\ref{lem:rotreg}); near-collapse posited & \emph{numerical}: rotation defect ${\approx}0.08$--$0.16$ (Rem.~\ref{rem:rotnum})                               \\
