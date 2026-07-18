@@ -843,7 +843,10 @@ write the Newton-step bilinear form as
 \begin{remark}[Self-consistency of (NC)]
     Hypothesis (NC) is compatible with the singular kinematics \eqref{eq:Fblowup}: an angular profile $\bm{\Phi}$
     corresponding to opening/shear produces $\Grad\bm{u}$ whose dominant eigenvalue is positive (radial extension), so
-    $\lambda_{\max}\to\infty$ while $\lambda_{\min}=\det\bm{F}/\lambda_{\max}$ need not approach zero. The complementary
+    $\lambda_{\max}\to\infty$ while $\lambda_{\min}=\det\bm{F}/\lambda_{\max}$ need not approach zero. The angular
+    structure is made quantitative by Lemma~\ref{lem:screen} and checked in \S\ref{sub:numW}: off the degenerate-ray
+    layers both stretches diverge (so (NC) holds with room to spare), on the layers $\lambda_{\min}$ stays
+    $\mathcal{O}(1)$, and the orientation clause of (W) holds for $\nu>\nu_W\approx0.40$. The complementary
     profile, in which the dominant eigenvalue of $\Grad\bm{u}$ is negative, drives $\lambda_{\min}\to0$ and violates
     (NC); that is exactly Scenario~B below.
 \end{remark}
@@ -866,7 +869,10 @@ Here it is the \emph{inverse channel} of \eqref{eq:twochannels} that fires: $\|\
     \infty$. The dilation channel $\Theta(J)$ is now probed at $J\to0^+$ rather than $J\to\infty$, and---exactly as in
 tension, but with the roles reversed---its behaviour discriminates between the two penalties. Writing
 $J=\prod_i\lambda_i\sim\lambda_{\min}$ near the corner (one collapsing stretch, the remaining $d-1$ bounded, cf.
-\S\ref{sub:growth}),
+\S\ref{sub:growth}),\claude{Same kinematic caveat as (W) on the tensile side: at depth the Williams field has
+$J\sim K^2r^{2(\alpha-1)}\mu(\theta)>0$ for $\nu>\nu_W$ regardless of load sign, so the compressive collapse
+$J\to0$ lives in the transition annulus $r\sim r_K$, not at the vertex --- consistent with the tip-disc picture of
+Prop.~\ref{prop:tipdisc}, but worth one sentence here.}
 \begin{equation}
     \label{eq:Thetacompress}
     \Theta_{\log}(J) \sim 2\lambda_e\,\big|\log J\big| \to \infty,
@@ -1648,8 +1654,9 @@ left as the one regularity hypothesis of the physical-branch statement.
     \label{prop:physical}
     Under load control the structure follows the compressed fundamental branch up to the snap at $t_s(\epsilon)\le t_c$
     (Proposition~\ref{prop:koiter}) and then jumps to the creased branch of amplitude $w=\mathcal{O}(1)$. On the
-    compressed branch the bound is unconditional: $\lambda_{\min}\ge\lambda_c(t)\ge\lambda_c(t_c)>0$ (buckling precedes
-    collapse), so $\|\mathbb{L}\|=\mathcal{O}(1)$ there. Under the non-degeneracy hypothesis~\ref{ass:nd} the post-snap
+    compressed branch the bound needs only the pre-collapse floor of (FP)(i) together with the ordering
+    $t_c<t_{\mathrm{coll}}$ of Lemma~\ref{lem:tc}: $\lambda_{\min}\ge\lambda_c(t)\ge\lambda_c(t_c)>0$ (buckling
+    precedes collapse), so $\|\mathbb{L}\|=\mathcal{O}(1)$ there. Under the non-degeneracy hypothesis~\ref{ass:nd} the post-snap
     branch is likewise controlled, and on the whole physical branch
     \begin{equation}
         \max_{\bm{x}\in B_\rho}\|\mathbb{L}(\bm{x},\epsilon)\| = \mathcal{O}(1) \quad\text{uniformly in } \epsilon,
@@ -1660,7 +1667,8 @@ left as the one regularity hypothesis of the physical-branch statement.
 
 \begin{theorem}[Unstable continuation branch: regularised blow-up]
     \label{thm:reg}
-    Under Assumptions~\ref{ass:reg}, \ref{ass:bif}, \ref{ass:subcrit}, \ref{ass:rot} and the conclusions
+    Under Assumptions~\ref{ass:reg}, \ref{ass:bif}, \ref{ass:subcrit}, \ref{ass:rot}, the orientation floor
+    \eqref{eq:dphisign} near the collapse locus, and the conclusions
     \eqref{eq:lminscale} of Lemma~\ref{lem:relief}, with the barrier penalty $f_{\log}$, the tangent \emph{along the
     unstable continuation
         branch} \eqref{eq:wscale}---the branch tracked by a displacement- or arc-length-controlled solver---satisfies
@@ -1791,7 +1799,8 @@ $\mathcal{O}(\epsilon^{2/3})$ (Proposition~\ref{prop:koiter}), keeping a bounded
 it is the worst case for an algorithm---displacement or arc-length control, numerical continuation---that suppresses
 the snap and tracks the \emph{unstable} branch through the instability. On that branch the determinant is still lifted
 off zero (Lemma~\ref{lem:relief}, with the asymptotically volume-preserving character of the mode posited by
-Assumption~\ref{ass:rot} and confirmed numerically, Remark~\ref{rem:rotnum}), the tangent diverges only algebraically,
+Assumption~\ref{ass:rot}, its qualitative content confirmed numerically, Remark~\ref{rem:rotnum}), the tangent
+diverges only algebraically,
 $\epsilon^{-4/3}$ up to a logarithm
 (Theorem~\ref{thm:reg}), and the singular character is confined to a tube of width
 $\ell(\epsilon)\sim\epsilon^{2/3}\to0$ about the collapse locus, remaining $L^q$-integrable for all $q<\tfrac12$

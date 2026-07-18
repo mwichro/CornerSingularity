@@ -16,6 +16,14 @@
 % load the original preamble (packages and macros)
 \input{splitted/preamble}
 
+% review margin notes (Claude)
+\definecolor{olivegreen}{RGB}{85, 150, 60}
+\usepackage[normalem]{ulem}   % \sout for struck-through (resolved) notes
+\usepackage{todonotes}
+\newcommand{\claude}[2][]{\todo[color=olivegreen!50,size=\scriptsize,#1]{C: #2}}
+\newcommand{\claudedone}[2][]{\todo[color=olivegreen!30,size=\scriptsize,#1]{C: \sout{#2}}}
+\newcommand{\claudeinline}[1]{\todo[inline,color=olivegreen!30]{C: #1}}
+
 % load shared title/author/macros from the original
 \input{splitted/shared}
 

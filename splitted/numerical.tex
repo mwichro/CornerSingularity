@@ -208,7 +208,12 @@ the physical rectangle at fixed resolution, the ratio is below $-1$ --- hence $b
     \end{tabular}
 \end{center}
 The margin to the threshold $r=-1$ is smallest near the incompressible corner ($\nu\to\tfrac12$, $\hat K\approx0.2$),
-where $r\approx-1.65$, and is never breached on the physical rectangle. On this evidence the cubic clause of
+where $r\approx-1.65$, and is never breached on the physical rectangle. One further robustness check cuts the margin
+rather than padding it: replacing the ad-hoc linear ramp by the \emph{physical} power profile
+$\lambda_\parallel\sim1+\hat K\,r^{\alpha-1}$ of the edge field thins the ratio to $r\approx-1.5$ at
+$\nu=0.417$ (against $-2.5$ for the linear ramp at the same point), still below $-1$ but markedly closer to it ---
+the nearer the grading is to the physical profile, the thinner the subcritical margin, which is one more reason the
+genuine wedge solve, not the surrogate, must be the final arbiter. On this evidence the cubic clause of
 Assumption~\ref{ass:subcrit} holds and the corner behaves as the genuine crease-analogue; but the evidence comes
 from the surrogate cell and has not converged, so we treat it as strong support rather than verification. The
 quintic clause $d>0$ is not tested by this computation at all and remains fully open (Remark~\ref{rem:fbstatus}).

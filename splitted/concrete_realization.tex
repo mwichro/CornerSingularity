@@ -240,8 +240,9 @@ always be met by loading hard enough, provided the material does not fail elsewh
         \label{eq:Qneg}
         Q_{t_*}(\bm{v}_*) = \int_{B_\rho}\Grad\bm{v}_* : \mathbb{L}\big(\bm{F}_0(t_*)\big) : \Grad\bm{v}_*\,dV < 0 .
     \end{equation}
-    Consequently, with $\mu_1(0)>0$ from Lemma~\ref{lem:tc}(i), there is a first critical load $t_c\in(0,t_*]$ with
-    $\mu_1(t_c)=0$.
+    Consequently, with $\mu_1(0)>0$ from Lemma~\ref{lem:tc}(i) and granted the pre-collapse floor (FP)(i) with
+    $t_*<t_{\mathrm{coll}}$ (hypothesis (iii) of Lemma~\ref{lem:tc}), there is a first critical load $t_c\in(0,t_*]$
+    with $\mu_1(t_c)=0$, and the ordering $t_c<t_{\mathrm{coll}}$ follows.
 \end{lemma}
 
 \begin{proof}
@@ -253,7 +254,12 @@ always be met by loading hard enough, provided the material does not fail elsewh
     \emph{Step 1: the homogeneous unstable mode.} Freeze the coefficients at $\bm{F}_P$ and consider the constant-tensor
     form $Q_0(\bm{v})=\int_{\{n>0\}}\Grad\bm{v}:\mathbb{L}(\bm{F}_P):\Grad\bm{v}\,dV$ on the half-space, with $\bm{v}$
     traction-free at $n=0$. Because $\lambda_\parallel<\lambda_\star$, the half-space is past its surface-instability
-    threshold \cite{Biot1963,Hong2009}: for each surface wavevector $\bm{k}\in\mathbb{R}^{d-1}$, $k:=|\bm{k}|$, there is a
+    threshold \cite{Biot1963,Hong2009}:\claude{These references treat the incompressible/gel half-space; existence,
+    exponential decay, and $q(\lambda_\parallel)<0$ for the \emph{compressible} $f_{\log}$ material are used here but
+    not covered by them. The compressible secular condition and its root are exactly what the surface-instability
+    computation of \S\ref{sub:numbiot} implements --- state that secular analysis in the appendix (or cite a
+    compressible reference) so Step~1 rests on something in the paper.} for each surface wavevector
+    $\bm{k}\in\mathbb{R}^{d-1}$, $k:=|\bm{k}|$, there is a
     surface mode
     \begin{equation}
         \label{eq:biotmode}
@@ -737,7 +743,11 @@ the sampled sign fractions of \S\ref{sec:numerical} by closed-form criteria on t
     limit $J_0\to0$, the envelope extremum of the critical mode detaches from the collapse tube (relief holds) or
     rides on it (relief fails). That question is posed on the Stroh data of the compressible surface eigenmode ---
     two exponents and two amplitude ratios fixed by the secular condition --- and is answerable in closed form; we
-    leave its evaluation to the planned wedge computation.
+    leave its evaluation to the planned wedge computation.\claude{This envelope-extremum question needs no wedge
+    solver: the Stroh exponents and amplitude ratios are already computed by the surface-instability solve of
+    \S\ref{sub:numbiot}, so the extremum-vs-tube comparison is a closed-form evaluation on existing data. Given that
+    the accessible evidence currently \emph{leans against} \eqref{eq:dphisign} (deep-skin ratio ${\approx}0.6$,
+    drifting down), answering it should precede any further reliance on the relief floor.}
 \end{remark}
 
 \subsection{Attainment of the critical mode}
@@ -761,10 +771,18 @@ has bounded coefficients and the spectrum is discrete.
     \end{equation}
 \end{assumption}
 
+% (BC) is now derived, not independent: record its relation to the standing path assumption and the rewired lem:tc.
+\noindent Under the standing path assumption (FP)(i) of \S\ref{sec:iba}, (BC) is no longer an independent postulate:
+once the destabilisation load satisfies $t_*<t_{\mathrm{coll}}$, Lemma~\ref{lem:tc} \emph{concludes}
+$t_c\le t_*<t_{\mathrm{coll}}$ and \eqref{eq:bc} holds with $c=c(t_*)$. We keep the name (BC) for its mnemonic value;
+its entire quantitative content is the single lower bound $t_{\mathrm{coll}}>t_*$, which
+Proposition~\ref{prop:tipdisc} confines to the tip disc.
+
 \begin{lemma}[Attainment under (BC)]
     \label{lem:attain}
     Assume, in addition to \textup{(BC)}, that the fundamental state $(t,\bm x)\mapsto\bm F_0(t,\bm x)$ is continuous on
-    the compact cylinder $[0,t_c]\times\overline{B_\rho}$ --- a standing regularity of the load path, automatic for a
+    the compact cylinder $[0,t_c]\times\overline{B_\rho}$ --- a standing regularity of the load path in the spirit of
+    the selection continuity of Assumption~\ref{ass:fp}, automatic for a
     fundamental branch depending continuously on the load with bounded data. Then for every $t\le t_c$ the tangent
     $\mathbb{L}(\bm{F}_0(t))$ is bounded on $B_\rho$, the
     operator $\mathcal{L}_c=\partial_{\bm{u}}G(\bm{u}_0(t_c),t_c,0)$ has compact resolvent and discrete spectrum, and the
@@ -983,8 +1001,10 @@ in concrete, checkable form rather than as opaque spectral postulates:
           the geometry-dependent orthogonal-mode feedback. For the cubic, the \emph{direction} of that feedback is now
           a theorem, $b_\psi\le0$ (Lemma~\ref{lem:fbsign}), so the open content is the magnitude comparison
           $|b_\psi|>b_{\mathrm{dir}}$: proved for small $\hat K$ under the coupling non-degeneracy of
-          Proposition~\ref{prop:certdeg}, and on the finite rectangle certifiable by the inversion-free criterion of
-          Corollary~\ref{cor:cert}, which we evaluate numerically (Remarks~\ref{rem:bsign}, \ref{rem:certnum}). The
+          Proposition~\ref{prop:certdeg}, and on the finite rectangle certified by the inversion-free criterion of
+          Corollary~\ref{cor:cert}, evaluated in \S\ref{sub:numb} (Remarks~\ref{rem:bsign}, \ref{rem:certnum}); the
+          quintic clause $d>0$, by contrast, has no analogous sign theorem and no computation behind it and remains
+          fully open (Remark~\ref{rem:fbstatus}). The
           homogeneity count of Proposition~\ref{prop:bcount} pins down \emph{why} the magnitude is irreducible:
           because the edge exponent satisfies $\alpha>\tfrac12$ here, the cubic integral is tip-convergent but not
           tip-dominated, so $b$ does not collapse to a universal wedge number but remains a functional $b(\nu,\hat K)$
@@ -1009,7 +1029,7 @@ in concrete, checkable form rather than as opaque spectral postulates:
         Stable-branch non-degeneracy (Ass.~\ref{ass:nd})                          & posited                                                        & \emph{physical} (bounded-distortion crease); not computed here (Prop.~\ref{prop:physical})                      \\
         \midrule
         Buckling precedes collapse (BC) (Ass.~\ref{ass:bc})                       & ---                                                            & \emph{numerical} on tip disc only; measure-repelled + confined (Lem.~\ref{lem:measrep}, Prop.~\ref{prop:tipdisc}, Lem.~\ref{lem:bcwedge})  \\
-        Subcriticality $b<0<d$ (Ass.~\ref{ass:subcrit})                           & assumed                                                        & feedback sign \textbf{proved} $b_\psi{\le}0$ (Lem.~\ref{lem:fbsign}); magnitude \emph{numerical/certifiable} (Cor.~\ref{cor:cert}, Prop.~\ref{prop:certdeg})     \\
+        Subcriticality $b<0<d$ (Ass.~\ref{ass:subcrit})                           & assumed                                                        & cubic: sign \textbf{proved} $b_\psi{\le}0$ (Lem.~\ref{lem:fbsign}), magnitude \emph{certified numerically} (Cor.~\ref{cor:cert}, \S\ref{sub:numb}); quintic $d{>}0$ \emph{open} (Rem.~\ref{rem:fbstatus})     \\
         \bottomrule
     \end{tabular}
     \caption{Hypothesis ledger for the concrete clamped--free neo-Hookean model. Fixing the material and geometry

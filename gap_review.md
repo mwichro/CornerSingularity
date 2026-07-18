@@ -1,343 +1,120 @@
-# Gap review — what is not proven and what blocks the paper
+# Gap review — current state
 
-Date: 2026-07-17. Scope: mathematical gaps and open problems only, ordered by severity.
-Small writing/typo issues deliberately omitted. Items marked **[fixed in this pass]** were
-edited directly in the `.tex`; everything else needs real work.
-
----
-
-## A. Gaps in proved statements (claims presented as theorems that are not fully proved)
-
-### A1. Theorem `thm:A` case (A): the pencil-stability step is not covered by the cited theory
-The proof freezes the linear-elasticity tensor at the vertex and treats
-`R = L(F) − L_lin` as a "subordinate perturbation of relative bound 0" because
-`‖R‖ = o(r^{−δ})` for every `δ`, concluding the corner pencil — hence the exponents `α`
-and profiles `Φ` — is unchanged. The problem: `o(r^{−δ})` for all `δ` includes
-perturbations that are **O(1) or O(log 1/r) and do not vanish at the vertex**, and that is
-exactly the situation here. Under the tensile kinematics `F = I + O(K r^{α−1})`, `F` does
-*not* tend to `I` as `r → 0`, so `L(F(x))` does not converge to `L_lin`; along the
-self-similar field it has an angular, `K`-dependent limit (and for `f_log` the volumetric
-coefficient even grows like `log(1/r)`). Kondratiev/KMR stability theorems for the pencil
-require the principal-part perturbation to vanish at the vertex (o(1), usually with a Dini
-or Hölder rate); a non-vanishing bounded perturbation of the principal symbol *does* shift
-pencil eigenvalues in general. As written, "the exponents coincide with linearised
-elasticity" is proved only in the mild-loading limit `|K̂| → 0`.
-
-**Propagates to:** `prop:blowup`(ii) (which cites this step for "common vertex pencil"),
-`§sub:edgeexp` ("the nonlinear tangent inherits exactly this α"), and every downstream use
-of the universal `(ν, K̂)` phase diagram.
-
-**Possible repairs:** (i) restate the pencil claim as perturbative in `K̂` (small
-stress-intensity), which is likely all the numerics need; or (ii) freeze at the genuine
-angular limit `L_∞(θ)` of `L` along the self-similar field and study *that* pencil (its
-eigenvalues will be `K̂`-dependent — which would itself be a finding); or (iii) prove a
-log-perturbation stability theorem, which does not exist off the shelf.
-
-**STATUS (2026-07-17): closed in principle via route (ii) — see `thmA_pencil_repair.md`.**
-The genuine angular limit turns out to be `μ_e·Id` (the decoupled vector Laplacian), not a
-`K̂`-dependent tensor: every nonlinear term of `eq:Lnh` carries two factors of `F^{-T}`,
-and under the tensor Williams ansatz with nondegenerate angular determinant
-`μ(θ) = α Φ×Φ' > 0`, both stretches diverge for generic θ and `F^{-1} → 0` like
-`r^{1−α}` ("screening"). KMR then applies with the Laplacian pencil (exponents 1,3,5,… —
-no singularity of the increments at the vertex); the Williams exponents `α(ν)` survive as
-intermediate asymptotics on `r_K ≪ r ≪ ρ`, which is what the numerics and the (ν,K̂)
-universality actually use. Implemented in the paper: new hypothesis (W) + Lemma
-`lem:screen`, rewritten case (A) statement and proof, updated `rem:core`,
-`prop:blowup(ii)`, `§sub:edgeexp`, conclusion. Remaining (bounded) debt, flagged in the
-text: (a) absorption of the degenerate-ray layers (log-sized perturbation on angular sets
-of algebraically vanishing measure — Meyers-type argument owed); (b) transmission of the
-Dirichlet condition through the collapsing elastic boundary layer at the clamped face;
-(c) hypothesis (W) itself should be verified numerically from the computed `Φ(θ; ν)`
-(one-line check), and self-consistency of the ansatz below `r_K` remains as in A4. This
-also partially resolves A7 (the one-large-stretch regime is now *derived* to be the
-boundary-layer regime, not the generic one) and sharpens A2 (the finite-extensibility-cap
-exemplar was not merely unexhibited but inconsistent: (NC) + `λ_max → ∞` forces `J → ∞`,
-so a capped law cannot carry the assumed kinematics — now stated in `rem:core`; the pure
-log barrier `f = −μ_e log J` is named in the theorem as the model exemplar).
-
-### A2. Theorem `thm:A` case (A) has no exhibited energy satisfying its hypotheses
-Case (A) needs simultaneously: barrier (`ass:reg`), inverse-channel growth (`ass:growth`),
-mild growth `Θ = O(log^p J)` (`ass:mild`), and `f'' ≥ 0` globally. Of the models in the
-paper, `f_quad` fails `ass:reg` and `ass:mild`; `f_log` fails `f'' ≥ 0` (the dilation
-core). The "finite-extensibility cap `J_max ≤ J*`" invoked in the theorem is not an energy
-in the framework — a constraint `J < J_max` is not a `C²` function on `GL⁺(d)`, and its
-`Θ` is never computed. So the "genuine corner result" (A) is currently a theorem about an
-empty (or at least unexhibited) class. Note `f = −μ_e log J` (i.e. `λ_e = 0`) does satisfy
-everything (`f'' = μ_e/J² > 0` globally, `f''J² + f'J = 0`, `Θ ≡ μ_e` bounded), but it
-removes the second Lamé constant; whether an `f` with barrier + global convexity +
-logarithmic `Θ` + independent volumetric stiffness exists is a nontrivial question the
-paper should answer or explicitly concede (candidate obstruction: `f'' ≥ 0` with
-`f'(J)J = O(log J)` forces `f'(J) → 0⁻`, i.e. asymptotically pressure-free bulk response).
-Either exhibit a concrete admissible `f` in a remark, or downgrade (A) to a conditional
-statement.
-
-**STATUS (2026-07-17): closed — the class is nonempty with both moduli free, and the
-obstruction sharpened into a characterisation.** In log variables `t = log J`,
-`h(t) := f'(J)J`, convexity reads `h' ≥ h` and `Θ = |h'−h| + |h|`. (i) *Forced sign
-(proved, now `rem:tempered`(i)):* convexity + mild growth force `f' ≤ 0 everywhere` —
-admissible materials are never volumetrically tensile; `f_log` exits the class precisely
-because its volumetric stress turns positive past `J_p = e^{μ_e/2λ_e}`. (ii) *Explicit
-exemplar (`eq:ftempered`):* saturate `f_log`'s linear `h` with
-`h_T = −μ_e + 2λ_e T tanh(t/T)`, `0 < T < μ_e/(2λ_e)`, i.e.
-`f_T(J) = −μ_e log J + 2λ_e T² log cosh(log J / T)`. Verified (analytically and
-numerically): `C^∞`, `f_T(1)=0`, `f_T'(1)=−μ_e`, `f_T''(1)=μ_e+2λ_e` (identical linearised
-moduli and Poisson ratio to `f_log`; `f_T = f_log + O(log⁴J)` at `J=1`), global convexity
-floor `f''J² ≥ μ_e − 2λ_e T > 0`, `Θ ≤ 3μ_e + 2λ_e` bounded (`p=0`), log barrier at
-`J→0⁺`. Interpolates pure log (`T→0`) ↔ `f_log` (inadmissible limit `T→∞`).
-(iii) *One-sided temper:* gluing `f_log` on `J ≤ 1` to `f_T` on `J ≥ 1` is `C³` and leaves
-every compressive statement of the paper pointwise unchanged while removing the dilation
-core (`r_* = 0`) — the thm:A case split is an artefact of the untempered `log²` tail and
-can be deleted for the concrete model at no cost. Implemented: new `rem:tempered` after
-`ass:mild`, exemplar named in `thm:A`(A), table row in `§sub:growth`, finite-extensibility
-caution in `rem:core` now points to the tempered penalty. Open residue: whether to
-actually *adopt* the one-sided temper in the concrete realization (would make the tensile
-side unconditionally case (A)) is a modelling decision left to the authors; numerics for
-compressive states are unaffected by construction.
-
-### A3. No existence/regularity theory for the compressive fundamental path — partial circularity
-The whole of §4 and §5 presupposes a fundamental branch `u_0(t)` that (a) exists and is
-continuous in `t`, (b) has second-variation form `Q_t` bounded (needed for `μ_1(t)` to be
-finite and continuous in `lem:tc`), (c) admits the *linear* Kondratiev expansion with
-pointwise gradient control of the remainder (used quantitatively in `prop:tipdisc`), and
-(d) has a monotone load-to-stretch map (`lem:bcwedge`). None of this is proved for the
-compressive corner. Worse, boundedness of the coefficients of `Q_t` for `0 < t < t_c`
-already requires `λ_min(F_0(t))` bounded below on `B_ρ` — i.e. a (BC)-type control — while
-(BC) is introduced later and only *at* `t ≤ t_c`. The text itself admits (rem:bc) that the
-linear prediction collapses the tip at *any* load, so it is not even clear `Q_t` is a
-bounded form for small `t` without an argument that the nonlinear state regularises the
-tip. This should become an explicit standing hypothesis on the fundamental branch (with
-the circularity acknowledged and localised), or a small-load existence lemma (implicit
-function theorem off `t = 0` in a weighted space) should be added — the latter seems
-provable with the tools already in the paper and would anchor the whole construction.
-
-**STATUS (2026-07-17): largely closed — existence proved, circularity dissolved,
-irreducible hypotheses named; A5 closed as a by-product, A4 folded into (FP).**
-Findings and implementation:
-1. *The IFT route proposed above does not work* — for any `t > 0` the linear Williams
-   field predicts `J < 0` inside the tip disc, so the linear solution is not even in the
-   energy's domain and no contraction around it is available. The correct anchor is
-   variational: new `lem:fundexist` proves existence of a global minimiser for every `t`
-   by the direct method, using (a) the 2D affine-cofactor identity ⇒ `det∇u` weakly
-   continuous along bounded-`H¹` sequences with no singular part (the distributional
-   limit is pinned to the `L¹` function `det∇u`), (b) Goffman–Serrin/affine-minorant
-   lower semicontinuity for the convex penalty (no superlinearity needed), (c) barrier ⇒
-   `J > 0` a.e. Also: `E_min(t) ≤ Ct²` and `E_min` continuous. Requires the penalty
-   globally convex — a *second dividend of the A2 tempered class* (`f_log` itself is
-   obstructed by the same large-`J` nonconvexity as its dilation core; stated honestly).
-2. *What remains unprovable is named once, up front:* new standing Assumption (FP)
-   (`ass:fp`), before its first use: (i) pre-collapse `λ_min` floor (compressive analogue
-   of (NC); no screening under compression, cf. A1), (ii) the corner expansion with
-   gradient envelope (the former `prop:tipdisc` hypothesis — A4 folded in), (iii) the
-   monotone load-to-stretch map (M). New `rem:fp` states why each resists proof
-   (minimisers of polyconvex energies have no regularity theory; selection continuity not
-   automatic).
-3. *The circularity is dissolved, not just acknowledged:* `lem:tc` rewired — it needs the
-   floor only on `[0, t_*]` (the Biot load, where `λ_min ≈ λ_★ = O(1)`), and under
-   `t_* < t_coll` it now *concludes* `t_c ≤ t_* < t_coll`: the (BC) ordering becomes a
-   theorem given one quantitative input, a tip floor at the Biot load (checkable via
-   `eq:scsafe`), rather than a hypothesis at `t_c`. Stated in `lem:tc`, `rem:fp`, and
-   appended to `rem:bc`.
-4. *A5 closed:* `lem:measrep` restated for any branch with `E ≤ E(t)` (minimality never
-   used, only the energy bound); the minimiser branch qualifies by construction, and
-   unstable continuations qualify whenever the monitored energy stays below the bound.
-Remaining open (as expected, now sharply localised): the single lower bound
-`t_coll > t_*` (item B2 of this review), and the (FP)(ii) expansion for the nonlinear
-compressive state (shares its fate with `rem:core`'s inner problem).
-
-### A4. `prop:tipdisc` applies linear corner asymptotics to the nonlinear state
-The hypothesis "`|∇u_0^♯| ≤ C_♯ (r/ρ)^{α'−1}` \cite{KMR2001,MazyaRossmann2010}" cites
-linear theory for the expansion of the *nonlinear* fundamental state in the compressive
-regime — precisely where Theorem `thm:A` (tension only) gives nothing. `M(t)` bounded
-along the path is likewise assumed. The proposition is fine as a conditional statement,
-but it is currently listed in the ledger as an unconditional estimate. Mark its hypothesis
-as part of the same standing assumption as A3, or restrict it to the regime where a
-nonlinear expansion is actually available.
-
-**STATUS (2026-07-17): folded into (FP)(ii) — see A3 status.** `prop:tipdisc` now cites
-the expansion as hypothesis (FP)(ii) explicitly ("a genuine hypothesis on the nonlinear
-state, not a citation"), with the no-screening-under-compression reason recorded in
-`rem:fp`.
-
-### A5. `lem:measrep` assumes the fundamental state is an energy minimiser
-The Chebyshev argument needs `E(u_0(t)) ≤ E(trial)`, i.e. global (or at least
-competitor-beating) minimality under displacement control. Before `t_c` the fundamental
-branch is only a *local* minimiser in general (and past `t_c`, where collapse is actually
-threatened, it is unstable, so the lemma does not apply there at all). Either weaken to
-"any branch along which the energy stays below the explicit trial bound" (which is what is
-really used, and is checkable), or restrict the statement to `t < t_c` with a stability
-argument.
-
-**STATUS (2026-07-17): closed — see A3 status, item 4.** `lem:measrep` restated for any
-energy-bounded branch; the global-minimiser branch of the new `lem:fundexist` supplies
-the bound by construction, and the past-`t_c` regime is covered by monitoring the energy.
-
-### A6. Genericity invoked without a parameter
-Two places rely on "generic" with nothing being perturbed: simplicity of the ground state
-within the symmetry sector (`§sub:symmetry`, feeding `ass:bif`), and transversal vanishing
-of `λ_min` via "Sard" (`lem:sval` — Sard needs a family; a fixed field's zero set has no
-genericity by itself). For a *fixed* material, geometry and load path these are just
-assumptions. Cheap repair: treat `(ν, K̂)` as the parameter family (the paper already
-works on that rectangle) and phrase both as "for a.e. `(ν, K̂)`", or fold them into the
-numerically-checked column of the ledger (the computed spectral gap in §6.3 is exactly a
-simplicity check — say so).
-
-**STATUS (2026-07-18): closed along the suggested lines, with one extra unconditional
-fallback found.**
-- *`lem:sval`:* the fixed-field Sard invocation is removed (Sard controls a.e. *level*,
-  never the specific zero level, and nothing is being perturbed). Transversality is now a
-  named hypothesis (T) in the lemma, and a new `rem:transgen` states (i) the honest sense
-  in which (T) is generic — Thom-nongenericity of tangential contact within the
-  `(ν, K̂, t)` family, versality unverified; (ii) checkability — `|∇λ_min|` near `Σ_c` is
-  a by-product of the numerics that locate `Σ_c`; (iii) a fallback the paper already
-  owned but never wired in: without any transversality, `lem:measrep` confines the
-  sublevel sets *unconditionally* at a logarithmic rate, so the qualitative localisation
-  is hypothesis-free and (T) buys only the sharp algebraic tube (`eq:locallength`) and
-  the `q < 1/2` range of `prop:narrow`; (iv) the point-vertex geometry of `rem:locus`
-  only improves matters.
-- *`§sub:symmetry` simplicity:* "generic" grounded in the von Neumann–Wigner
-  codimension-two argument over the `(ν, K̂)` family (degeneracy at the crossing avoided
-  for a.e. `(ν, K̂)` along the load path; not pointwise for a given body — stated), and
-  the computed sector gap of §6.3 is now cited as the numerical check with its
-  unsettled-refinement caveat. `ass:bif` discussion and the ledger row updated to match.
-
-### A7. The "one-large-stretch" kinematics is asserted, not derived
-Scenario A's `J ~ r^{α−1}` (one diverging stretch) and Scenario B's `J ~ λ_min` are taken
-from a verbal characterisation of Dirichlet–Neumann openings. The actual singular-value
-structure of `∇u = K r^{α−1}(αΦ⊗e_r + Φ'⊗e_θ)` is computable from the Williams profile
-`Φ(θ)` that the paper already computes to ten digits — check it once (does exactly one
-singular value of the angular matrix dominate, for all θ, over the physical ν range?) and
-cite the computation. Same for the self-consistency of (NC): currently a plausibility
-remark, never verified on any actual tensile solution.
-
-**STATUS (2026-07-18): checked — and the check *partially falsifies* hypothesis (W).**
-New script `williams_profile_W.py` (output in `williams_profile_W.output`) builds the
-KM null mode at α(ν), with analytic θ-derivatives verified against FD to 1e-9, and
-evaluates `μ(θ) = det G = α Φ×Φ'` and `tr G` (both scale/sign-invariant). Result:
-- `μ ≥ 0` holds **precisely for ν > ν_W ≈ 0.4042** (single forced order-2 zero at the
-  clamped face, `tr G ≠ 0` there): (W) verified in the near-incompressible range where
-  the paper's compressive numerics live (ν = 0.417 etc.).
-- For ν < ν_W, `μ < 0` on the clamped-side sector `(0, θ_z(ν))`, θ_z sweeping from the
-  clamped face (ν→ν_W) to the free face as ν decreases (whole opening negative below
-  ν ≈ 0.08). Since `J ~ K²r^{2(α−1)}μ` at depth for either load sign, the linear ansatz
-  is orientation-reversing at depth on an O(1) sector: the screened-vertex conclusion of
-  thm:A(A) is established only on the free-face sector there; intermediate-annulus
-  statements (all that `prop:blowup` uses) are unaffected. Failure is soft near ν_W
-  (|min μ| from 2e-2 at ν=0.05 down to 1e-7 at ν=0.40).
-- Layer structure confirmed across the whole range: `tr G ≠ 0` at every zero of μ, so
-  the one-large-stretch regime is exactly the layer regime, as `lem:screen` asserts —
-  this part of A7 is now *derived and checked*.
-Recorded in the paper: new `§sub:numW` (table + verdict) and `rem:Wstatus` after
-`lem:screen`; thm:A(A)'s vertex claim now explicitly scoped by ν_W via the remark.
-Residual: the self-consistent nonlinear inner state on the negative sector for ν < ν_W
-(same class of open problem as `rem:core`'s compressive inner region); (NC)
-self-consistency on an actual tensile solve remains untested (needs a nonlinear solver,
-not profile data).
+First pass 2026-07-17; updated 2026-07-18 after the repair passes and the whole-paper
+review. Margin notes in the PDF (`\claude{...}`, olive) mark in-place review comments;
+this file keeps only what still needs work, plus a one-line ledger of what was closed.
+Details of the closed items live in the paper itself, in `thmA_pencil_repair.md`, and in
+`handoff.md` §5.0.
 
 ---
 
-## B. Open hypotheses the architecture still rests on (correctly labelled, but load-bearing)
+## OPEN — ranked by how much falls if it fails
 
-Ranked by how much falls if they fail.
+### 1. Quintic sign `d > 0` (least supported claim in the paper)
+Frozen part provably adverse (`d_dir < 0`), feedback `d_ψ` unsigned by the `lem:fbsign`
+argument, and **no numerical computation of `d` exists anywhere** (now stated in
+`rem:fbstatus`, `sub:core`, and the ledger row). If `d ≤ 0`: the fold `(t_L, w_L)`, the
+O(1) creased branch, coexistence/hysteresis, and `prop:physical`'s post-snap story all
+change. What survives without it: `eq:wscale` and hence `thm:reg`/`prop:narrow` need only
+`b < 0`. Either compute `d` in the wedge solve or restructure to quarantine `d > 0` to
+the physical-branch narrative.
 
-1. **Quintic sign `d > 0`** — the *least* supported clause in the paper: the frozen part is
-   provably adverse (`d_dir < 0`), the feedback `d_ψ` is unsigned by the `lem:fbsign`
-   argument, and — unlike `b` — there is **no numerical computation of `d` anywhere**
-   (§6.3 is silent; now stated explicitly after this pass). If `d ≤ 0` the fold structure
-   `(t_L, w_L)`, the O(1) creased branch, coexistence/hysteresis and `prop:physical`'s
-   post-snap story all change. Note what survives without `d`: `eq:wscale`
-   (`w ~ ε^{1/3}` on the unstable continuation) and hence `thm:reg`/`prop:narrow` need
-   only `b < 0`; the paper could restructure to make the regularisation results
-   `d`-independent and quarantine `d > 0` to the physical-branch narrative. Either compute
-   `d` in the wedge solve or do that restructuring.
-2. **(BC) pointwise floor on the tip disc** — reduced (nicely) to one shrinking disc, but
-   the lower bound on the barrier-regularised collapse load `t_coll` is open, and it is
-   the hinge for attainment (`lem:attain`) and thus for the entire bifurcation apparatus.
-3. **`eq:dphisign` (`d_φ ≥ c_d > 0` near `Σ_c`)** — needed only in the collapse limit, but
-   the accessible numerics *lean against it* (deep-skin ratio `ω²/|det E| ≈ 0.6 < 1`,
-   drifting down). `lem:orient`(iii)/`rem:orient` reduce it to a closed-form
-   envelope-extremum question on the Stroh data — that question is answerable now with
-   `surface_instability.py` outputs and should be answered before the sign is leaned on
-   any further. **[floor made uniform in this pass — see C3]**
-4. **(AR) rate `δJ = O(J_0/√|log J_0|)`** — only qualitatively supported (base states reach
-   `J_0 ≈ 0.56`, nowhere near the limit). `thm:reg` invokes the precise rate.
-5. **`|b_ψ| > b_dir` on the finite rectangle** — evidence currently from a surrogate cell
-   with unsettled convergence (see C1); the inversion-free `Γ` certificate of `cor:cert` /
-   `prop:certdeg` is *recommended by the paper but has never been computed*. This is the
-   cheapest high-value computation available: one trilinear integral + one Rayleigh
-   quotient on the existing discretisation, immune to the `cond(B)` blow-up, and it
-   simultaneously tests hypothesis (b) of `prop:certdeg` (does the coupling survive
-   `K̂ → 0`?).
+### 2. Tip floor `t_coll > t_*` (the single remaining hinge of (BC))
+After the A3 rewiring, (BC) is *derived* from `lem:tc` given (FP)(i) and this one bound:
+the barrier-regularised collapse load must exceed the Biot load, i.e. the tip disc of
+`prop:tipdisc` must not collapse by the time the free-face stretch reaches `λ_★`
+(checkable via `eq:scsafe`). This powers attainment (`lem:attain`) and hence the whole
+bifurcation apparatus. The paper calls it its "irreducible analytic core" — correctly.
 
-   **STATUS (2026-07-18): computed — `gamma_certificate.py` (output in
-   `gamma_certificate.output`). Three results:**
-   1. *Certified.* On the full 12-point `(ν, K̂)` rectangle the certificate fires:
-      Γ crosses 1 at CG iteration k₁ = 66–184 (each iterate an explicit test field —
-      a polynomial in Q applied to the source — so no bordered solve; by Krylov
-      optimality Γ_k is monotone and every k gives the rigorous bound
-      `b ≤ b_dir(1−Γ_k)`), reaching Γ ∈ [1.31, 3.01] at k=1000. Discrete `b < 0`
-      certified everywhere tested. Cheap single fields are NOT enough: Γ(R) ≈ 0.09–0.17,
-      Γ(φ₂) ≤ 0.29 — the certificate needs the Krylov build-up.
-   2. *Cross-validation.* Deep CG converges to the bordered-solve ratio itself
-      (Γ → 2.12 vs −r = 2.17 at ν=0.417, K̂=0.10, k=2000): the `cond(B) ~ 10⁷–10⁸`
-      bordered values of the r-tables are independently confirmed — this removes the
-      main conditioning worry of C1 (though not the continuum-limit worry: under
-      refinement k₁ grows 127→324 as the gap decays; Γ still exceeds 1.8 at depth).
-   3. *Honest negative on `prop:certdeg`.* On this cell the excited mode never goes
-      neutral as K̂→0 (Rayleigh quotient ≈ 0.09, flat — the monotone grading was
-      *designed* to lift the flat resonance) and its coupling to the source is small and
-      erratic (2.6e-4–2.6e-2): hypotheses (a)+(b) are not operative here, so the
-      proposition remains untested; probing it needs the periodic or genuine-wedge
-      geometry where the doubled-wavenumber harmonic exists.
-   Recorded in the paper: §`sub:numb` (certificate paragraph rewritten with results),
-   `rem:certnum`, conclusion. Remaining: the certificate certifies the *discrete* b of
-   the surrogate cell at each resolution — the continuum-limit question (C1) and the
-   true wedge solve stand.
-6. **(ND) post-snap non-degeneracy** — posited on physical grounds; only a full nonlinear
-   continuation (FEniCS-type path following with deflation) can check it. Honestly
-   labelled; just noting that `prop:physical`'s headline "no tangent blow-up on the
-   physical branch" is conditional on it.
+### 3. `eq:dphisign` (`d_φ ≥ c_d > 0` near `Σ_c`) — evidence currently *leans against*
+Deep-skin ratio `ω²/|det E| ≈ 0.6 < 1` and drifting down under deepening; the deepest-J₀
+decile has `d_φ > 0` essentially nowhere. `lem:orient`(iii)/`rem:orient` reduce it to a
+closed-form envelope-extremum question on the Stroh data of the compressible surface
+eigenmode — **answerable now with `surface_instability.py` outputs, no wedge solver
+needed** (margin note placed at `rem:orient`). Should be answered before the relief floor
+is leaned on further; `thm:reg` now lists the floor explicitly among its hypotheses.
 
----
+### 4. (AR) rate `δJ = O(J₀/√|log J₀|)`
+Qualitative content confirmed (rotation defect 0.08–0.16, co-energy bounded by
+cancellation), but base states reach only `J₀ ≈ 0.56` — the asymptotic rate `thm:reg`
+invokes is untested and untestable with current tooling.
 
-## C. Numerics vs. text (the empirical weak link)
+### 5. The true wedge solve (continuum limit of the surrogate)
+`graded_buckling.py` is a flat graded half-space cell with monotone ramp, not the
+prescribed Mellin×Chebyshev wedge with `r^{α−1}` grading. Its discrete gap decays under
+refinement (5.8→2.8e-2), so the surrogate may lack a well-defined continuum `b`. The Γ
+certificate (see ledger) certified the *discrete* sign at every resolution and
+cross-validated the bordered solve, and the thinner power-profile margins are now
+reported in §6 — but the continuum question and the physical-profile computation stand.
+The wedge solver's job list: Γ on the rectangle with physical grading, the tip-disc (BC)
+floor, and the quintic `d`.
 
-1. **The prescribed computation has not been done.** §6.3 prescribes a
-   Mellin×Chebyshev solve on the wedge with the physical `r^{α−1}` grading;
-   `graded_buckling.py` actually solves a flat half-space cell with an ad-hoc *linear*
-   ramp. The text presented this proxy as "the model wedge". Its own refinement data
-   undermine the headline: the discrete spectral gap decays monotonically
-   (5.8→2.8×10⁻²) — consistent with the flat resonance re-emerging in the continuum
-   limit, i.e. the surrogate may have no well-defined `b` at all — while `r` oscillates
-   (−2.09/−2.45/−2.43/−2.21) and `cond(B)` grows to ~4×10⁸.
-   **[fixed in this pass: §6.3 and the conclusion now state the surrogate honestly, drop
-   "robust/settles/O(1) gap", flag the gap decay, and state that `d` is untested]** The
-   underlying gap remains: build the real wedge solver (or at minimum run the `Γ`
-   certificate, item B5, which sidesteps most of the conditioning pathology).
-2. **`power`-profile margins.** The closer-to-physical `power` grading profile in
-   `graded_buckling.py` gives thinner margins (r ≈ −1.53 at ν = 0.417) than the linear
-   ramp reported in the tables (−1.86 to −2.19 at that ν). The reported rectangle sweep
-   uses the more favourable profile; if the tables stay, the thinner `power` numbers
-   should appear next to them, or the tables should be replaced by `Γ` values.
-3. **`lem:relief` division by `d_φ`** — Young's inequality in case (ii) uses `1/(2 d_φ)`;
-   a.e. positivity without a uniform floor makes `w_0` and the constants in `eq:Jlower`
-   non-uniform on the collapse tube. **[fixed in this pass: `eq:dphisign` and
-   `lem:relief` now require a uniform floor `d_φ ≥ c_d > 0`]**
+### 6. (ND) post-snap non-degeneracy
+Only a full nonlinear continuation (path following + deflation, FEniCS-class) can check
+it; `prop:physical`'s "no tangent blow-up on the physical branch" is conditional on it.
+
+### 7. Theorem A residual debts (bounded, flagged in the text)
+(a) layer-absorption lemma (log-sized perturbation on angular sets of algebraically
+vanishing measure — Meyers-type argument owed); (b) transmission of the Dirichlet
+condition through the collapsing clamped-face elastic layer; (c) for `ν < ν_W ≈ 0.404`
+the profile determinant is negative on a clamped-side sector (hypothesis (W) fails
+there — `§sub:numW`), so the screened-vertex statement holds only on the free-face
+sector and the self-consistent nonlinear inner state on the negative sector is open
+(same class as `rem:core`'s compressive inner problem); (d) self-consistency of the
+Williams ansatz below the crossover scale `r_K` in general, and the (FP)(ii) expansion
+for the compressive state.
+
+### 8. Modelling decision (authors'): adopt the one-sided tempered penalty?
+`rem:tempered`(iii): gluing `f_log` (compression) to the tempered tail (dilation) is C³,
+leaves every compressive statement pointwise unchanged, removes the dilation core
+(`r_* = 0`, tensile side unconditionally case (A)), and makes `lem:fundexist`'s
+existence theorem apply. Costs nothing mathematically; it is a modelling choice.
+
+### 9. Manuscript-level
+- `introduction.tex` still empty — an inline todo note in the PDF now specifies the
+  suggested five-paragraph structure, including where `d = 2` is essential.
+- §1.1–1.2 cite Knowles–Sternberg, Ball, Kondratiev by name-and-decade only; real
+  citations needed.
+- `appendix.tex` empty and not even `\input` in `main.tex`; the compressible Biot
+  secular analysis (used by `lem:biot` Step 1 — margin note placed there: the cited
+  refs cover the incompressible/gel cases only) and the Gårding dyadic-freezing detail
+  belong there.
+- Stale agent file `agents/finite-fem-paper.agent.md` (different project); delete.
 
 ---
 
-## D. Manuscript-level holes (structural, not mathematical)
+## RESOLVED — one-line ledger (details in the paper / thmA_pencil_repair.md / handoff §5.0)
 
-1. `splitted/introduction.tex` is **empty** (one comment line). The literature discussion
-   that exists (§1.1–1.2) has no actual citations for Knowles–Sternberg, Ball, Kondratiev
-   — the claims are cited by name-and-decade in prose.
-2. `splitted/appendix.tex` is empty; several proofs (the Gårding dyadic-freezing argument
-   in `thm:A`, the compressible Biot secular analysis behind `lem:biot`/`rem:threshold`)
-   promise detail that would naturally live there.
-3. `lem:biot` cites \cite{Biot1963,Hong2009} for existence, exponential decay, and strict
-   negativity `q(λ_∥) < 0` of the surface mode for the *compressible* `f_log` material;
-   those references treat the incompressible/gel cases. The compressible secular analysis
-   is exactly what `surface_instability.py` implements — either cite a compressible
-   reference or state the secular condition and its root in the appendix.
-4. Stale agent file: `agents/finite-fem-paper.agent.md` describes a different project
-   (PreTensorFEM GPU-FEM paper) and contradicts `AGENTS.md`'s "no references to the
-   codebase" rule; it should be deleted or rewritten for this repo.
+- **A1 pencil-stability step of thm:A** — replaced by the screening route: vertex limit
+  is `μ_e·Id` (two-scale statement; hypothesis (W) + `lem:screen` + `rem:Wstatus`);
+  Williams exponents are intermediate asymptotics. Residuals → OPEN 7.
+- **A2 empty case-(A) class** — nonempty with both moduli free: forced-sign
+  characterisation + tempered penalty `eq:ftempered` (`rem:tempered`); cap exemplar was
+  inconsistent with (NC), removed.
+- **A3 fundamental path** — existence proved for convex penalties (`lem:fundexist`, 2D
+  direct method via affine cofactor); irreducibles named once in (FP)/`rem:fp`;
+  (BC)-circularity dissolved (`lem:tc` concludes `t_c ≤ t_* < t_coll`; noted at
+  `ass:bc`). Residual → OPEN 2.
+- **A4 tipdisc linear asymptotics** — folded into (FP)(ii), cited as hypothesis.
+- **A5 measrep minimality** — restated for any energy-bounded branch.
+- **A6 genericity without a parameter** — (T) named in `lem:sval` + `rem:transgen`
+  (Sard misuse removed; unconditional log-tube fallback wired in);
+  simplicity grounded in von Neumann–Wigner over `(ν, K̂)` (`§sub:symmetry`).
+- **A7 one-large-stretch kinematics** — derived (layer regime) and checked
+  (`williams_profile_W.py`, `§sub:numW`): `tr G ≠ 0` at all zeros; (W) holds iff
+  `ν > ν_W ≈ 0.4042` — partial falsification recorded honestly. Residual → OPEN 7(c).
+- **B5 Γ certificate** — computed (`gamma_certificate.py`): `b < 0` certified at all 12
+  rectangle points via monotone CG-Krylov test fields (k₁ = 66–184); deep CG reproduces
+  the bordered ratio (2.12 vs 2.17), retiring the cond(B) worry; `prop:certdeg`'s
+  hypotheses not operative on the monotone-graded cell (honest negative, in
+  `rem:certnum`). Residual → OPEN 5.
+- **C2 power-profile margins** — now reported in §6.3 next to the rectangle table.
+- **C3 `d_φ` floor** — `lem:relief`/`eq:dphisign` carry a uniform floor `c_d`.
+- **Abstract overclaims** — "preserving Kondratiev exponents" → two-scale statement;
+  "we prove creasing preempts collapse" → reduced-to-tip-disc-criterion phrasing.
+- **Whole-paper consistency pass (2026-07-18)** — `prop:physical` no longer claims an
+  "unconditional" bound (cites (FP)(i) + `lem:tc`); `thm:reg` lists `eq:dphisign` among
+  its hypotheses; `lem:biot`'s conclusion routed through the rewired `lem:tc`;
+  self-consistency-of-(NC) remark cross-linked to `lem:screen`/`§sub:numW`; ledger row
+  for subcriticality split into cubic (certified) vs quintic (open); (AR) "confirmed"
+  softened to "qualitative content confirmed".
