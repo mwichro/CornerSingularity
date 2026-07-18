@@ -1003,8 +1003,9 @@ in concrete, checkable form rather than as opaque spectral postulates:
           $|b_\psi|>b_{\mathrm{dir}}$: proved for small $\hat K$ under the coupling non-degeneracy of
           Proposition~\ref{prop:certdeg}, and on the finite rectangle certified by the inversion-free criterion of
           Corollary~\ref{cor:cert}, evaluated in \S\ref{sub:numb} (Remarks~\ref{rem:bsign}, \ref{rem:certnum}); the
-          quintic clause $d>0$, by contrast, has no analogous sign theorem and no computation behind it and remains
-          fully open (Remark~\ref{rem:fbstatus}). The
+          quintic, by contrast, is \emph{computed negative} through the sixth-order reduction
+          (Lemma~\ref{lem:quintic}, \S\ref{sub:numb}), so the classical saturation clause fails and the arrested
+          post-snap state is carried by (ND) alone (Remark~\ref{rem:quinticstatus}). The
           homogeneity count of Proposition~\ref{prop:bcount} pins down \emph{why} the magnitude is irreducible:
           because the edge exponent satisfies $\alpha>\tfrac12$ here, the cubic integral is tip-convergent but not
           tip-dominated, so $b$ does not collapse to a universal wedge number but remains a functional $b(\nu,\hat K)$
@@ -1029,7 +1030,7 @@ in concrete, checkable form rather than as opaque spectral postulates:
         Stable-branch non-degeneracy (Ass.~\ref{ass:nd})                          & posited                                                        & \emph{physical} (bounded-distortion crease); not computed here (Prop.~\ref{prop:physical})                      \\
         \midrule
         Buckling precedes collapse (BC) (Ass.~\ref{ass:bc})                       & ---                                                            & \emph{numerical} on tip disc only; measure-repelled + confined (Lem.~\ref{lem:measrep}, Prop.~\ref{prop:tipdisc}, Lem.~\ref{lem:bcwedge})  \\
-        Subcriticality $b<0<d$ (Ass.~\ref{ass:subcrit})                           & assumed                                                        & cubic: sign \textbf{proved} $b_\psi{\le}0$ (Lem.~\ref{lem:fbsign}), magnitude \emph{certified numerically} (Cor.~\ref{cor:cert}, \S\ref{sub:numb}); quintic $d{>}0$ \emph{open} (Rem.~\ref{rem:fbstatus})     \\
+        Subcritical cubic $b<0$ (Ass.~\ref{ass:subcrit})                          & assumed                                                        & sign \textbf{proved} $b_\psi{\le}0$ (Lem.~\ref{lem:fbsign}), magnitude \emph{certified numerically} (Cor.~\ref{cor:cert}, \S\ref{sub:numb}); quintic \textbf{computed} $d{<}0$: no polynomial saturation, arrest via (ND) (Lem.~\ref{lem:quintic})     \\
         \bottomrule
     \end{tabular}
     \caption{Hypothesis ledger for the concrete clamped--free neo-Hookean model. Fixing the material and geometry

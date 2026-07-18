@@ -1169,19 +1169,22 @@ $\theta\mapsto\tfrac\pi2-\theta$, which swaps $\Gamma_D$ and $\Gamma_N$ and is n
 structural facts do \emph{not} settle is the \emph{sign} of the cubic and quintic coefficients; indeed, by
 Lemma~\ref{lem:volcoeff}(ii), the explicit single-mode (frozen) parts point \emph{against} subcriticality,
 $b_{\mathrm{dir}}>0$ and $d_{\mathrm{dir}}<0$ in compression. The subcritical pattern therefore hinges on the
-geometry-dependent orthogonal-mode feedback overturning these signs; we record it as a residual hypothesis to be
-verified numerically (Remark~\ref{rem:bsign}) rather than asserted from the creasing analogy
-\cite{Biot1963,Hong2009}.
+geometry-dependent orthogonal-mode feedback overturning these signs; we record the cubic clause as a residual
+hypothesis to be verified numerically (Remark~\ref{rem:bsign}) rather than asserted from the creasing analogy
+\cite{Biot1963,Hong2009} --- and the computation finds the feedback does overturn the cubic but \emph{not} the
+quintic (Remark~\ref{rem:quinticstatus}), which reshapes the saturation story below.
 \begin{assumption}[Subcritical sign pattern (residual, geometry-dependent)]
     \label{ass:subcrit}
-    With $c_2=0$ by Lemma~\ref{lem:volcoeff}(i), the full reduced cubic and quintic coefficients
+    With $c_2=0$ by Lemma~\ref{lem:volcoeff}(i), the full reduced cubic coefficient
     \begin{equation}
         b:=\tfrac16\langle\bm{\phi},\partial^3_{\bm{u}}G[\bm{\phi},\bm{\phi},\bm{\phi}]\rangle,
-        \qquad
-        d:=\tfrac1{120}\langle\bm{\phi},\partial^5_{\bm{u}}G[\bm{\phi},\dots,\bm{\phi}]\rangle,
     \end{equation}
-    each the frozen part of Lemma~\ref{lem:volcoeff} corrected by the orthogonal-mode feedback, satisfy $b<0<d$
-    (subcritical with quintic saturation). This is a condition on the corner geometry, not on the material model.
+    the frozen part of Lemma~\ref{lem:volcoeff} corrected by the orthogonal-mode feedback, satisfies $b<0$
+    (subcritical). This is a condition on the corner geometry, not on the material model. We do \emph{not} assume a
+    sign for the reduced quintic $d$ (defined analogously at fifth order): its sixth-order reduction is derived in
+    Lemma~\ref{lem:quintic} and \emph{computed} in \S\ref{sub:numb}, with the result $d<0$ --- the polynomial normal
+    form does not saturate the subcritical branch, and the arrest of the snap is a finite-amplitude matter carried by
+    Assumption~\ref{ass:nd} (Remark~\ref{rem:quinticstatus}).
 \end{assumption}
 \begin{remark}[Status of the subcritical signs: geometry-decided, checked numerically]
     \label{rem:bsign}
@@ -1201,7 +1204,8 @@ verified numerically (Remark~\ref{rem:bsign}) rather than asserted from the crea
     rather than an inheritance from flat creasing. The \emph{direction} of the cubic feedback can in fact be signed
     analytically: $b_\psi\le0$ always, by the variational structure of the first crossing
     (Lemma~\ref{lem:fbsign} below), so the genuinely open content is the magnitude comparison
-    $|b_\psi|>b_{\mathrm{dir}}$; the quintic feedback $d_\psi$ we do not sign. The magnitude is evaluated
+    $|b_\psi|>b_{\mathrm{dir}}$; the quintic is treated at sixth order in Lemma~\ref{lem:quintic}, with the outcome
+    $d<0$ (Remark~\ref{rem:quinticstatus}). The magnitude is evaluated
     numerically from the eigenmode and reduced operator of the two-dimensional model wedge of Proposition~\ref{prop:blowup}
     as a function of $(\nu,\hat K)$, which is the proper arbiter of a geometry-dependent sign. Were the verdict $b>0$ instead, the bifurcation would be supercritical and \emph{more}
     benign --- the physical branch smooth through $t_c$ with no snap at onset --- and the regularisation conclusions of
@@ -1225,8 +1229,9 @@ verified numerically (Remark~\ref{rem:bsign}) rather than asserted from the crea
         \label{eq:bifeq}
         a\,(t_c-t)\,w + b\,w^3 + d\,w^5 = \epsilon\,\eta + \mathcal{O}\!\big(\epsilon^2 + \epsilon w + |t_c-t|\,w^2 + w^6\big),
     \end{equation}
-    with $a>0$ (Lemma~\ref{lem:transversal}), $b<0<d$ (Assumption~\ref{ass:subcrit}) and $\eta$ as in
-    Lemma~\ref{lem:eta}.
+    with $a>0$ (Lemma~\ref{lem:transversal}), $b<0$ (Assumption~\ref{ass:subcrit}), $d$ the reduced quintic of
+    Lemma~\ref{lem:quintic} (computed negative; no statement below uses a sign for it except where explicitly
+    conditioned), and $\eta$ as in Lemma~\ref{lem:eta}.
 \end{proposition}
 
 \begin{proof}
@@ -1236,9 +1241,11 @@ verified numerically (Remark~\ref{rem:bsign}) rather than asserted from the crea
     yields a unique smooth $\bm{\psi}=\bm{\psi}(w,t,\epsilon)$ with $\bm{\psi}(0,t_c,0)=0$ and
     $\bm{\psi}=\mathcal{O}(w^2+\epsilon+|t_c-t|)$. Substituting into the kernel equation $\langle G,\bm{\phi}\rangle=0$
     and Taylor-expanding $G$ about $(\bm{u}_0(t_c),t_c,0)$ gives \eqref{eq:bifeq}: the linear term $a(t_c-t)w$ from
-    Lemma~\ref{lem:transversal}, the cubic $bw^3$ and quintic $dw^5$ from Assumption~\ref{ass:subcrit} (the quadratic
+    Lemma~\ref{lem:transversal}, the cubic $bw^3$ from Assumption~\ref{ass:subcrit} and the quintic $dw^5$ from
+    Lemma~\ref{lem:quintic} (the quadratic
     vanishing by symmetry), and the inhomogeneity $\epsilon\eta$ from $-\epsilon\langle\bm{p},\bm{\phi}\rangle$. Because
-    $b<0$, the cubic alone does not saturate the amplitude, which is why the quintic $dw^5$ ($d>0$) is retained. \qed
+    $b<0$, the cubic alone does not saturate the amplitude, which is why the quintic $dw^5$ is retained --- whether it
+    saturates in turn is decided by the sign of $d$ (Remark~\ref{rem:quinticstatus}). \qed
 \end{proof}
 
 \subsection{The sign of the orthogonal-mode feedback is not free}
@@ -1345,9 +1352,76 @@ $\mathcal{L}_c=E_2$, $\partial^2_{\bm{u}}G=E_3$ and $\partial^3_{\bm{u}}G=E_4$ t
     tests this single scalar and nothing else, while Corollary~\ref{cor:cert} upgrades any sufficiently good explicit
     $\bm{v}$ to a certificate. Two caveats. First, the argument is tied to the first crossing: along the unstable
     continuation past $t_c$ the operator is indefinite and \eqref{eq:fbsign} does not apply there (nor is it needed:
-    $b$ is a datum of the critical point). Second, the same argument does \emph{not} sign the quintic feedback
-    $d_\psi$ --- the fourth-order Lyapunov--Schmidt correction mixes terms of both signs --- so the saturation clause
-    $d>0$ of Assumption~\ref{ass:subcrit} is untouched.
+    $b$ is a datum of the critical point). Second, the same argument does \emph{not} sign the \emph{full} quintic
+    feedback --- the sixth-order reduction mixes terms of both signs --- but it does sign one channel of it, and the
+    computation built on the next lemma settles the rest: see Lemma~\ref{lem:quintic} and
+    Remark~\ref{rem:quinticstatus}.
+\end{remark}
+
+% The sixth-order reduction, never previously written down: it makes d computable, signs the psi3 channel, and the
+% computation then returns d<0 -- the saturation clause of the old normal form is refuted, not merely open.
+\begin{lemma}[The sixth-order reduction, and the quintic feedback channel that is never stabilising]
+    \label{lem:quintic}
+    In the setting of Lemma~\ref{lem:fbsign} (symmetric case, $c_2=0$), let $\bm\psi_2=-(Q\mathcal{L}_cQ)^{-1}R$ and
+    define $S_3\in(V^\perp)'$ by
+    \begin{equation}
+        \label{eq:S3def}
+        \langle S_3,\bm v\rangle := E_3[\bm\phi,\bm\psi_2,\bm v] + \tfrac16\,E_4[\bm\phi,\bm\phi,\bm\phi,\bm v],
+        \qquad \bm v\in V^\perp ,
+    \end{equation}
+    so that the third-order Lyapunov--Schmidt field is $\bm\psi_3=-(Q\mathcal{L}_cQ)^{-1}S_3$. Then the reduced
+    quintic coefficient of \eqref{eq:bifeq} is exactly
+    \begin{equation}
+        \label{eq:dformula}
+        d \;=\; \tfrac1{120}\,E_6[\bm\phi^{\otimes6}]
+        \;+\; \tfrac14\,E_5[\bm\phi^{\otimes4},\bm\psi_2]
+        \;+\; \tfrac32\,E_4[\bm\phi^{\otimes2},\bm\psi_2^{\otimes2}]
+        \;+\; E_3[\bm\psi_2^{\otimes3}]
+        \;-\; 3\,\big\langle S_3,\ (Q\mathcal{L}_cQ)^{-1}S_3\big\rangle .
+    \end{equation}
+    The last term is $\le0$, with equality iff $S_3=0$: the feedback through $\bm\psi_3$ is \emph{never stabilising}
+    for the quintic, the exact mirror of Lemma~\ref{lem:fbsign} one order up. In the frozen limit
+    $D_1\to0$ the first term reduces to $d_{\mathrm{dir}}=\int f'''(J_0)\,d_\phi^3\,dV$ of
+    Lemma~\ref{lem:volcoeff}(ii); the middle three terms are unsigned in general.
+\end{lemma}
+
+\begin{proof}
+    Write $\bm u=\bm u_0+w\bm\phi+\bm\psi(w)$ with $\bm\psi=w^2\bm\psi_2+w^3\bm\psi_3+\mathcal O(w^4)$ and expand the
+    reduced energy $V(w)=\mathcal E_{t_c}(\bm u)$ at $\epsilon=0$. Because $V$ is stationary in $\bm\psi$ on the range
+    component, perturbing $\bm\psi$ by $\mathcal O(w^4)$ changes $V$ by $\mathcal O(w^8)$, so the fourth-order field
+    does not enter the $w^6$ coefficient. Collecting the order-$w^6$ terms of $\sum_k\tfrac1{k!}E_k[(w\bm\phi+
+    w^2\bm\psi_2+w^3\bm\psi_3)^{\otimes k}]$ gives
+    \[
+        V_6=\tfrac1{720}E_6[\bm\phi^{\otimes6}]+\tfrac1{24}E_5[\bm\phi^{\otimes4},\bm\psi_2]
+        +\tfrac14E_4[\bm\phi^{\otimes2},\bm\psi_2^{\otimes2}]+\tfrac16E_3[\bm\psi_2^{\otimes3}]
+        +\langle S_3,\bm\psi_3\rangle+\tfrac12\langle\bm\psi_3,\mathcal{L}_c\bm\psi_3\rangle ,
+    \]
+    where the $w^3$ range equation $Q(\mathcal{L}_c\bm\psi_3+S_3)=0$ identifies $\bm\psi_3$ and collapses the last
+    two terms to $-\tfrac12\langle S_3,(Q\mathcal{L}_cQ)^{-1}S_3\rangle$; with $d=6V_6$ this is \eqref{eq:dformula}.
+    Nonpositivity of the final term is positivity of $(Q\mathcal{L}_cQ)^{-1}$ on $V^\perp$ (Lemma~\ref{lem:fbsign}(i)).
+    The frozen limit follows from $E_6[\bm\phi^{\otimes6}]=\int f^{(6)}D_1^6+30f^{(5)}D_1^4d_\phi
+    +180f''''D_1^2d_\phi^2+120f'''d_\phi^3\,dV$ (Fa\`a di Bruno with the exact quadratic determinant expansion of
+    Lemma~\ref{lem:relief}) at $D_1\to0$. \qed
+\end{proof}
+
+\begin{remark}[Status of the quintic: computed, and negative]
+    \label{rem:quinticstatus}
+    Formula \eqref{eq:dformula} makes $d$ computable with the same ingredients as $b$ --- one further bordered solve
+    for $\bm\psi_3$ and closed-form volumetric integrands (in two dimensions the determinant is quadratic in the
+    gradient, so every $E_k$ with $k\ge3$ is an explicit polynomial in $D_1$-type contractions). The computation
+    (\S\ref{sub:numb}) returns $d<0$ at \emph{every} tested point of the $(\nu,\hat K)$ rectangle, under both grading
+    profiles and at every resolution, with the sign-definite $\bm\psi_3$-channel of \eqref{eq:dformula} as the
+    dominant contribution. The saturation clause $d>0$ of the classical subcritical normal form is therefore not
+    merely unsupported --- on the accessible discretisation it is \emph{refuted}: with $b<0$ \emph{and} $d<0$ the
+    polynomial normal form has no stabilising term through fifth order, the quintic fold \eqref{eq:fold} does not
+    exist at this order, and the unstable branch exits the normal-form neighbourhood without turning. This is not a
+    pathology of the corner but the expected signature of creasing: the crease is a strongly nonlinear,
+    finite-amplitude state not reachable by a weakly nonlinear expansion about the flat (here: compressed) state
+    \cite{Hong2009}, and the corner inherits exactly that character. The consequences are catalogued where they
+    arise: the snap-load law \eqref{eq:koiter} and the unstable-branch scaling \eqref{eq:wscale} need only $b<0$ and
+    are untouched; the arrest of the snap at finite amplitude is carried entirely by the non-degeneracy hypothesis
+    (ND) of Assumption~\ref{ass:nd}, which the quintic was never a substitute for; and the fold data $(t_L,w_L)$ of
+    \eqref{eq:fold} are meaningful only conditionally on $d>0$, i.e.\ not for the computed corner.
 \end{remark}
 
 \subsection{Subcritical branch structure and imperfection sensitivity}
@@ -1356,17 +1430,24 @@ $\mathcal{L}_c=E_2$, $\partial^2_{\bm{u}}G=E_3$ and $\partial^3_{\bm{u}}G=E_4$ t
 \paragraph{Perfect system.}
 Set $\epsilon=0$ and $t<t_c$. Dividing \eqref{eq:bifeq} by $w$ gives $a(t_c-t)+bw^2+dw^4=0$, i.e.
 \begin{equation}
-    w^2 = \frac{-b\pm\sqrt{b^2-4ad(t_c-t)}}{2d},
+    w^2 = \frac{-b\pm\sqrt{b^2-4ad(t_c-t)}}{2d}.
 \end{equation}
-which (with $a>0$, $b<0$, $d>0$) admits real nontrivial branches only for $t\ge t_L$, where
+Were the quintic stabilising, $d>0$, this would admit real nontrivial branches only for $t\ge t_L$, where
 \begin{equation}
     \label{eq:fold}
-    t_L := t_c - \frac{b^2}{4ad} < t_c, \qquad w_L^2 = \frac{-b}{2d} = \mathcal{O}(1).
+    t_L := t_c - \frac{b^2}{4ad} < t_c, \qquad w_L^2 = \frac{-b}{2d} = \mathcal{O}(1),
 \end{equation}
-At $t_L$ the two branches meet in a limit point (fold) at the \emph{finite} amplitude $w_L$. The fundamental branch
-$w=0$ is stable for $t<t_c$ and unstable for $t>t_c$; the upper nontrivial branch is stable. Hence on $[t_L,t_c)$ the
-compressed state and a finite-amplitude creased state coexist: the bifurcation is subcritical, with hysteresis and a
-\emph{snap} at $t_c$.
+with the two branches meeting in a limit point (fold) at the finite amplitude $w_L$, and the upper branch stable ---
+the textbook subcritical picture, in which the normal form itself supplies the arrested state. The computed corner is
+\emph{not} in this case: $d<0$ (Remark~\ref{rem:quinticstatus}), the truncation carries no stabilising term, and the
+nontrivial branch simply leaves the normal-form neighbourhood without turning --- exactly the behaviour of a crease,
+whose arrested state is a finite-amplitude fold invisible to any weakly nonlinear expansion \cite{Hong2009}. What
+survives, and what the rest of this section uses, is sign-robust: the fundamental branch $w=0$ is stable for $t<t_c$
+and unstable for $t>t_c$; the departure is subcritical (the cubic pushes away from the fundamental branch); the
+arrested creased state exists on physical grounds and its bounded distortion is exactly the content of
+Assumption~\ref{ass:nd}, which now carries \emph{alone} the coexistence-and-hysteresis picture: on an interval below
+$t_c$ the compressed state and the finite-amplitude crease coexist, with a \emph{snap} at $t_c$; only the
+\emph{location} of the fold $(t_L,w_L)$ is beyond the reduced equation when $d<0$.
 
 \paragraph{Imperfect system.}
 \begin{proposition}[Imperfection sensitivity, Koiter $\tfrac23$ law]
@@ -1640,7 +1721,9 @@ numerically below in place of the (false) claim that it follows from the $f''$ t
 \end{assumption}
 
 \noindent We state (ND) as a hypothesis, not a consequence of the energy bound: an integral bound $\int f(J)<\infty$
-gives only measure-type control of $\{J\ \text{small}\}$, not a pointwise floor. It is the finite-amplitude analogue of
+gives only measure-type control of $\{J\ \text{small}\}$, not a pointwise floor. Its role has moreover grown: with
+the computed quintic negative (Remark~\ref{rem:quinticstatus}) the polynomial normal form supplies no arrested state,
+so (ND) is not a convenience but the \emph{sole} carrier of the post-snap picture. It is the finite-amplitude analogue of
 the small-$w$ relief of Lemma~\ref{lem:relief}, which it does \emph{not} invoke --- the lemma is local ($|w|\le w_0$)
 while the snap is to $\mathcal{O}(1)$ amplitude. Physically it is the standard expectation for creasing: the post-snap
 state is a finite-amplitude fold of bounded distortion, not a collapse, and the barrier $f_{\log}(J)\to\infty$ makes

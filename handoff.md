@@ -122,6 +122,15 @@ paper).
    prop:certdeg's hypotheses (a)/(b) NOT operative on the monotone-graded cell (no
    neutrality, erratic coupling) — that test still needs the periodic/wedge geometry.
    numerical.tex §sub:numb softening also done (this covered old item 5).
+   **Further (2026-07-18, same later session): the QUINTIC is computed — and negative.**
+   New `lem:quintic` (6th-order LS formula, ψ₃-channel provably ≤ 0) + `quintic_d.py`:
+   d < 0 at all 12 rectangle points, both gradings, all resolutions (validations: b
+   reproduced to 1e-13; FD fit of exact energy matches w⁶ to 0.3%). Paper restructured:
+   `ass:subcrit` assumes only b < 0; fold (t_L, w_L) presented as the conditional d > 0
+   case; arrest/coexistence now carried by (ND) alone — consistent with the strongly
+   nonlinear character of creasing (Hong2009). See `rem:quinticstatus`, §sub:numb, and
+   gap_review item 1. Whole-paper review pass also done (todonotes margin comments,
+   `\claude{}`); abstract overclaims fixed; gap_review.md rewritten as open-items list.
 
 1. **Γ-based certification run** (cheapest, highest value): on the existing (or any)
    discretisation, compute Γ = E₃[φ,φ,v]²/(2 b_dir⟨v,L_c v⟩) with v = the

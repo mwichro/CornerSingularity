@@ -10,14 +10,26 @@ Details of the closed items live in the paper itself, in `thmA_pencil_repair.md`
 
 ## OPEN — ranked by how much falls if it fails
 
-### 1. Quintic sign `d > 0` (least supported claim in the paper)
-Frozen part provably adverse (`d_dir < 0`), feedback `d_ψ` unsigned by the `lem:fbsign`
-argument, and **no numerical computation of `d` exists anywhere** (now stated in
-`rem:fbstatus`, `sub:core`, and the ledger row). If `d ≤ 0`: the fold `(t_L, w_L)`, the
-O(1) creased branch, coexistence/hysteresis, and `prop:physical`'s post-snap story all
-change. What survives without it: `eq:wscale` and hence `thm:reg`/`prop:narrow` need only
-`b < 0`. Either compute `d` in the wedge solve or restructure to quarantine `d > 0` to
-the physical-branch narrative.
+### 1. ~~Quintic sign `d > 0`~~ — RESOLVED BY FALSIFICATION (2026-07-18): `d < 0`
+The sixth-order reduction was derived (new `lem:quintic`: with `ψ₃ = −(Q𝓛Q)⁻¹S₃`,
+`d = E₆[φ⁶]/120 + E₅[φ⁴ψ₂]/4 + (3/2)E₄[φ²ψ₂²] + E₃[ψ₂³] − 3⟨S₃,(Q𝓛Q)⁻¹S₃⟩`, last term
+`≤ 0` always — the mirror of `lem:fbsign` one order up) and computed for the first time
+(`quintic_d.py`, output committed). Verdict: **`d < 0` at every tested point** — all 12
+rectangle points, both gradings (linear and physical power), every resolution — with the
+sign-definite ψ₃-channel dominant and `w_L² = −b/2d < 0` (no quintic fold). Validations:
+the same machinery reproduces `b` to 1e-13, and an FD fit of the exact energy along the
+composite field reproduces the w⁶ coefficient to 0.3%.
+
+**Consequence and restructuring (implemented):** the classical saturation clause is
+refuted, not open — consistent with the strongly nonlinear character of creasing (no
+weakly nonlinear expansion reaches the crease). `ass:subcrit` now assumes only `b < 0`;
+`prop:LS` keeps the quintic with free sign; the fold `(t_L, w_L)` of `eq:fold` is
+presented as the conditional `d > 0` textbook case, which the computed corner is *not*
+in; coexistence/hysteresis and the post-snap arrest now rest **entirely on (ND)** (stated
+at `ass:nd`, `rem:quinticstatus`, ledger, conclusion). Snap-load law `eq:koiter` and the
+unstable-branch scaling `eq:wscale` (hence `thm:reg`/`prop:narrow`) need only `b < 0` and
+are untouched. Residuals: the surrogate-cell caveats apply to `d` as to `b` (OPEN 5), and
+(ND)'s load has grown (OPEN 6).
 
 ### 2. Tip floor `t_coll > t_*` (the single remaining hinge of (BC))
 After the A3 rewiring, (BC) is *derived* from `lem:tc` given (FP)(i) and this one bound:
@@ -49,9 +61,13 @@ reported in §6 — but the continuum question and the physical-profile computat
 The wedge solver's job list: Γ on the rectangle with physical grading, the tip-disc (BC)
 floor, and the quintic `d`.
 
-### 6. (ND) post-snap non-degeneracy
+### 6. (ND) post-snap non-degeneracy — load has GROWN after the `d < 0` verdict
 Only a full nonlinear continuation (path following + deflation, FEniCS-class) can check
-it; `prop:physical`'s "no tangent blow-up on the physical branch" is conditional on it.
+it; `prop:physical`'s "no tangent blow-up on the physical branch" is conditional on it,
+and since the computed quintic is negative (item 1), (ND) is now the *sole* carrier of
+the arrested post-snap state and of the coexistence/hysteresis picture — the normal form
+supplies no fold. This makes the nonlinear continuation the single most valuable
+remaining computation.
 
 ### 7. Theorem A residual debts (bounded, flagged in the text)
 (a) layer-absorption lemma (log-sized perturbation on angular sets of algebraically
