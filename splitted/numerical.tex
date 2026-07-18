@@ -208,7 +208,12 @@ the physical rectangle at fixed resolution, the ratio is below $-1$ --- hence $b
     \end{tabular}
 \end{center}
 The margin to the threshold $r=-1$ is smallest near the incompressible corner ($\nu\to\tfrac12$, $\hat K\approx0.2$),
-where $r\approx-1.65$, and is never breached on the physical rectangle. On this evidence the cubic clause of
+where $r\approx-1.65$, and is never breached on the physical rectangle. One further robustness check cuts the margin
+rather than padding it: replacing the ad-hoc linear ramp by the \emph{physical} power profile
+$\lambda_\parallel\sim1+\hat K\,r^{\alpha-1}$ of the edge field thins the ratio to $r\approx-1.5$ at
+$\nu=0.417$ (against $-2.5$ for the linear ramp at the same point), still below $-1$ but markedly closer to it ---
+the nearer the grading is to the physical profile, the thinner the subcritical margin, which is one more reason the
+genuine wedge solve, not the surrogate, must be the final arbiter. On this evidence the cubic clause of
 Assumption~\ref{ass:subcrit} holds and the corner behaves as the genuine crease-analogue; but the evidence comes
 from the surrogate cell and has not converged, so we treat it as strong support rather than verification. The
 quintic clause $d>0$ is not tested by this computation at all and remains fully open (Remark~\ref{rem:fbstatus}).
@@ -237,6 +242,26 @@ remains untested; probing it requires the periodic or genuine-wedge geometry in 
 harmonic exists. The $b$-computation itself is reproduced by \texttt{graded\_buckling.py}, which reuses the validated
 linear building blocks of \S\ref{sub:numpencil}--\S\ref{sub:numbiot} (\texttt{williams\_clampedfree.py} /
 \texttt{mellin\_chebyshev\_pencil.py} for $\alpha$; \texttt{surface\_instability.py} for $\lambda_\star$).
+
+% The quintic, computed for the first time via the sixth-order reduction: negative everywhere -- reported with its
+% validations and its structural reading.
+The same discretisation evaluates the sixth-order reduction of Lemma~\ref{lem:quintic}
+(\texttt{quintic\_d.py}): one further bordered solve for $\bm\psi_3$, and closed-form volumetric integrands (the 2D
+determinant being quadratic in the gradient, every $E_k$ is an explicit polynomial in the contractions
+$D_1$-type/$d_\phi$-type, with $f^{(5)},f^{(6)}$ analytic for $f_{\log}$). Two independent validations anchor the
+implementation: the fourth-order route through the same machinery reproduces the $b$ of the direct assembly to
+$10^{-13}$ relative, and a finite-difference fit of the \emph{exact} energy along the composite field
+$w\bm\phi+w^2\bm\psi_2+w^3\bm\psi_3$ reproduces the $w^6$ coefficient to $0.3\%$. The result is unambiguous:
+\emph{$d<0$ at every tested point} --- across the $(\nu,\hat K)$ rectangle ($d\in[-6.6,-0.38]$ at mode normalisation
+$\max|\Grad\bm\phi|=1$), under both the linear and the physical power grading, and at every resolution of the
+refinement sweep --- with the sign-definite $\bm\psi_3$-channel of \eqref{eq:dformula} as the dominant contribution
+and the sole positive term ($E_4[\bm\phi^{\otimes2},\bm\psi_2^{\otimes2}]$) never overcoming it. Consistently,
+$w_L^2=-b/(2d)<0$: no quintic fold exists on the computed cell. The reading is in
+Remark~\ref{rem:quinticstatus}: the corner shares the strongly nonlinear character of creasing, the snap-load law and
+the unstable-branch scaling (which need only $b<0$) are untouched, and the arrested state is carried by (ND) alone.
+The usual surrogate-cell caveats apply verbatim, with one asymmetry worth noting: for $b$ the surrogate evidence
+\emph{supports} the hypothesis the architecture needs, while for $d$ it \emph{refutes} the classical saturation
+clause --- which is why the text above no longer assumes it.
 
 As a byproduct, the same critical mode furnishes a partial check of Assumption~\ref{ass:rot}
 (Remark~\ref{rem:rotnum}): the neutral co-energy $\langle\bm\phi,\mathcal L\bm\phi\rangle\approx10^{-8}$ confirms the
