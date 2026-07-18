@@ -181,6 +181,25 @@ works on that rectangle) and phrase both as "for a.e. `(ν, K̂)`", or fold them
 numerically-checked column of the ledger (the computed spectral gap in §6.3 is exactly a
 simplicity check — say so).
 
+**STATUS (2026-07-18): closed along the suggested lines, with one extra unconditional
+fallback found.**
+- *`lem:sval`:* the fixed-field Sard invocation is removed (Sard controls a.e. *level*,
+  never the specific zero level, and nothing is being perturbed). Transversality is now a
+  named hypothesis (T) in the lemma, and a new `rem:transgen` states (i) the honest sense
+  in which (T) is generic — Thom-nongenericity of tangential contact within the
+  `(ν, K̂, t)` family, versality unverified; (ii) checkability — `|∇λ_min|` near `Σ_c` is
+  a by-product of the numerics that locate `Σ_c`; (iii) a fallback the paper already
+  owned but never wired in: without any transversality, `lem:measrep` confines the
+  sublevel sets *unconditionally* at a logarithmic rate, so the qualitative localisation
+  is hypothesis-free and (T) buys only the sharp algebraic tube (`eq:locallength`) and
+  the `q < 1/2` range of `prop:narrow`; (iv) the point-vertex geometry of `rem:locus`
+  only improves matters.
+- *`§sub:symmetry` simplicity:* "generic" grounded in the von Neumann–Wigner
+  codimension-two argument over the `(ν, K̂)` family (degeneracy at the crossing avoided
+  for a.e. `(ν, K̂)` along the load path; not pointwise for a given body — stated), and
+  the computed sector gap of §6.3 is now cited as the numerical check with its
+  unsettled-refinement caveat. `ass:bif` discussion and the ledger row updated to match.
+
 ### A7. The "one-large-stretch" kinematics is asserted, not derived
 Scenario A's `J ~ r^{α−1}` (one diverging stretch) and Scenario B's `J ~ λ_min` are taken
 from a verbal characterisation of Dirichlet–Neumann openings. The actual singular-value
