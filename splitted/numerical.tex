@@ -44,6 +44,48 @@ Twelve angular modes already reach machine precision, a saturation no graded mes
 which the corner is better resolved spectrally than by FEM. The computation is reproduced by
 \texttt{mellin\_chebyshev\_pencil.py} (validated against \texttt{williams\_clampedfree.py}).
 
+\subsection{Profile nondegeneracy: the hypothesis (W)}
+\label{sub:numW}
+
+% The screening lemma's kinematic hypothesis is a one-line check on the computed profile; we run it and report both
+% the confirmation and the failure region honestly, since the answer splits the physical nu range in two.
+The kinematic hypothesis (W) of Lemma~\ref{lem:screen} is a closed-form condition on the already-computed angular
+profile: with $\bm G(\theta)=\alpha\,\bm\Phi\otimes\bm e_r+\bm\Phi'\otimes\bm e_\theta$, it requires
+$\mu(\theta)=\det\bm G=\alpha\,\bm\Phi\times\bm\Phi'\ge0$ on $[0,\tfrac\pi2]$ with finite-order zeros and
+$\tr\bm G\neq0$ at each zero. Both $\mu$ and the vanishing of $\tr\bm G$ are invariant under the residual scaling of
+the mode, so the check is parameter-free. Evaluating it on the Kolosov--Muskhelishvili null mode (analytic
+$\theta$-derivatives, verified against finite differences to $10^{-9}$; \texttt{williams\_profile\_W.py}) gives a
+sharp answer:
+\begin{center}
+    \begin{tabular}{ccccc}
+        \toprule
+        $\nu$ & $\alpha$ & $\min_\theta \mu/\|\bm G\|^2$ & interior zero $\theta_z/(\pi/2)$ & verdict \\
+        \midrule
+        $0.10$   & $0.86704$ & $-1.9\times10^{-2}$ & $0.975$ & fails \\
+        $0.25$   & $0.74475$ & $-3.9\times10^{-3}$ & $0.470$ & fails \\
+        $0.35$   & $0.67970$ & $-2.3\times10^{-4}$ & $0.173$ & fails \\
+        $0.40$   & $0.64991$ & $-1.3\times10^{-7}$ & $0.014$ & fails (marginally) \\
+        $0.4042$ & $0.64748$ & $-1\times10^{-14}$  & ---     & threshold $\nu_W$ \\
+        $0.417$  & $0.64012$ & $+3\times10^{-17}$  & ---     & holds \\
+        $0.49$   & $0.59990$ & $-4\times10^{-17}$  & ---     & holds \\
+        \bottomrule
+    \end{tabular}
+\end{center}
+Hypothesis (W) \emph{holds} precisely for $\nu>\nu_W\approx0.404$: there $\mu\ge0$ throughout, with only the forced
+order-two zero at the clamped face, where $\tr\bm G\neq0$ (its normalised value decreasing from $0.23$ to $0.03$ as
+$\nu\uparrow\tfrac12$). For $\nu<\nu_W$ the profile has $\mu<0$ on the clamped-side sector $(0,\theta_z(\nu))$, with
+$\theta_z$ sweeping monotonically from the clamped face at $\nu_W$ to the free face as $\nu$ decreases (the whole
+opening is negative below $\nu\approx0.08$); $\tr\bm G\neq0$ at every zero across the range, so the \emph{layer}
+structure of Lemma~\ref{lem:screen} is as assumed --- it is the \emph{sign} clause that fails. Since the deep-field
+orientation $J\sim K^2r^{2(\alpha-1)}\mu$ is independent of the load sign, $\mu<0$ on a sector means the linear
+ansatz is orientation-reversing at depth there for \emph{either} loading: below $\nu_W$ the screened-vertex
+conclusion of Theorem~\ref{thm:A}(A) is established only on the free-face sector, and on the clamped-side sector the
+inner state must leave the linear ansatz below the crossover scale (the self-consistency caveat of
+Remark~\ref{rem:Wstatus}). The intermediate-annulus statements, which is all the reduction of
+Proposition~\ref{prop:blowup} uses, are unaffected. The failure is soft near the threshold ($|\min\mu|$ falls from
+$2\times10^{-2}$ at $\nu=0.05$ to $10^{-7}$ at $\nu=0.40$) and absent in the near-incompressible range where the
+compressive computations of this section operate.
+
 \subsection{The buckling threshold \texorpdfstring{$\lambda_\star(\nu)$}{lambda*(nu)} and condition (BC)}
 \label{sub:numbiot}
 
@@ -170,12 +212,30 @@ where $r\approx-1.65$, and is never breached on the physical rectangle. On this 
 Assumption~\ref{ass:subcrit} holds and the corner behaves as the genuine crease-analogue; but the evidence comes
 from the surrogate cell and has not converged, so we treat it as strong support rather than verification. The
 quintic clause $d>0$ is not tested by this computation at all and remains fully open (Remark~\ref{rem:fbstatus}).
-For the definitive computation we recommend, in place of the assembled $r$, the inversion-free
-certification criterion of Corollary~\ref{cor:cert}/Proposition~\ref{prop:certdeg}: the invariant $\Gamma$ of
-\eqref{eq:gammadef} needs only one trilinear integral and one Rayleigh quotient on an explicit test field, so it is
-immune to the growth of $\mathrm{cond}(B)$ that the bordered Lyapunov--Schmidt solve suffers as the flat resonance is
-approached, and $\Gamma>1$ certifies $b<0$ outright. The computation is reproduced by \texttt{graded\_buckling.py}, which reuses the validated linear
-building blocks of \S\ref{sub:numpencil}--\S\ref{sub:numbiot} (\texttt{williams\_clampedfree.py} /
+
+% The Gamma certificate has now been run: it certifies b<0 on the rectangle without the bordered solve, validates the
+% bordered ratios independently, and returns an honest negative on the certdeg hypotheses, which this cell cannot probe.
+The inversion-free certification criterion of Corollary~\ref{cor:cert} has now been evaluated on the same
+discretisation (\texttt{gamma\_certificate.py}), and it upgrades the table above in two ways. First, since the
+assembled load vector represents the quadratic self-coupling, every conjugate-gradient iterate of it is an
+\emph{explicit} test field --- a polynomial in the operator applied to the source, no bordered matrix, no
+near-singular solve --- and by Krylov optimality the certified value $\Gamma_k$ of \eqref{eq:gammadef} increases
+monotonically in $k$, each $k$ yielding the rigorous bound $b\le b_{\mathrm{dir}}(1-\Gamma_k)$. On the full rectangle
+the certificate fires at between $66$ and $184$ iterations, reaching $\Gamma\in[1.31,3.01]$ by $k=1000$:
+\emph{the sign $b<0$ of the discrete cell is certified at every tested $(\nu,\hat K)$ without inverting the reduced
+operator}. Second, at the reference point the deep iteration converges to the bordered-solve value itself
+($\Gamma_k\to2.12$ against $-r=2.17$ at $k=2000$), independently validating the assembled ratios of the table against
+their own $\mathrm{cond}(B)\sim10^{7}$--$10^{8}$ pathology. Under refinement the certificate survives --- the
+crossing iteration grows ($127\to324$ from the coarsest to the finest grid) as the shrinking gap slows the Krylov
+convergence, but $\Gamma$ still exceeds $1.8$ at depth --- with the standing caveat that all of this certifies the
+\emph{discrete} $b$ of the surrogate cell, at each resolution, and cannot repair the unsettled continuum limit noted
+above. One honest negative completes the picture: the flat-degeneracy amplification mechanism of
+Proposition~\ref{prop:certdeg} is \emph{not operative on this cell} --- the excited mode never goes neutral as
+$\hat K\to0$ (its Rayleigh quotient stays near $0.09$, precisely because the monotone grading was designed to lift
+the flat resonance) and its coupling to the source is small and erratic --- so hypothesis (b) of that proposition
+remains untested; probing it requires the periodic or genuine-wedge geometry in which the doubled-wavenumber
+harmonic exists. The $b$-computation itself is reproduced by \texttt{graded\_buckling.py}, which reuses the validated
+linear building blocks of \S\ref{sub:numpencil}--\S\ref{sub:numbiot} (\texttt{williams\_clampedfree.py} /
 \texttt{mellin\_chebyshev\_pencil.py} for $\alpha$; \texttt{surface\_instability.py} for $\lambda_\star$).
 
 As a byproduct, the same critical mode furnishes a partial check of Assumption~\ref{ass:rot}

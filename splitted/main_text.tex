@@ -618,6 +618,24 @@ remains the dominant asymptotics visible from any fixed scale. This is the preci
 that the tensile corner \emph{passes like linear elasticity}: it passes like linear elasticity on the mesh-relevant
 intermediate range, and \emph{better} than linear elasticity at the vertex.
 
+\begin{remark}[Status of (W): verified above $\nu_W\approx0.40$, fails below]
+    \label{rem:Wstatus}
+    Hypothesis (W) is a parameter-free, closed-form condition on the computed clamped--free profile, and checking it
+    (\S\ref{sub:numW}) returns a sharp split of the physical range: $\mu\ge0$ holds precisely for
+    $\nu>\nu_W\approx0.404$ (single order-two zero at the clamped face, $\tr\bm G\neq0$ there), while for $\nu<\nu_W$
+    the determinant is \emph{negative} on a clamped-side sector $(0,\theta_z(\nu))$ that widens as $\nu$ decreases.
+    Since the mode enters $\mu$ quadratically, the sign is intrinsic, and $J\sim K^2r^{2(\alpha-1)}\mu$ at depth for
+    either load sign: below $\nu_W$ the linear Williams field is orientation-reversing at depth on an $\mathcal O(1)$
+    sector, so the tensor ansatz cannot describe the state below the crossover scale there and the screened-vertex
+    conclusion of Theorem~\ref{thm:A}(A) is established only on the complementary free-face sector. Nothing above the
+    crossover scale is affected --- the intermediate-annulus asymptotics, which is what the blow-up reduction and the
+    numerics consume, holds for all $\nu$ --- but a complete vertex theory for $\nu<\nu_W$ requires the
+    self-consistent nonlinear inner state on the negative sector, the same open problem as the compressive inner
+    region of Remark~\ref{rem:core}. The layer structure, by contrast, is confirmed across the whole range:
+    $\tr\bm G\neq0$ at every zero of $\mu$, so the one-large-stretch regime of \S\ref{sub:growth} is exactly the
+    layer regime, as Lemma~\ref{lem:screen} asserts.
+\end{remark}
+
 For the weighted well-posedness we recall two standard inequalities in the Kondratiev space
 $V^{1,2}_\beta(B_\rho)$---the closure of smooth functions vanishing on $\Gamma_D\cap\partial B_\rho$ under
 $\|\bm{v}\|_{V^{1,2}_\beta}^2 = \int_{B_\rho} \big(r^{2\beta}|\Grad\bm{v}|^2 + r^{2\beta-2}|\bm{v}|^2\big)\,dV$.

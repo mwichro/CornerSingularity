@@ -209,6 +209,30 @@ singular value of the angular matrix dominate, for all θ, over the physical ν 
 cite the computation. Same for the self-consistency of (NC): currently a plausibility
 remark, never verified on any actual tensile solution.
 
+**STATUS (2026-07-18): checked — and the check *partially falsifies* hypothesis (W).**
+New script `williams_profile_W.py` (output in `williams_profile_W.output`) builds the
+KM null mode at α(ν), with analytic θ-derivatives verified against FD to 1e-9, and
+evaluates `μ(θ) = det G = α Φ×Φ'` and `tr G` (both scale/sign-invariant). Result:
+- `μ ≥ 0` holds **precisely for ν > ν_W ≈ 0.4042** (single forced order-2 zero at the
+  clamped face, `tr G ≠ 0` there): (W) verified in the near-incompressible range where
+  the paper's compressive numerics live (ν = 0.417 etc.).
+- For ν < ν_W, `μ < 0` on the clamped-side sector `(0, θ_z(ν))`, θ_z sweeping from the
+  clamped face (ν→ν_W) to the free face as ν decreases (whole opening negative below
+  ν ≈ 0.08). Since `J ~ K²r^{2(α−1)}μ` at depth for either load sign, the linear ansatz
+  is orientation-reversing at depth on an O(1) sector: the screened-vertex conclusion of
+  thm:A(A) is established only on the free-face sector there; intermediate-annulus
+  statements (all that `prop:blowup` uses) are unaffected. Failure is soft near ν_W
+  (|min μ| from 2e-2 at ν=0.05 down to 1e-7 at ν=0.40).
+- Layer structure confirmed across the whole range: `tr G ≠ 0` at every zero of μ, so
+  the one-large-stretch regime is exactly the layer regime, as `lem:screen` asserts —
+  this part of A7 is now *derived and checked*.
+Recorded in the paper: new `§sub:numW` (table + verdict) and `rem:Wstatus` after
+`lem:screen`; thm:A(A)'s vertex claim now explicitly scoped by ν_W via the remark.
+Residual: the self-consistent nonlinear inner state on the negative sector for ν < ν_W
+(same class of open problem as `rem:core`'s compressive inner region); (NC)
+self-consistency on an actual tensile solve remains untested (needs a nonlinear solver,
+not profile data).
+
 ---
 
 ## B. Open hypotheses the architecture still rests on (correctly labelled, but load-bearing)
@@ -243,6 +267,31 @@ Ranked by how much falls if they fail.
    quotient on the existing discretisation, immune to the `cond(B)` blow-up, and it
    simultaneously tests hypothesis (b) of `prop:certdeg` (does the coupling survive
    `K̂ → 0`?).
+
+   **STATUS (2026-07-18): computed — `gamma_certificate.py` (output in
+   `gamma_certificate.output`). Three results:**
+   1. *Certified.* On the full 12-point `(ν, K̂)` rectangle the certificate fires:
+      Γ crosses 1 at CG iteration k₁ = 66–184 (each iterate an explicit test field —
+      a polynomial in Q applied to the source — so no bordered solve; by Krylov
+      optimality Γ_k is monotone and every k gives the rigorous bound
+      `b ≤ b_dir(1−Γ_k)`), reaching Γ ∈ [1.31, 3.01] at k=1000. Discrete `b < 0`
+      certified everywhere tested. Cheap single fields are NOT enough: Γ(R) ≈ 0.09–0.17,
+      Γ(φ₂) ≤ 0.29 — the certificate needs the Krylov build-up.
+   2. *Cross-validation.* Deep CG converges to the bordered-solve ratio itself
+      (Γ → 2.12 vs −r = 2.17 at ν=0.417, K̂=0.10, k=2000): the `cond(B) ~ 10⁷–10⁸`
+      bordered values of the r-tables are independently confirmed — this removes the
+      main conditioning worry of C1 (though not the continuum-limit worry: under
+      refinement k₁ grows 127→324 as the gap decays; Γ still exceeds 1.8 at depth).
+   3. *Honest negative on `prop:certdeg`.* On this cell the excited mode never goes
+      neutral as K̂→0 (Rayleigh quotient ≈ 0.09, flat — the monotone grading was
+      *designed* to lift the flat resonance) and its coupling to the source is small and
+      erratic (2.6e-4–2.6e-2): hypotheses (a)+(b) are not operative here, so the
+      proposition remains untested; probing it needs the periodic or genuine-wedge
+      geometry where the doubled-wavenumber harmonic exists.
+   Recorded in the paper: §`sub:numb` (certificate paragraph rewritten with results),
+   `rem:certnum`, conclusion. Remaining: the certificate certifies the *discrete* b of
+   the surrogate cell at each resolution — the continuum-limit question (C1) and the
+   true wedge solve stand.
 6. **(ND) post-snap non-degeneracy** — posited on physical grounds; only a full nonlinear
    continuation (FEniCS-type path following with deflation) can check it. Honestly
    labelled; just noting that `prop:physical`'s headline "no tangent blow-up on the

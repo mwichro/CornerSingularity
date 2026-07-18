@@ -1,0 +1,21 @@
+Hypothesis (W) check, right-angle clamped--free Williams profile.
+nu_W (sign change of the theta^2 coefficient at the clamped face): 0.4042
+
+    nu    alpha  min detG~ theta_z/(pi/2) |trG| at zeros~  verdict
+0.0500  0.92260  -2.05e-02              -           0.928  (W) FAILS on clamped-side sector
+0.1000  0.86704  -1.91e-02          0.975    0.836, 0.799  (W) FAILS on clamped-side sector
+0.1500  0.82121  -1.34e-02          0.784    0.739, 0.694  (W) FAILS on clamped-side sector
+0.2000  0.78107  -8.00e-03          0.621    0.640, 0.597  (W) FAILS on clamped-side sector
+0.2500  0.74475  -3.91e-03          0.470    0.542, 0.506  (W) FAILS on clamped-side sector
+0.3000  0.71117  -1.39e-03          0.323    0.443, 0.419  (W) FAILS on clamped-side sector
+0.3500  0.67970  -2.28e-04          0.173    0.342, 0.330  (W) FAILS on clamped-side sector
+0.4000  0.64991  -1.29e-07          0.014    0.237, 0.236  (W) FAILS on clamped-side sector
+0.4042  0.64748  -1.43e-14              -           0.228  (W) holds
+0.4170  0.64012   3.45e-17              -           0.200  (W) holds
+0.4500  0.62158  -5.91e-17              -           0.124  (W) holds
+0.4900  0.59990  -3.60e-17              -           0.026  (W) holds
+
+Normalisation: detG by max|G|^2, trG by max|G| over theta (mode is
+defined up to a real scalar; detG and the vanishing of trG are
+scale- and sign-invariant). First |trG| column entry is the clamped
+face theta=0; subsequent entries are the interior zeros theta_z.
